@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import web.service.Ch10LoginResult;
-import web.service.Ch10Service;
+import web.service.loginResult;
+import web.service.loginService;
 
 //import com.company.web_ch09_01.service.Ch09CommonService;
 
@@ -19,12 +19,13 @@ import web.service.Ch10Service;
 // @Controller 는 Annotation이라 하며 행동 양식을 설정하는 것이라 생각하면 된다.
 
 @Controller
+@RequestMapping("/")
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	// HomeController.class에서 사용할 log에 대한 작업
 	
-	@RequestMapping("/home")
+	@RequestMapping("home")
 	public String home() {
 		logger.info("HOMECONTROLLER ACTIVATE");
 		//commonService.method();
@@ -38,34 +39,29 @@ public class HomeController {
 	}
 	
 	@Autowired
-	private Ch10Service ch10service;
+	private loginService service;
 	
-	@PostMapping("login")
-	public String login(String mid, String mpassword, HttpSession session) {
-		// submit으로 전달받은 id값이 mid와 mpassword를 받는다.
+	@RequestMapping("login")
+	public String login(String m_id, String m_pw, HttpSession session) {
 		
-		// Serivce에서 DB와 대조하여 확인한다.
-		// 상태에 따른 반환을 저장할 것을 받는다.
-		// 로그인, ID틀림, PW틀림
-		// 아래 방법은 열거타입으로 판단
-		Ch10LoginResult result = ch10service.login(mid,mpassword);
+		logger.info("HomeController login() Activate");
+		logger.info("m_id = " + m_id + "\t m_pw = " + m_pw);
 		
-		if(result == Ch10LoginResult.FailId) {
-			// session.setAttribute("error", "InCorrect ID");
-			// return "redirect:/ch10/loginForm";
-			// session으로 넘겨 줄 수 있다.			
+		loginResult result = service.login(m_id,m_pw, session);
+		
+		if(result == loginResult.FailId) {
+			logger.info("Fail ID");
 			return "login";
-			// 혹은 그냥 get방식으로 넘겨줄 수 있다.
 		}
-		else if(result == Ch10LoginResult.FailPw) {
-			//session.setAttribute("error", "InCorrect PW");
-			//return "redirect:/ch10/loginForm";			
+		else if(result == loginResult.FailPw) {
+			logger.info("Fail PW");			
 			return "login";
 		}
 		
 		
 		// ID와 PW가 맞다면 Success일 테니까
-		session.setAttribute("mid", mid); // 로그인된 ID 저장
+		session.setAttribute("m_id", m_id); // 로그인된 ID 저장
+		
 		return "home";
 	}
 	
@@ -83,6 +79,13 @@ public class HomeController {
 			}
 			// model에 저장해서 넘긴다.
 		}
-		return "ch10/loginForm";
+		return "login";
+	}
+	
+	@RequestMapping("logOut")
+	public String logOut(HttpSession session) {
+		logger.info("logOut() Activate");
+		session.removeAttribute("m_rate");
+		return "login";
 	}
 }

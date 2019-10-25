@@ -1,7 +1,7 @@
 package web.service;
 
-public enum Ch10LoginResult {
-	Succes,
+public enum loginResult {
+	Success,
 	FailId,
 	FailPw
 }

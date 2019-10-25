@@ -25,11 +25,11 @@
 		// class는 .클래스 명으로 접근
 		// 내부에 html이 있는 것이 아닌 String이기에 text("")으로 초기화
 		// 입력값 검사
-		if ($("#mid").val() == "") {
+		if ($("#m_id").val() == "") {
 			$("#mIdError").text("* Input ID *");
 			result = false;
 		}
-		if ($("#mpassword").val() == "") {
+		if ($("#m_pw").val() == "") {
 			$("#mPasswordError").text("* Input PW *");
 			result = false;
 		}
@@ -142,18 +142,18 @@ html, body {
 				<div id="betweenlogoForm">
 				</div>
 				<div id="loginForm">
-					<form method="post" action="home" onsubmit="return checkForm()">
+					<form method="post" action="login" onsubmit="return checkForm()">
 						<div class="form-group">
 							<label for="mid">ID</label>
 							<!-- 해당 라벨을 클릭하면 해당 title로 이동 -->
-							<input id="mid" name="mid" type="text" class="form-control"
+							<input id="m_id" name="m_id" type="text" class="form-control"
 								placeholder="Input ID"> <span class="error"
 								id="mIdError" style="color: red;"> ${Id_error} </span>
 							<!-- model에서 전달받은 속성 값 Id_error를 출력 -->
 						</div>
 						<div class="form-group">
-							<label for="mpassword">PW</label> <input id="mpassword"
-								name="mpassword" type="password" class="form-control"
+							<label for="m_password">PW</label> <input id="m_pw"
+								name="m_pw" type="password" class="form-control"
 								placeholder="Input PW"> <span class="error"
 								id="mPasswordError" style="color: red;"> ${Pw_error} </span>
 						</div>
