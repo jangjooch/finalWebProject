@@ -10,6 +10,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Main</title>
+		<script type="text/javascript"
+			src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
+		<link rel="stylesheet" tpye="text/css"
+			href="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+		<!-- bootstrap의 css를 가져옴 -->
+		<script type="text/javascript"
+			src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+		<!-- bootstrap을 사용하기 위해서는 css파일과 js 파일 두가지 다 필요하다 -->
 		<style type="text/css">
 			html, body{
 				height: 100%;
@@ -128,8 +136,8 @@
 						</li>
 						
 						<li>
-							<a href="logOut" class = "btn btn-success">Logoff</a>
-						</li>
+							<a href="logOut" class="btn btn-success">Logoff</a>
+						</li>						
 					</ul>
 				</div>
 				
