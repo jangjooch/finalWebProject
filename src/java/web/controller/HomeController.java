@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import web.dto.members;
 import web.service.loginResult;
 import web.service.loginService;
 
@@ -47,6 +48,8 @@ public class HomeController {
 		logger.info("HomeController login() Activate");
 		logger.info("m_id = " + m_id + "\t m_pw = " + m_pw);
 		
+		
+		
 		loginResult result = service.login(m_id,m_pw, session);
 		
 		if(result == loginResult.FailId) {
@@ -58,8 +61,8 @@ public class HomeController {
 			return "login";
 		}
 		
-		
 		// ID와 PW가 맞다면 Success일 테니까
+		members member_logined = (members)session.getAttribute("member_logined");
 		session.setAttribute("m_id", m_id); // 로그인된 ID 저장
 		
 		return "home";
@@ -85,7 +88,7 @@ public class HomeController {
 	@RequestMapping("logOut")
 	public String logOut(HttpSession session) {
 		logger.info("logOut() Activate");
-		session.removeAttribute("m_rate");
+		session.removeAttribute("member_logined");
 		return "login";
 	}
 }

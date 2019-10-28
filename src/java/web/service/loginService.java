@@ -39,7 +39,7 @@ public class loginService {
 		else {
 			if(m_pw.equals(member.getM_pw())) {
 				logger.info("login SUCESS");
-				session.setAttribute("m_rate", member.getM_rate());
+				session.setAttribute("member_logined", member);
 				return loginResult.Success;
 			}
 			else {
@@ -49,21 +49,4 @@ public class loginService {
 		}
 	}
 	
-	public boolean exists(String mid) {
-		logger.info("loginSerivce exists() Activate");
-		
-		members member = memberdao.selectMember(mid);
-		// 아이디로 가져올 것이 있는가
-		if(member==null)
-			return true;
-		else
-			return false;
-	}
-
-	public void join(members member) {
-		logger.info("loginSerivce join() Activate");
-		
-		// TODO Auto-generated method stub
-		memberdao.insert(member);
-	}
 }

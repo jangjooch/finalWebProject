@@ -136,7 +136,7 @@
 						</li>
 						
 						<li>
-							<a href="logOut" class="btn btn-success">Logoff</a>
+							<a href="logOut" class = "btn btn-success">Logoff</a>
 						</li>						
 					</ul>
 				</div>
