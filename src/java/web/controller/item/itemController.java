@@ -13,5 +13,8 @@ public class itemController {
 
 	private static final Logger logger = LoggerFactory.getLogger(logController.class);
 	
-	
+	@RequestMapping("/item_list")
+	public String itemList() {
+		return "item/item_list";
+	}
 }

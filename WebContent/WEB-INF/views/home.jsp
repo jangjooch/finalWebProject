@@ -138,7 +138,7 @@
 						
 						<c:if test="${member_logined.po_num == 3 || member_logined.po_num == 1}">
 							<li>
-								<form action="member/memberList" target="iframe">
+								<form action="item/item_list" target="iframe">
 									<input type = "submit" value = "ITEM" class="btn btn-success">
 								</form>
 							</li>
