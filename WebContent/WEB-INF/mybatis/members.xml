@@ -11,7 +11,7 @@
 		<!-- 해당 sql 결과를 dto로 만든다는 뜻이다 resultMap="resultMember"
 			 즉 반환되는 테이블을 해당 이름의 resultMap설정으로 처리하겠다 -->
 		select *
-		from members
+		from member
 		where m_id=#{m_id}
 		<!-- 위와 같이 고정적인 형태로 지정하고 이후 #{m_id}를 변수처리 하겠다는 것이다. -->
 	</select>
@@ -24,7 +24,7 @@
 		<!-- 해당 sql 결과를 dto로 만든다는 뜻이다 resultMap="resultMember"
 			 즉 반환되는 테이블을 해당 이름의 resultMap설정으로 처리하겠다 -->
 		select *
-		from members
+		from member
 		where m_num=#{m_num}
 		<!-- 위와 같이 고정적인 형태로 지정하고 이후 #{m_id}를 변수처리 하겠다는 것이다. -->
 	</select>
@@ -41,14 +41,14 @@
 	</resultMap>
 	
 	<insert id="insertMember" parameterType="web.dto.members">
-	<selectKey keyProperty="m_num" resultType="int" order="BEFORE">
+<!-- 	<selectKey keyProperty="m_num" resultType="int" order="BEFORE"> -->
 			<!-- primary ket설정. primary key값 형태, order는 끝나고 실행할 것인가. -->
-			select SEQUENCE1.nextval from dual
+<!-- 			select SEQUENCE1.nextval from dual -->
 			<!-- 이 값을 bnumber로 지정하여 저장할 수 있도록 한다 -->
 			<!-- 현재에서는 1가지의 table만 사용하기에 사용하지 않아도 문제가 없지만
 				 동시에 2개 이상의 table에 내용에 따라 작성이 이루어져야 하는 경우
 				 SEQUENCE의 다음 값을 미리 받아 동시에 처리하기 위함이다. -->
-	</selectKey>
+<!-- 	</selectKey> -->
 		insert into members (m_num, m_name, m_id, m_pw, m_phone, m_rate)
 		values(#{m_num}, #{m_name}, #{m_id}, #{m_pw}, #{m_phone}, #{m_rate})
 	</insert>

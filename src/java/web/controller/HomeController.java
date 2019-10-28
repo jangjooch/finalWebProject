@@ -65,7 +65,7 @@ public class HomeController {
 		members member_logined = (members)session.getAttribute("member_logined");
 		session.setAttribute("m_id", m_id); // 로그인된 ID 저장
 		
-		return "home";
+		return "redirect:/home";
 	}
 	
 	@RequestMapping("loginForm")
