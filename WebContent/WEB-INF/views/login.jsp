@@ -85,7 +85,7 @@ html, body {
 	flex-grow: 1;
 }
 #logo_center{	
-	background-image: url("resources/image/DroneLogo.png");
+	background-image: url("resources/image/DroneLogo1.png");
 	background-size: 100%100%;
 	height: 200px;
 	width: 200px;

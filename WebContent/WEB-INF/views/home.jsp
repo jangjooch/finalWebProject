@@ -58,7 +58,7 @@
 			#sideBar_img{
 				width: 100%;
 				height : 200px;
-				background-image: url("resources/image/DroneLogo.png");
+				background-image: url("resources/image/DroneLogo1.png");
 				background-size: 100% 100%;
 			}
 			#sideBar_menu{
