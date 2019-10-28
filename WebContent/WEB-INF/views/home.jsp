@@ -109,7 +109,7 @@
 							<br>
 						</li>
 						
-						<c:if test="${member_logined.m_rate == 1}">
+						<c:if test="${member_logined.po_num == 1}">
 							<li>
 								<form action="member/memberList" target="iframe">
 									<input type = "submit" value = "MEMBER" class="btn btn-success">
@@ -118,7 +118,7 @@
 							<br>
 						</c:if>
 						
-						<c:if test="${member_logined.m_rate <= 2}">
+						<c:if test="${member_logined.po_num <= 2}">
 							<li>
 								<form action="member/memberList" target="iframe">
 									<input type = "submit" value = "DRONE" class="btn btn-success">
@@ -127,7 +127,7 @@
 							<br>
 						</c:if>
 						
-						<c:if test="${member_logined.m_rate <= 3}">
+						<c:if test="${member_logined.po_num <= 3}">
 							<li>
 								<form action="member/memberList" target="iframe">
 									<input type = "submit" value = "MISSION" class="btn btn-success">
@@ -136,7 +136,7 @@
 							<br>
 						</c:if>
 						
-						<c:if test="${member_logined.m_rate == 3 || member_logined.m_rate == 1}">
+						<c:if test="${member_logined.po_num == 3 || member_logined.po_num == 1}">
 							<li>
 								<form action="member/memberList" target="iframe">
 									<input type = "submit" value = "ITEM" class="btn btn-success">
