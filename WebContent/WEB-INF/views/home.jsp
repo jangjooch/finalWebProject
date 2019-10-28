@@ -19,22 +19,30 @@
 			src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 		<!-- bootstrap을 사용하기 위해서는 css파일과 js 파일 두가지 다 필요하다 -->
 		<style type="text/css">
-			html, body{
-				height: 100%;
-			}
 			#wrapper{
-				width: 100%;
-				height: 100%;
+				height: 100vh;
 				display: flex;
 				flex-direction: column;
 			}
 			#header{
+				flex: 1;
 				border-bottom: 3px solid black;
-				margin-bottom: 15px
+				text-align: center;
+				display: flex;
 			}
+				#header_left{
+					flex: 1;
+				}
+				#header_center{
+					flex: 1;
+					text-align: center;
+				}
+				#header_right{
+					flex: 1;
+				}
+			
 			#content{
-				flex-grow: 1;
-				height: 95%;
+				height: 80%;
 				display: flex;
 				min-height: 0;
 			}
@@ -48,11 +56,10 @@
 				flex-direction: column;								
 			}
 			#sideBar_img{
-				
 				width: 100%;
 				height : 200px;
 				background-image: url("resources/image/DroneLogo.png");
-				background-size: 100%100%;
+				background-size: 100% 100%;
 			}
 			#sideBar_menu{
 				
@@ -67,8 +74,12 @@
 				height: 100%;
 			}
 			#footer{
+				flex: 1;
 				border-top: 3px solid black;
-				margin-top: 15px
+			}
+			
+			ul{
+				list-style-type: none;
 			}
 		</style>
 		
@@ -77,7 +88,13 @@
 	
 	<div id = "wrapper">
 		<div id = "header">
-			<h3>관제소</h3>
+			<div id="header_left"></div>
+			<div id="header_center">
+				<h3>관제소</h3>
+			</div>
+			<div id="header_right">
+				<a href="logOut" class="btn btn-success">Log Out</a>
+			</div>
 		</div>
 		<div id = "content">
 			<div id = "sideBar">
@@ -87,7 +104,7 @@
 					<ul>
 						<li>
 							<form action="home">
-								<input type = "submit" value = "HOME">
+								<input type = "submit" value = "HOME" class="btn btn-success">
 							</form>
 							<br>
 						</li>
@@ -95,7 +112,7 @@
 						<c:if test="${m_rate == 1}">
 							<li>
 								<form action="member/memberList" target="iframe">
-									<input type = "submit" value = "MEMBER">
+									<input type = "submit" value = "MEMBER" class="btn btn-success">
 								</form>
 							</li>
 							<br>
@@ -104,7 +121,7 @@
 						<c:if test="${m_rate <= 2}">
 							<li>
 								<form action="member/memberList" target="iframe">
-									<input type = "submit" value = "DRONE">
+									<input type = "submit" value = "DRONE" class="btn btn-success">
 								</form>
 							</li>
 							<br>
@@ -113,7 +130,7 @@
 						<c:if test="${m_rate <= 3}">
 							<li>
 								<form action="member/memberList" target="iframe">
-									<input type = "submit" value = "MISSION">
+									<input type = "submit" value = "MISSION" class="btn btn-success">
 								</form>
 							</li>
 							<br>
@@ -122,7 +139,7 @@
 						<c:if test="${m_rate == 3 || m_rate == 1}">
 							<li>
 								<form action="member/memberList" target="iframe">
-									<input type = "submit" value = "ITEM">
+									<input type = "submit" value = "ITEM" class="btn btn-success">
 								</form>
 							</li>
 							<br>
@@ -130,14 +147,10 @@
 											
 						<li>
 							<form action="member/memberList" target="iframe">
-								<input type = "submit" value = "HISTORY">
+								<input type = "submit" value = "HISTORY" class="btn btn-success">
 							</form>
 							<br>
 						</li>
-						
-						<li>
-							<a href="logOut" class = "btn btn-success">Logoff</a>
-						</li>						
 					</ul>
 				</div>
 				
