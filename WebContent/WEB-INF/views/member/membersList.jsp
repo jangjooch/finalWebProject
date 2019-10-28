@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Member List
+	Member List 2
 </body>
 </html>
