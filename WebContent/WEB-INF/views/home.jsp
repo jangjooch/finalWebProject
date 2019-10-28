@@ -111,7 +111,7 @@
 						
 						<c:if test="${member_logined.po_num == 1}">
 							<li>
-								<form action="member/memberList" target="iframe">
+								<form action="member/memberList?pageNo=1" target="iframe">
 									<input type = "submit" value = "MEMBER" class="btn btn-success">
 								</form>
 							</li>
