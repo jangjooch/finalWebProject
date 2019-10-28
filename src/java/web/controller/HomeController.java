@@ -62,8 +62,8 @@ public class HomeController {
 		}
 		
 		// ID와 PW가 맞다면 Success일 테니까
-		members member_logined = (members)session.getAttribute("member_logined");
-		session.setAttribute("m_id", m_id); // 로그인된 ID 저장
+		// members member_logined = (members)session.getAttribute("member_logined");
+		// session.setAttribute("m_id", m_id); // 로그인된 ID 저장
 		
 		return "redirect:/home";
 	}

@@ -7,7 +7,7 @@ public class members {
 	private String m_name;
 	private String m_pw;
 	private int m_phone;
-	private int m_rate;
+	private int po_num;
 	// 데이터 결과 저장을 위한 dto는 이렇듯 private으로 되어
 	// setter가 존재하여야 한다. setter가 있어야
 	// property로 넘어올 수 있기 때문이다.
@@ -41,11 +41,11 @@ public class members {
 	public void setM_phone(int m_phone) {
 		this.m_phone = m_phone;
 	}
-	public int getM_rate() {
-		return m_rate;
+	public int getPo_num() {
+		return po_num;
 	}
-	public void setM_rate(int m_rate) {
-		this.m_rate = m_rate;
+	public void setPo_num(int po_num) {
+		this.po_num = po_num;
 	}
 	
 }
