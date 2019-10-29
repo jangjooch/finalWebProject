@@ -120,7 +120,7 @@
 						
 						<c:if test="${member_logined.po_num <= 2}">
 							<li>
-								<form action="member/memberList" target="iframe">
+								<form action="drone/drone_list" target="iframe">
 									<input type = "submit" value = "DRONE" class="btn btn-success">
 								</form>
 							</li>

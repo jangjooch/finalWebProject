@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="drone">
-
-
+	
+	<select id="selectList" parameterType="map" resultType="web.dto.drone.DroneDto"> <!-- resultMap="resultMap1">  각행을 result객체로 만들겠다 -->
+		select d_rn, d_number, d_model, d_status, d_weight, d_battery
+			from(
+			select rownum as d_rn, d_number, d_model, d_status, d_weight, d_battery
+						from(
+			select d_number, d_model, d_status, d_weight, d_battery from drone
+			order by d_number asc))
+			where d_rn &lt;= #{drone_endRowNo}
+					and d_rn &gt;= #{drone_startRowNo}
+				
+	</select>
+	
+	<select id="selectdrone" parameterType="int" resultType="web.dto.drone.DroneDto">
+		select d_number, d_model, d_status, d_weight, d_battery from drone
+		where d_number = #{drone_no}	
+	</select>
+	
+	<select id="selectDroneTotalRowNum" resultType="int">
+		select count(*) from drone
+	</select>
+	 
+	<insert id="insertdrone" parameterType="web.dto.drone.DroneDto">
+		
+		insert into DRONE(D_NUMBER, D_MODEL, D_STATUS, D_WEIGHT, D_BATTERY)
+		values((select max(d_number) from drone)+1, #{d_model}, #{d_status}, #{d_weight}, #{d_battery})
+		
+	</insert>
+	
+	<delete id="deletedrone" parameterType="web.dto.drone.DroneDto">
+		delete from drone where d_number = #{d_number}
+	</delete>
+	
+	<update id="updatedrone" parameterType="web.dto.drone.DroneDto">
+		update drone set d_model=#{d_model}, d_status=#{d_status}, d_weight=#{d_weight}, d_battery=#{d_battery}
+		where d_number=#{d_number}
+	</update>
+	
 </mapper>
