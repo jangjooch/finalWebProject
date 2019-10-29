@@ -84,6 +84,8 @@
 									class="form-control" readonly>
 							</div>
 						</div>
+						
+						
 						<div class="form-group row">
 							<label for="m_id" class="col-sm-4 col-form-label">ID</label>
 							<div class="col-sm-8">
@@ -91,13 +93,11 @@
 									class="form-control" readonly>
 							</div>
 						</div>
+						
+						
 						<div class="form-group row">
 							<label for="m_pw" class="col-sm-4 col-form-label">PW</label>
 							<div class="col-sm-8"> 
-								<input type="password" id="m_pw" value="${member.m_pw}"
-									class="form-control" readonly>
-							</div>
-							<div class="col-sm-8">
 								<input type="password" id="m_pw" value="${member.m_pw}"
 									class="form-control" readonly>
 							</div>
