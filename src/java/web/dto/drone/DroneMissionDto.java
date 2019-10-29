@@ -2,7 +2,7 @@ package web.dto.drone;
 
 import java.sql.Date;
 
-public class droneMissionDto {
+public class DroneMissionDto {
 	
 	private int d_m_number;
 	// drone d_num former

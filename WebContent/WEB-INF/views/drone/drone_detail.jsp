@@ -53,39 +53,39 @@
 				<div id="center_left"></div>
 				<div id="center_center">
 					<form>
-						<%-- 물품 primary key h --%>
+						<%-- 드론번호 primary key h --%>
 						<div class="form-group row">
 							<label for="d_num" class="col-sm-5 col-form-label">드론 번호</label>
 							<div class="col-sm-7">
-								<input type="text" id="d_num" value="" 
+								<input type="text" id="d_number" value="${dronedto.d_number}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="d_model" class="col-sm-5 col-form-label">드론 모델명</label>
 							<div class="col-sm-7">
-								<input type="text" id="d_model" value="" 
+								<input type="text" id="d_model" value="${dronedto.d_model}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="d_status" class="col-sm-5 col-form-label">드론 상태</label>
 							<div class="col-sm-7">
-								<input type="text" id="d_status" value="" 
+								<input type="text" id="d_status" value="${dronedto.d_status}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="d_weight" class="col-sm-5 col-form-label">적제 가능 중량</label>
+							<label for="d_weight" class="col-sm-5 col-form-label">적재 가능 중량</label>
 							<div class="col-sm-7">
-								<input type="text" id="d_weight" value=""
+								<input type="text" id="d_weight" value="${dronedto.d_weight}"
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="d_battery" class="col-sm-5 col-form-label">비행 가능 시간</label>
 							<div class="col-sm-7">
-								<input type="text" id="d_battery" value="" 
+								<input type="text" id="d_battery" value="${dronedto.d_battery}" 
 									class="form-control" readonly>
 							</div>
 						</div>
@@ -108,9 +108,9 @@
 					<div id="b_r_top"></div>
 					<%--bottom-right center 버튼 --%>
 					<div id="b_r_center">
-						<a href="#" class="btn btn-warning">수정하기</a>	
-						<a href="#" class="btn btn-warning">삭제하기</a>
-						<a href="#" class="btn btn-warning">목록으로</a>
+						<a href="drone_updateForm?d_number=${dronedto.d_number}" class="btn btn-warning">수정하기</a>	
+						<a href="drone_delete?d_number=${dronedto.d_number}" class="btn btn-warning">삭제하기</a>
+						<a href="drone_list" class="btn btn-warning">목록으로</a>
 					</div>
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>

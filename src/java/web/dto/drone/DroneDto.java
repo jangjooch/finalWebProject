@@ -1,6 +1,9 @@
 package web.dto.drone;
 
-public class droneDto {
+import org.springframework.stereotype.Component;
+
+@Component
+public class DroneDto {
 	private int d_number;
 	private String d_model;
 	private int d_status;
