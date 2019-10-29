@@ -9,12 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import web.controller.HomeController;
-
-//import web.dao.Ch10BoardDao;
-
-import web.dao.membersDao;
-import web.dto.members;
+import web.dao.member.MemberDao;
+import web.dto.member.MemberDto;
 //import web.dto.Ch10Board;
 
 // 관리 객체화
@@ -24,13 +20,10 @@ public class loginService {
 	private static final Logger logger = LoggerFactory.getLogger(loginService.class);
 	
 	@Autowired
-	private membersDao memberdao;
+	private MemberDao memberDao;
 	
 	public loginResult login(String m_id, String m_pw, HttpSession session) {
-		logger.info("m_id = " + m_id + "\t m_pw = " + m_pw);
-		logger.info("loginSerivce login() Activate");
-		members member = memberdao.selectMember(m_id);
-		logger.info("loginSerivce login() After memberdao.selectMember Activate");
+		MemberDto member = memberDao.selectMember(m_id);
 		// DAO에서 DB에 접근하도록 한다.
 		if(member == null) {
 			logger.info("member is NULL no Such Id");

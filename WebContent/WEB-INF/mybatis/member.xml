@@ -2,5 +2,79 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
+	<!-- 멤버리스트 -->
+	<select id="memberList" parameterType="map"
+		resultType="web.dto.member.MemberDto">
+		select rn, m_num, m_name, m_id, m_phone, po_num
+		from (
+		select rownum as rn, m_num, m_name, m_id, m_phone, po_num
+		from (
+		select m_num, m_name, m_id, m_phone, po_num
+		from member
+		order by m_num desc
+		)
+		where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt;= #{startRowNo}
+	</select>
+
+	<select id="selectTotalRowNum" resultType="int">
+		SELECT COUNT(*) FROM
+		member
+	</select>
+
+	<!-- 멤버 디테일 -->
+	<select id="memberSelectOne" parameterType="int"
+		resultType="web.dto.member.MemberDto">
+		SELECT * FROM MEMBER m, position p
+		WHERE m.po_num = p.po_num
+		and m.m_num = #{m_num}
+	</select>
+
+	<!-- 멤버 수정 -->
+	<update id="memberUpdate"
+		parameterType="web.dto.member.MemberDto">
+		UPDATE member SET 
+		m_name=#{m_name}, m_id=#{m_id}, m_pw=#{m_pw}, m_phone=#{m_phone}, po_num=#{po_num}
+		WHERE m_num = #{m_num}
+	</update>
+
+	<!-- 멤버 등록 -->
+	<insert id="memberInsert"
+		parameterType="web.dto.member.MemberDto">
+		INSERT INTO member (m_num, m_name, m_id, m_pw, m_phone, po_num)
+		VALUES(#{m_num} ,#{m_name} ,#{m_id},#{m_pw} ,#{m_phone} ,#{po_num})
+	</insert>
+
+
+	<!-- 멤버 삭제 -->
+	<delete id="memberDelte" parameterType="int">
+		DELETE FROM member WHERE m_num = #{m_num}
+	</delete>
+
+	<select id="selectMemberByMid" parameterType="string"
+		resultType="web.dto.member.MemberDto">
+		SELECT *
+		FROM member
+		WHERE m_id=#{m_id}
+	</select>
+
+	<!-- 멤버 디테일 -->
+	<select id="selectMember" parameterType="int" resultType="web.dto.member.MemberDto">
+		SELECT * FROM member m, position p WHERE m_num = #{m_num} AND m.po_num = p.po_num
+	</select>
+	
+	<!-- 회원 사건리스트 -->
+	<select id="memberReport" parameterType="int" resultType="web.dto.member.ReportDto">
+		SELECT 
+	        r.m_num as requester_num, dm.m_num as manager_num , r.re_time, dm.d_m_number, m.m_name as requester_name, 
+	        a.m_name as manager_name, r.re_location_x, r.re_location_y 
+   		FROM
+       		member m, request r, drone_mission dm , (select a.m_name  from member a, drone_mission b 
+                                                	where a.m_num = b.m_num) a
+    	WHERE m.m_num = r.m_num 
+        	AND r.re_num = dm.re_num
+    		Order by r.re_time desc
+	</select>
 
 </mapper>

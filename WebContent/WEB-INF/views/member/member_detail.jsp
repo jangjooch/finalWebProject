@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,6 +14,16 @@
 			href="<%=application.getContextPath()%>/resources/css/shc/collection.css">
 		<script type="text/javascript"
 			src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+			
+			
+		<script type="text/javascript">
+			function memdel() {
+				var con = confirm("정말 삭제하시겠습니까?");
+				if (con == true) {
+					location.href = "memberDelete?m_num=" + ${member.m_num};
+				}
+			}
+		</script>	
 	</head>
 	<style>
 		.test{
@@ -50,7 +61,7 @@
 			<div id="top">
 				<div id="top_top"></div>
 				<div id="top_center">
-					<h1>? 회원</h1>
+					<h1>회원 정보</h1>
 				</div>
 				<div id="top_bottom"></div>
 			</div>
@@ -60,44 +71,44 @@
 				<div id="center_left">
 					<form>
 						<div class="form-group row">
-							<label for="m_id" class="col-sm-4 col-form-label">회원 번호</label>
+							<label for="m_num" class="col-sm-4 col-form-label">회원 번호</label>
 							<div class="col-sm-8">
-								<input type="text" id="m_id" value="" 
+								<input type="text" id="m_num" value="${member.m_num}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="m_name" class="col-sm-4 col-form-label">이름</label>
 							<div class="col-sm-8">
-								<input type="text" id="m_name" value="" 
+								<input type="text" id="m_name" value="${member.m_name}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="m_id" class="col-sm-4 col-form-label">ID</label>
 							<div class="col-sm-8">
-								<input type="text" id="m_id" value="" 
+								<input type="text" id="m_id" value="${member.m_id}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="m_pw" class="col-sm-4 col-form-label">PW</label>
 							<div class="col-sm-8">
-								<input type="password" id="m_pw" value=""
+								<input type="password" id="m_pw" value="${member.m_pw}"
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="m_phone" class="col-sm-4 col-form-label">TEL</label>
 							<div class="col-sm-8">
-								<input type="text" id="m_phone" value="" 
+								<input type="text" id="m_phone" value="${member.m_phone}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="po_name" class="col-sm-4 col-form-label">직급</label>
+							<label for="po_num" class="col-sm-4 col-form-label">직급</label>
 							<div class="col-sm-8">
-								<input type="text" id="po_name" value="" 
+								<input type="text" id="po_num" value="${member.po_position}"
 									class="form-control" readonly>
 							</div>
 						</div>
@@ -117,13 +128,17 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><a href="detail">1</a></td>
-									<td>서형철</td>
-									<td>0.12345, 2.13456</td>
-									<td>2019/10/25 21:05</td>
-									<td>저형철</td>
-								</tr>
+								<c:forEach var="report" items="${report}">
+									<tr>
+										<td><a href="#">${report.d_m_number}</a></td>
+										<td>${report.requester_name}</td>
+										<td>${report.re_location_x} / ${report.re_location_y}</td>
+										<!-- <td>${report.re_time}</td> -->
+										<td><fmt:formatDate value="${report.re_time}" 
+											pattern="yyyy-MM-dd hh:mm"/></td>
+										<td>${report.manager_name}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>	
 					</div> 
@@ -142,11 +157,13 @@
 				<div id="bottom_right">
 					<%--bottom-right top --%>
 					<div id="b_r_top"></div>
+					
+
 					<%--bottom-right center 버튼 --%>
 					<div id="b_r_center">
-						<a href="#" class="btn btn-warning">수정하기</a>	
-						<a href="#" class="btn btn-warning">삭제하기</a>
-						<a href="#" class="btn btn-warning">목록으로</a>
+						<a href="updateMemberForm?m_num=${member.m_num}" class="btn btn-warning">수정하기</a>	
+						<a onclick="memdel()" class="btn btn-warning">삭제하기</a>
+						<a href="memberList?pageNo=${pageNo}" class="btn btn-warning">목록으로</a>
 					</div>
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>
