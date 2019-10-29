@@ -23,7 +23,7 @@ import web.service.item.ItemService;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
-
+//edit
 	private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 	
 	@Resource(name="dataSource")
