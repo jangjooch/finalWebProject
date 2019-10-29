@@ -1,5 +1,5 @@
 package web.dto.log;
 
-public class logDto {
+public class LogDto {
 
 }

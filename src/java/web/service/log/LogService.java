@@ -1,5 +1,5 @@
 package web.service.log;
 
-public class logService {
+public class LogService {
 
 }
