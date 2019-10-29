@@ -72,7 +72,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="items" items="${itemList}">
+						<c:forEach var="items" items="${itemList_searched}">
 							<tr>
 								<td><a href="item_detail?i_code=${items.i_code}">${items.i_code}</a></td>
 								<td>${items.i_name}</td>
@@ -109,18 +109,18 @@
 					<div id ="b_c_center">
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="item_list?ipageNumber=1"> 
+								<li class="page-item"><a class="page-link" href="item_list_search?ipageNumber_s=1"> 
 									<span aria-hidden="true">&laquo;</span></a>
 								</li>
 								<c:if test="${igroupNo > 1}">
-									<li class="page-item"><a class="page-link" href="item_list?ipageNumber=${istartPageNo - 1}"> 
+									<li class="page-item"><a class="page-link" href="item_list_search?ipageNumber_s=${istartPageNo - 1}"> 
 										<span aria-hidden="true"><</span></a>
 									</li>
 								</c:if>
 								
 								<c:forEach begin="${istartPageNo}" end="${iendPageNo}" var="i">
 								<li class="page-item">
-									<a class="page-link" href="item_list?ipageNumber=${i}">${i}</a>
+									<a class="page-link" href="item_list_search?ipageNumber_s=${i}">${i}</a>
 								</li>
 								</c:forEach>
 								
@@ -132,11 +132,11 @@
 								<li class="page-item"><a class="page-link" href="#">5</a></li>
 								--%>
 								<c:if test="${igroupNo < itotalGroupNum}">
-									<li class="page-item"><a class="page-link" href="item_list?ipageNumber=${iendPageNo + 1}">
+									<li class="page-item"><a class="page-link" href="item_list_search?ipageNumber_s=${iendPageNo + 1}">
 										<span aria-hidden="true">></span>									
 									</a></li>
 								</c:if>								
-								<li class="page-item"><a class="page-link" href="item_list?ipageNumber=${itotalPageNum}"> 
+								<li class="page-item"><a class="page-link" href="item_list_search?ipageNumber_s=${itotalPageNum}"> 
 									<span aria-hidden="true">&raquo;</span></a>
 								</li>							
 							</ul>
