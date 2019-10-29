@@ -7,4 +7,6 @@ public class MissionItemDto {
 	private int i_name; // 요청 물품 명
 	private int i_amount; // 요청 수량
 	
+	
+	
 }
