@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="members">
+
+	<select id="mission_re_code">
+		select re_num
+		from request
+		where re_success=0
+	</select>
+	
+	<select id="missionItemList" parameterType="java.util.HashMap">
+		select ri.re_num, il.i_name, il.i_amount
+		from item_list il, request_item ri
+		where il.i_code = ri.i_code
+		<choose>
+            <when test="i_codeList.size != 0">
+                and ri.i_code in
+                <foreach collection="i_codeList" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </when>
+        </choose>
+	</select>
+	
+</mapper>

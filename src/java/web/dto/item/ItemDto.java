@@ -1,12 +1,14 @@
 package web.dto.item;
 
-public class itemDto {
+public class ItemDto {
 	
 	private int i_code;
 	private String i_name;
 	private int i_mount;
 	private String i_class;
 	private int i_weight;
+	
+	
 	public int getI_code() {
 		return i_code;
 	}
