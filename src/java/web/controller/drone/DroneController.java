@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import web.controller.log.logController;
+import web.controller.log.LogController;
 import web.dto.drone.DroneDto;
 import web.service.drone.DroneService;
 
@@ -23,7 +23,7 @@ import web.service.drone.DroneService;
 @RequestMapping("/drone")
 public class DroneController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(logController.class);
+	private static final Logger logger = LoggerFactory.getLogger(LogController.class);
 	
 	@Resource(name="dataSource")
 	private DataSource dataSource;

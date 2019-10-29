@@ -146,7 +146,7 @@
 						</c:if>
 											
 						<li>
-							<form action="member/memberList" target="iframe">
+							<form action="log/log_list" target="iframe">
 								<input type = "submit" value = "HISTORY" class="btn btn-success">
 							</form>
 							<br>
