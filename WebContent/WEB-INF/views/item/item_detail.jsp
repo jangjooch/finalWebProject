@@ -57,35 +57,35 @@
 						<div class="form-group row">
 							<label for="i_code" class="col-sm-4 col-form-label">물품 번호</label>
 							<div class="col-sm-8">
-								<input type="text" id="i_code" value="" 
+								<input type="text" id="i_code" value="${item_selected.i_code}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="i_name" class="col-sm-4 col-form-label">물품 이름</label>
 							<div class="col-sm-8">
-								<input type="text" id="i_name" value="" 
+								<input type="text" id="i_name" value="${item_selected.i_name}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="i_mount" class="col-sm-4 col-form-label">물품 수량</label>
 							<div class="col-sm-8">
-								<input type="text" id="i_mount" value="" 
+								<input type="text" id="i_mount" value="${item_selected.i_mount}" 
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="i_class" class="col-sm-4 col-form-label">분류</label>
 							<div class="col-sm-8">
-								<input type="password" id="i_class" value=""
+								<input type="password" id="i_class" value="${item_selected.i_class}"
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="i_weight" class="col-sm-4 col-form-label">무게</label>
 							<div class="col-sm-8">
-								<input type="text" id="i_weight" value="" 
+								<input type="text" id="i_weight" value="${item_selected.i_class}" 
 									class="form-control" readonly>
 							</div>
 						</div>
@@ -108,9 +108,9 @@
 					<div id="b_r_top"></div>
 					<%--bottom-right center 버튼 --%>
 					<div id="b_r_center">
-						<a href="#" class="btn btn-warning">수정하기</a>	
-						<a href="#" class="btn btn-warning">삭제하기</a>
-						<a href="#" class="btn btn-warning">목록으로</a>
+						<a href="item_update" class="btn btn-warning">수정하기</a>	
+						<a href="item_remove" class="btn btn-warning">삭제하기</a>
+						<a href="item_list?ipageNumber=${ipageNumber}" class="btn btn-warning">목록으로</a>
 					</div>
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>
