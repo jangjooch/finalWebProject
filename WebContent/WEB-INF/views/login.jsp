@@ -46,19 +46,18 @@ html, body {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	background-image: url("resources/image/Jellyfish.jpg");
 	background-size: 100%100%;
 }
 
 #header {
-	border-bottom: 3px solid black;
+	border-bottom: 3px ;
 	flex-grow: 4;
 }
 
 #content {
 	flex-grow: 2;
 	min-height: 0;
-	border-bottom: 3px solid black;
+	border-bottom: 3px ;
 	display: flex;
 	flex-direction: row;
 }
@@ -85,7 +84,7 @@ html, body {
 	flex-grow: 1;
 }
 #logo_center{	
-	background-image: url("resources/image/DroneLogo.png");
+	background-image: url("resources/image/DroneLogo1.png");
 	background-size: 100%100%;
 	height: 200px;
 	width: 200px;
@@ -118,7 +117,7 @@ html, body {
 }
 #bottom {
 	flex-grow: 4;
-	border-bottom: 3px solid black;
+	border-bottom: 3px ;
 }
 </style>
 </head>
@@ -128,7 +127,7 @@ html, body {
 		<div class="row" id="content">
 			<div id="content_left">
 			</div>
-			<div id="content_center" style="border: 1px solid black;">
+			<div id="content_center" style="border: 1px ;">
 				<div id="top">
 				</div>
 				<div id="logo">

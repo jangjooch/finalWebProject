@@ -11,7 +11,7 @@ import web.dao.item.ItemDao;
 import web.dto.item.ItemDto;
 
 @Component
-public class ItemService {	/////
+public class ItemService {	
 	
 	private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 	

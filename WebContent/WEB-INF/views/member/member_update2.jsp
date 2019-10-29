@@ -13,33 +13,6 @@
 			href="<%=application.getContextPath()%>/resources/css/shc/collection.css">
 		<script type="text/javascript"
 			src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-					function checkForm() {
-				var result = true;
-				//모든 에러 내용 지우기
-				$(".error").text("");
-				//입력값 검사
-				if($("#m_name").val() == "") {
-					$("#m_nameError").text("*이름을 확인하세요.");
-					result = false;
-				}
-				if($("#m_pw").val() == "") {
-					$("#m_pwError").text("*비밀번호를 확인하세요.");
-					result = false;
-				}
-				if($("#m_phone").val() == "") {
-					$("#m_phoneError").text("*연락처를 확인하세요.");
-					result = false;
-				}
-				if($("#po_num").val() == "") {
-					$("#po_numError").text("*직위를 확인하세요.");
-					result = false;
-				}
-				
-				return result;
-			}
-			
-		</script>	
 	</head>
 	<style>
 		.test{
@@ -82,14 +55,17 @@
 			<div id="center_detail">
 				<div id="center_left"></div>
 				<div id="center_center">
-					<form action="updateMember" method="post" onsubmit="return checkForm()">
-						<input type="hidden" id="m_num" name="m_num" class="form-control"  value="${member.m_num }">
+					<form action="#" method="post" onsubmit="">
+						<input type="hidden" id="m_num" name="m_num" class="form-control">
 					
 						<div class="form-group row">
 							<label for="m_id" class="col-sm-2 col-form-label">ID</label>
 							<div class="input-group col-sm-10">
-								<input type="text" id="m_id" name="m_id" class="form-control"  value="${member.m_id }"
-									readonly>
+								<input type="text" id="m_id" name="m_id" class="form-control"  value="${member.m_id }">
+								<div class="input-group-append">
+									<input type="button" class="btn btn-danger"	value="중복체크"
+										 onclick="checkMid()">
+								</div>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -97,7 +73,6 @@
 							<div class="col-sm-10">
 								<input type="text" id="m_name" name="m_name" value="${member.m_name }"
 									class="form-control">
-								<span id="m_nameError" class="error" style="color:red"></span>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -105,7 +80,6 @@
 							<div class="col-sm-10">
 								<input type="password" id="m_pw" name="m_pw" value="${member.m_pw }"
 									class="form-control">
-								<span id="m_pwError" class="error" style="color:red"></span>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -113,7 +87,6 @@
 							<div class="col-sm-10">
 								<input type="tel" pattern="(010)\d{3,4}\d{4}" id="m_phone" name="m_phone" value="${member.m_phone }"
 									class="form-control">
-								<span id="m_phoneError" class="error" style="color:red"></span>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -125,8 +98,7 @@
 									<option value="2">보급 담당자</option>
 									<option value="3">드론 담당자</option>
 									<option value="4">요청자</option>
-								</select>			
-								<span id="po_numError" class="error" style="color:red"></span>					
+								</select>								
 							</div>
 							</div>
 						<div class="form-group row">
