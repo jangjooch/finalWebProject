@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fnc" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -55,29 +58,31 @@
 				<table class="table table-hover" style="border: 1px solid 1px">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">번호</th>
-							<th scope="col">요청자</th>
-							<th scope="col">요청 시간</th>
-							<th scope="col">요청 위치</th>
-							<th scope="col">처리자</th>
+							<th scope="col">사건 번호</th>
 							<th scope="col">드론 번호</th>
-							<th scope="col">드론 모델명</th>
+							<th scope="col">요청 번호</th>
+							<th scope="col">회원 번호</th>
 							<th scope="col">미션 내용</th>
-							<th scope="col">미션 작성일/시간</th>
+							<th scope="col">미션 내용 작성일</th>
+							<th scope="col">테스트용이라서</th>
+							<th scope="col">다시해야합니다</th>
+							<th scope="col">페이징만 해놓은 거 입니다.</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>김요청</td>
-							<td>2019/10/29 - 21:09</td>
-							<td>위치</td>
-							<td>김처리</td>
-							<td>2</td>
-							<td>모델명</td>
-							<td>미션 임파서블!</td>
-							<td>2019/10/30 - 01:20</td>
-						</tr>
+						<c:forEach var="i" items="${droneMissionDtoList}">
+							<tr onclick="location.href='log_detail?d_m_number=${i.d_m_number}'" style="cursor: pointer;">
+								<td>${i.d_m_number}</td>
+								<td>${i.d_number}</td>
+								<td>${i.re_num}</td>
+								<td>${i.m_num}</td>
+								<td>${fnc:substring(i.d_m_start,0,3)}...</td>
+								<td><fmt:formatDate value="${i.d_m_preparation}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
+								<td></td>
+								<td></td>
+								<td></td>								
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -97,21 +102,28 @@
 					<div id ="b_c_center">
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="#"> 
+								<li class="page-item"><a class="page-link" href="?pageNo=1"> 
 									<span aria-hidden="true">&laquo;</span></a>
 								</li>
-								<li class="page-item"><a class="page-link" href="#"> 
-									<span aria-hidden="true"><</span></a>
-								</li>
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item active"><a class="page-link" href="#">4</a></li>
-								<li class="page-item"><a class="page-link" href="#">5</a></li>
-								<li class="page-item"><a class="page-link" href="#"> 
-									<span aria-hidden="true">></span>
-								</a></li>
-								<li class="page-item"><a class="page-link " href="#"> 
+								<c:if test="${groupNo>1}">
+									<li class="page-item"><a class="page-link" href="#"> 
+										<span aria-hidden="true"><</span></a>
+									</li>
+								</c:if>
+								<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
+									<c:if test="${pageNo == i}">
+										<li class="page-item active"><a class="page-link" href="?pageNo=${i}">${i}</a></li>		
+									</c:if>
+									<c:if test="${pageNo != i}">
+										<li class="page-item"><a class="page-link" href="?pageNo=${i}">${i}</a></li>
+									</c:if>
+								</c:forEach>
+								<c:if test="${group<totalGroupNum}">
+									<li class="page-item"><a class="page-link" href="?pageNo=${endPageNo+1}"> 
+										<span aria-hidden="true">></span></a>
+									</li>	
+								</c:if>								
+								<li class="page-item"><a class="page-link " href="?pageNo=${totalPageNum}"> 
 									<span aria-hidden="true">&raquo;</span></a>
 								</li>
 							</ul>

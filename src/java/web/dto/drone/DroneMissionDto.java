@@ -1,6 +1,6 @@
 package web.dto.drone;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class DroneMissionDto {
 	
@@ -11,7 +11,7 @@ public class DroneMissionDto {
 	private int re_num;
 	// member m_num former
 	private int m_num;
-	private String d_m_stat;
+	private String d_m_start;
 	private Date d_m_preparation;
 	public int getD_m_number() {
 		return d_m_number;
@@ -37,11 +37,11 @@ public class DroneMissionDto {
 	public void setM_num(int m_num) {
 		this.m_num = m_num;
 	}
-	public String getD_m_stat() {
-		return d_m_stat;
+	public String getD_m_start() {
+		return d_m_start;
 	}
-	public void setD_m_stat(String d_m_stat) {
-		this.d_m_stat = d_m_stat;
+	public void setD_m_start(String d_m_start) {
+		this.d_m_start = d_m_start;
 	}
 	public Date getD_m_preparation() {
 		return d_m_preparation;
