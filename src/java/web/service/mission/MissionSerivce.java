@@ -40,5 +40,13 @@ public class MissionSerivce {
 		logger.info("MissionService reduceMount Activate");
 		missiondao.reduceMount(re_num);
 	}
+
+	public List<String> getDestination(int re_num) {
+		// TODO Auto-generated method stub
+		
+		List<String> destination = missiondao.getDestination(re_num);
+		
+		return destination;
+	}
 	
 }

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import web.dto.mission.MissionDto;
@@ -61,8 +62,13 @@ public class MissionController {
 	}
 	
 	@RequestMapping("missionProcess")
-	public String missionProcess() {
-		return "mission/missionProcess";
+	public String missionProcess(int re_num, Model model) {
+		
+		List<String> destination = missionservice.getDestination(re_num);
+		model.addAttribute("destination_lat",destination.get(0));
+		model.addAttribute("destination_lng",destination.get(1));
+		
+		return "mission/mission_pro_detail";
 	}
 	
 }
