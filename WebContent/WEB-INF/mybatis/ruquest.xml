@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="request">
+
+	<!-- 요청 전체 List -->
+	<select id="requestList" resultType="web.dto.log.RequestDto">
+		SELECT re_num, re_time, re_location_x, re_location_y, m_num, re_success
+		    FROM
+		    request	
+	</select>
+	
+	<!-- 요청 한행 -->
+	<select id="requestSelectOne" parameterType="int" resultType="web.dto.log.RequestDto">
+		SELECT re_num, re_time, re_location_x, re_location_y, m_num, re_success
+		    FROM
+		        request
+		    WHERE re_num = #{re_num}
+	</select>
+	
+	<!-- insert -->
+	<!-- update -->
+	<!-- delete -->
+	
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="request_Item">
+
+	<!-- 전체 요청 물품 리스트 -->
+	<select id="selectRequestItemList" resultType="web.dto.log.RequestItemDto">
+		SELECT re_num, i_code, i_amount 
+		    FROM 
+		        request_item
+	</select>
+	
+	<!-- 요청에 대한 물품 리스트 -->
+	<select id="selectRe_numRequestItemList" parameterType="int" resultType="web.dto.log.RequestItemDto">
+		SELECT re_num, i_code, i_amount
+		    FROM 
+		        request_item
+		    WHERE 
+		        re_num = #{re_num}
+	</select>
+</mapper>

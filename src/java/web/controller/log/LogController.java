@@ -48,7 +48,7 @@ public class LogController {
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;			//
 		
 		List<DroneMissionDto> droneMissionDtoList = droneMissionService.droneMissionList(startRowNo, endRowNo);
-		
+				
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
 		model.addAttribute("totalGroupNum", totalGroupNum);
