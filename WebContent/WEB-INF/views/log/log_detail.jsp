@@ -129,7 +129,7 @@
 					<div id="b_r_top"></div>
 					<%--bottom-right center 버튼 --%>
 					<div id="b_r_center">
-						<a href="#" class="btn btn-warning">목록으로</a>
+						<a href="log_list?pageNo=${pageNo}" class="btn btn-warning">목록으로</a>
 					</div>
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>

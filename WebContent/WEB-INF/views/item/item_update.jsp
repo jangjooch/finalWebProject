@@ -110,15 +110,19 @@
 					<form action="item_edit" method="post" onsubmit="return checkForm()">
 						<div class="form-group row">
 							<label for="i_name" class="col-sm-4 col-form-label">물품</label>
-							<div class="col-sm-8">
+							<div class="input-group col-sm-8">
 								<input type="text" id="i_name" name="i_name" value="${item_selected.i_name}"
 									class="form-control">
 								<div class="input-group-append">
 										<input class="btn btn-danger" type="button" onclick="checkMid()" value="중복검사">
 								</div>
-								<span class="error" id ="iNameError" style="color: red;"></span>
 							</div>
-							<%-- 입력값 검사 효과 추가해야함 --%>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-4"></div>
+							<div class="col-sm-8">
+								<span class="error" id ="iNameError" style="color: red;"></span>
+							</div>						
 						</div>
 						<div class="form-group row">
 							<label for="i_mount" class="col-sm-4 col-form-label">물품 수량</label>
