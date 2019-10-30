@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="item">
 
+<!-- item_list의 총 갯수를 int로 반환한다. -->
 <select id="selectTotalRowNum" resultType="int">
 SELECT
 count(*)
 from item_list
 </select>
 
+<!-- 페이징 -->
 <select id="selectList" parameterType="map" resultType="web.dto.item.ItemDto">
 select
 rn, i_code, i_name, i_mount, i_class, i_weight
@@ -25,41 +27,55 @@ From(
 where rn &gt;=#{startRowNo}
 </select>
 
+<!-- 해당 i_code에 해당하는 정보를 가져와 ItemDto로 반환한다.  -->
 <select id="selectByICode" parameterType="int" resultType="web.dto.item.ItemDto">
 select i_code, i_name, i_mount, i_class, i_weight
 from item_list
 where i_code=#{i_code}
 </select>
+
+<!-- Name을 매개로 해당 정보를 가져와 ItemDto로 반환한다. -->
 <select id="selectByName" parameterType="string" resultType="web.dto.item.ItemDto">
 select i_code, i_name, i_mount, i_class, i_weight
 from item_list
 where i_name=#{i_name}
 </select>
+
+<!-- class에 따라 해당 정보를 가져와 ItemDto List로 반환한다. -->
 <select id="selectByClass" parameterType="string" resultType="web.dto.item.ItemDto">
 select i_code, i_name, i_mount, i_class, i_weight
 from item_list
 where i_class=#{i_class}
 </select>
 
+<!-- 정보 저장전에 가장 큰 i_code의 값을 반환한다. -->
 <select id="settingCode" resultType="int">
 SELECT i_code FROM (SELECT i_code FROM item_list ORDER BY i_code DESC)
 WHERE rownum = 1
 </select>
+
+<!-- findding에 해당하는 i_code을 가진것의 i_code를 반환한다. -->
 <select id="searchByCode" parameterType="int" resultType="int">
 select i_code
 from item_list
 where i_code=#{findding_code}
 </select>
+
+<!-- findding에 해당하는 i_name을 가진것의 i_code를 반환한다. -->
 <select id="searchByName" parameterType="string" resultType="int">
 select i_code
 from item_list
 where i_name like #{findding}
 </select>
+
+<!-- findding에 해당하는 i_class에 해당하는 i_code를 반환한다. -->
 <select id="searchByClass" parameterType="string" resultType="int">
 select i_code
 from item_list
 where i_class like #{findding}
 </select>
+
+<!-- 전달받은 i_code01 ~ 05에 있는 i_code에 따른 정보를 반환한다. -->
 <select id="selectList_searched" parameterType="map" resultType="web.dto.item.ItemDto">
 select i_code, i_name, i_mount, i_class, i_weight
 from item_list
@@ -67,11 +83,13 @@ where i_code
 in (#{i_code01}, #{i_code02}, #{i_code03}, #{i_code04}, #{i_code05})
 </select>
 
+<!-- 전달받은 ItemDto를 기반으로 정보를 저장한다. -->
 <insert id="insertItem" parameterType="web.dto.item.ItemDto">
 	INSERT into item_list(i_code, i_name, i_mount, i_class, i_weight)
 	values(#{i_code}, #{i_name}, #{i_mount}, #{i_class}, #{i_weight})
 </insert>
 
+<!-- 전달받은 ItemDto를 기반으로 정보를 update한다. -->
 <update id="update" parameterType="web.dto.item.ItemDto">
 UPDATE item_list
 SET i_name=#{i_name}, i_mount=#{i_mount}, i_weight=#{i_weight}, i_class=#{i_class}

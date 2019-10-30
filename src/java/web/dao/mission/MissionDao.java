@@ -82,4 +82,9 @@ public class MissionDao {
 		// TODO Auto-generated method stub
 		sqlsessionTemplate.update("mission.successChange",re_num);
 	}
+
+	public void reduceMount(int re_num) {
+		// TODO Auto-generated method stub
+		
+	}
 }

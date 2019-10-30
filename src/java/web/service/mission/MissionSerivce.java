@@ -34,5 +34,11 @@ public class MissionSerivce {
 		missiondao.successChange(re_num);
 		
 	}
+
+	public void reduceMount(int re_num) {
+		// TODO Auto-generated method stub
+		logger.info("MissionService reduceMount Activate");
+		missiondao.reduceMount(re_num);
+	}
 	
 }

@@ -55,6 +55,8 @@ public class MissionController {
 		
 		missionservice.successChange(re_num);
 		
+		missionservice.reduceMount(re_num);
+		
 		return "redirect:/mission/missionInList";
 	}
 	
