@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import web.controller.HomeController;
 import web.dto.member.MemberDto;
-import web.dto.member.ReportDto;
 import web.service.member.MemberSerivce;
 
 @Controller
@@ -149,5 +149,50 @@ public class MemberController {
 		pw.flush();
 		pw.close();
 	}
+	
+	
+	// 검색 리스트
+	@RequestMapping("/memberSearch")
+	public String memberSearch(String searchThing, String things,Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
+		session.setAttribute("pageNo", pageNo);
+		logger.info("써치 컨트롤러 시작");
+		int rowsPerPage = 10;
+		int pagesPerGroup = 5;
+		int totalRowNum = service.getTotalRowNo();
+		int totalPageNum = totalRowNum / rowsPerPage;
+		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
+		int totalGroupNum = totalPageNum / pagesPerGroup;
+		if(totalPageNum % pagesPerGroup != 0) totalGroupNum++;
+		int groupNo = (pageNo-1)/pagesPerGroup + 1;
+		int startPageNo = (groupNo-1)*pagesPerGroup + 1;
+		int endPageNo = startPageNo + pagesPerGroup - 1;
+		if(groupNo == totalGroupNum) endPageNo = totalPageNum;
+		int startRowNo = (pageNo-1)*rowsPerPage + 1;
+		int endRowNo = pageNo*rowsPerPage;
+		if(pageNo == totalPageNum) endRowNo = totalRowNum;
+		
+		//현재 페이지의 게시물 가져오기
+		List<MemberDto> searchList = null;
+		
+		if (searchThing.equals("m_num")) {
+			logger.info("써치 컨트롤러 조건문");
+			searchList = service.getSearchList(things,startRowNo, endRowNo);
+		}
+		
+		
+		//JSP로 페이지 정보 넘기기
+		model.addAttribute("pagesPerGroup", pagesPerGroup);
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("totalGroupNum", totalGroupNum);
+		model.addAttribute("groupNo", groupNo);
+		model.addAttribute("startPageNo", startPageNo);
+		model.addAttribute("endPageNo", endPageNo);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("searchList", searchList);
+		logger.info("써치 컨트롤러 끝");
+		return "member/member_searched";
+	}
+	
+	
 	
 }

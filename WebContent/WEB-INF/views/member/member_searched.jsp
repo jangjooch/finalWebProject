@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>회원 목록</title>
+		<title>보유 물품 목록</title>
 		<script type="text/javascript"
 			src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
 		<link rel="stylesheet" type="text/css"
@@ -16,20 +16,19 @@
 			src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 		<style>
 		</style>
-		
-		<script type="text/javascript">
-			function searchSelect(){
-				var result = true;
-				if ($("#searchThing").val() == "0") {
-					result = false;
-				}
-				if($("#things").val() == ""){
-					result = false;
-				}
-				return result;
-			}
-		</script>
 	</head>
+	<script type="text/javascript">
+		function searchSelect(){
+			var result = true;
+			if ($("#selectGroup").val() == "0") {
+				result = false;
+			}
+			if($("#findding").val() == ""){
+				result = false;
+			}
+			return result;
+		}
+	</script>
 	<body>
 		<%-- 전체 div --%>
 		<div id="body">
@@ -38,7 +37,7 @@
 				<div id="top_top"></div>
 				
 				<div id="top_center">
-					<h1>회원 목록</h1>
+					<h1>보유 물품 목록</h1>
 				</div>
 				
 				<%-- top_bottom검색어 --%>
@@ -62,7 +61,7 @@
 			</div>
 			
 			<%-- 테이블 div top--%>
-			<div id="center">
+			<div id="center">				
 				<table class="table table-hover" style="border: 1px solid 1px">
 					<thead class="thead-dark">
 						<tr>
@@ -74,8 +73,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					 
-			 			<c:forEach var="member" items="${memberList}">
+						<c:forEach var="member" items="${searchList}">
 						    <tr>
 						      <td><a href="memberDetail?m_num=${member.m_num}">${member.m_num }</a></td>
 						      <td>${member.m_name}</td>
@@ -84,6 +82,15 @@
 						      <td>${member.po_num}</td>
 						    </tr>
 						</c:forEach>
+						<%--
+						<tr>
+							<td><a href="item_detail">1</a></td>
+							<td>물</td>
+							<td>25</td>
+							<td>식품</td>
+							<td>25kg</td>
+						</tr>
+						 --%>
 					</tbody>
 				</table>
 			</div>
@@ -132,7 +139,7 @@
 								</li>
 							</ul>
 						</nav>
-					</div>	
+					</div>		
 				
 					<%-- bottom --%>
 					<div id ="b_c_bottom"></div>
@@ -145,9 +152,9 @@
 					<div id="b_r_top"></div>
 					<%--bottom-right center 버튼 --%>
 					<div id="b_r_center">
-						<a href="memberInsertForm" class="btn btn-warning">회원 등록</a>
+						<a href="item_list" class="btn btn-warning">물품 목록</a>
+						<a href="item_add" class="btn btn-warning">물품 등록</a>
 					</div>
-
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>
 				</div>

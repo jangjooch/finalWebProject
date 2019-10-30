@@ -68,6 +68,19 @@ public class MemberDao {
 		System.out.println("디에이오");
 		sqlSessionTemplate.insert("memberUpdate",member);
 	}
+
+	public List<MemberDto> selectSearchMember(int thingsA, int startRowNo, int endRowNo) {
+		logger.info("디에이오");
+		Map<String, Integer> map = new HashMap<>();
+		map.put("thingsA", thingsA);
+		map.put("startRowNo", startRowNo);
+		map.put("endRowNo", endRowNo);
+		logger.info("디에이오2");
+		List<MemberDto> searchList = sqlSessionTemplate.selectList("member.searchMemberList", map);
+		logger.info("디에이오3");
+		return searchList;
+	}
+
 	
 	
 }

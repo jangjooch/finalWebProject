@@ -42,8 +42,8 @@
 	<!-- 멤버 등록 -->
 	<insert id="memberInsert"
 		parameterType="web.dto.member.MemberDto">
-		INSERT INTO member (m_num, m_name, m_id, m_pw, m_phone, po_num)
-		VALUES(#{m_num} ,#{m_name} ,#{m_id},#{m_pw} ,#{m_phone} ,#{po_num})
+		INSERT INTO member
+		VALUES(MEMBER_SEQ.nextval ,#{m_name} ,#{m_id},#{m_pw} ,#{m_phone} ,#{po_num})
 	</insert>
 
 
@@ -77,4 +77,17 @@
     		Order by r.re_time desc
 	</select>
 
+
+	<!-- 회원번호를 제외한 검색 -->
+	<select id="searchList">
+		select * from member where #{searchThing} like '%#{things}%'
+	</select>
+	
+	<!-- 회원번호 검색 -->
+	<select id="searchMemberList" parameterType="web.dto.member.MemberDto" resultType="web.dto.member.MemberDto">
+		select  m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num, p.po_position 
+		from member m, position p
+				where m.po_num = p.po_num
+   				 AND m.m_num = #{thingsA}
+	</select>
 </mapper>

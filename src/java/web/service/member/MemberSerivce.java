@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import web.controller.HomeController;
 import web.dao.member.MemberDao;
+import web.dto.item.ItemDto;
 import web.dto.member.MemberDto;
 
 @Service
@@ -67,4 +68,12 @@ public class MemberSerivce {
 		System.out.println("서비스");
 		memberDao.updateMember(member);
 	}
+
+	public List<MemberDto> getSearchList(String things, int startRowNo, int endRowNo) {
+		logger.info("써비스");
+		int thingsA = Integer.parseInt(things);
+		List<MemberDto> searchList = memberDao.selectSearchMember(thingsA,startRowNo, endRowNo);
+		return searchList;
+	}
+
 }
