@@ -86,5 +86,7 @@ public class MissionDao {
 	public void reduceMount(int re_num) {
 		// TODO Auto-generated method stub
 		
+		
+		
 	}
 }

@@ -182,7 +182,7 @@
 					<div id="b_r_top"></div>
 					<%--bottom-right center 버튼 --%>
 					<div id="b_r_center">
-						<a href="item/item_list?ipageNumber=${ipageNumber}" class="btn btn-warning">목록으로</a>
+						<a href="item_list?ipageNumber=${ipageNumber}" class="btn btn-warning">목록으로</a>
 					</div>
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>
