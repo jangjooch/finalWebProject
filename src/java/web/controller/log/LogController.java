@@ -33,7 +33,7 @@ public class LogController {
 		int pagesPerGroup = 5;										// 페이지 당 그룹 수
 		int totalRowNum = droneMissionService.getTotalRowNo();		// 전체 게시글 수
 		int totalPageNum = totalRowNum / rowsPerPage;				// 전체 페이지 수
-		if(totalRowNum % rowsPerPage !=0) rowsPerPage++;			 
+		if(totalRowNum % rowsPerPage !=0) totalPageNum++;			 
 		
 		int totalGroupNum = totalPageNum / pagesPerGroup;			// 전 체 그룹 수
 		if(totalPageNum % pagesPerGroup !=0) totalGroupNum++;		//
@@ -48,7 +48,7 @@ public class LogController {
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;			//
 		
 		List<DroneMissionDto> droneMissionDtoList = droneMissionService.droneMissionList(startRowNo, endRowNo);
-		
+				
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
 		model.addAttribute("totalGroupNum", totalGroupNum);

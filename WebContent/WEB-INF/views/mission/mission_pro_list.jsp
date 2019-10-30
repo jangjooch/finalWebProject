@@ -84,9 +84,9 @@
 							<a href="missionReject" class="btn btn-danger">미션 거부</a>
 							 --%>
 							<form action="missionProcess">
-								<input value="${mission.re_num}" readonly="readonly" type="number">
+								<input value="${mission.re_num}" readonly="readonly" type="number" name="re_num">
 								<button type="submit" class="btn btn-primary">미션 수행</button>
-							</form>	
+							</form>
 							</div>
 						</div>
 					</div>

@@ -14,7 +14,15 @@ public class MissionDto {
 							// 1. 요청 수락
 							// 2. 요청 완료
 							// 2는 어차피 안나오게 할것이다.
+	private int m_num;		// 멤버 번호
 	
+	
+	public int getM_num() {
+		return m_num;
+	}
+	public void setM_num(int m_num) {
+		this.m_num = m_num;
+	}
 	public int getRe_num() {
 		return re_num;
 	}

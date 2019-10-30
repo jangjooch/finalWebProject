@@ -1,5 +1,6 @@
 package web.dao.mission;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,8 +86,39 @@ public class MissionDao {
 
 	public void reduceMount(int re_num) {
 		// TODO Auto-generated method stub
+		List<Integer> Getting_Icode = sqlsessionTemplate.selectList("mission.Getting_Icode",re_num);
 		
+		List<Integer> Getting_Iamount = sqlsessionTemplate.selectList("mission.Getting_Iamount",re_num);
 		
+		List<Integer> Getting_Imount = new ArrayList<Integer>();
+		for(int i_code : Getting_Icode) {
+			int mount = (int)sqlsessionTemplate.selectOne("mission.GetMountByICode", i_code);
+			Getting_Imount.add(mount);
+		}
 		
+		for(int i = 0 ; i < Getting_Icode.size() ; i++) {
+			Map<String, Integer> parsing = new HashMap<String, Integer>();
+			parsing.put("i_code", Getting_Icode.get(i));
+			if(Getting_Imount.get(i) - Getting_Iamount.get(i) < 0) {
+				parsing.put("i_amount", 0);
+			}
+			else {
+				parsing.put("i_amount", Getting_Imount.get(i) - Getting_Iamount.get(i));
+			}
+			sqlsessionTemplate.update("mission.reduceMount", parsing);
+		}
+		
+	}
+
+	public List<String> getDestination(int re_num) {
+		// TODO Auto-generated method stub
+		
+		MissionDto missiondto = sqlsessionTemplate.selectOne("mission.GetMissionByReNum",re_num);
+		
+		List<String> destination = new ArrayList<String>();
+		destination.add(missiondto.getRe_location_x());
+		destination.add(missiondto.getRe_location_y());
+		
+		return destination;
 	}
 }

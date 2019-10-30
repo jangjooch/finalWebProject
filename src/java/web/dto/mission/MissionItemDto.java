@@ -25,6 +25,4 @@ public class MissionItemDto {
 		this.i_amount = i_amount;
 	}
 	
-	
-	
 }

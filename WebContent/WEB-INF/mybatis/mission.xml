@@ -54,10 +54,44 @@
        	order by re_time desc
 	</select>
 	
+	<!-- re_num에 해당하는 i_code 가져오기 -->
+	<select id="Getting_Icode" parameterType="int" resultType="int">
+		select i_code
+		from request_item
+		where re_num=#{re_num}
+	</select>
+	
+	<!-- re_num에 해당하는 i_amount 가져오기 -->
+	<select id="Getting_Iamount" parameterType="int" resultType="int">
+		select i_amount
+		from request_item
+		where re_num=#{re_num}
+	</select>
+	
+	<!-- i_code를 기반으로 i_mount를 가져옴 -->
+	<select id="GetMountByICode" parameterType="int" resultType="int">
+		select i_mount
+		from item_list
+		where i_code=#{i_code}
+	</select>
+	
+	<select id="GetMissionByReNum" parameterType="int" resultType="web.dto.mission.MissionDto">
+		select re_num, re_time, re_location_x, re_location_y, re_success
+		from request
+		where re_num=#{re_num}
+	</select>
+	
 	<!-- 전달받은 re_num을 매게로 success를 1(요청 진행)로 변환한다. -->
 	<update id="successChange" parameterType="int">
-	UPDATE request
-	SET re_success=1
-	where re_num=#{re_num}
+		UPDATE request
+		SET re_success=1
+		where re_num=#{re_num}
 	</update>
+	
+	<update id="reduceMount" parameterType="map">
+		update item_list
+		set i_mount = #{i_amount}
+		where i_code=#{i_code}
+	</update>
+
 </mapper>
