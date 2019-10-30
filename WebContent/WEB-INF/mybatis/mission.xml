@@ -2,12 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mission">
 
-	<select id="mission_re_num" resultType="int">
+	<select id="mission_in_re_num" resultType="int">
 		select re_num
 		from request
-		where re_success=0 or re_success=1
+		where re_success=0
 	</select>
-	
+	<select id="mission_pro_re_num" resultType="int">
+		select re_num
+		from request
+		where re_success=1
+	</select>
 	<select id="currentMissionItemList" parameterType="java.util.HashMap"
 		resultType="web.dto.mission.MissionItemDto">
 		select ri.re_num, il.i_name, ri.i_amount
@@ -36,5 +40,11 @@
             </when>
         </choose>
        	order by re_time desc
-	</select>	
+	</select>
+	
+	<update id="successChange" parameterType="int">
+	UPDATE request
+	SET re_success=1
+	where re_num=#{re_num}
+	</update>
 </mapper>

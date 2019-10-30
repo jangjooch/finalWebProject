@@ -20,11 +20,19 @@ public class MissionSerivce {
 
 	private static final Logger logger = LoggerFactory.getLogger(MissionSerivce.class);
 	
-	public List<MissionDto> missionList(HttpSession session) {
+	public List<MissionDto> missionList(HttpSession session, int success) {
 		// TODO Auto-generated method stub
 		logger.info("MissionService missionList Activate");
-		List<MissionDto> missionList = missiondao.missionList(session);
+		List<MissionDto> missionList = missiondao.missionList(session, success);
 		return missionList;
+	}
+
+	public void successChange(int re_num) {
+		// TODO Auto-generated method stub
+		logger.info("MissionService successChange activate");
+		
+		missiondao.successChange(re_num);
+		
 	}
 	
 }

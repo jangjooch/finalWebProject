@@ -39,7 +39,7 @@
 			
 			<%-- 테이블 div top--%>
 			<div id="center">
-				<c:forEach items="${currentMissionList}" var="mission">
+				<c:forEach items="${currentMissionInList}" var="mission">
 					<div style="border: 1px solid 1px">
 						<table class="table table-hover">
 							<thead class="thead-dark">
@@ -67,7 +67,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${currentMissionItems}" var="item">
+							<c:forEach items="${currentMissionInItems}" var="item">
 								<c:if test="${mission.re_num == item.re_num }">
 									<tr>
 										<td>${item.i_name}</td>
@@ -78,60 +78,16 @@
 							</c:forEach>							
 						</tbody>
 						</table>
-						<div style="display: flex;flex-direction: row;">
-							<c:if test="${mission.re_success == 0}">
-								<div>
-								<form action="missionAccept">
-									<input value="${mission.re_num}" readonly="readonly" type="number">
-									<button type="submit" class="btn btn-success">미션 수락</button>
-								</form>
-							</div>
-							</c:if>
-							<c:if test="${mission.re_success == 1}">
-								<div>
-								<%--
-								<a href="missionReject" class="btn btn-danger">미션 거부</a>
-								 --%>
-								<form action="missionProcess">
-									<input value="${mission.re_num}" readonly="readonly" type="number">
-									<button type="submit" class="btn btn-primary">미션 수행</button>
-								</form>	
-							</div>
-							</c:if>
+						<div>
+							<form action="missionAccept" method="post">
+								<input value="${mission.re_num}" readonly="readonly" type="number" id="re_num" name="re_num">
+								<button type="submit" class="btn btn-success">미션 수락</button>
+							</form>
 						</div>
 					</div>
 					<br>
 				</c:forEach>
-			</div>
-			
-			<%-- 버튼 div bottom --%>
-			<div id="bottom">
-			
-				<%-- bottom left - div --%>
-				<div id="bottom_left"></div>
-				
-				<%-- bottom center - div --%>
-				<div id="bottom_center">
-					<%-- top --%>
-					<div id ="b_c_top"></div>
-					
-					<%-- center 페이징 --%>
-					<div id ="b_c_center">						
-					</div>						
-					<%-- bottom --%>
-					<div id ="b_c_bottom"></div>				
-				</div>
-				<%-- bottom left - right --%>
-				<div id="bottom_right">
-					
-					<%--bottom-right top --%>
-					<div id="b_r_top"></div>
-					<%--bottom-right center 버튼 --%>
-					<%--bottom-right bottom --%>
-					<div id="b_r_bottom"></div>
-				</div>
-			</div>
-			
+			</div>			
 		</div>	
 	</body>
 </html>
