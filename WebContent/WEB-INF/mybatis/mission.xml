@@ -1,96 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mission">
-	<!-- request 테이블에서 re_success가 0인것을 
-		 (요청 대기) re_num값을 int형으로 반환합니다. -->
+	<!-- request 테이블에서 re_success가 0인것을 (요청 대기) re_num값을 int형으로 반환합니다. -->
 	<select id="mission_in_re_num" resultType="int">
 		select re_num
-		from request
+		from
+		request
 		where re_success=0
 	</select>
-	
-	<!-- request 테이블에서 re_success가 1인것을 
-		 (요청 진행) re_num값을 int형으로 반환합니다. -->
+
+	<!-- request 테이블에서 re_success가 1인것을 (요청 진행) re_num값을 int형으로 반환합니다. -->
 	<select id="mission_pro_re_num" resultType="int">
 		select re_num
-		from request
+		from
+		request
 		where re_success=1
 	</select>
-	
-	<!-- request_item 테이블과 item_list를 조인하고 이후
-		 조인된 테이블의 i_code값이 HashMap내부에 있는
-		 파라미터 re_numList로 받은 리스트 내부에 있는 것들을
-		 MissionItemDto로 반환한다. -->
-	<select id="currentMissionItemList" parameterType="java.util.HashMap"
+
+	<!-- request_item 테이블과 item_list를 조인하고 이후 조인된 테이블의 i_code값이 HashMap내부에 있는 
+		파라미터 re_numList로 받은 리스트 내부에 있는 것들을 MissionItemDto로 반환한다. -->
+	<select id="currentMissionItemList"
+		parameterType="java.util.HashMap"
 		resultType="web.dto.mission.MissionItemDto">
 		select ri.re_num, il.i_name, ri.i_amount
-		from request_item ri, item_list il 
+		from request_item ri,
+		item_list il
 		where ri.i_code = il.i_code
 		<choose>
-            <when test="re_numList.size != 0">
-                and ri.re_num in
-                <foreach collection="re_numList" item="item" index="index" separator="," open="(" close=")">
-                    #{item}
-                </foreach>
-            </when>
-        </choose>
+			<when test="re_numList.size != 0">
+				and ri.re_num in
+				<foreach collection="re_numList" item="item" index="index"
+					separator="," open="(" close=")">
+					#{item}
+				</foreach>
+			</when>
+		</choose>
 	</select>
-	
-	<!-- request 테이블에서 i_code값이 HashMap내부에 있는
-		 파라미터 re_numList로 받은 리스트 내부에 있는 것들을
-		 MissionDto로 반환한다. -->
-	<select id="currentMissionList" parameterType="java.util.HashMap"
+
+	<!-- request 테이블에서 i_code값이 HashMap내부에 있는 파라미터 re_numList로 받은 리스트 내부에 있는 
+		것들을 MissionDto로 반환한다. -->
+	<select id="currentMissionList"
+		parameterType="java.util.HashMap"
 		resultType="web.dto.mission.MissionDto">
 		select re_num, re_time, re_location_x, re_location_y, re_success
-		from request
+		from
+		request
 		<choose>
-            <when test="re_numList.size != 0">
-                where re_num in
-                <foreach collection="re_numList" item="item" index="index" separator="," open="(" close=")">
-                    #{item}
-                </foreach>
-            </when>
-        </choose>
-       	order by re_time desc
+			<when test="re_numList.size != 0">
+				where re_num in
+				<foreach collection="re_numList" item="item" index="index"
+					separator="," open="(" close=")">
+					#{item}
+				</foreach>
+			</when>
+		</choose>
+		order by re_time desc
 	</select>
-	
+
 	<!-- re_num에 해당하는 i_code 가져오기 -->
 	<select id="Getting_Icode" parameterType="int" resultType="int">
 		select i_code
 		from request_item
 		where re_num=#{re_num}
 	</select>
-	
+
 	<!-- re_num에 해당하는 i_amount 가져오기 -->
-	<select id="Getting_Iamount" parameterType="int" resultType="int">
+	<select id="Getting_Iamount" parameterType="int"
+		resultType="int">
 		select i_amount
 		from request_item
 		where re_num=#{re_num}
 	</select>
-	
+
 	<!-- i_code를 기반으로 i_mount를 가져옴 -->
-	<select id="GetMountByICode" parameterType="int" resultType="int">
+	<select id="GetMountByICode" parameterType="int"
+		resultType="int">
 		select i_mount
 		from item_list
 		where i_code=#{i_code}
 	</select>
-	
-	<select id="GetMissionByReNum" parameterType="int" resultType="web.dto.mission.MissionDto">
-		select re_num, re_time, re_location_x, re_location_y, re_success
+
+	<select id="GetMissionByReNum" parameterType="int"
+		resultType="web.dto.mission.MissionDto">
+		select re_num, re_time, re_location_x, re_location_y,
+		re_success, m_num
 		from request
 		where re_num=#{re_num}
 	</select>
-	
+
+	<!-- 형철쓰가 손댐 -->
+	<resultMap id="GetMissionByReNum2ResultMap"
+		type="web.dto.mission.MissionDto">
+		<result column="re_num" property="re_num" />
+		<result column="re_time" property="re_time" />
+		<result column="re_location_x" property="re_location_x" />
+		<result column="re_location_y" property="re_location_y" />
+		<result column="re_success" property="re_success" />
+		<result column="m_num" property="m_num" />
+		<collection property="missionItems" ofType="web.dto.item.MissionItemsDto">
+			<result property="re_num" column="re_num"/>
+			<result property="i_code" column="i_code"/>
+			<result property="i_amount" column="i_amount"/>
+			<association property="itemDto" javaType="web.dto.item.ItemDto">
+			    <result property="i_code" column="i_code"/>
+			    <result property="i_name" column="i_name"/>
+			    <result property="i_mount" column="i_mount"/>
+			    <result property="i_class" column="i_class"/>
+			    <result property="i_weight" column="i_weight"/>
+			</association>
+		</collection>
+	</resultMap>
+	<select id="GetMissionByReNum2" parameterType="int"
+		resultMap="GetMissionByReNum2ResultMap">
+		select re_num, re_time, re_location_x, re_location_y,
+		re_success, m_num
+		from request
+		where re_num=#{re_num}
+	</select>
+
+
 	<!-- 전달받은 re_num을 매게로 success를 1(요청 진행)로 변환한다. -->
 	<update id="successChange" parameterType="int">
 		UPDATE request
-		SET re_success=1
+		SET
+		re_success=1
 		where re_num=#{re_num}
 	</update>
-	
+
 	<update id="reduceMount" parameterType="map">
 		update item_list
-		set i_mount = #{i_amount}
+		set
+		i_mount = #{i_amount}
 		where i_code=#{i_code}
 	</update>
 

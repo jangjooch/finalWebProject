@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import web.dto.drone.DroneMissionDto;
 import web.service.drone.DroneMissionService;
+import web.service.log.LogService;
 
 @Controller
 @RequestMapping("/log")
@@ -23,6 +24,9 @@ public class LogController {
 	
 	@Autowired
 	private DroneMissionService droneMissionService;
+	@Autowired
+	private LogService logService;
+	
 	
 	// 페이징
 	@RequestMapping("/log_list")
