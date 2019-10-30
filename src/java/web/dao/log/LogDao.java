@@ -34,9 +34,13 @@ public class LogDao {
 	public LogDto getSelectLog(int d_m_number) {
 		LogDto logDto = new LogDto();
 		
+		// 드론 미션 테이블에서 한행 가져오기
 		DroneMissionDto droneMissionDto = sqlSessionTemplate.selectOne("droneMission.selectDroneMissionDetail", d_m_number);
+		// 드론  테이블에서 드론 미션테이블 primary에 대한 한행 가져오기
 		DroneDto droneDto = sqlSessionTemplate.selectOne("drone.selectdrone", droneMissionDto.getD_number());
+		// 요청 테이블에서 드론 미션 테이블의 요청번호의 한행 가져오기
 		MissionDto missionDto = sqlSessionTemplate.selectOne("mission.GetMissionByReNum", droneMissionDto.getRe_num());
+		// 요청자에 대한 회원 정보 한행으로 가져오기
 		MemberDto memberDto = sqlSessionTemplate.selectOne("member.memberSelectOne", missionDto.getM_num());
 		
 		return logDto;
