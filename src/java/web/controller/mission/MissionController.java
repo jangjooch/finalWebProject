@@ -27,13 +27,42 @@ public class MissionController {
 	@Resource(name="dataSource")
 	private DataSource datasource;
 	
-	@RequestMapping("/missionList")
-	public String missionList(HttpSession session) {
-		logger.info("Controller missionList Activate");
+	@RequestMapping("/missionInList")
+	public String missionInList(HttpSession session) {		
 		
-		List<MissionDto> missionList = missionservice.missionList(session); 
+		logger.info("Controller missionInList Activate");
+		int success = 0;
 		
-		return "mission/mission_list";
+		List<MissionDto> missionList = missionservice.missionList(session, success); 
+		
+		return "mission/mission_in_list";
+	}
+	@RequestMapping("/missionProList")
+	public String missionProList(HttpSession session) {		
+		
+		logger.info("Controller missionProList Activate");
+		int success = 1;
+		
+		List<MissionDto> missionList = missionservice.missionList(session, success); 
+		
+		return "mission/mission_pro_list";
+	}
+	
+	@RequestMapping("/missionAccept")
+	public String missionAccept(int re_num) {
+		
+		logger.info("Controller missionAccept Activate");
+		
+		missionservice.successChange(re_num);
+		
+		missionservice.reduceMount(re_num);
+		
+		return "redirect:/mission/missionInList";
+	}
+	
+	@RequestMapping("missionProcess")
+	public String missionProcess() {
+		return "mission/missionProcess";
 	}
 	
 }

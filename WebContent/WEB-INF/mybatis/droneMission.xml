@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="droneMission">
+
+	<!-- 드론 미션 페이징 -->
+	<select id="selectDroneMission" parameterType="map" resultType="web.dto.drone.DroneMissionDto">
+		SELECT rn, d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation
+		FROM
+		    (SELECT ROWNUM AS rn, d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation 
+		     FROM
+		        (SELECT d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation
+		        FROM 
+		            drone_mission
+		        ORDER BY d_m_number DESC)
+		    WHERE ROWNUM  &lt;= #{endRowNo})
+		WHERE rn  &gt;= #{startRowNo}
+	</select>
+	
+	<!-- 드론 테이블수 Count 가져오기 -->
+	<select id="selectDroneMissionCount" resultType="int">
+		SELECT COUNT(*) FROM drone_mission
+	</select>
+	
+	<!-- 게시글 상세 페이지 한 행 가져오기 -->
+	<select id="selectDroneMissionDetail" parameterType="int" resultType="web.dto.drone.DroneMissionDto">
+		SELECT d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation
+			FROM drone_mission
+			WHERE d_m_number = #{d_m_number}
+	</select>
+</mapper>

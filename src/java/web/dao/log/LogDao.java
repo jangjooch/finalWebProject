@@ -1,5 +1,5 @@
 package web.dao.log;
 
-public class logDao {
+public class LogDao {
 
 }

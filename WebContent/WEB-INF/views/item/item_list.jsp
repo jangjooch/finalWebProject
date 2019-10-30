@@ -73,7 +73,7 @@
 					</thead>
 					<tbody>
 						<c:forEach var="items" items="${itemList}">
-							<tr>
+							<tr onclick="location.href='item_detail?i_code=${items.i_code}'" style="cursor: pointer;">
 								<td><a href="item_detail?i_code=${items.i_code}">${items.i_code}</a></td>
 								<td>${items.i_name}</td>
 								<td>${items.i_mount}</td>
@@ -154,8 +154,8 @@
 					<div id="b_r_top"></div>
 					<%--bottom-right center 버튼 --%>
 					<div id="b_r_center">
-						<a href="item_list" class="btn btn-warning">물품 목록</a>
 						<a href="item_add" class="btn btn-warning">물품 등록</a>
+						<a href="item_list" class="btn btn-warning">물품 목록</a>
 					</div>
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>

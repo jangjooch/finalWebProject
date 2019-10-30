@@ -112,16 +112,21 @@
 					<form action="item_join" method="post" onsubmit="return checkForm()">
 						<div class="form-group row">
 							<label for="i_name" class="col-sm-4 col-form-label">물품</label>
-							<div class="col-sm-8">
+							<div class="input-group col-sm-8">
 								<input type="text" id="i_name" name="i_name"
 									class="form-control" placeholder="물품을 등록하세요.">
-									<div class="input-group-append">
-										<input class="btn btn-danger" type="button" onclick="checkMid()" value="중복검사">
-									</div>
-								<span class="error" id ="iNameError" style="color: red;"></span>
+								<div class="input-group-append">
+									<input class="btn btn-danger" type="button" onclick="checkMid()" value="중복검사">
+								</div>
 							</div>
-							<%-- 입력값 검사 효과 추가해야함 --%>
 						</div>
+						<div class="form-group row">
+							<div class="col-sm-4"></div>
+							<div class="col-sm-8">
+								<span class="error" id ="iNameError" style="color: red;"></span>
+							</div>						
+						</div>
+						
 						<div class="form-group row">
 							<label for="i_mount" class="col-sm-4 col-form-label">물품 수량</label>
 							<div class="col-sm-8">
@@ -182,7 +187,7 @@
 					<div id="b_r_top"></div>
 					<%--bottom-right center 버튼 --%>
 					<div id="b_r_center">
-						<a href="item/item_list?ipageNumber=${ipageNumber}" class="btn btn-warning">목록으로</a>
+						<a href="item_list?ipageNumber=${ipageNumber}" class="btn btn-warning">목록으로</a>
 					</div>
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>
