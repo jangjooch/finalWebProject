@@ -17,15 +17,16 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 
 </head>
 <body>
-	<div id="map" style="width: 100%; height: 350px;"></div>
+	<div id="map" style="width: 100%; height: 500px;"></div>
 	<p>
 		<em>지도를 클릭해주세요!</em>
 	</p>
 	<div id="clickLatlng"></div>
 	
 	<script>	 	
-		var destination_x = ${destination_lat};
-		var destination_y = ${destination_lat};
+		var destination_x = ${"#destination_lat"};
+		var destination_y = ${"#destination_lng"};
+		console.log(${destination_lat});
 		// 37.504000, 127.122000
 		var lat = 37.504383;
 		var lng = 127.122404;
@@ -44,40 +45,43 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 		// 지도를 클릭한 위치에 표출할 마커입니다
 		var marker = new kakao.maps.Marker({
 			// 지도 중심좌표에 마커를 생성합니다 
-			position : map.getCenter()
+			map: map,
+		    position: new kakao.maps.LatLng(lat, lng)
 		});
-		// 지도에 마커를 표시합니다
+		//marker.setPosition(new kakao.maps.LatLng(destination_x, destination_y))
+		// 지도에 마커를 표시합니다		
 		marker.setMap(map);
-		var DroneMarker = kakao.maps.Marker({ 
-			
+		
+		
+		var DroneMarker = new kakao.maps.Marker({ 
+			map: map,
+		    position: new kakao.maps.LatLng(destination_x, destination_y)
 		}); 
-		DroneMarker.setPosition(new kakao.maps.LatLng(lat, lng))
+		//37.504000, 127.122000
+		//DroneMarker.setPosition(new kakao.maps.LatLng(destination_x, destination_y));
 		DroneMarker.setMap(map);
 		
-		// markers에 저장된 marker를 map에 세팅하기
-		function setMarkers(map) {
-		    for (var i = 0; i < markers.length; i++) {
-		        markers[i].setMap(map);
-		    }            
-		}
-
+		
 		// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
 		function showMarkers() {
-		    setMarkers(map)    
+		    setMarkers(map); 
 		}
 
 		// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
 		function hideMarkers() {
 		    setMarkers(null);    
 		}
+		
+		/*
 		setInterval(function(){
 			lat = lat + 0.00001;
 			lng = lng + 0.00001;
-			marker.setMap(null);
-			marker.setPosition(new kakao.maps.LatLng(lat, lng));
-			marker.setMap(map);
-			map.setCenter(new kakao.maps.LatLng(lat, lng));
-		},1000);
+			DroneMarker.setMap(null);
+			DroneMarker.setPosition(new kakao.maps.LatLng(lat, lng));
+			DroneMarker.setMap(map);
+			map.setCenter(new kakao.maps.LatLng((lat+destination_x)/2, (lng+destination_y)/2);
+		},3000);
+		*/
 	</script>
 </body>
 </html>
