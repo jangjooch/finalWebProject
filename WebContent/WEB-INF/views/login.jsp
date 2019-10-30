@@ -78,7 +78,7 @@ html, body {
 
 
 #top{
-	height: 50px;
+	height: 20px;
 }
 #logo{
 	flex-grow: 1;
@@ -108,7 +108,7 @@ html, body {
 	color: white;
 	font-size: 40px;
 	text-align: center;
-	height: 50px;
+	height: 80px;
 	font-weight: bold;
 }
 

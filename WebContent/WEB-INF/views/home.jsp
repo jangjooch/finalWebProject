@@ -26,9 +26,10 @@
 			}
 			#header{
 				flex: 1;
-				border-bottom: 3px solid black;
 				text-align: center;
 				display: flex;
+				background-image: url("resources/image/header.png");
+				background-size: 100%100%;
 			}
 				#header_left{
 					flex: 1;
@@ -51,7 +52,6 @@
 				height : 100%;
 				background-color: gray;
 				padding-right: 15px;
-				border-right: 3px solid black;
 				display: flex;
 				flex-direction: column;								
 			}
@@ -74,8 +74,9 @@
 				height: 100%;
 			}
 			#footer{
-				flex: 1;
-				border-top: 3px solid black;
+				text-align: center;
+				flex: 0.3;
+				border-top: 1px solid ;
 			}
 			
 			ul{
@@ -93,7 +94,7 @@
 				<h3>관제소</h3>
 			</div>
 			<div id="header_right">
-				<a href="logOut" class="btn btn-success">Log Out</a>
+				
 			</div>
 		</div>
 		<div id = "content">
@@ -157,7 +158,9 @@
 							<form action="log/log_list" target="iframe">
 								<input type = "submit" value = "HISTORY" class="btn btn-success">
 							</form>
+							
 							<br>
+							<a href="logOut" class="btn btn-success">Log Out</a>
 						</li>
 					</ul>
 				</div>
@@ -167,7 +170,7 @@
 				<iframe name="iframe" frameborder="0"></iframe>
 			</div>
 		</div>
-		<div id = "footer">2019. Iot. JSH</div>
+		<div id="footer">2019. Iot. JSH</div>
 	</div>
 	
 </body>
