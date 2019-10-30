@@ -1,6 +1,6 @@
 package web.dto.item;
 
-public class MissionItems {
+public class MissionItemsDto {
 
 	private int re_num;
 	private int i_code;
