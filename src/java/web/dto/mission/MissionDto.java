@@ -9,10 +9,20 @@ public class MissionDto {
 	private Date re_time; // 요청 날짜
 	private String re_location_x; // 신청 위치 X
 	private String re_location_y; // 신청 위치 Y
-	
+	private int re_success; // 요청대기 요청 수락 판별용
+							// 0. 요청 대기
+							// 1. 요청 수락
+							// 2. 요청 완료
+							// 2는 어차피 안나오게 할것이다.
 	
 	public int getRe_num() {
 		return re_num;
+	}
+	public int getRe_success() {
+		return re_success;
+	}
+	public void setRe_success(int re_success) {
+		this.re_success = re_success;
 	}
 	public void setRe_num(int re_num) {
 		this.re_num = re_num;

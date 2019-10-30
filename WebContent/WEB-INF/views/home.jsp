@@ -129,8 +129,16 @@
 						
 						<c:if test="${member_logined.po_num <= 3}">
 							<li>
-								<form action="mission/missionList" target="iframe">
-									<input type = "submit" value = "MISSION" class="btn btn-success">
+								<form action="mission/missionInList" target="iframe">
+									<input type = "submit" value = "MISSION IN" class="btn btn-success">
+								</form>
+							</li>
+							<br>
+						</c:if>
+						<c:if test="${member_logined.po_num <= 2}">
+							<li>
+								<form action="mission/missionProList" target="iframe">
+									<input type = "submit" value = "MISSION PROGRESS" class="btn btn-success">
 								</form>
 							</li>
 							<br>

@@ -39,23 +39,23 @@
 			
 			<%-- 테이블 div top--%>
 			<div id="center">
-				<c:forEach items="${MisstionLocation}" var="mission">
+				<c:forEach items="${currentMissionList}" var="mission">
 					<div style="border: 1px solid 1px">
 						<table class="table table-hover">
 							<thead class="thead-dark">
 							<tr>
-								<th scope="col" width="20%;">요청 번호</th>
-								<th scope="col" width="20%;">요청 시간</th>
-								<th scope="col" width="20%;">요청 위치 Lat</th>
-								<th scope="col" width="20%;">요청 위치 Lng</th>							
+								<th scope="col" width="15%;">요청 번호</th>
+								<th scope="col" width="15%;">요청 시간</th>
+								<th scope="col" width="15%;">요청 위치 Lat</th>
+								<th scope="col" width="15%;">요청 위치 Lng</th>							
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>${mission.number}</td>
-								<td>${mission.time}</td>
-								<td>${mission.location_x}</td>
-								<td>${mission.location_y}</td>
+								<td>${mission.re_num}</td>
+								<td>${mission.re_time}</td>
+								<td>${mission.re_location_x}</td>
+								<td>${mission.re_location_y}</td>
 							</tr>
 						</tbody>						
 						</table>
@@ -67,21 +67,40 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${mission.itemList}" var="item">
-								<tr>
-								<td>${item.name}</td>
-								<td>${item.amount}</td>
-							</tr>
+							<c:forEach items="${currentMissionItems}" var="item">
+								<c:if test="${mission.re_num == item.re_num }">
+									<tr>
+										<td>${item.i_name}</td>
+										<td>${item.i_amount}</td>
+									</tr>
+								</c:if>
+								
 							</c:forEach>							
 						</tbody>
 						</table>
-						<form action="missionAccept">
-							<input value="${mission.number}" readonly="readonly" type="number">
-							<button type="submit" class="btn btn-primary mb-2">미션 수락</button>
-						</form>
-						<a href="missionReject">미션 거부</a>
-						<a href="missionMapping">미션 진행</a>
-					</div>					
+						<div style="display: flex;flex-direction: row;">
+							<c:if test="${mission.re_success == 0}">
+								<div>
+								<form action="missionAccept">
+									<input value="${mission.re_num}" readonly="readonly" type="number">
+									<button type="submit" class="btn btn-success">미션 수락</button>
+								</form>
+							</div>
+							</c:if>
+							<c:if test="${mission.re_success == 1}">
+								<div>
+								<%--
+								<a href="missionReject" class="btn btn-danger">미션 거부</a>
+								 --%>
+								<form action="missionProcess">
+									<input value="${mission.re_num}" readonly="readonly" type="number">
+									<button type="submit" class="btn btn-primary">미션 수행</button>
+								</form>	
+							</div>
+							</c:if>
+						</div>
+					</div>
+					<br>
 				</c:forEach>
 			</div>
 			
@@ -97,21 +116,10 @@
 					<div id ="b_c_top"></div>
 					
 					<%-- center 페이징 --%>
-					<div id ="b_c_center">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination">								
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item"><a class="page-link" href="#">4</a></li>
-								<li class="page-item"><a class="page-link" href="#">5</a></li>
-							</ul>
-						</nav>
-					</div>		
-				
+					<div id ="b_c_center">						
+					</div>						
 					<%-- bottom --%>
-					<div id ="b_c_bottom"></div>
-				
+					<div id ="b_c_bottom"></div>				
 				</div>
 				<%-- bottom left - right --%>
 				<div id="bottom_right">
@@ -119,10 +127,6 @@
 					<%--bottom-right top --%>
 					<div id="b_r_top"></div>
 					<%--bottom-right center 버튼 --%>
-					<div id="b_r_center">
-						<a href="#" class="btn btn-warning">물품 목록</a>
-						<a href="#" class="btn btn-warning">물품 등록</a>
-					</div>
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>
 				</div>

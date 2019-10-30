@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="members">
+<mapper namespace="mission">
 
-	<select id="mission_re_code">
+	<select id="mission_re_num" resultType="int">
 		select re_num
 		from request
-		where re_success=0
+		where re_success=0 or re_success=1
 	</select>
 	
-	<select id="missionItemList" parameterType="java.util.HashMap">
-		select ri.re_num, il.i_name, il.i_amount
-		from item_list il, request_item ri
-		where il.i_code = ri.i_code
+	<select id="currentMissionItemList" parameterType="java.util.HashMap"
+		resultType="web.dto.mission.MissionItemDto">
+		select ri.re_num, il.i_name, ri.i_amount
+		from request_item ri, item_list il 
+		where ri.i_code = il.i_code
 		<choose>
-            <when test="i_codeList.size != 0">
-                and ri.i_code in
-                <foreach collection="i_codeList" item="item" index="index" separator="," open="(" close=")">
+            <when test="re_numList.size != 0">
+                and ri.re_num in
+                <foreach collection="re_numList" item="item" index="index" separator="," open="(" close=")">
                     #{item}
                 </foreach>
             </when>
         </choose>
 	</select>
 	
+	<select id="currentMissionList" parameterType="java.util.HashMap"
+		resultType="web.dto.mission.MissionDto">
+		select re_num, re_time, re_location_x, re_location_y, re_success
+		from request
+		<choose>
+            <when test="re_numList.size != 0">
+                where re_num in
+                <foreach collection="re_numList" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </when>
+        </choose>
+       	order by re_time desc
+	</select>	
 </mapper>

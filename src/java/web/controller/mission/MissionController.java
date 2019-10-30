@@ -28,7 +28,8 @@ public class MissionController {
 	private DataSource datasource;
 	
 	@RequestMapping("/missionList")
-	public String missionList(HttpSession session) {
+	public String missionList(HttpSession session) {		
+		
 		logger.info("Controller missionList Activate");
 		
 		List<MissionDto> missionList = missionservice.missionList(session); 
