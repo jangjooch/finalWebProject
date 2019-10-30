@@ -67,13 +67,14 @@ html, body {
 }
 
 #content_center {
-	flex-grow: 2;
+	flex-grow: 0.5;
 	display: flex;
 	flex-direction: column;
-	background-color: white;
+	background-image: url("resources/image/android_Login.png");
+	background-size: 100%100%;
 }
 #top{
-	height: 10px;
+	height: 150px;
 }
 #logo{
 	flex-grow: 1;
@@ -86,7 +87,7 @@ html, body {
 #logo_center{	
 	background-image: url("resources/image/DroneLogo1.png");
 	background-size: 100%100%;
-	height: 200px;
+	height: 100px;
 	width: 200px;
 }
 #logo_right{
@@ -104,17 +105,21 @@ html, body {
 }
 #input{
 	display: flex;
-	flex-direction: column; 
+	flex-direction: row; 
 }
-#input_left{
+#input_button_left{
 	flex-grow: 1;
 }
-#input_center{
+
+
+#input_button_right{
 	flex-grow: 1;
 }
-#input_right{
-	flex-grow: 1;
+
+#login_bottom{
+	height: 80px;
 }
+
 #bottom {
 	flex-grow: 4;
 	border-bottom: 3px ;
@@ -142,30 +147,48 @@ html, body {
 				</div>
 				<div id="loginForm">
 					<form method="post" action="login" onsubmit="return checkForm()">
-						<div class="form-group">
-							<label for="mid">ID</label>
-							<!-- 해당 라벨을 클릭하면 해당 title로 이동 -->
-							<input id="m_id" name="m_id" type="text" class="form-control"
-								placeholder="Input ID"> <span class="error"
-								id="mIdError" style="color: red;"> ${Id_error} </span>
-							<!-- model에서 전달받은 속성 값 Id_error를 출력 -->
-						</div>
-						<div class="form-group">
-							<label for="m_password">PW</label> <input id="m_pw"
-								name="m_pw" type="password" class="form-control"
-								placeholder="Input PW"> <span class="error"
-								id="mPasswordError" style="color: red;"> ${Pw_error} </span>
-						</div>
-						<div class="form-group" id="input">
-							<div id="input_left">
-							</div>
-							<div id="input_center">
-								<input type="submit" value="Login" class="btn btn-success" />
-							</div>
-							<div id="input_right">
-							</div>							
-						</div>
+								<div id="input">
+								<div id="input_button_left">
+								</div>
+								<div class="form-group">
+									<label for="mid">ID</label>
+									<!-- 해당 라벨을 클릭하면 해당 title로 이동 -->
+									<input id="m_id" name="m_id" type="text" class="form-control"
+										placeholder="Input ID"> <span class="error"
+										id="mIdError" style="color: red;"> ${Id_error} </span>
+									<!-- model에서 전달받은 속성 값 Id_error를 출력 -->
+								</div>
+								<div id="input_button_right">
+								</div>
+								</div>
+								
+								
+								<div id="input">
+								<div id="input_button_left">
+								</div>
+								<div class="form-group">
+									<label for="m_password">PW</label> <input id="m_pw"
+										name="m_pw" type="password" class="form-control"
+										placeholder="Input PW"> <span class="error"
+										id="mPasswordError" style="color: red;"> ${Pw_error} </span>
+								</div>
+								<div id="input_button_right">
+								</div>
+								</div>
+								
+								<div id="input">
+									<div id="input_button_left">
+									</div>
+										<div class="form-group" >
+											<input type="submit" value="Login" class="btn btn-success"/>
+										</div>	
+									<div id="input_button_right">
+									</div>				
+								</div>
+				
 					</form>
+					<div id="login_bottom">
+					</div>
 				</div>
 			</div>
 			<div id="content_right">

@@ -24,7 +24,14 @@
 	<!-- 게시글 상세 페이지 한 행 가져오기 -->
 	<select id="selectDroneMissionDetail" parameterType="int" resultType="web.dto.drone.DroneMissionDto">
 		SELECT d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation
-			FROM drone_mission
-			WHERE d_m_number = #{d_m_number}
+			FROM 
+				drone_mission
+			WHERE 
+				d_m_number = #{d_m_number}
 	</select>
+	
+	<!-- insert -->
+	<!-- update -->
+	<!-- insert -->
+	
 </mapper>

@@ -52,19 +52,19 @@
 									</tr>
 									<tr>
 										<th>요청자:</th>
-										<td>?</td>
+										<td></td>
 									</tr>
 									<tr>
 										<th>요청시간:</th>
-										<td>?</td>
+										<td></td>
 									</tr>
 									<tr>
 										<th>요청 위치</th>
-										<td>?</td>
+										<td></td>
 									</tr>
 									<tr>
 										<th>요청 물품 및 수량</th>
-										<td>?</td>
+										<td></td>
 									</tr>
 								</tbody>
 							</table>
@@ -84,11 +84,11 @@
 									</tr>
 									<tr>
 										<th>드론 모델명</th>
-										<td>?</td>
+										<td></td>
 									</tr>
 									<tr>
 										<th>적재량</th>
-										<td>?</td>
+										<td></td>
 									</tr>
 								</tbody>
 							</table>
