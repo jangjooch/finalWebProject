@@ -164,8 +164,17 @@ public class ItemController {
 	@RequestMapping("item_list_search")
 	public String item_search(String findding, String selectGroup, Model model, @RequestParam(defaultValue = "1")int searchedipageNumber, HttpSession session) {
 		
+
+		if(selectGroup == null) {
+			selectGroup=(String)session.getAttribute("selectGroupSaved");
+		}
+		if(findding == null) {
+			findding=(String)session.getAttribute("finddingSaved");
+		}
 		// 조건에 맞는 i_code만 뽑아냄.
-		List<Integer> searched_iCode = itemservice.search_iCode(findding, selectGroup);
+		List<Integer> searched_iCode = itemservice.search_iCode(findding, selectGroup);		
+		session.setAttribute("selectGroupSaved", selectGroup);
+		session.setAttribute("finddingSaved", findding);
 		int searched_size = searched_iCode.size();
 		int rowsPerPage = 5;
 		int pagesPerGroup = 5;

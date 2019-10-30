@@ -24,12 +24,12 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 	<div id="clickLatlng"></div>
 	
 	<script>	 	
-		var destination_x = ${"#destination_lat"};
-		var destination_y = ${"#destination_lng"};
+		var destination_x = "${destination_lat}"; // 전에 model로 받은 destinaion_lat
+		var destination_y = "${destination_lng}"; // 전에 model로 받은 destinaion_lng
 		console.log(${destination_lat});
 		// 37.504000, 127.122000
-		var lat = 37.504383;
-		var lng = 127.122404;
+		var lat = 37.502000;
+		var lng = 127.120000;
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
@@ -46,7 +46,7 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 		var marker = new kakao.maps.Marker({
 			// 지도 중심좌표에 마커를 생성합니다 
 			map: map,
-		    position: new kakao.maps.LatLng(lat, lng)
+		    position: new kakao.maps.LatLng(destination_x, destination_y)
 		});
 		//marker.setPosition(new kakao.maps.LatLng(destination_x, destination_y))
 		// 지도에 마커를 표시합니다		
@@ -55,7 +55,7 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 		
 		var DroneMarker = new kakao.maps.Marker({ 
 			map: map,
-		    position: new kakao.maps.LatLng(destination_x, destination_y)
+		    position: new kakao.maps.LatLng(lat, lng)
 		}); 
 		//37.504000, 127.122000
 		//DroneMarker.setPosition(new kakao.maps.LatLng(destination_x, destination_y));
@@ -72,16 +72,18 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 		    setMarkers(null);    
 		}
 		
-		/*
+		
 		setInterval(function(){
-			lat = lat + 0.00001;
-			lng = lng + 0.00001;
+			lat = lat + 0.0001;
+			lng = lng + 0.0001;
 			DroneMarker.setMap(null);
 			DroneMarker.setPosition(new kakao.maps.LatLng(lat, lng));
 			DroneMarker.setMap(map);
-			map.setCenter(new kakao.maps.LatLng((lat+destination_x)/2, (lng+destination_y)/2);
-		},3000);
-		*/
+			cent_x= (lat + destination_x /2);
+			cent_x= (lng + destination_y /2);
+			map.setCenter(new kakao.maps.LatLng(cent_x,cent_y));
+		},2000);
+		
 	</script>
 </body>
 </html>
