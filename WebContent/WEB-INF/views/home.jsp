@@ -25,7 +25,7 @@
 				flex-direction: column;
 			}
 			#header{
-				flex: 0.8;
+				height: 150px;
 				text-align: center;
 				display: flex;
 				background-image: url("resources/image/header.png");
@@ -54,7 +54,7 @@
 				background-size: 100% 100%;
 				padding-right: 15px;
 				display: flex;
-				flex-direction: column;								
+				flex-direction: column;						
 			}
 			#sideBar_img{
 				width: 100%;
