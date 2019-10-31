@@ -25,21 +25,21 @@
 				flex-direction: column;
 			}
 			#header{
-				flex: 1;
+				flex: 0.8;
 				text-align: center;
 				display: flex;
 				background-image: url("resources/image/header.png");
-				background-size: 100%100%;
+				background-size: 100% 100%;
 			}
 				#header_left{
-					flex: 1;
+					width: 250px;
 				}
 				#header_center{
-					flex: 1;
+					flex: 2;
 					text-align: center;
 				}
 				#header_right{
-					flex: 1;
+					width: 250px;
 				}
 			
 			#content{
@@ -48,7 +48,7 @@
 				min-height: 0;
 			}
 			#sideBar{
-				width: 300px;
+				width: 250px;
 				height : 100%;
 				background-image: url("resources/image/sidebar_eagle.png");
 				background-size: 100% 100%;
@@ -59,8 +59,7 @@
 			#sideBar_img{
 				width: 100%;
 				height : 200px;
-				background-image: url("resources/image/DroneLogo1.png");
-				background-size: 100% 100%;
+				
 			}
 			#sideBar_menu{
 				
@@ -90,7 +89,18 @@
 	
 	<div id = "wrapper">
 		<div id = "header">
-			<div id="header_left"></div>
+			<div id="header_left">
+				<div>
+				<a href="https://www.seoul.go.kr/">
+				<img src="resources/image/seoul_logo.png">
+				</a>
+				</div>
+				<div>
+				<a href="https://fire.seoul.go.kr/">
+				<img src="resources/image/seoulFirefighter_logo.png">
+				</a>
+				</div>
+			</div>
 			<div id="header_center">
 				<h3>관제소</h3>
 			</div>
@@ -100,17 +110,23 @@
 		</div>
 		<div id = "content">
 			<div id = "sideBar">
+				
 				<div id = "sideBar_img">
+				<a href="home">
+				<img src="resources/image/DroneLogo1.png" width="100%" height="200px">
+				</a>
 				</div>
+				
 				<div id = "sideBar_menu">
 					<ul>
+						<!-- 
 						<li>
 							<form action="home">
 								<input type = "submit" value = "HOME" class="btn btn-success">
 							</form>
 							<br>
 						</li>
-						
+						 -->
 						<c:if test="${member_logined.po_num == 1}">
 							<li>
 								<form action="member/memberList" target="iframe">
