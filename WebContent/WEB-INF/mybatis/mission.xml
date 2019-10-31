@@ -89,6 +89,7 @@
 	</select>
 
 	<!-- 형철쓰가 손댐 -->
+	<!-- result맵을 이용하여 이러한 형태로  -->
 	<resultMap id="GetMissionByReNum2ResultMap"
 		type="web.dto.mission.MissionDto">
 		<result column="re_num" property="re_num" />
@@ -98,10 +99,14 @@
 		<result column="re_success" property="re_success" />
 		<result column="m_num" property="m_num" />
 		<collection property="missionItems" ofType="web.dto.item.MissionItemsDto">
+		<!-- 1 대 N을 넣기 위해 MissionDto에 있는 private List<MissionItemsDto> missionItems;
+			 를 받아오기 위해 것을 박아넣기 위해 List한 것을 받아오기 위해 -->
 			<result property="re_num" column="re_num"/>
 			<result property="i_code" column="i_code"/>
 			<result property="i_amount" column="i_amount"/>
 			<association property="itemDto" javaType="web.dto.item.ItemDto">
+			<!-- 1 대 1을 넣기 위해 association item.MissionItemDto에 있는
+				 private ItemDto itemDto;를 사용하기 위해서 -->
 			    <result property="i_code" column="i_code"/>
 			    <result property="i_name" column="i_name"/>
 			    <result property="i_mount" column="i_mount"/>
@@ -117,6 +122,7 @@
 		from request
 		where re_num=#{re_num}
 	</select>
+	<!-- 이렇게 위에서 MissionDto를 resultMap을 통한 설정으로 커스터 마이즈를 할 수 있도록 한다.  -->
 
 
 	<!-- 전달받은 re_num을 매게로 success를 1(요청 진행)로 변환한다. -->
