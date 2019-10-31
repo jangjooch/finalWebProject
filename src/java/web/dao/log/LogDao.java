@@ -1,15 +1,14 @@
 package web.dao.log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import web.dao.drone.DroneDao;
-import web.dao.drone.DroneMissionDao;
-import web.dao.member.MemberDao;
-import web.dao.mission.MissionDao;
 import web.dto.drone.DroneDto;
 import web.dto.drone.DroneMissionDto;
 import web.dto.log.LogDto;
@@ -35,11 +34,6 @@ public class LogDao {
 		// 요청자에 대한 회원 정보 한행으로 가져오기
 		MemberDto memberDto = sqlSessionTemplate.selectOne("member.memberSelectOne", missionDto.getM_num());
 		
-		for(int i=0; i<missionDto.getMissionItems().size(); i++) {
-			System.out.println(String.valueOf(missionDto.getMissionItems().get(i).getItemDto().getI_name()));
-		}
-		
-		
 		logDto.setDroneDto(droneDto);
 		logDto.setDroneMissionDto(droneMissionDto);
 		logDto.setMemberDto(memberDto);
@@ -47,4 +41,19 @@ public class LogDao {
 		
 		return logDto;
 	}
+	
+//	public List<LogDto> getSelectLogList(){
+//		List<LogDto> logDto = new ArrayList<LogDto>();
+//		
+//		// 드론 미션 테이블에서 한행 가져오기
+//		DroneMissionDto droneMissionDto = sqlSessionTemplate.selectOne("droneMission.selectDroneMissionDetail");
+//		// 드론  테이블에서 드론 미션테이블 primary에 대한 한행 가져오기
+//		DroneDto droneDto = sqlSessionTemplate.selectOne("drone.selectdrone", droneMissionDto.getD_number());
+//		// 요청 테이블에서 드론 미션 테이블의 요청번호의 한행 가져오기
+//		MissionDto missionDto = sqlSessionTemplate.selectOne("mission.GetMissionByReNum2", droneMissionDto.getRe_num());
+//		// 요청자에 대한 회원 정보 한행으로 가져오기
+//		MemberDto memberDto = sqlSessionTemplate.selectOne("member.memberSelectOne", missionDto.getM_num());
+//
+//		
+//	}
 }

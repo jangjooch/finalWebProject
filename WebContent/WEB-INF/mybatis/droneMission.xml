@@ -69,23 +69,23 @@
 		</association>
 	</resultMap>
 	<select id="selectDroneMissionList" parameterType="map" resultMap="droneMemberList">
-		SELECT rn, dm.d_m_number, dm.d_number, dm.re_num, dm.m_num, dm.d_m_start, dm.d_m_preparation,
-               m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num,       
-               p.po_position
+		SELECT rn, d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation,
+               m_m_num, m_name, m_id, m_pw, m_phone, po_num,       
+               po_position
 		FROM
-		    (SELECT ROWNUM AS rn, dm.d_m_number, dm.d_number, dm.re_num, dm.m_num, dm.d_m_start, dm.d_m_preparation,
-                              m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num,       
-                              p.po_position
+		    (SELECT ROWNUM AS rn, d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation,
+                              m_m_num, m_name, m_id, m_pw, m_phone, po_num,       
+                              po_position
 		     FROM
-		        (SELECT dm.d_m_number, dm.d_number, dm.re_num, dm.m_num, dm.d_m_start, dm.d_m_preparation,
-                           m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num,       
-                           p.po_position
-                    FROM 
-                        drone_mission dm, member m, position p
-                    WHERE 
-                        m.m_num = dm.m_num AND
-                        m.po_num = p.po_num
-		        	ORDER BY dm.d_m_number DESC)
+              (SELECT dm.d_m_number, dm.d_number, dm.re_num, dm.m_num , dm.d_m_start, dm.d_m_preparation,
+                             m.m_num m_m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num,       
+                             p.po_position
+                      FROM 
+                          drone_mission dm, member m, position p
+                      WHERE 
+                          m.m_num = dm.m_num AND
+                          m.po_num = p.po_num
+                      ORDER BY dm.d_m_number DESC)
 		    WHERE ROWNUM  &lt;= #{endRowNo})
 		WHERE rn  &gt;= #{startRowNo}
 	</select>

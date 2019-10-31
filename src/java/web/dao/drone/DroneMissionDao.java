@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import web.dto.drone.DroneMissionDto;
+import web.dto.log.LogDto;
 
 @Component
 public class DroneMissionDao {
@@ -26,7 +27,7 @@ public class DroneMissionDao {
 		
 		List<DroneMissionDto> droneMissionDtoList =
 				sqlSessionTemplate.selectList("droneMission.selectDroneMissionList", map);
-	
+		
 		return droneMissionDtoList;
 	}
 
