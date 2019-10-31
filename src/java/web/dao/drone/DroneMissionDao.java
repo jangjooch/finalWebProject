@@ -25,7 +25,7 @@ public class DroneMissionDao {
 		map.put("endRowNo", endRowNo);
 		
 		List<DroneMissionDto> droneMissionDtoList =
-				sqlSessionTemplate.selectList("droneMission.selectDroneMission", map);
+				sqlSessionTemplate.selectList("droneMission.selectDroneMissionList", map);
 	
 		return droneMissionDtoList;
 	}
