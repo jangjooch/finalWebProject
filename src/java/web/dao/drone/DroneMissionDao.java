@@ -17,7 +17,7 @@ public class DroneMissionDao {
 	private static final Logger logger = LoggerFactory.getLogger(DroneMissionDao.class);
 	
 	@Autowired
-	SqlSessionTemplate sqlSessionTmplate;
+	SqlSessionTemplate sqlSessionTemplate;
 	
 	public List<DroneMissionDto> droneMissionList(int startRowNo, int endRowNo){
 		Map<String, Integer> map = new HashMap<>();
@@ -25,18 +25,19 @@ public class DroneMissionDao {
 		map.put("endRowNo", endRowNo);
 		
 		List<DroneMissionDto> droneMissionDtoList =
-				sqlSessionTmplate.selectList("droneMission.selectDroneMission", map);
+				sqlSessionTemplate.selectList("droneMission.selectDroneMission", map);
 	
 		return droneMissionDtoList;
 	}
 
 	public int droneMissionCountRows() {
-		int rows = sqlSessionTmplate.selectOne("droneMission.selectDroneMissionCount");
+		int rows = sqlSessionTemplate.selectOne("droneMission.selectDroneMissionCount");
 		return rows;
 	}
 
 	public DroneMissionDto droneMissionDtoSelectOne(int d_m_number) {
-		DroneMissionDto droneMissionDto = sqlSessionTmplate.selectOne("droneMission.selectDroneMissionDetail", d_m_number);
+		DroneMissionDto droneMissionDto = sqlSessionTemplate.selectOne("droneMission.selectDroneMissionDetail", d_m_number);
 		return droneMissionDto;
 	}
+	
 }

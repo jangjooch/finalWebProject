@@ -46,13 +46,13 @@ html, body {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	background-image: url("resources/image/background_firefighter_test1.png");
+	background-image: url("resources/image/background_firefighter_test.png");
 	background-size: 100%100%;
 }
 
 #header {
 	border-bottom: 3px ;
-	flex-grow: 4;
+	flex-grow: 5;
 }
 
 #content {
@@ -71,11 +71,14 @@ html, body {
 	flex-grow: 0.5;
 	display: flex;
 	flex-direction: column;
-	background-image: url("resources/image/android_Login.png");
+	background-image: url("resources/image/opacity_background.png");
+	
 	background-size: 100%100%;
 }
+
+
 #top{
-	height: 150px;
+	height: 20px;
 }
 #logo{
 	flex-grow: 1;
@@ -101,6 +104,14 @@ html, body {
 	flex-grow: 1;
 }
 
+#login_text{
+	color: white;
+	font-size: 40px;
+	text-align: center;
+	height: 80px;
+	font-weight: bold;
+}
+
 #content_right {
 	flex-grow: 5;
 }
@@ -118,7 +129,7 @@ html, body {
 }
 
 #login_bottom{
-	height: 80px;
+	height: 50px;
 }
 
 #bottom {
@@ -134,6 +145,9 @@ html, body {
 			<div id="content_left">
 			</div>
 			<div id="content_center" style="border: 1px ;">
+				<div id="login_text">
+					Login
+				</div>
 				<div id="top">
 				</div>
 				<div id="logo">

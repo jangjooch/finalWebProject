@@ -65,7 +65,7 @@
 							<label for="i_name" class="col-sm-4 col-form-label">물품 이름</label>
 							<div class="col-sm-8">
 								<input type="text" id="i_name" value="${item_selected.i_name}" 
-									class="form-control" readonly>
+									class="form-control" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -78,14 +78,14 @@
 						<div class="form-group row">
 							<label for="i_class" class="col-sm-4 col-form-label">분류</label>
 							<div class="col-sm-8">
-								<input type="password" id="i_class" value="${item_selected.i_class}"
+								<input type="text" id="i_class" value="${item_selected.i_class}"
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="i_weight" class="col-sm-4 col-form-label">무게</label>
 							<div class="col-sm-8">
-								<input type="text" id="i_weight" value="${item_selected.i_class}" 
+								<input type="number" id="i_weight" value="${item_selected.i_weight}" 
 									class="form-control" readonly>
 							</div>
 						</div>

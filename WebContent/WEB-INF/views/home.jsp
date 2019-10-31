@@ -25,20 +25,21 @@
 				flex-direction: column;
 			}
 			#header{
-				flex: 1;
-				border-bottom: 3px solid black;
+				height: 150px;
 				text-align: center;
 				display: flex;
+				background-image: url("resources/image/header.png");
+				background-size: 100% 100%;
 			}
 				#header_left{
-					flex: 1;
+					width: 250px;
 				}
 				#header_center{
-					flex: 1;
+					flex: 2;
 					text-align: center;
 				}
 				#header_right{
-					flex: 1;
+					width: 250px;
 				}
 			
 			#content{
@@ -47,19 +48,18 @@
 				min-height: 0;
 			}
 			#sideBar{
-				width: 300px;
+				width: 250px;
 				height : 100%;
-				background-color: gray;
+				background-image: url("resources/image/sidebar_eagle.png");
+				background-size: 100% 100%;
 				padding-right: 15px;
-				border-right: 3px solid black;
 				display: flex;
-				flex-direction: column;								
+				flex-direction: column;						
 			}
 			#sideBar_img{
 				width: 100%;
 				height : 200px;
-				background-image: url("resources/image/DroneLogo1.png");
-				background-size: 100% 100%;
+				
 			}
 			#sideBar_menu{
 				
@@ -74,8 +74,9 @@
 				height: 100%;
 			}
 			#footer{
-				flex: 1;
-				border-top: 3px solid black;
+				text-align: center;
+				flex: 0.3;
+				border-top: 1px solid ;
 			}
 			
 			ul{
@@ -88,27 +89,44 @@
 	
 	<div id = "wrapper">
 		<div id = "header">
-			<div id="header_left"></div>
+			<div id="header_left">
+				<div>
+				<a href="https://www.seoul.go.kr/">
+				<img src="resources/image/seoul_logo.png">
+				</a>
+				</div>
+				<div>
+				<a href="https://fire.seoul.go.kr/">
+				<img src="resources/image/seoulFirefighter_logo.png">
+				</a>
+				</div>
+			</div>
 			<div id="header_center">
 				<h3>관제소</h3>
 			</div>
 			<div id="header_right">
-				<a href="logOut" class="btn btn-success">Log Out</a>
+				
 			</div>
 		</div>
 		<div id = "content">
 			<div id = "sideBar">
+				
 				<div id = "sideBar_img">
+				<a href="home">
+				<img src="resources/image/DroneLogo1.png" width="100%" height="200px">
+				</a>
 				</div>
+				
 				<div id = "sideBar_menu">
 					<ul>
+						<!-- 
 						<li>
 							<form action="home">
 								<input type = "submit" value = "HOME" class="btn btn-success">
 							</form>
 							<br>
 						</li>
-						
+						 -->
 						<c:if test="${member_logined.po_num == 1}">
 							<li>
 								<form action="member/memberList" target="iframe">
@@ -157,7 +175,9 @@
 							<form action="log/log_list" target="iframe">
 								<input type = "submit" value = "HISTORY" class="btn btn-success">
 							</form>
+							
 							<br>
+							<a href="logOut" class="btn btn-success">Log Out</a>
 						</li>
 					</ul>
 				</div>
@@ -167,7 +187,7 @@
 				<iframe name="iframe" frameborder="0"></iframe>
 			</div>
 		</div>
-		<div id = "footer">2019. Iot. JSH</div>
+		<div id="footer">2019. Iot. JSH</div>
 	</div>
 	
 </body>

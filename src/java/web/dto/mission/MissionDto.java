@@ -1,6 +1,9 @@
 package web.dto.mission;
 
 import java.util.Date;
+import java.util.List;
+
+import web.dto.item.MissionItemsDto;
 
 
 public class MissionDto {
@@ -16,7 +19,15 @@ public class MissionDto {
 							// 2는 어차피 안나오게 할것이다.
 	private int m_num;		// 멤버 번호
 	
+	private List<MissionItemsDto> missionItems;
+	// mission이랑 연결되어 있으니 이렇게 하여 1 대 N의 관계를 형성한다.
 	
+	public List<MissionItemsDto> getMissionItems() {
+		return missionItems;
+	}
+	public void setMissionItems(List<MissionItemsDto> missionItems) {
+		this.missionItems = missionItems;
+	}
 	public int getM_num() {
 		return m_num;
 	}

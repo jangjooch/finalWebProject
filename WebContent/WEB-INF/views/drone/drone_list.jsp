@@ -96,15 +96,14 @@
 							<td>480 분</td>
 							 -->
 							<c:forEach var="drone" items="${drone_list}" >
-								<tr>
-						 		<th scope="row"> <a href="drone_detail?d_number=${drone.d_number}">${drone.d_number}</a></th>
+							<tr onclick="location.href='drone_detail?d_number=${drone.d_number}'" style="cursor: pointer;">
+						 	<th scope="row"> <a href="drone_detail?d_number=${drone.d_number}">${drone.d_number}</a></th>
 						      <td>${drone.d_model}</td>
 						      <td>${drone.d_status}</td>
 						      <td>${drone.d_weight}</td>
 						      <td>${drone.d_battery}</td>
 						      </tr>
 							</c:forEach>
-							
 						</tr>
 					</tbody>
 				</table>
