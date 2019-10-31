@@ -68,9 +68,9 @@
 						<tr>
 							<th scope="col" width="15%;">번호</th>
 							<th scope="col" width="15%;">이름</th>
-							<th scope="col" width="40%;">아이디</th>
-							<th scope="col" width="20%;">전화번호</th>
-							<th scope="col" width="10%;">직급</th>
+							<th scope="col" width="25%;">아이디</th>
+							<th scope="col" width="25%;">전화번호</th>
+							<th scope="col" width="20%;">직급</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -81,7 +81,7 @@
 						      <td>${member.m_name}</td>
 						      <td>${member.m_id}</td>
 						      <td>${member.m_phone}</td>
-						      <td>${member.po_num}</td>
+						      <td>${member.po_position}</td>
 						    </tr>
 						</c:forEach>
 					</tbody>

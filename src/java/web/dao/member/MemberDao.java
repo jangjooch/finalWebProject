@@ -16,6 +16,8 @@ import web.dto.member.MemberDto;
 public class MemberDao {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
+
+	private static final int String = 0;
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
@@ -69,16 +71,41 @@ public class MemberDao {
 		sqlSessionTemplate.insert("memberUpdate",member);
 	}
 
-	public List<MemberDto> selectSearchMember(int thingsA, int startRowNo, int endRowNo) {
-		logger.info("디에이오");
-		Map<String, Integer> map = new HashMap<>();
-		map.put("thingsA", thingsA);
+
+	public List<MemberDto> selectSearchMember(String searchThing, String things, int startRowNo, int endRowNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchThing", searchThing);
+		map.put("things", things);
 		map.put("startRowNo", startRowNo);
 		map.put("endRowNo", endRowNo);
-		logger.info("디에이오2");
-		List<MemberDto> searchList = sqlSessionTemplate.selectList("member.searchMemberList", map);
-		logger.info("디에이오3");
+		List<MemberDto> searchList = null;
+		if (searchThing.equals("m_name")) {
+			searchList = sqlSessionTemplate.selectList("member.searchMemberList2", map);
+		} else if (searchThing.equals("m_phone")) {
+			searchList = sqlSessionTemplate.selectList("member.searchMemberList3", map);
+		} else if (searchThing.equals("po_num")) {
+			searchList = sqlSessionTemplate.selectList("member.searchMemberList4", map);
+		} else if (searchThing.equals("m_num")) {
+			searchList = sqlSessionTemplate.selectList("member.searchMemberList1", map);
+		}
 		return searchList;
+	}
+
+	public int selectSearchTotalRowNo(String searchThing , String things) {
+		int totalRowNo = 0;
+		System.out.println(searchThing);
+		System.out.println(things);
+		if (searchThing.equals("m_num")) {
+			totalRowNo = sqlSessionTemplate.selectOne("member.selectSearchTotalRowNo1",things);
+		} else if (searchThing.equals("m_name")) {
+			totalRowNo = sqlSessionTemplate.selectOne("member.selectSearchTotalRowNo2",things);
+		} else if (searchThing.equals("m_phone")) {
+			totalRowNo = sqlSessionTemplate.selectOne("member.selectSearchTotalRowNo3",things);
+		} else if (searchThing.equals("po_num")) {
+			totalRowNo = sqlSessionTemplate.selectOne("member.selectSearchTotalRowNo4",things);
+		}
+		System.out.println("디에이오 토탈로넘"+totalRowNo);
+		return totalRowNo;
 	}
 
 	

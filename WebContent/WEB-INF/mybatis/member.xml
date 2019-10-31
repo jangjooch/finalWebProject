@@ -5,12 +5,12 @@
 	<!-- 멤버리스트 -->
 	<select id="memberList" parameterType="map"
 		resultType="web.dto.member.MemberDto">
-		select rn, m_num, m_name, m_id, m_phone, po_num
+		select rn, m_num, m_name, m_id, m_phone, po_num,po_position 
 		from (
-		select rownum as rn, m_num, m_name, m_id, m_phone, po_num
+		select rownum as rn, m_num, m_name, m_id, m_phone, po_num,po_position 
 		from (
-		select m_num, m_name, m_id, m_phone, po_num
-		from member
+		select m_num, m_name, m_id, m_phone, p.po_num ,po_position 
+		from member ,position p
 		order by m_num desc
 		)
 		where rownum &lt;= #{endRowNo}
@@ -73,21 +73,83 @@
        		member m, request r, drone_mission dm , (select a.m_name  from member a, drone_mission b 
                                                 	where a.m_num = b.m_num) a
     	WHERE m.m_num = r.m_num 
-        	AND r.re_num = dm.re_num
+        	AND r.re_num = dm.re_num 
     		Order by r.re_time desc
 	</select>
 
 
+
+
+	<select id="searchMemberList1" parameterType="map" resultType="web.dto.member.MemberDto">
+        select rn, m_num, m_name, m_id, m_phone, po_num,  po_position 
+		from (
+            select rownum as rn, m_num, m_name, m_id, m_phone, po_num , po_position 
+            from (
+                select m_num, m_name, m_id, m_phone, p.po_num, po_position 
+                from member , position p
+                where member.po_num = p.po_num
+                    AND m_num = #{things}
+                order by m_num desc
+            ) 
+		where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt;= #{startRowNo}
+	</select>
+
 	<!-- 회원번호를 제외한 검색 -->
-	<select id="searchList">
-		select * from member where #{searchThing} like '%#{things}%'
+	<select id="searchMemberList2" parameterType="map" resultType="web.dto.member.MemberDto">
+        select rn, m_num, m_name, m_id, m_phone, po_num,  po_position 
+		from (
+            select rownum as rn, m_num, m_name, m_id, m_phone, po_num , po_position 
+            from (
+                select m_num, m_name, m_id, m_phone, p.po_num, po_position 
+                from member , position p
+                where member.po_num = p.po_num
+                    AND m_name like '%'||#{things}||'%'
+                order by m_num desc
+            ) 
+		where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt;= #{startRowNo}
+	</select>
+	<select id="searchMemberList3" parameterType="map" resultType="web.dto.member.MemberDto">
+		SELECT 	m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num, p.po_position 
+		FROM 	member m , position p
+		WHERE 
+				m.po_num = p.po_num 
+				AND m_phone like '%'||#{things}||'%'
+	</select>
+	<select id="searchMemberList4" parameterType="map" resultType="web.dto.member.MemberDto">
+		SELECT 	m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num, p.po_position 
+		FROM 	member m , position p
+		WHERE 
+				m.po_num = p.po_num 
+				AND p.po_position like '%'||#{things}||'%'
+	</select> <!-- c:if 로 가능 -->
+	
+	<select id="selectSearchTotalRowNo1" parameterType="string" resultType="int">
+                select count(*)
+                from member , position p
+                where member.po_num = p.po_num
+                    AND m_num = #{things}
+	</select>
+	<select id="selectSearchTotalRowNo2" parameterType="string" resultType="int">
+                select count(*)
+                from member , position p
+                where member.po_num = p.po_num
+                    AND m_name like '%'||#{things}||'%'
+	</select>
+	<select id="selectSearchTotalRowNo3" parameterType="string" resultType="int">
+                select count(*)
+                from member , position p
+                where member.po_num = p.po_num
+                    AND m_phone like '%'||#{things}||'%'
+	</select>
+	<select id="selectSearchTotalRowNo4" parameterType="string" resultType="int">
+                select count(*)
+                from member , position p
+                where member.po_num = p.po_num
+                    AND po_num like '%'||#{things}||'%'
 	</select>
 	
-	<!-- 회원번호 검색 -->
-	<select id="searchMemberList" parameterType="web.dto.member.MemberDto" resultType="web.dto.member.MemberDto">
-		select  m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num, p.po_position 
-		from member m, position p
-				where m.po_num = p.po_num
-   				 AND m.m_num = #{thingsA}
-	</select>
 </mapper>

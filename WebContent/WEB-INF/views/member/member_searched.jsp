@@ -20,10 +20,10 @@
 	<script type="text/javascript">
 		function searchSelect(){
 			var result = true;
-			if ($("#selectGroup").val() == "0") {
+			if ($("#searchThing").val() == "0") {
 				result = false;
 			}
-			if($("#findding").val() == ""){
+			if($("#things").val() == ""){
 				result = false;
 			}
 			return result;
@@ -79,7 +79,7 @@
 						      <td>${member.m_name}</td>
 						      <td>${member.m_id}</td>
 						      <td>${member.m_phone}</td>
-						      <td>${member.po_num}</td>
+						      <td>${member.po_position}</td>
 						    </tr>
 						</c:forEach>
 						<%--
@@ -121,20 +121,20 @@
 								
 						  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
 						  		<c:if test="${pageNo==i}">
-						  			<a href="memberList?pageNo=${i}" class="page-link" style="color:orange;">${i}</a>
+						  			<a href="memberSearch?pageNo=${i}" class="page-link" style="color:orange;">${i}</a>
 						  		</c:if>
 				  				<c:if test="${pageNo!=i}">
-				  					<a href="memberList?pageNo=${i}" class="page-link">${i}</a>
+				  					<a href="memberSearch?pageNo=${i}" class="page-link">${i}</a>
 				  				</c:if>
 				  			</c:forEach>
 								<c:if test="${groupNo < totalGroupNum}">
 									<li class="page-item">
-										<a class="page-link" href="memberList?pageNo=${endPageNo+1 }"> 
+										<a class="page-link" href="memberSearch?pageNo=${endPageNo+1 }"> 
 										<span aria-hidden="true">></span>
 										</a>
 									</li>
 								</c:if>
-								<li class="page-item"><a class="page-link" href="memberList?pageNo=${totalPageNum }"> 
+								<li class="page-item"><a class="page-link" href="memberSearch?pageNo=${totalPageNum }"> 
 									<span aria-hidden="true">&raquo;</span></a>
 								</li>
 							</ul>
@@ -152,8 +152,8 @@
 					<div id="b_r_top"></div>
 					<%--bottom-right center 버튼 --%>
 					<div id="b_r_center">
-						<a href="item_list" class="btn btn-warning">물품 목록</a>
-						<a href="item_add" class="btn btn-warning">물품 등록</a>
+						<a href="memberInsertForm" class="btn btn-warning">회원 등록</a>
+						<a href="memberList" class="btn btn-warning">전체 리스트</a>
 					</div>
 					<%--bottom-right bottom --%>
 					<div id="b_r_bottom"></div>

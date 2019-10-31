@@ -155,10 +155,30 @@ public class MemberController {
 	@RequestMapping("/memberSearch")
 	public String memberSearch(String searchThing, String things,Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
 		session.setAttribute("pageNo", pageNo);
-		logger.info("써치 컨트롤러 시작");
+		String searching_get = null;
+		if(searchThing == null) {
+			searching_get = (String)session.getAttribute("memberSearchThing");
+		}
+		else {
+			session.setAttribute("memberSearchThing", searchThing);
+		}
+		String thing_get = null;
+		if(things == null) {
+			thing_get = (String)session.getAttribute("memberThings");
+		}
+		else {
+			session.setAttribute("memberThings", things);
+		}
+		
 		int rowsPerPage = 10;
 		int pagesPerGroup = 5;
-		int totalRowNum = service.getTotalRowNo();
+		int totalRowNum = 0;
+		if(thing_get != null) {
+			totalRowNum = service.getSearchTotalRowNo(searching_get ,thing_get);
+		}
+		else {
+			totalRowNum = service.getSearchTotalRowNo(searchThing ,things);
+		}
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
 		int totalGroupNum = totalPageNum / pagesPerGroup;
@@ -174,9 +194,11 @@ public class MemberController {
 		//현재 페이지의 게시물 가져오기
 		List<MemberDto> searchList = null;
 		
-		if (searchThing.equals("m_num")) {
-			logger.info("써치 컨트롤러 조건문");
-			searchList = service.getSearchList(things,startRowNo, endRowNo);
+		if (searchThing !=null && things != null) {
+			searchList = service.getSearchList(searchThing, things, startRowNo, endRowNo);
+		}
+		else {
+			searchList = service.getSearchList(searching_get, thing_get, startRowNo, endRowNo);
 		}
 		
 		
@@ -189,6 +211,7 @@ public class MemberController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("searchList", searchList);
+		
 		logger.info("써치 컨트롤러 끝");
 		return "member/member_searched";
 	}

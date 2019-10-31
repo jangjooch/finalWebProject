@@ -69,11 +69,15 @@ public class MemberSerivce {
 		memberDao.updateMember(member);
 	}
 
-	public List<MemberDto> getSearchList(String things, int startRowNo, int endRowNo) {
-		logger.info("써비스");
-		int thingsA = Integer.parseInt(things);
-		List<MemberDto> searchList = memberDao.selectSearchMember(thingsA,startRowNo, endRowNo);
+
+	public List<MemberDto> getSearchList(String searchThing ,String things, int startRowNo, int endRowNo) {
+		List<MemberDto> searchList = memberDao.selectSearchMember(searchThing,things,startRowNo, endRowNo);
 		return searchList;
+	}
+
+	public int getSearchTotalRowNo(String searchThing,String things) {
+		int totalRowNum = memberDao.selectSearchTotalRowNo(searchThing, things);
+		return totalRowNum;
 	}
 
 }
