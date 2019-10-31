@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -112,7 +112,7 @@
 							<label for="i_name" class="col-sm-4 col-form-label">물품</label>
 							<div class="input-group col-sm-8">
 								<input type="text" id="i_name" name="i_name" value="${item_selected.i_name}"
-									class="form-control">
+									class="form-control" readonly="readonly">
 								<div class="input-group-append">
 										<input class="btn btn-danger" type="button" onclick="checkMid()" value="중복검사">
 								</div>
@@ -147,10 +147,21 @@
 							<div class="col-sm-8">
 								<select class="form-control" name="i_class">
 									<option value="0" selected="selected">물품 분류</option>
-									<option value="식품">식품</option>
-									<option value="약품">약품</option>
-									<option value="구호 물품">구호 물품</option>
-									<option value="하품">하품</option>
+									<option value="식품" 
+										<c:if test="${item_selected.i_class eq '식품'}">selected
+										</c:if>>식품</option>
+									<option value="약품"
+										<c:if test="${item_selected.i_class eq '약품'}">selected
+										</c:if>
+										>약품</option>
+									<option value="구호 물품"
+										<c:if test="${item_selected.i_class eq '구호 물품'}">selected
+										</c:if>
+										>구호 물품</option>
+									<option value="하품"
+										<c:if test="${item_selected.i_class eq '하품'}">selected
+										</c:if>
+										>하품</option>
 								</select>
 								<span class="error" id = "iClassError" style="color: red;"></span>				
 							</div>
