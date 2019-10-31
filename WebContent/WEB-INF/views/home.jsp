@@ -50,7 +50,8 @@
 			#sideBar{
 				width: 300px;
 				height : 100%;
-				background-color: gray;
+				background-image: url("resources/image/sidebar_eagle.png");
+				background-size: 100% 100%;
 				padding-right: 15px;
 				display: flex;
 				flex-direction: column;								
