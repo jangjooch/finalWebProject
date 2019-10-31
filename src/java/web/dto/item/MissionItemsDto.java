@@ -4,8 +4,8 @@ public class MissionItemsDto {
 
 	private int re_num;
 	private int i_code;
-	private ItemDto itemDto;	// 물품 상세 테이블
 	private int i_amount;
+	private ItemDto itemDto;	// 물품 상세 테이블
 	
 	public int getRe_num() {
 		return re_num;
@@ -19,10 +19,10 @@ public class MissionItemsDto {
 	public void setI_code(int i_code) {
 		this.i_code = i_code;
 	}
-	public ItemDto getItemdto() {
+	public ItemDto getItemDto() {
 		return itemDto;
 	}
-	public void setItemdto(ItemDto itemDto) {
+	public void setItemDto(ItemDto itemDto) {
 		this.itemDto = itemDto;
 	}
 	public int getI_amount() {

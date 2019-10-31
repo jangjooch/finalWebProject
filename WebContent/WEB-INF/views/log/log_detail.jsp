@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -34,7 +35,7 @@
 			<div id="top">
 				<div id="top_top"></div>
 				<div id="top_center">
-					<h1>로그 상세 페이지 # ${droneMissionDto.d_m_number}</h1>
+					<h1>로그 상세 페이지 # ${logDto.droneMissionDto.d_m_number}</h1>
 				</div>
 				<div id="top_bottom"></div>
 			</div>
@@ -48,23 +49,27 @@
 								<tbody>
 									<tr>
 										<th>요청번호:</th>
-										<td>${droneMissionDto.re_num}</td>
+										<td>${logDto.missionDto.re_num}</td>
 									</tr>
 									<tr>
-										<th>요청자:</th>
-										<td></td>
+										<th>요청자/직급</th>
+										<td>${logDto.memberDto.m_name}/${logDto.memberDto.po_position}</td>
 									</tr>
 									<tr>
-										<th>요청시간:</th>
-										<td></td>
+										<th>요청시간</th>
+										<td><fmt:formatDate value="${logDto.missionDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 									</tr>
 									<tr>
-										<th>요청 위치</th>
-										<td></td>
+										<th>요청 위치 x/y</th>
+										<td>${logDto.missionDto.re_location_x}/${logDto.missionDto.re_location_y}</td>
 									</tr>
 									<tr>
 										<th>요청 물품 및 수량</th>
-										<td></td>
+										<td>
+											<c:forEach var="i" items="${logDto.missionDto.missionItems}">
+												${i.itemDto.i_name} / ${i.itemDto.i_weight}<br/>
+											</c:forEach>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -75,21 +80,18 @@
 							<table class="table table-bordered">
 								<tbody>
 									<tr>
-										<th>처리자:</th>
-										<td>${droneMissionDto.d_m_number}</td>
+										<th>처리자/직급</th>
+										<td>${logDto.droneMissionDto.memberDto.m_name}/${logDto.droneMissionDto.memberDto.po_position}</td>
 									</tr>
 									<tr>
 										<th>드론 번호</th>
-										<td>${droneMissionDto.d_number}</td>
+										<td>${logDto.droneDto.d_number}</td>
 									</tr>
 									<tr>
 										<th>드론 모델명</th>
-										<td></td>
+										<td>${logDto.droneDto.d_model}</td>
 									</tr>
-									<tr>
-										<th>적재량</th>
-										<td></td>
-									</tr>
+									
 								</tbody>
 							</table>
 						</div>
@@ -100,12 +102,12 @@
 								<tbody>
 									<tr>
 										<th width="30%">미션 작성일 시간</th>
-										<td><fmt:formatDate value="${droneMissionDto.d_m_preparation}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
+										<td><fmt:formatDate value="${logDto.droneMissionDto.d_m_preparation}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 									</tr>
 									<tr>
 										<th>미션 내용</th>
 										<td>
-											${droneMissionDto.d_m_start}
+											${logDto.droneMissionDto.d_m_start}
 										</td>
 									</tr>
 								</tbody>

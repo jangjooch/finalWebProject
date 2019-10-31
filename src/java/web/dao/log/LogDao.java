@@ -19,15 +19,7 @@ import web.dto.mission.MissionDto;
 @Component
 public class LogDao {
 	private static final Logger logger = LoggerFactory.getLogger(LogDao.class);
-	
-	@Autowired
-	private MemberDao memberDao;
-	@Autowired
-	private DroneMissionDao droneMissionDao;
-	@Autowired
-	private DroneDao droneDao;
-	@Autowired
-	private MissionDao missionDao;
+
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
@@ -39,9 +31,19 @@ public class LogDao {
 		// 드론  테이블에서 드론 미션테이블 primary에 대한 한행 가져오기
 		DroneDto droneDto = sqlSessionTemplate.selectOne("drone.selectdrone", droneMissionDto.getD_number());
 		// 요청 테이블에서 드론 미션 테이블의 요청번호의 한행 가져오기
-		MissionDto missionDto = sqlSessionTemplate.selectOne("mission.GetMissionByReNum", droneMissionDto.getRe_num());
+		MissionDto missionDto = sqlSessionTemplate.selectOne("mission.GetMissionByReNum2", droneMissionDto.getRe_num());
 		// 요청자에 대한 회원 정보 한행으로 가져오기
 		MemberDto memberDto = sqlSessionTemplate.selectOne("member.memberSelectOne", missionDto.getM_num());
+		
+		for(int i=0; i<missionDto.getMissionItems().size(); i++) {
+			System.out.println(String.valueOf(missionDto.getMissionItems().get(i).getItemDto().getI_name()));
+		}
+		
+		
+		logDto.setDroneDto(droneDto);
+		logDto.setDroneMissionDto(droneMissionDto);
+		logDto.setMemberDto(memberDto);
+		logDto.setMissionDto(missionDto);
 		
 		return logDto;
 	}
