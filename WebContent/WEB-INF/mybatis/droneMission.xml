@@ -22,12 +22,33 @@
 	</select>
 	
 	<!-- 게시글 상세 페이지 한 행 가져오기 -->
-	<select id="selectDroneMissionDetail" parameterType="int" resultType="web.dto.drone.DroneMissionDto">
-		SELECT d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation
-			FROM 
-				drone_mission
-			WHERE 
-				d_m_number = #{d_m_number}
+	<resultMap type="web.dto.drone.DroneMissionDto" id="droneMemberObject">
+		<result property="d_m_number" column="d_m_number"/>
+		<result property="d_number" column="d_number"/>
+		<result property="re_num" column="re_num"/>
+		<result property="m_num" column="m_num"/>
+		<result property="d_m_start" column="d_m_start"/>
+		<result property="d_m_preparation" column="d_m_preparation"/>
+		<association property="memberDto" javaType="web.dto.member.MemberDto">
+			<result property="m_num" column="m_num"/>
+			<result property="m_name" column="m_name"/>
+			<result property="m_id" column="m_id"/>
+			<result property="m_pw" column="m_pw"/>
+			<result property="m_phone" column="m_phone"/>
+			<result property="po_num" column="po_num"/>
+			<result property="po_position" column="po_position"/>
+		</association>
+	</resultMap>
+	<select id="selectDroneMissionDetail" parameterType="int" resultMap="droneMemberObject">
+		SELECT dm.d_m_number, dm.d_number, dm.re_num, dm.m_num, dm.d_m_start, dm.d_m_preparation,
+		       m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num,       
+		       p.po_position
+        FROM 
+            drone_mission dm, member m, position p
+        WHERE 
+            m.m_num = dm.m_num AND
+            m.po_num = p.po_num AND
+            d_m_number = #{d_m_number}
 	</select>
 	
 	<!-- insert -->

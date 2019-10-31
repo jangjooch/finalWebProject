@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import web.dto.drone.DroneMissionDto;
+import web.dto.log.LogDto;
 import web.service.drone.DroneMissionService;
 import web.service.log.LogService;
 
@@ -68,9 +69,8 @@ public class LogController {
 	// 상세페이지
 	@RequestMapping("/log_detail")
 	public String log_detail(int d_m_number, Model model) {
-		DroneMissionDto droneMissionDto = 
-				droneMissionService.droneMissionDtoSelectOne(d_m_number);
-		model.addAttribute("droneMissionDto", droneMissionDto);
+		LogDto logDto = logService.getSelectLog(d_m_number);
+		model.addAttribute("logDto", logDto);
 		
 		return "log/log_detail";
 	}
