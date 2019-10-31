@@ -60,7 +60,9 @@ public class DroneController {
 		int drone_startPageNo = (drone_groupNo-1)*drone_pagesPerGroup + 1;
 		//현재 그룹의 마지막 페이지 번호
 		int drone_endPageNo = drone_startPageNo + drone_pagesPerGroup - 1;
-		if(drone_pageNo == drone_totalPageNum) drone_endPageNo = drone_totalPageNum;
+		if(drone_groupNo == drone_totalGroupNum) drone_endPageNo = drone_totalPageNum;
+		//if(drone_pageNo == drone_totalPageNum) drone_endPageNo = drone_totalPageNum;
+		
 		//if(drone_groupNo == drone_totalGroupNum)drone_endPageNo = drone_totalPageNum;	
 		
 		
