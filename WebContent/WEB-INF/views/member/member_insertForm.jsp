@@ -16,61 +16,63 @@
 	
 	
 	<script type="text/javascript">
-		function checkForm() {
-			var result = true;
-			//모든 에러 내용 지우기
-			$(".error").text("");
-			//입력값 검사
-	
-			if ($("#m_name").val() == "") {
-				$("#m_nameError").text("*이름을 확인하세요.");
-				result = false;
-			}
-			if ($("#m_id").val() == "") {
-				$("#m_idError").text("*아이디를 확인하세요.");
-				result = false;
-			}
-			if ($("#m_pw").val() == "") {
-				$("#m_pwError").text("*비밀번호를 확인하세요.");
-				result = false;
-			}
-			if ($("#m_phone").val() == "") {
-				$("#m_phoneError").text("*연락처를 확인하세요.");
-				result = false;
-			}
-			if ($("#po_num").val() == 0) {
-				$("#po_numError").text("*직위를 확인하세요.");
-				result = false;
-			}
-	
-			return result;
-		}
-	
-		function checkMid() {
+	var availability = false;
+	$(document).ready(function(){
+		$("#m_id").blur(function() {
 			$.ajax({
 				url : "checkMid",
-				data : {
-					m_id : $("#m_id").val()
-				},
+				data:{m_id:$("#m_id").val()},
 				success : function(data) {
-					if (data.result) {
-						$("#m_idError").text("사용할 수 있는 아이디 입니다.")
-						$("#m_idError").css("color", "green");
-					} else {
-						$("#m_idError").text("사용할 수 없는 아이디 입니다.")
-						$("#m_idError").css("color", "red");
+						if (data.result == false) {
+							$("#m_idError").text("사용중인 아이디입니다 :p");
+							$("#m_idError").css("color", "red");
+						}
+						if (data.result == true) {
+							$("#m_idError").text("사용할 수 있는 아이디 입니다.")
+							$("#m_idError").css("color", "green");
+							return availability = true;
+						}
 					}
-				}
+			});
+		});
+	});
 	
-			})
+	function checkForm() {
+		var result = true;
+		//모든 에러 내용 지우기
+		$(".error").text("");
+		//입력값 검사
+
+		if ($("#m_id").val() == "" || availability == false) {
+			$("#m_idError").text("*아이디를 확인하세요.");
+			result = false;
 		}
+		if ($("#m_name").val() == "") {
+			$("#m_nameError").text("*이름을 확인하세요.");
+			result = false;
+		}
+		if ($("#m_pw").val() == "") {
+			$("#m_pwError").text("*비밀번호를 확인하세요.");
+			result = false;
+		}
+		if ($("#m_phone").val() == "") {
+			$("#m_phoneError").text("*연락처를 확인하세요.");
+			result = false;
+		}
+		if ($("#po_num").val() == 0) {
+			$("#po_numError").text("*직위를 확인하세요.");
+			result = false;
+		}
+		if (availability != true) {
+			result = false;
+		}
+		return result;
+	}
+	
+	
 	</script>
 	</head>
 	<style>
-	.test {
-		border: 1px solid black;
-	}
-	
 	#center_detail {
 		height: 70%;
 		display: flex;
@@ -107,17 +109,12 @@
 			<div id="center_detail">
 				<div id="center_left"></div>
 				<div id="center_center">
-					<form action="insertMember" method="post"
-						onsubmit="return checkForm()">
+					<form action="insertMember" method="post" onsubmit="return checkForm()">
 						<div class="form-group row">
 							<label for="m_id" class="col-sm-2 col-form-label">ID</label>
 							<div class="input-group col-sm-10">
 								<input type="text" id="m_id" name="m_id" class="form-control"
 									placeholder="아이디를 입력하세요.">
-								<div class="input-group-append">
-									<input type="button" class="btn btn-danger" value="중복체크"
-										onclick="return checkMid()">
-								</div>
 							</div>
 						</div>
 						<div class="form-group row">
