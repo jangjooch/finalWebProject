@@ -40,6 +40,8 @@
 		
 	</style>
 	<script type="text/javascript">
+	var mid_check = false;
+	
 	function checkForm() {
 		var result = true;
 		// 모든 span의 error의 내용 지우기
@@ -47,22 +49,28 @@
 		// class는 .클래스 명으로 접근
 		// 내부에 html이 있는 것이 아닌 String이기에 text("")으로 초기화
 		// 입력값 검사
-		if ($("#i_name").val() == "") {
-			$("#iNameError").text("* Input NAME *");
+		if(mid_check == false){
 			result = false;
 		}
-		if ($("#i_mount").val() == "") {
-			$("#iMountError").text("* Input MOUNT *");
-			result = false;
-		}
-		if ($("#i_class").val() == "0") {
-			$("#iClassError").text("* Choose CLASS *");
-			result = false;
-		}
-		if ($("#i_weight").val() == "") {
-			$("#iWeightError").text("* Input WEIGHT *");
-			result = false;
-		}
+		else{
+			result = true;
+			if ($("#i_name").val() == "") {
+				$("#iNameError").text("* Input NAME *");
+				result = false;
+			}
+			if ($("#i_mount").val() == "") {
+				$("#iMountError").text("* Input MOUNT *");
+				result = false;
+			}
+			if ($("#i_class").val() == "0") {
+				$("#iClassError").text("* Choose CLASS *");
+				result = false;
+			}
+			if ($("#i_weight").val() == "") {
+				$("#iWeightError").text("* Input WEIGHT *");
+				result = false;
+			}
+		}		
 		return result;
 	}
 	
@@ -70,7 +78,7 @@
 		$(".error").text("");
 		if ($("#i_name").val() == "") {
 			$("#iNameError").text("* Input NAME *");
-			result = false;
+			mid_check = false;
 		}
 		else{
 			$.ajax({
@@ -83,9 +91,11 @@
 					if(data.result){
 						$("#iNameError").text("Available to Use");
 						$("#iNameError").css("color","green");
+						mid_check = true;
 					}else{
 						$("#iNameError").text("It's Occupied");
 						$("#iNameError").css("color","red");
+						mid_check = false;
 					}
 				}
 			});	

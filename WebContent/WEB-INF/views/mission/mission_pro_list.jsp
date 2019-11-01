@@ -93,6 +93,38 @@
 					<br>
 				</c:forEach>
 			</div>
+			<%-- 버튼 div bottom --%>
+			<div id="bottom">
+			
+				<%-- bottom left - div --%>
+				<div id="bottom_left"></div>
+				
+				<%-- bottom center - div --%>
+				<div id="bottom_center">
+					<%-- top --%>
+					<div id ="b_c_top"></div>
+					
+					<%-- center 페이징 --%>
+					<div id ="b_c_center">
+						
+					</div>		
+				
+					<%-- bottom --%>
+					<div id ="b_c_bottom"></div>
+				
+				</div>
+				<%-- bottom left - right --%>
+				<div id="bottom_right">
+					
+					<%--bottom-right top --%>
+					<div id="b_r_top"></div>
+					<%--bottom-right center 버튼 --%>
+					<div id="b_r_center">						
+					</div>
+					<%--bottom-right bottom --%>
+					<div id="b_r_bottom"></div>
+				</div>
+			</div>
 		</div>	
 	</body>
 </html>
