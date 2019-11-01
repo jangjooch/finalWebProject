@@ -48,7 +48,7 @@
 							<table class="table table-bordered">
 								<tbody>
 									<tr>
-										<th>요청번호:</th>
+										<th>요청 번호</th>
 										<td>${logDto.missionDto.re_num}</td>
 									</tr>
 									<tr>
@@ -56,7 +56,7 @@
 										<td>${logDto.memberDto.m_name}/${logDto.memberDto.po_position}</td>
 									</tr>
 									<tr>
-										<th>요청시간</th>
+										<th>요청 시간</th>
 										<td><fmt:formatDate value="${logDto.missionDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 									</tr>
 									<tr>
@@ -79,6 +79,10 @@
 						<div id="center_center">
 							<table class="table table-bordered">
 								<tbody>
+									<tr>
+										<th>기록 번호</th>
+										<td>${logDto.droneMissionDto.d_m_number}</td>
+									</tr>
 									<tr>
 										<th>처리자/직급</th>
 										<td>${logDto.droneMissionDto.memberDto.m_name}/${logDto.droneMissionDto.memberDto.po_position}</td>

@@ -76,4 +76,10 @@ public class LogController {
 		
 		return "log/log_detail";
 	}
+	
+	@RequestMapping("/selectLog_list")
+	public String selectLog_list() {
+		
+		return "";
+	}
 }

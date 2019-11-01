@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>A Control Center login</title>
 <script type="text/javascript"
 	src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js">
 	

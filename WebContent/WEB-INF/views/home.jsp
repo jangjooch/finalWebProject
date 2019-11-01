@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
 <!-- charset 설정을 위함. 기존에는 이상하게 되어있다. -->
 
 <!DOCTYPE html>

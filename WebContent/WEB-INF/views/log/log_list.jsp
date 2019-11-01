@@ -37,9 +37,10 @@
 				<div id="top_bottom">
 					<form class="form-inline">
 						<div class="form-group mb-2" id="t_b_right">
-							<select class="form-control">
-								<option id="" value="" selected="selected">선택하기</option>
-								<option id="" value="">요청한 회원</option>
+							<select class="form-control" style="cursor: pointer;">
+								<option id="" value="" selected="selected" style="cursor: pointer;">선택하기</option>
+								<option id="" value="">요청자</option>
+								<option id="" value="">처리자</option>
 								<option id="" value="">드론 번호</option>
 								<option id="" value="">처리 회원</option>
 								<option id="" value="">요청 날짜</option>
@@ -63,6 +64,8 @@
 							<th scope="col">요청 시간</th>
 							<th scope="col">요청 위치x/y</th>
 							<th scope="col">처리자/직급</th>
+							<th scope="col">드론</th>
+							<th scope="col">드론 모델</th>
 							<th scope="col">미션 내용</th>
 							<th scope="col">미션 내용 작성일 시간</th>
 							
@@ -76,6 +79,8 @@
 								<td><fmt:formatDate value="${i.missionDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 								<td>${i.missionDto.re_location_x}/${i.missionDto.re_location_y}</td>
 								<td>${i.droneMissionDto.memberDto.m_name}/${i.droneMissionDto.memberDto.po_position}</td>
+								<td>${i.droneMissionDto.d_number}</td>
+								<td>${i.droneDto.d_model}</td>
 								<td>${fnc:substring(i.droneMissionDto.d_m_start,0,3)}...</td>
 								<td><fmt:formatDate value="${i.droneMissionDto.d_m_preparation}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 							</tr>
