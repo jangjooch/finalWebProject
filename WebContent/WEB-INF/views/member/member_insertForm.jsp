@@ -17,6 +17,7 @@
 	
 	<script type="text/javascript">
 	var availability = false;
+	
 	$(document).ready(function(){
 		$("#m_id").blur(function() {
 			$.ajax({
@@ -26,6 +27,7 @@
 						if (data.result == false) {
 							$("#m_idError").text("사용중인 아이디입니다 :p");
 							$("#m_idError").css("color", "red");
+							availability = false;
 						}
 						if (data.result == true) {
 							$("#m_idError").text("사용할 수 있는 아이디 입니다.")
@@ -66,6 +68,11 @@
 		if (availability != true) {
 			result = false;
 		}
+		
+		if (result != true) {
+			availability = false;
+		}
+		
 		return result;
 	}
 	
@@ -167,6 +174,8 @@
 							<div class="col-sm-6"></div>
 							<div class="col-sm-6">
 								<input type="submit" class="btn btn-primary" value="등록하기">
+							</div>
+							<div class="col-sm-6">
 								<input type="reset" class="btn btn-primary" value="취소하기">
 							</div>
 						</div>
