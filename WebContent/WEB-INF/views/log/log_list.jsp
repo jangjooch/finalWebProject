@@ -59,28 +59,25 @@
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">사건 번호</th>
-							<th scope="col">드론 번호</th>
-							<th scope="col">요청 번호</th>
-							<th scope="col">회원 번호</th>
+							<th scope="col">요청자/직급</th>
+							<th scope="col">요청 시간</th>
+							<th scope="col">요청 위치x/y</th>
+							<th scope="col">처리자/직급</th>
 							<th scope="col">미션 내용</th>
-							<th scope="col">미션 내용 작성일</th>
-							<th scope="col">테스트용이라서</th>
-							<th scope="col">다시해야합니다</th>
-							<th scope="col">페이징만 해놓은 거 입니다.</th>
+							<th scope="col">미션 내용 작성일 시간</th>
+							
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="i" items="${droneMissionDtoList}">
-							<tr onclick="location.href='log_detail?d_m_number=${i.d_m_number}'" style="cursor: pointer;">
-								<td>${i.d_m_number}</td>
-								<td>${i.d_number}</td>
-								<td>${i.re_num}</td>
-								<td>${i.m_num}</td>
-								<td>${fnc:substring(i.d_m_start,0,3)}...</td>
-								<td><fmt:formatDate value="${i.d_m_preparation}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
-								<td></td>
-								<td></td>
-								<td></td>								
+						<c:forEach var="i" items="${logDtoList}">
+							<tr onclick="location.href='log_detail?d_m_number=${i.droneMissionDto.d_m_number}'" style="cursor: pointer;">
+								<td>${i.droneMissionDto.d_m_number}</td>
+								<td>${i.memberDto.m_name}/${i.memberDto.po_position}</td>
+								<td><fmt:formatDate value="${i.missionDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
+								<td>${i.missionDto.re_location_x}/${i.missionDto.re_location_y}</td>
+								<td>${i.droneMissionDto.memberDto.m_name}/${i.droneMissionDto.memberDto.po_position}</td>
+								<td>${fnc:substring(i.droneMissionDto.d_m_start,0,3)}...</td>
+								<td><fmt:formatDate value="${i.droneMissionDto.d_m_preparation}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 							</tr>
 						</c:forEach>
 					</tbody>

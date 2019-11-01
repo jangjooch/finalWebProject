@@ -152,5 +152,4 @@
                 where member.po_num = p.po_num
                     AND po_num like '%'||#{things}||'%'
 	</select>
-	
 </mapper>

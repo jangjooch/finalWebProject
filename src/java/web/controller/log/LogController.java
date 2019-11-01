@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import web.dao.log.LogDao;
 import web.dto.drone.DroneMissionDto;
 import web.dto.log.LogDto;
 import web.service.drone.DroneMissionService;
@@ -27,7 +28,8 @@ public class LogController {
 	private DroneMissionService droneMissionService;
 	@Autowired
 	private LogService logService;
-	
+	@Autowired
+	private LogDao logDao;
 	
 	// 페이징
 	@RequestMapping("/log_list")
@@ -52,7 +54,7 @@ public class LogController {
 		int endRowNo = pageNo * rowsPerPage;						// 현재 페이지의 끝 행 번호
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;			//
 		
-		List<DroneMissionDto> droneMissionDtoList = droneMissionService.droneMissionList(startRowNo, endRowNo);
+		List<LogDto> logDtoList = logService.getSelectLogList(startRowNo, endRowNo);
 				
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
@@ -61,7 +63,7 @@ public class LogController {
 		model.addAttribute("startPageNo", startPageNo);
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
-		model.addAttribute("droneMissionDtoList", droneMissionDtoList); // 현재 페이지
+		model.addAttribute("logDtoList", logDtoList); // 현재 페이지
 		
 		return "log/log_list";
 	}

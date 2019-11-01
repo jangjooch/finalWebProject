@@ -39,4 +39,9 @@
 		where d_number=#{d_number}
 	</update>
 	
+	<select id="selectDroneList" resultType="web.dto.drone.DroneDto">
+		select d_number, d_model, d_status, d_weight, d_battery from drone
+    		order by d_number asc
+	</select>
+	
 </mapper>

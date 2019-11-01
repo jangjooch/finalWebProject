@@ -1,5 +1,7 @@
 package web.service.log;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,10 @@ public class LogService {
 	public LogDto getSelectLog(int d_m_number) {
 		LogDto logDto = logDao.getSelectLog(d_m_number);
 		return logDto;
+	}
+	
+	public List<LogDto> getSelectLogList(int startRowNo, int endRowNo){
+		List<LogDto> logDtoList = logDao.getSelectLogList(startRowNo, endRowNo);
+		return logDtoList;
 	}
 }

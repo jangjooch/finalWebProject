@@ -43,7 +43,7 @@
 			<%-- center_detail --%>
 			<div id="center_detail row">
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<div id="center_left">
 							<table class="table table-bordered">
 								<tbody>
@@ -75,7 +75,7 @@
 							</table>
 						</div>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<div id="center_center">
 							<table class="table table-bordered">
 								<tbody>
@@ -96,12 +96,12 @@
 							</table>
 						</div>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-12">
 						<div id="center_right">
-							<table class="table table-bordered">
+							<table class="table table-bordered"  style="border: 2px solid black;">
 								<tbody>
 									<tr>
-										<th width="30%">미션 작성일 시간</th>
+										<th width="20%">미션 작성일 시간</th>
 										<td><fmt:formatDate value="${logDto.droneMissionDto.d_m_preparation}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 									</tr>
 									<tr>

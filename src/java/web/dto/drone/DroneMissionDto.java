@@ -5,6 +5,7 @@ import java.util.Date;
 import web.dto.member.MemberDto;
 
 public class DroneMissionDto {
+	private int rn;
 	
 	private int d_m_number;
 	// drone d_num former
@@ -18,6 +19,12 @@ public class DroneMissionDto {
 	private String d_m_start;
 	private Date d_m_preparation;
 	
+	public int getRn() {
+		return rn;
+	}
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
 	public int getM_num() {
 		return m_num;
 	}
