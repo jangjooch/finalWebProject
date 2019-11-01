@@ -37,7 +37,15 @@
 				#header_center{
 					flex: 2;
 					text-align: center;
+					font-weight: bold;
+					font-size: 3em;
+					flex-direction: row;
 				}
+				#header_center_hr{
+					flex: 1 ;
+				}
+				
+								
 				#header_right{
 					width: 250px;
 				}
@@ -91,21 +99,30 @@
 		<div id = "header">
 			<div id="header_left">
 				<div>
-				<a href="https://www.seoul.go.kr/">
-				<img src="resources/image/seoul_logo.png">
+				<a href="https://www.seoul.go.kr/" title="서울특별시 홈페이지로 이동">
+				<img src="resources/image/seoul_logo.png" >
 				</a>
 				</div>
 				<div>
-				<a href="https://fire.seoul.go.kr/">
+				<a href="https://fire.seoul.go.kr/" title="소방재난본부 홈페이지로 이동">
 				<img src="resources/image/seoulFirefighter_logo.png">
 				</a>
 				</div>
 			</div>
-			<div id="header_center">
-				<h3>관제소</h3>
+			
+			<div id="header_center" >
+				<div id="header_center_hr">
 			</div>
+				<div id="header_center_hr">
+				<p><img src="resources/image/moniter.png" height="60px" width="60px">119는 언제나 여러분 곁에 있습니다.</p>
+				</div>
+				<div id="header_center_hr">
+			</div>
+			</div>
+			
 			<div id="header_right">
-				
+			<div>
+			</div>	
 			</div>
 		</div>
 		<div id = "content">
