@@ -22,8 +22,9 @@
 						var result = true;
 						//입력값 검사
 						if($("#drone_type").val()=="needselect")
-							{
-								result = false;
+							{	
+								return false;
+								
 							}
 						if($("#drone_type").val()=="drone_number")
 							{
@@ -31,14 +32,15 @@
 							}
 						if($("#drone_type").val()=="drone_model")
 							{
-								result = ture;
+								result = true;
 							}
 						if($("#drone_type").val()=="drone_status")
 							{
-								result = true;
+								
+								return result = true;
 							}
 						
-						return result;
+						// return result;
 					}	
 					
 					</script>
@@ -57,17 +59,18 @@
 				
 				<%-- top_bottom검색어 //하는중 --%>
 				<div id="top_bottom">
-					<form class="form-inline" action="drone_search" method="post" onsubmit="return checkForm()">
+					<form class="form-inline" action="drone_list" method="post" onsubmit="return checkForm()">
 						<div class="form-group mb-2" id="t_b_right">
-							<select class="form-control" id="drone_type">
+							<select class="form-control" id="drone_type" name="drone_type">
 								<option value="needselect" selected="selected">선택하기</option>
 								<option value="drone_number">드론 번호</option>
 								<option value="drone_model">모델명</option>
 								<option value="drone_status">드론 상태</option>
 							</select>
 						</div>
+						
 						<div class="form-group mx-sm-3 mb-2"> 
-							<input id="" name="" type="text" class="form-control"	placeholder="검색어">
+							<input id="result" name="drone_value" type="text" class="form-control"	placeholder="검색어">
 						</div>
 						<button type="submit" class="btn btn-primary mb-2">검색</button>
 					</form>
