@@ -19,8 +19,6 @@
 		<script type="text/javascript">
 			
 		</script>
-		<style>
-		</style>
 	</head>
 	<body>
 		<%-- 전체 div --%>
@@ -35,15 +33,13 @@
 				
 				<%-- top_bottom검색어 --%>
 				<div id="top_bottom">
-					<form class="form-inline">
+					<form class="form-inline" action="selectLog_list" method="get">
 						<div class="form-group mb-2" id="t_b_right">
-							<select class="form-control" style="cursor: pointer;">
-								<option id="" value="" selected="selected" style="cursor: pointer;">선택하기</option>
-								<option id="" value="">요청자</option>
-								<option id="" value="">처리자</option>
-								<option id="" value="">드론 번호</option>
-								<option id="" value="">처리 회원</option>
-								<option id="" value="">요청 날짜</option>
+							<select class="form-control" style="cursor: pointer;" name="choose">
+								<option value="0" selected="selected" style="cursor: pointer;">선택하기</option>
+								<option value="requestMember">요청 회원</option>
+								<option value="disposerMember">처리 회원</option>
+								<option value="droneModel">드론 모델명</option>
 							</select>
 						</div>
 						<div class="form-group mx-sm-3 mb-2">

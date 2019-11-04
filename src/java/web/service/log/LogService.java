@@ -22,4 +22,11 @@ public class LogService {
 		List<LogDto> logDtoList = logDao.getSelectLogList(startRowNo, endRowNo);
 		return logDtoList;
 	}
+	
+	public List<LogDto> getSelectChooseLogList(String choose, int startRowNo, int endRowNo){
+		
+		List<LogDto> logDtoList = logDao.getSelectLogList(startRowNo, endRowNo);
+		
+		return logDtoList;
+	}
 }
