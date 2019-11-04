@@ -10,7 +10,7 @@
 		<title>Main</title>
 		<script type="text/javascript"
 			src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
-		<link rel="stylesheet" tpye="text/css"
+		<link rel="stylesheet" type="text/css"
 			href="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
 		<!-- bootstrap의 css를 가져옴 -->
 		<script type="text/javascript"
