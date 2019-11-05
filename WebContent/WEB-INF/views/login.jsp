@@ -46,7 +46,7 @@ html, body {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	background-image: url("resources/image/background_firefighter_test.png");
+	background-image: url("resources/image/background_firefighter_test2.png");
 	background-size: 100%100%;
 }
 
