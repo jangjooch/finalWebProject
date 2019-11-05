@@ -112,7 +112,7 @@
 				<div id="header_center_hr">
 			</div>
 				<div id="header_center_hr">
-				<p><img src="resources/image/moniter.png" height="60px" width="60px">119는 언제나 여러분 곁에 있습니다.</p>
+				<p><img src="resources/image/moniter.png" height="60px" width="60px">차세대 재난 구조 시스템</p>
 				</div>
 				<div id="header_center_hr">
 			</div>

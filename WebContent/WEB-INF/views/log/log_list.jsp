@@ -19,8 +19,6 @@
 		<script type="text/javascript">
 			
 		</script>
-		<style>
-		</style>
 	</head>
 	<body>
 		<%-- 전체 div --%>
@@ -35,15 +33,13 @@
 				
 				<%-- top_bottom검색어 --%>
 				<div id="top_bottom">
-					<form class="form-inline">
+					<form class="form-inline" action="selectLog_list" method="get">
 						<div class="form-group mb-2" id="t_b_right">
-							<select class="form-control" style="cursor: pointer;">
-								<option id="" value="" selected="selected" style="cursor: pointer;">선택하기</option>
-								<option id="" value="">요청자</option>
-								<option id="" value="">처리자</option>
-								<option id="" value="">드론 번호</option>
-								<option id="" value="">처리 회원</option>
-								<option id="" value="">요청 날짜</option>
+							<select class="form-control" style="cursor: pointer;" name="choose">
+								<option value="0" selected="selected" style="cursor: pointer;">선택하기</option>
+								<option value="requestMember">요청 회원</option>
+								<option value="disposerMember">처리 회원</option>
+								<option value="droneModel">드론 모델명</option>
 							</select>
 						</div>
 						<div class="form-group mx-sm-3 mb-2">
@@ -59,31 +55,24 @@
 				<table class="table table-hover" style="border: 1px solid 1px">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">사건 번호</th>
+							<th scope="col">요청 번호</th>
 							<th scope="col">요청자/직급</th>
 							<th scope="col">요청 시간</th>
 							<th scope="col">요청 위치x/y</th>
-							<th scope="col">처리자/직급</th>
-							<th scope="col">드론</th>
-							<th scope="col">드론 모델</th>
-							<th scope="col">미션 내용</th>
-							<th scope="col">미션 내용 작성일 시간</th>
-							
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="i" items="${logDtoList}">
-							<tr onclick="location.href='log_detail?d_m_number=${i.droneMissionDto.d_m_number}'" style="cursor: pointer;">
-								<td>${i.droneMissionDto.d_m_number}</td>
-								<td>${i.memberDto.m_name}/${i.memberDto.po_position}</td>
-								<td><fmt:formatDate value="${i.missionDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
-								<td>${i.missionDto.re_location_x}/${i.missionDto.re_location_y}</td>
-								<td>${i.droneMissionDto.memberDto.m_name}/${i.droneMissionDto.memberDto.po_position}</td>
-								<td>${i.droneMissionDto.d_number}</td>
-								<td>${i.droneDto.d_model}</td>
-								<td>${fnc:substring(i.droneMissionDto.d_m_start,0,3)}...</td>
-								<td><fmt:formatDate value="${i.droneMissionDto.d_m_preparation}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
-							</tr>
+						<c:forEach var="i" items="${droneMissionList}">
+							<c:forEach var="j" items="${missionList}">
+								<c:if test="${i.re_num==j.re_num}">
+									<tr onclick="location.href='log_detail?d_m_number=${i.d_m_number}'" style="cursor: pointer;">
+										<td>${i.d_m_number}</td>
+										<td>${j.member.m_name}/${j.member.po_position}</td>
+										<td><fmt:formatDate value="${j.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
+										<td>${j.re_location_x}/${j.re_location_y}</td>
+									</tr>
+								</c:if>
+							</c:forEach>
 						</c:forEach>
 					</tbody>
 				</table>

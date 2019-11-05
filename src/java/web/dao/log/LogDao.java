@@ -1,6 +1,5 @@
 package web.dao.log;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,31 +42,22 @@ public class LogDao {
 		
 		return logDto;
 	}
-	
-	public List<LogDto> getSelectLogList(int startRowNo, int endRowNo){
+	// 전체 리스트
+	public List<DroneMissionDto> getSelectLogList(int startRowNo, int endRowNo){
 		Map<String, Integer> map = new HashMap<>();
 		map.put("startRowNo", startRowNo);
 		map.put("endRowNo", endRowNo);
 		
+		List<DroneMissionDto> droneMissionlist = sqlSessionTemplate.selectList("droneMission.droneMemberListEx", map); 
 		
-		List<LogDto> logDtoList = new ArrayList<LogDto>();
-		List<DroneMissionDto> droneMissionDtoList = sqlSessionTemplate.selectList("droneMission.droneMemberListEx", map);
-		
-		for(int i=0; i<droneMissionDtoList.size(); i++) {
-			LogDto logdto = new LogDto();
-			
-			DroneDto droneDto = sqlSessionTemplate.selectOne("drone.selectdrone", droneMissionDtoList.get(i).getD_m_number());
-			MissionDto missionDto = sqlSessionTemplate.selectOne("mission.GetMissionByReNum2", droneMissionDtoList.get(i).getRe_num());
-			MemberDto memberDto = sqlSessionTemplate.selectOne("member.memberSelectOne", missionDto.getM_num());
-			
-			logdto.setDroneMissionDto(droneMissionDtoList.get(i));
-			logdto.setDroneDto(droneDto);
-			logdto.setMissionDto(missionDto);
-			logdto.setMemberDto(memberDto);
-			
-			logDtoList.add(logdto);
-		}
-		
-		return logDtoList;
+		return droneMissionlist;
 	}
+	
+	public List<MissionDto> getRequestList(){
+		
+		List<MissionDto> missionList = sqlSessionTemplate.selectList("mission.GetMissionByReNum2List");
+		
+		return missionList;
+	}
+	
 }

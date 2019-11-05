@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import web.dto.item.MissionItemsDto;
+import web.dto.member.MemberDto;
 
 
 public class MissionDto {
@@ -13,15 +14,18 @@ public class MissionDto {
 	private String re_location_x; // 신청 위치 X
 	private String re_location_y; // 신청 위치 Y
 	private int re_success; // 요청대기 요청 수락 판별용
-							// 0. 요청 대기
-							// 1. 요청 수락
-							// 2. 요청 완료
-							// 2는 어차피 안나오게 할것이다.
 	private int m_num;		// 멤버 번호
+	private MemberDto member;
 	
 	private List<MissionItemsDto> missionItems;
 	// mission이랑 연결되어 있으니 이렇게 하여 1 대 N의 관계를 형성한다.
 	
+	public MemberDto getMember() {
+		return member;
+	}
+	public void setMember(MemberDto member) {
+		this.member = member;
+	}
 	public List<MissionItemsDto> getMissionItems() {
 		return missionItems;
 	}
