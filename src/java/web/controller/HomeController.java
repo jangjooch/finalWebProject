@@ -83,6 +83,7 @@ public class HomeController {
    @RequestMapping("logOut")
    public String logOut(HttpSession session) {
       logger.info("logOut() Activate");
+      System.out.println(session.getAttribute("member_logined").toString());
       session.removeAttribute("member_logined");
       return "login";
    }

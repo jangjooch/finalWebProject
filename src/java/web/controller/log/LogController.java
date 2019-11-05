@@ -25,7 +25,7 @@ public class LogController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LogController.class);
 	
-	@Autowired
+	@Autowired 
 	private DroneMissionService droneMissionService;
 	@Autowired
 	private LogService logService;
