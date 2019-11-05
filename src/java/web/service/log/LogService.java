@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.log.LogDao;
+import web.dto.drone.DroneMissionDto;
 import web.dto.log.LogDto;
+import web.dto.mission.MissionDto;
 
 @Service
 public class LogService {
@@ -18,15 +20,15 @@ public class LogService {
 		return logDto;
 	}
 	
-	public List<LogDto> getSelectLogList(int startRowNo, int endRowNo){
-		List<LogDto> logDtoList = logDao.getSelectLogList(startRowNo, endRowNo);
-		return logDtoList;
+	public List<DroneMissionDto> getSelectLogList(int startRowNo, int endRowNo){
+		List<DroneMissionDto> droneMissionList = logDao.getSelectLogList(startRowNo, endRowNo);
+		return droneMissionList;
 	}
 	
-	public List<LogDto> getSelectChooseLogList(String choose, int startRowNo, int endRowNo){
-		
-		List<LogDto> logDtoList = logDao.getSelectLogList(startRowNo, endRowNo);
-		
-		return logDtoList;
+	public List<MissionDto> getRequestList(){
+		List<MissionDto> missionList = logDao.getRequestList();
+		return missionList;
 	}
+	
+	
 }

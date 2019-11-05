@@ -129,6 +129,58 @@
 	        r.re_num = #{re_num}
 	     ORDER BY r.re_time DESC
 	</select>
+	<!-- 요청 테이블 전체 가져오기 -->
+	<resultMap id="GetMissionByReNum2ResultMapList"
+		type="web.dto.mission.MissionDto">
+		<result column="re_num" property="re_num" />
+		<result column="re_time" property="re_time" />
+		<result column="re_location_x" property="re_location_x" />
+		<result column="re_location_y" property="re_location_y" />
+		<result column="re_success" property="re_success" />
+		<result column="m_num" property="m_num" />
+		<association property="member" javaType="web.dto.member.MemberDto">
+			<result property="m_num" column="m_num"/>
+			<result property="m_name" column="m_name"/>
+			<result property="m_id" column="m_id"/>
+			<result property="m_pw" column="m_pw"/>
+			<result property="m_phone" column="m_phone"/>
+			<result property="po_num" column="po_num"/>
+			<result property="po_position" column="po_position"/>
+		</association>
+		<collection property="missionItems" ofType="web.dto.item.MissionItemsDto">
+		<!-- 1 대 N을 넣기 위해 MissionDto에 있는 private List<MissionItemsDto> missionItems;
+			 를 받아오기 위해 것을 박아넣기 위해 List한 것을 받아오기 위해 -->
+			<result property="re_num" column="re_num"/>
+			<result property="i_code" column="i_code"/>
+			<result property="i_amount" column="i_amount"/>
+			<association property="itemDto" javaType="web.dto.item.ItemDto">
+			<!-- 1 대 1을 넣기 위해 association item.MissionItemDto에 있는
+				 private ItemDto itemDto;를 사용하기 위해서 -->
+			    <result property="i_code" column="i_code"/>
+			    <result property="i_name" column="i_name"/>
+			    <result property="i_mount" column="i_mount"/>
+			    <result property="i_class" column="i_class"/>
+			    <result property="i_weight" column="i_weight"/>
+			</association>
+		</collection>
+	</resultMap>
+	<select id="GetMissionByReNum2List" parameterType="int"
+		resultMap="GetMissionByReNum2ResultMapList">
+		SELECT 
+	          r.re_num , r.re_time , r.re_location_x , r.re_location_y , r.m_num , r.re_success,
+	          ri.re_num , ri.i_code , ri.i_amount ,
+	          il.i_code , il.i_name , il.i_mount , il.i_class , il.i_weight,
+	          m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num,
+	          p.po_num, p.po_position
+	      FROM 
+	          request r, request_item ri, item_list il, member m, position p
+	      WHERE 
+	          r.re_num = ri.re_num AND
+	          il.i_code = ri.i_code AND
+	          m.m_num = r.m_num AND
+	          p.po_num = m.po_num
+	      ORDER BY r.re_num DESC
+	</select>
 	<!-- 이렇게 위에서 MissionDto를 resultMap을 통한 설정으로 커스터 마이즈를 할 수 있도록 한다.  -->
 	
 
