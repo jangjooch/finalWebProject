@@ -48,8 +48,24 @@ public class DroneService {
 			dronedao.update(dronedto);
 		}
 
-		public void search(DroneDto dronedto) {
-			dronedao.search(dronedto);
+		public List<DroneDto> getDroneSearch(int drone_value,int drone_startRowNo, int drone_endRowNo){
+			List<DroneDto> droneList = dronedao.selectSearch(drone_startRowNo, drone_endRowNo);
+			logger.info("getDroneList 실행");
+			return droneList;	// 수정중
+			
 		}
 		
+		public List<DroneDto> getDroneSearch(String drone_value,int drone_startRowNo, int drone_endRowNo){
+			List<DroneDto> droneList = dronedao.selectSearch(drone_startRowNo, drone_endRowNo);
+			logger.info("getDroneList 실행");
+			return droneList;
+			
+		}
+		
+		public List<DroneDto> getDroneSearch(int type, int drone_value,int drone_startRowNo, int drone_endRowNo){
+			List<DroneDto> droneList = dronedao.selectSearch(drone_startRowNo, drone_endRowNo);
+			logger.info("getDroneList 실행");
+			return droneList;
+			
+		}
 }

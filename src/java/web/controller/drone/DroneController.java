@@ -31,10 +31,8 @@ public class DroneController {
 	@Autowired
 	private DroneService service;
 	
-	
-	
 	@RequestMapping("/drone_list")
-	public String droneList(Model model, @RequestParam(defaultValue ="1") int drone_pageNo, HttpSession session) {
+	public String droneList(String drone_value, String drone_type, Model model, @RequestParam(defaultValue ="1") int drone_pageNo, HttpSession session) {
 		logger.info("droneList() Activate");
 		
 		session.setAttribute("drone_pageNo", drone_pageNo);
@@ -55,27 +53,54 @@ public class DroneController {
 		//현재 페이지의 그룹번호
 		int drone_groupNo = (drone_pageNo-1)/drone_pagesPerGroup + 1;
 		
-		
 		//현재 그룹의 시작 페이지 번호
 		int drone_startPageNo = (drone_groupNo-1)*drone_pagesPerGroup + 1;
 		//현재 그룹의 마지막 페이지 번호
 		int drone_endPageNo = drone_startPageNo + drone_pagesPerGroup - 1;
 		if(drone_groupNo == drone_totalGroupNum) drone_endPageNo = drone_totalPageNum;
 		//if(drone_pageNo == drone_totalPageNum) drone_endPageNo = drone_totalPageNum;
-		
 		//if(drone_groupNo == drone_totalGroupNum)drone_endPageNo = drone_totalPageNum;	
-		
 		
 		//현재 페이지의 시작 행 번호
 		int drone_startRowNo = (drone_pageNo-1)*drone_rowsPerPage+1;
 		//현재 페이지의 끝 행 번호
 		int drone_endRowNo = drone_pageNo * drone_rowsPerPage;
-		if(drone_groupNo == drone_totalGroupNum) drone_endRowNo = drone_totalRowNum;
+		if(drone_pageNo == drone_totalPageNum) drone_endRowNo = drone_totalRowNum;
+		
+		//if(drone_groupNo == drone_totalGroupNum) drone_endRowNo = drone_totalRowNum;
 				
+		
+		if(drone_value!=null)
+		{
+			if(drone_type.equals("drone_number")){	// 수정중
+				List<DroneDto> drone_list = service.getDroneSearch(Integer.parseInt(drone_value), drone_startRowNo, drone_endRowNo);
+				model.addAttribute("drone_list", drone_list);				
+			}else if(drone_type.equals("drone_model")) {
+				List<DroneDto> drone_list = service.getDroneSearch(drone_value, drone_startRowNo, drone_endRowNo);
+				model.addAttribute("drone_list", drone_list);
+			}else if(drone_type.equals("drone_status")) {
+				List<DroneDto> drone_list = service.getDroneSearch(1, Integer.parseInt(drone_value), drone_startRowNo, drone_endRowNo);
+				model.addAttribute("drone_list", drone_list);
+			}
+			
+			//Jsp로 페이지 정보 넘기기
+			model.addAttribute("drone_pagesPerGroup", drone_pagesPerGroup);
+			model.addAttribute("drone_totalPageNum", drone_totalPageNum);
+			model.addAttribute("drone_totalGroupNum", drone_totalGroupNum);
+			model.addAttribute("drone_groupNo", drone_groupNo);
+			model.addAttribute("drone_startPageNo", drone_startPageNo);
+			model.addAttribute("drone_endPageNo", drone_endPageNo);
+			model.addAttribute("drone_pageNo", drone_pageNo);
+			
+			
+			return "drone/drone_list";
+		}
 		
 		//현재 페이지의 게시물 가져오기
 		List<DroneDto> drone_list = service.getDroneList(drone_startRowNo, drone_endRowNo);
 		logger.info(""+drone_list.size());
+		
+		
 		
 		//Jsp로 페이지 정보 넘기기
 		model.addAttribute("drone_pagesPerGroup", drone_pagesPerGroup);
@@ -133,13 +158,6 @@ public class DroneController {
 		service.update(dronedto);
 
 		return "redirect:/drone/drone_list";
-	}
-	
-	@RequestMapping("/drone_search")
-	public String drone_search(DroneDto dronedto) {
-		service.search(dronedto);
-		
-		return "/drone/drone_list";
 	}
 	
 	

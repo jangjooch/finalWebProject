@@ -69,8 +69,16 @@ public class DroneDao {
 		
 	}
 
-	public void search(DroneDto dronedto) {
-		logger.info("drone search run..");
+	public List<DroneDto> selectSearch(int drone_startRowNo, int drone_endRowNo){
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("drone_startRowNo", drone_startRowNo);
+		map.put("drone_endRowNo", drone_endRowNo);
+		logger.info("drone select in 실행");
+		
+		List<DroneDto> drone_list = sqlSessionTemplate.selectList("selectDroneSearch", map);
+		logger.info("drone select out 실행");
+		return drone_list;
 		
 	}
 	
