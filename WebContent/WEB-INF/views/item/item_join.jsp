@@ -1,125 +1,100 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:include page="../main/top.jsp" flush="false"/>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>물품 등록</title>
-		<script type="text/javascript"
-			src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
-		<link rel="stylesheet" type="text/css"
-			href="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css"
-			href="<%=application.getContextPath()%>/resources/css/shc/collection.css">
-		<script type="text/javascript"
-			src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-	</head>
-	<style>
-		.test{
-			border: 1px solid black;
-		}
-		
-		#center_detail{
-			height: 70%;
-			display: flex;
-		}
-		#center_left{
-			flex:1;
-		}
-		
-		#center_center{
-			display: flex;
-			flex-direction: column;
-			width: 30%;
-			text-align: right;
-		}
+		<script type="text/javascript">
+			var mid_check = false;
 			
-		#center_right{
-			flex: 1;
-		}
-		
-	</style>
-	<script type="text/javascript">
-	var mid_check = false;
-	
-	function checkForm() {
-		var result = true;
-		// 모든 span의 error의 내용 지우기
-		$(".error").text("");
-		// class는 .클래스 명으로 접근
-		// 내부에 html이 있는 것이 아닌 String이기에 text("")으로 초기화
-		// 입력값 검사
-		if(mid_check == false){
-			result = false;
-		}
-		else{
-			result = true;
-			if ($("#i_name").val() == "") {
-				$("#iNameError").text("* Input NAME *");
-				result = false;
-			}
-			if ($("#i_mount").val() == "") {
-				$("#iMountError").text("* Input MOUNT *");
-				result = false;
-			}
-			if ($("#i_class").val() == "0") {
-				$("#iClassError").text("* Choose CLASS *");
-				result = false;
-			}
-			if ($("#i_weight").val() == "") {
-				$("#iWeightError").text("* Input WEIGHT *");
-				result = false;
-			}
-		}		
-		return result;
-	}
-	
-	function checkMid(){
-		$(".error").text("");
-		if ($("#i_name").val() == "") {
-			$("#iNameError").text("* Input NAME *");
-			mid_check = false;
-		}
-		else{
-			$.ajax({
-				url: "checkIname",
-				// Controller checkMid를 통해 결과를 얻는다.
-				data: {
-					i_name:$("#i_name").val()
-					},
-				success: function(data){
-					if(data.result){
-						$("#iNameError").text("Available to Use");
-						$("#iNameError").css("color","green");
-						mid_check = true;
-					}else{
-						$("#iNameError").text("It's Occupied");
-						$("#iNameError").css("color","red");
-						mid_check = false;
-					}
+			function checkForm() {
+				var result = true;
+				// 모든 span의 error의 내용 지우기
+				$(".error").text("");
+				// class는 .클래스 명으로 접근
+				// 내부에 html이 있는 것이 아닌 String이기에 text("")으로 초기화
+				// 입력값 검사
+				if(mid_check == false){
+					result = false;
 				}
-			});	
-		}
-	}
-	
-	</script>
+				else{
+					result = true;
+					if ($("#i_name").val() == "") {
+						$("#iNameError").text("* Input NAME *");
+						result = false;
+					}
+					if ($("#i_mount").val() == "") {
+						$("#iMountError").text("* Input MOUNT *");
+						result = false;
+					}
+					if ($("#i_class").val() == "0") {
+						$("#iClassError").text("* Choose CLASS *");
+						result = false;
+					}
+					if ($("#i_weight").val() == "") {
+						$("#iWeightError").text("* Input WEIGHT *");
+						result = false;
+					}
+				}		
+				return result;
+			}
+			
+			function checkMid(){
+				$(".error").text("");
+				if ($("#i_name").val() == "") {
+					$("#iNameError").text("* Input NAME *");
+					mid_check = false;
+				}
+				else{
+					$.ajax({
+						url: "checkIname",
+						// Controller checkMid를 통해 결과를 얻는다.
+						data: {
+							i_name:$("#i_name").val()
+							},
+						success: function(data){
+							if(data.result){
+								$("#iNameError").text("Available to Use");
+								$("#iNameError").css("color","green");
+								mid_check = true;
+							}else{
+								$("#iNameError").text("It's Occupied");
+								$("#iNameError").css("color","red");
+								mid_check = false;
+							}
+						}
+					});	
+				}
+			}
+		</script>
+		<style>
+		</style>
 	<body>
-		<div id="body">
-			
-			<%-- top --%>
-			<div id="top">
-				<div id="top_top"></div>
-				<div id="top_center">
-					<h1>물품 등록</h1>
+		<%-- 전체 div --%>
+			<div class="row">
+				<%-- top --%>
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8" id="top">
+					<div id="top">
+						<div id="top_t">
+							<div style="height: 20px;"></div>
+						</div>
+						<div id="top_c">
+							<h2> ItemInsert </h2>
+						</div>
+						<div id="top_b">
+							<div style="height: 20px;"></div>
+						</div>
+					</div>
 				</div>
-				<div id="top_bottom"></div>
-			</div>
-			
-			<%-- center_detail --%>
-			<div id="center_detail">
-				<div id="center_left"></div>
-				<div id="center_center">
-					<form action="item_join" method="post" onsubmit="return checkForm()">
+				<div class="col-sm-2"></div>
+				
+				<%-- center --%>
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="row">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<form action="item_join" method="post" onsubmit="return checkForm()">
 						<div class="form-group row">
 							<label for="i_name" class="col-sm-4 col-form-label">물품</label>
 							<div class="input-group col-sm-8">
@@ -179,30 +154,34 @@
 							</div>
 						</div>
 					</form>
-				</div>
-				<div id="center_right"></div>
-			</div>
-			
-			<%-- bottom --%>
-			<div id="bottom">
-			
-				<%-- bottom left - div --%>
-				<div id="bottom_left"></div>
-				
-				<%-- bottom center - div --%>
-				<div id="bottom_center"></div>
-				<%-- bottom left - right --%>
-				<div id="bottom_right">
-					<%--bottom-right top --%>
-					<div id="b_r_top"></div>
-					<%--bottom-right center 버튼 --%>
-					<div id="b_r_center">
-						<a href="item_list?ipageNumber=${ipageNumber}" class="btn btn-warning">목록으로</a>
+						</div>
+						<div class="col-sm-4"></div>		
 					</div>
-					<%--bottom-right bottom --%>
-					<div id="b_r_bottom"></div>
+					
+				</div>					
+				<div class="col-sm-2"></div>
+				
+				<%-- bottom --%>
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div id="bottom">
+						<div id="bottom_t" style="height: 20px;"></div>
+						<div id="bottom_c">
+							<div id="bottom_c_l"></div>
+							<div id="bottom_c_c">
+								
+							</div>
+							<div id="bottom_c_r">
+								<div>
+									<a href="item_list?ipageNumber=${ipageNumber}" class="btn btn-warning">목록으로</a>
+								</div>
+							</div>
+						</div>
+						<div id="bottom_b">
+							<div style="height: 20px;"></div>
+						</div>
+					</div>
 				</div>
+				<div class="col-sm-2"></div>
 			</div>
-		</div>	
-	</body>
-</html>
+<jsp:include page="../main/bottom.jsp" flush="false"/>

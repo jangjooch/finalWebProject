@@ -37,7 +37,7 @@ public class ItemController {
 		
 		logger.info("To item_list");
 		
-		int rowsPerPage = 5;
+		int rowsPerPage = 10;
 		
 		int pagesPerGroup = 5;
 		
@@ -176,7 +176,7 @@ public class ItemController {
 		session.setAttribute("selectGroupSaved", selectGroup);
 		session.setAttribute("finddingSaved", findding);
 		int searched_size = searched_iCode.size();
-		int rowsPerPage = 5;
+		int rowsPerPage = 10;
 		int pagesPerGroup = 5;
 		int totalRowNum = searched_size;
 		int totalPageNum = totalRowNum / rowsPerPage;

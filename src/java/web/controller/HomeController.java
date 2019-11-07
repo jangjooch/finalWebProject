@@ -87,4 +87,5 @@ public class HomeController {
       session.removeAttribute("member_logined");
       return "login";
    }
+  
 }
