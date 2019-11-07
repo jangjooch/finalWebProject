@@ -66,17 +66,22 @@
 	</select>
 	
 	<!-- 회원 사건리스트 -->
-	<select id="memberReport" parameterType="int" resultType="web.dto.member.ReportDto">
-		SELECT 
-	        r.m_num as requester_num, dm.m_num as manager_num , r.re_time, dm.d_m_number, m.m_name as requester_name, 
-	        a.m_name as manager_name, r.re_location_x, r.re_location_y 
-   		FROM
-       		member m, request r, drone_mission dm , (select a.m_name  from member a, drone_mission b 
-                                                	where a.m_num = b.m_num) a
-    	WHERE m.m_num = r.m_num 
-        	AND r.re_num = dm.re_num 
-    		Order by r.re_time desc
+	<select id="memberReport" parameterType="int" resultType="web.dto.mission.MissionDto">
+		SELECT re_num, re_time, re_location_x,re_location_y,  re_success
+		FROM request
+		WHERE m_num = #{m_num}
+  				 ORDER BY re_time DESC
 	</select>
+	<!-- 
+	<resultMap type="web.dto.mission.MissionDto" id="reportList">
+			<result property="re_num" column="re_num"/>
+			<result property="re_time" column="re_time"/>
+			<result property="re_location_x" column="re_location_x"/>
+			<result property="re_location_y" column="re_location_y"/>
+			<result property="re_success" column="re_success"/>
+	</resultMap>
+	 -->
+	
 
 
 

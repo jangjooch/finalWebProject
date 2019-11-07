@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import web.controller.HomeController;
 import web.dto.member.MemberDto;
+import web.dto.mission.MissionDto;
 import web.service.member.MemberSerivce;
 
 @Controller
@@ -131,7 +131,7 @@ public class MemberController {
 	@RequestMapping("memberDetail")
 	public String memberDetail(int m_num , Model model) {
 		MemberDto member = service.getMember(m_num);
-		List<Object> report = service.getReport(m_num);
+		List<MissionDto> report = service.getReport(m_num);
 		model.addAttribute("member",member);
 		model.addAttribute("report",report);
 		return "member/member_detail";

@@ -87,22 +87,21 @@
 								<thead class="thead-dark">
 									<tr>
 										<th scope="col" width="15%;">사건 번호</th>
-										<th scope="col" width="15%;">요청 회원</th>
 										<th scope="col" width="30%;">요청 위치(x, y)</th>
 										<th scope="col" width="20%;">요청 일시</th>
 										<th scope="col" width="20%">처리 회원</th>									
+										<th scope="col" width="20%">상태</th>									
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="report" items="${report}">
 										<tr>
-											<td><a href="#">${report.d_m_number}</a></td>
-											<td>${report.requester_name}</td>
+											<td><a href="#">${report.re_num}</a></td>
 											<td>${report.re_location_x} / ${report.re_location_y}</td>
 											<!-- <td>${report.re_time}</td> -->
 											<td><fmt:formatDate value="${report.re_time}" 
 												pattern="yyyy-MM-dd hh:mm"/></td>
-											<td>${report.manager_name}</td>
+											<td>${report.re_success}</td>
 										</tr>
 									</c:forEach>
 								</tbody>

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import web.dto.member.MemberDto;
+import web.dto.mission.MissionDto;
 
 @Component
 public class MemberDao {
@@ -61,8 +62,11 @@ public class MemberDao {
 		return member;
 	}
 
-	public List<Object> selectReportList(int m_num) {
-		List<Object> report = sqlSessionTemplate.selectList("member.memberReport", m_num);
+	public List<MissionDto> selectReportList(int m_num) {
+		System.out.println("진입ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+		List<MissionDto> report = sqlSessionTemplate.selectList("member.memberReport", m_num);
+		System.out.println("끝ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+		logger.info("dddddddddddd"+ report.size());
 		return report;
 	}
 
