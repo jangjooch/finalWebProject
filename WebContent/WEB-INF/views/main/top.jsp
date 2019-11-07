@@ -23,6 +23,15 @@
 			src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css"
 			href="<%=application.getContextPath()%>/resources/css/shc/resources.css">
+			
+		<script type="text/javascript">
+// 			if(${member_logined==null}){
+// 				location.href="${pageContext.request.contextPath}";
+// 			}
+			<c:if test="${member_logined==null}">
+				location.href="${pageContext.request.contextPath}";				
+			</c:if>
+		</script>
 		<style>
 		.fakeimg {
 			height: 200px;
@@ -58,6 +67,9 @@
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/item/item_list">Item</a></li>
 				</c:if>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/log/log_list">Log</a></li>
+				<c:if test="${member_logined!=null}">
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logOut">logOut</a></li>
+				</c:if>
 			</ul>
 		</div>
 	</nav>
