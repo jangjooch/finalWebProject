@@ -66,9 +66,11 @@
 				<c:if test="${member_logined.po_num == 3 || member_logined.po_num == 1}">
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/item/item_list">Item</a></li>
 				</c:if>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/log/log_list">Log</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/log/log_list">Log</a></li>
 				<c:if test="${member_logined!=null}">
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logOut">logOut</a></li>
+					<li class="nav-item" style="float:right">
+						<a class="nav-link" href="${pageContext.request.contextPath}/logOut">logOut</a>
+					</li>
 				</c:if>
 			</ul>
 		</div>
