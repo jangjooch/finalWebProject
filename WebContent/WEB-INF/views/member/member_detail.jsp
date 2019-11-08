@@ -86,7 +86,7 @@
 							<table class="table table-hover" style="border: 1px solid 1px">
 								<thead class="thead-dark">
 									<tr>
-										<th scope="col" width="15%;">사건 번호</th>
+										<th scope="col" width="15%;">요청 번호</th>
 										<th scope="col" width="30%;">요청 위치(x, y)</th>
 										<th scope="col" width="20%;">요청 일시</th>
 										<th scope="col" width="20%">상태</th>									
@@ -105,7 +105,8 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							
+		<c:choose>
+			<c:when test="${!empty report}">
 							<div class="col-sm-8">
 					<div id="bottom">
 						<div id="bottom_t" style="height: 20px;"></div>
@@ -152,6 +153,11 @@
 						<div id="bottom_b" style="height: 20px;"></div>
 					</div>
 				</div>
+					</c:when>
+			<c:when test="${empty report}">
+				<h5 align="center">관련된 요청이 없습니다.</h5>
+			</c:when>
+		</c:choose>
 						</div>
 					</div>
 				</div>

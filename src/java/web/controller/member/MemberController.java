@@ -129,7 +129,7 @@ public class MemberController {
 	@RequestMapping("memberDetail")
 	public String memberDetail(int m_num , Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
 		MemberDto member = service.getMember(m_num);
-		
+		session.setAttribute("m_num", m_num);
 		// 페이징
 		session.setAttribute("pageNo", pageNo);
 		int rowsPerPage = 5;
@@ -148,7 +148,16 @@ public class MemberController {
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;
 		
 		//현재 페이지의 게시물 가져오기
-		List<RequestDto> report = service.getReport(m_num,startRowNo, endRowNo);
+		List<RequestDto> report = null;
+		
+		if (session.getAttribute("m_num") == null) {
+			m_num = (int)session.getAttribute("m_num");
+			report = service.getReport(m_num,startRowNo, endRowNo);
+		}
+		if (session.getAttribute("m_num") != null) {
+			report = service.getReport(m_num,startRowNo, endRowNo);
+		}
+		
 		//JSP로 페이지 정보 넘기기
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
