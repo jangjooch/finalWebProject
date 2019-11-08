@@ -130,8 +130,8 @@ public class MemberController {
 	public String memberDetail(int m_num , Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
 		MemberDto member = service.getMember(m_num);
 		session.setAttribute("m_num", m_num);
-		// 페이징
 		session.setAttribute("pageNo", pageNo);
+		// 페이징
 		int rowsPerPage = 5;
 		int pagesPerGroup = 5;
 		int totalRowNum = 0;
@@ -151,10 +151,12 @@ public class MemberController {
 		List<RequestDto> report = null;
 		
 		if (session.getAttribute("m_num") == null) {
+			System.out.println("m_num이 없대!");
 			m_num = (int)session.getAttribute("m_num");
 			report = service.getReport(m_num,startRowNo, endRowNo);
 		}
 		if (session.getAttribute("m_num") != null) {
+			System.out.println("m_num이 있대!");
 			report = service.getReport(m_num,startRowNo, endRowNo);
 		}
 		

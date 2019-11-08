@@ -119,7 +119,7 @@
 											<span aria-hidden="true">&laquo;</span></a>
 										</li>
 										<c:if test="${groupNo > 1}">
-										<li class="page-item"><a class="page-link" href="memberDetail?pageNo=${startPageNo-1}"> 
+										<li class="page-item"><a class="page-link" href="memberDetail?pageNo=${startPageNo-1}&m_num=${member.m_num}"> 
 											<span aria-hidden="true"><</span></a>
 										</li>
 										</c:if>
@@ -127,23 +127,23 @@
 								  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
 								  		<c:if test="${pageNo==i}">
 								  			<li class="page-item active">
-								  				<a href="memberDetail?pageNo=${i}" class="page-link">${i}</a>
+								  				<a href="memberDetail?pageNo=${i}&m_num=${member.m_num}" class="page-link">${i}</a>
 								  			</li>
 								  		</c:if>
 						  				<c:if test="${pageNo!=i}">
 						  					<li class="page-item">
-						  						<a href="memberDetail?pageNo=${i}" class="page-link">${i}</a>
+						  						<a href="memberDetail?pageNo=${i}&m_num=${member.m_num}" class="page-link">${i}</a>
 						  					</li>
 						  				</c:if>
 						  			</c:forEach>
 										<c:if test="${groupNo < totalGroupNum}">
 											<li class="page-item">
-												<a class="page-link" href="memberDetail?pageNo=${endPageNo+1 }"> 
+												<a class="page-link" href="memberDetail?pageNo=${endPageNo+1 }&m_num=${member.m_num}"> 
 												<span aria-hidden="true">></span>
 												</a>
 											</li>
 										</c:if>
-										<li class="page-item"><a class="page-link" href="memberDetail?pageNo=${totalPageNum }"> 
+										<li class="page-item"><a class="page-link" href="memberDetail?pageNo=${totalPageNum }&m_num=${member.m_num}"> 
 											<span aria-hidden="true">&raquo;</span></a>
 										</li>
 									</ul>
