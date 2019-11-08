@@ -3,6 +3,7 @@ package web.dto.mission;
 import java.util.Date;
 
 import web.dto.drone.DroneDto;
+import web.dto.request.RequestDto;
 
 
 public class MissionDto {
@@ -16,17 +17,21 @@ public class MissionDto {
 	private Date d_m_prepatation;
 	
 	private DroneDto droneDto;
+	private RequestDto requestDto;
 	
 	
-	
-	
-	
-	
-	
-	
+	public RequestDto getRequestDto() {
+		return requestDto;
+	}
+	public void setRequestDto(RequestDto requestDto) {
+		this.requestDto = requestDto;
+	}
 	public DroneDto getDroneDto() {
 		return droneDto;
 	}
+	
+	
+	
 	public void setDroneDto(DroneDto droneDto) {
 		this.droneDto = droneDto;
 	}

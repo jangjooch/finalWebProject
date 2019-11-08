@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import web.dto.mission.MissionDto;
 import web.dto.mission.MissionItemDto;
 import web.dto.request.RequestDto;
 
@@ -20,7 +21,7 @@ import web.dto.request.RequestDto;
 public class MissionDao {
 
 	@Autowired
-	SqlSessionTemplate sqlsessionTemplate;
+	SqlSessionTemplate sqlSessionTemplate;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MissionDao.class);
 	
@@ -32,10 +33,10 @@ public class MissionDao {
 		List<Integer> combineRe_num;
 		
 		if(success == 0) {
-			combineRe_num = sqlsessionTemplate.selectList("mission.mission_in_re_num");
+			combineRe_num = sqlSessionTemplate.selectList("mission.mission_in_re_num");
 		}
 		else {
-			combineRe_num = sqlsessionTemplate.selectList("mission.mission_pro_re_num");
+			combineRe_num = sqlSessionTemplate.selectList("mission.mission_pro_re_num");
 		}
 		
 		param.put("re_numList", combineRe_num); //map에 list를 넣는다.		
@@ -46,7 +47,7 @@ public class MissionDao {
 			i++;
 		}
 		
-		List<MissionItemDto> currentMissionItems = sqlsessionTemplate.selectList("mission.currentMissionItemList",param);
+		List<MissionItemDto> currentMissionItems = sqlSessionTemplate.selectList("mission.currentMissionItemList",param);
 		i = 0;
 		logger.info("missionItems");
 		for(MissionItemDto itemDto : currentMissionItems) {
@@ -61,7 +62,7 @@ public class MissionDao {
 		}
 		
 		
-		List<RequestDto> currentMissionList = sqlsessionTemplate.selectList("mission.currentMissionList", param);
+		List<RequestDto> currentMissionList = sqlSessionTemplate.selectList("mission.currentMissionList", param);
 		i = 0;
 		logger.info("currentMissionList");
 		for(RequestDto missionDto : currentMissionList) {
@@ -81,18 +82,18 @@ public class MissionDao {
 
 	public void successChange(int re_num) {
 		// TODO Auto-generated method stub
-		sqlsessionTemplate.update("mission.successChange",re_num);
+		sqlSessionTemplate.update("mission.successChange",re_num);
 	}
 
 	public void reduceMount(int re_num) {
 		// TODO Auto-generated method stub
-		List<Integer> Getting_Icode = sqlsessionTemplate.selectList("mission.Getting_Icode",re_num);
+		List<Integer> Getting_Icode = sqlSessionTemplate.selectList("mission.Getting_Icode",re_num);
 		
-		List<Integer> Getting_Iamount = sqlsessionTemplate.selectList("mission.Getting_Iamount",re_num);
+		List<Integer> Getting_Iamount = sqlSessionTemplate.selectList("mission.Getting_Iamount",re_num);
 		
 		List<Integer> Getting_Imount = new ArrayList<Integer>();
 		for(int i_code : Getting_Icode) {
-			int mount = (int)sqlsessionTemplate.selectOne("mission.GetMountByICode", i_code);
+			int mount = (int)sqlSessionTemplate.selectOne("mission.GetMountByICode", i_code);
 			Getting_Imount.add(mount);
 		}
 		
@@ -105,7 +106,7 @@ public class MissionDao {
 			else {
 				parsing.put("i_amount", Getting_Imount.get(i) - Getting_Iamount.get(i));
 			}
-			sqlsessionTemplate.update("mission.reduceMount", parsing);
+			sqlSessionTemplate.update("mission.reduceMount", parsing);
 		}
 		
 	}
@@ -113,12 +114,51 @@ public class MissionDao {
 	public List<String> getDestination(int re_num) {
 		// TODO Auto-generated method stub
 		
-		RequestDto requestDto = sqlsessionTemplate.selectOne("mission.GetMissionByReNum",re_num);
+		RequestDto requestDto = sqlSessionTemplate.selectOne("mission.GetMissionByReNum",re_num);
 		
 		List<String> destination = new ArrayList<String>();
 		destination.add(requestDto.getRe_location_x());
 		destination.add(requestDto.getRe_location_y());
 		
 		return destination;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// -------------------------------------
+	// 페이징 로우넘
+	public int selectTotalRowNo() {
+		int totalRowNo = sqlSessionTemplate.selectOne("mission.selectTotalRowNum");
+		return totalRowNo;
+	}
+
+	// 요청목록
+	public List<MissionDto> requestList(int startRowNo, int endRowNo) {
+		System.out.println("디에이오 진입");
+		Map<String, Integer> map = new HashMap<>();
+		map.put("startRowNo", startRowNo);
+		map.put("endRowNo", endRowNo);
+		List<MissionDto> requestList = sqlSessionTemplate.selectList("mission.selectRequestList", map);
+		System.out.println("디에이오 끝");
+		return requestList;	
+	}
+
+	public MissionDto selectOneMission(int re_num) {
+		MissionDto mission = sqlSessionTemplate.selectOne("mission.missionDetail", re_num);
+		return mission;
 	}
 }

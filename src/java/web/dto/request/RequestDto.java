@@ -14,20 +14,28 @@ public class RequestDto {
 	private String re_location_y; // 신청 위치 Y
 	private int re_success; // 요청대기 요청 수락 판별용
 	private int m_num;		// 멤버 번호
-	private MemberDto member;
+	private MemberDto memberDto;
 	
 	private List<MissionItemsDto> missionItems;
 	// mission이랑 연결되어 있으니 이렇게 하여 1 대 N의 관계를 형성한다.
 	
-	public MemberDto getMember() {
-		return member;
-	}
-	public void setMember(MemberDto member) {
-		this.member = member;
-	}
 	public List<MissionItemsDto> getMissionItems() {
 		return missionItems;
 	}
+	
+	
+	
+	
+	public MemberDto getMemberDto() {
+		return memberDto;
+	}
+	public void setMemberDto(MemberDto memberDto) {
+		this.memberDto = memberDto;
+	}
+
+
+
+
 	public void setMissionItems(List<MissionItemsDto> missionItems) {
 		this.missionItems = missionItems;
 	}

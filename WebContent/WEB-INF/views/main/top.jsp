@@ -58,7 +58,7 @@
 				</c:if>
 				<c:if test="${member_logined.po_num <= 2}">
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/drone/drone_list">Drone</a></li>
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionInList">MissionInlist</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/requestList">MissionInlist</a></li>
 				</c:if>
 				<c:if test="${member_logined.po_num <= 3}">
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionProList">MissionProList</a></li>
