@@ -66,11 +66,19 @@
 	</select>
 	
 	<!-- 회원 사건리스트 -->
-	<select id="memberReport" parameterType="int" resultType="web.dto.mission.MissionDto">
-		SELECT re_num, re_time, re_location_x,re_location_y,  re_success
-		FROM request
-		WHERE m_num = #{m_num}
-  				 ORDER BY re_time DESC
+	<select id="memberReport" parameterType="int" resultType="web.dto.request.RequestDto">
+		select rn, re_num, re_time, re_location_x,re_location_y,  re_success
+		from (
+            select rownum as rn, re_num, re_time, re_location_x,re_location_y,  re_success
+            from (
+                    SELECT re_num, re_time, re_location_x,re_location_y,  re_success
+                    FROM request 
+                	WHERE m_num = #{m_num}
+                    ORDER BY re_time DESC
+            )
+        where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt;= #{startRowNo}
 	</select>
 	<!-- 
 	<resultMap type="web.dto.mission.MissionDto" id="reportList">

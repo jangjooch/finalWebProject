@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import web.dto.mission.MissionDto;
+import web.dto.request.RequestDto;
 import web.service.mission.MissionSerivce;
 
 @Controller
@@ -23,7 +24,7 @@ public class MissionController {
 	private static final Logger logger = LoggerFactory.getLogger(MissionController.class);
 	
 	@Autowired
-	MissionSerivce missionservice;
+	MissionSerivce service;
 	
 	@Resource(name="dataSource")
 	private DataSource datasource;
@@ -39,7 +40,7 @@ public class MissionController {
 		logger.info("Controller missionInList Activate");
 		int success = 0;
 		
-		List<MissionDto> missionList = missionservice.missionList(session, success); 
+		List<RequestDto> missionList = service.missionList(session, success); 
 		
 		return "mission/mission_in_list";
 	}
@@ -49,7 +50,7 @@ public class MissionController {
 		logger.info("Controller missionProList Activate");
 		int success = 1;
 		
-		List<MissionDto> missionList = missionservice.missionList(session, success); 
+		List<RequestDto> missionList = service.missionList(session, success); 
 		
 		return "mission/mission_pro_list";
 	}
@@ -59,9 +60,9 @@ public class MissionController {
 		
 		logger.info("Controller missionAccept Activate");
 		
-		missionservice.successChange(re_num);
+		service.successChange(re_num);
 		
-		missionservice.reduceMount(re_num);
+		service.reduceMount(re_num);
 		
 		return "redirect:/mission/missionInList";
 	}
@@ -69,7 +70,7 @@ public class MissionController {
 	@RequestMapping("missionProcess")
 	public String missionProcess(int re_num, Model model) {
 		
-		List<String> destination = missionservice.getDestination(re_num);
+		List<String> destination = service.getDestination(re_num);
 		model.addAttribute("destination_lat",destination.get(0));
 		model.addAttribute("destination_lng",destination.get(1));
 		

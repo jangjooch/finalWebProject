@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import web.controller.HomeController;
 import web.dao.member.MemberDao;
 import web.dto.member.MemberDto;
-import web.dto.mission.MissionDto;
+import web.dto.request.RequestDto;
 
 @Service
 public class MemberSerivce {
@@ -49,8 +49,8 @@ public class MemberSerivce {
 		return member;
 	}
 
-	public List<MissionDto> getReport(int m_num) {
-		List<MissionDto> report = memberDao.selectReportList(m_num);
+	public List<RequestDto> getReport(int m_num, int startRowNo, int endRowNo) {
+		List<RequestDto> report = memberDao.selectReportList(m_num, startRowNo, endRowNo);
 		return report;
 	}
 

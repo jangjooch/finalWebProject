@@ -89,7 +89,6 @@
 										<th scope="col" width="15%;">사건 번호</th>
 										<th scope="col" width="30%;">요청 위치(x, y)</th>
 										<th scope="col" width="20%;">요청 일시</th>
-										<th scope="col" width="20%">처리 회원</th>									
 										<th scope="col" width="20%">상태</th>									
 									</tr>
 								</thead>
@@ -106,6 +105,53 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							
+							<div class="col-sm-8">
+					<div id="bottom">
+						<div id="bottom_t" style="height: 20px;"></div>
+						<div id="bottom_c">
+							<div id="bottom_c_l"></div>
+							<div id="bottom_c_c">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+										<li class="page-item"><a class="page-link" href="memberDetail?=pageNo=1"> 
+											<span aria-hidden="true">&laquo;</span></a>
+										</li>
+										<c:if test="${groupNo > 1}">
+										<li class="page-item"><a class="page-link" href="memberDetail?pageNo=${startPageNo-1}"> 
+											<span aria-hidden="true"><</span></a>
+										</li>
+										</c:if>
+										
+								  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
+								  		<c:if test="${pageNo==i}">
+								  			<li class="page-item active">
+								  				<a href="memberDetail?pageNo=${i}" class="page-link">${i}</a>
+								  			</li>
+								  		</c:if>
+						  				<c:if test="${pageNo!=i}">
+						  					<li class="page-item">
+						  						<a href="memberDetail?pageNo=${i}" class="page-link">${i}</a>
+						  					</li>
+						  				</c:if>
+						  			</c:forEach>
+										<c:if test="${groupNo < totalGroupNum}">
+											<li class="page-item">
+												<a class="page-link" href="memberDetail?pageNo=${endPageNo+1 }"> 
+												<span aria-hidden="true">></span>
+												</a>
+											</li>
+										</c:if>
+										<li class="page-item"><a class="page-link" href="memberDetail?pageNo=${totalPageNum }"> 
+											<span aria-hidden="true">&raquo;</span></a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+						<div id="bottom_b" style="height: 20px;"></div>
+					</div>
+				</div>
 						</div>
 					</div>
 				</div>
@@ -122,9 +168,9 @@
 							</div>
 							<div id="bottom_c_r">
 								<div>
-									<a href="updateMemberForm?m_num=${member.m_num}" class="btn btn-warning">수정하기</a>	
-									<a onclick="memdel()" class="btn btn-warning">삭제하기</a>
-									<a href="memberList?pageNo=${pageNo}" class="btn btn-warning">목록으로</a>
+									<a href="updateMemberForm?m_num=${member.m_num}" class="btn btn-warning">회원수정</a>	
+									<a onclick="memdel()" class="btn btn-warning">회원삭제</a>
+									<a href="memberList?pageNo=${pageNo}" class="btn btn-warning">회원 목록으로</a>
 								</div>
 							</div>
 						</div>

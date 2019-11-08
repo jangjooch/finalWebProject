@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.mission.MissionDao;
-import web.dto.mission.MissionDto;
+import web.dto.request.RequestDto;
 
 @Service
 public class MissionSerivce {
@@ -20,10 +20,10 @@ public class MissionSerivce {
 
 	private static final Logger logger = LoggerFactory.getLogger(MissionSerivce.class);
 	
-	public List<MissionDto> missionList(HttpSession session, int success) {
+	public List<RequestDto> missionList(HttpSession session, int success) {
 		// TODO Auto-generated method stub
 		logger.info("MissionService missionList Activate");
-		List<MissionDto> missionList = missiondao.missionList(session, success);
+		List<RequestDto> missionList = missiondao.missionList(session, success);
 		return missionList;
 	}
 

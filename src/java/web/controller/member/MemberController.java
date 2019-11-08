@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import web.controller.HomeController;
 import web.dto.member.MemberDto;
-import web.dto.mission.MissionDto;
+import web.dto.request.RequestDto;
 import web.service.member.MemberSerivce;
 
 @Controller
@@ -98,10 +98,8 @@ public class MemberController {
 	// 멤버 삭제
 	@RequestMapping("/memberDelete")
 	public String deleteBoard(int m_num, HttpSession session) {
-		System.out.println("컨트롤러 주입"+m_num);
 		service.deleteMember(m_num);
 		int pageNo = (Integer)session.getAttribute("pageNo");
-		System.out.println("컨트롤러 응답 페이지 번호" + pageNo);
 		return "redirect:/member/memberList?pageNo=" + pageNo;
 	}
 	
@@ -129,11 +127,40 @@ public class MemberController {
 	
 	// 멤버 디테일
 	@RequestMapping("memberDetail")
-	public String memberDetail(int m_num , Model model) {
+	public String memberDetail(int m_num , Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
 		MemberDto member = service.getMember(m_num);
-		List<MissionDto> report = service.getReport(m_num);
-		model.addAttribute("member",member);
-		model.addAttribute("report",report);
+		
+		// 페이징
+		session.setAttribute("pageNo", pageNo);
+		int rowsPerPage = 5;
+		int pagesPerGroup = 5;
+		int totalRowNum = 0;
+		int totalPageNum = totalRowNum / rowsPerPage;
+		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
+		int totalGroupNum = totalPageNum / pagesPerGroup;
+		if(totalPageNum % pagesPerGroup != 0) totalGroupNum++;
+		int groupNo = (pageNo-1)/pagesPerGroup + 1;
+		int startPageNo = (groupNo-1)*pagesPerGroup + 1;
+		int endPageNo = startPageNo + pagesPerGroup - 1;
+		if(groupNo == totalGroupNum) endPageNo = totalPageNum;
+		int startRowNo = (pageNo-1)*rowsPerPage + 1;
+		int endRowNo = pageNo*rowsPerPage;
+		if(pageNo == totalPageNum) endRowNo = totalRowNum;
+		
+		//현재 페이지의 게시물 가져오기
+		List<RequestDto> report = service.getReport(m_num,startRowNo, endRowNo);
+		//JSP로 페이지 정보 넘기기
+		model.addAttribute("pagesPerGroup", pagesPerGroup);
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("totalGroupNum", totalGroupNum);
+		model.addAttribute("groupNo", groupNo);
+		model.addAttribute("startPageNo", startPageNo);
+		model.addAttribute("endPageNo", endPageNo);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("report", report);		// 요청리스트
+		
+		model.addAttribute("member",member); // 회원 상세정보
+		
 		return "member/member_detail";
 	}
 	

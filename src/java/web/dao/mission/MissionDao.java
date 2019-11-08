@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import web.dto.mission.MissionDto;
 import web.dto.mission.MissionItemDto;
+import web.dto.request.RequestDto;
 
 @Component
 public class MissionDao {
@@ -24,7 +24,7 @@ public class MissionDao {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MissionDao.class);
 	
-	public List<MissionDto> missionList(HttpSession session, int success) {
+	public List<RequestDto> missionList(HttpSession session, int success) {
 		// TODO Auto-generated method stub
 		logger.info("MissionDao missionList Activate");
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -61,10 +61,10 @@ public class MissionDao {
 		}
 		
 		
-		List<MissionDto> currentMissionList = sqlsessionTemplate.selectList("mission.currentMissionList", param);
+		List<RequestDto> currentMissionList = sqlsessionTemplate.selectList("mission.currentMissionList", param);
 		i = 0;
 		logger.info("currentMissionList");
-		for(MissionDto missionDto : currentMissionList) {
+		for(RequestDto missionDto : currentMissionList) {
 			logger.info( i + " : " + missionDto.getRe_num() + " " + missionDto.getRe_time());
 			i++;
 		}
@@ -113,11 +113,11 @@ public class MissionDao {
 	public List<String> getDestination(int re_num) {
 		// TODO Auto-generated method stub
 		
-		MissionDto missiondto = sqlsessionTemplate.selectOne("mission.GetMissionByReNum",re_num);
+		RequestDto requestDto = sqlsessionTemplate.selectOne("mission.GetMissionByReNum",re_num);
 		
 		List<String> destination = new ArrayList<String>();
-		destination.add(missiondto.getRe_location_x());
-		destination.add(missiondto.getRe_location_y());
+		destination.add(requestDto.getRe_location_x());
+		destination.add(requestDto.getRe_location_y());
 		
 		return destination;
 	}

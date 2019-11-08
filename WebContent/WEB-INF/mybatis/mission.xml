@@ -91,7 +91,7 @@
    <!-- 형철쓰가 손댐 -->
    <!-- result맵을 이용하여 이러한 형태로  -->
    <resultMap id="GetMissionByReNum2ResultMap"
-      type="web.dto.mission.MissionDto">
+      type="web.dto.request.RequestDto">
       <result column="re_num" property="re_num" />
       <result column="re_time" property="re_time" />
       <result column="re_location_x" property="re_location_x" />
@@ -131,7 +131,7 @@
    </select>
    <!-- 요청 테이블 전체 가져오기 -->
    <resultMap id="GetMissionByReNum2ResultMapList"
-      type="web.dto.mission.MissionDto">
+      type="web.dto.request.RequestDto">
       <result column="re_num" property="re_num" />
       <result column="re_time" property="re_time" />
       <result column="re_location_x" property="re_location_x" />

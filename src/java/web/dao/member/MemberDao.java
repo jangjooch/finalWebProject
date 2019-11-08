@@ -11,14 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import web.dto.member.MemberDto;
-import web.dto.mission.MissionDto;
+import web.dto.request.RequestDto;
 
 @Component
 public class MemberDao {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
 
-	private static final int String = 0;
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
@@ -62,11 +61,12 @@ public class MemberDao {
 		return member;
 	}
 
-	public List<MissionDto> selectReportList(int m_num) {
-		System.out.println("진입ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
-		List<MissionDto> report = sqlSessionTemplate.selectList("member.memberReport", m_num);
-		System.out.println("끝ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
-		logger.info("dddddddddddd"+ report.size());
+	public List<RequestDto> selectReportList(int m_num, int startRowNo, int endRowNo) {
+		Map<String , Integer> map = new HashMap<>();
+		map.put("m_num", m_num);
+		map.put("startRowNo", startRowNo);
+		map.put("endRowNo", endRowNo);
+		List<RequestDto> report = sqlSessionTemplate.selectList("member.memberReport", map);
 		return report;
 	}
 
