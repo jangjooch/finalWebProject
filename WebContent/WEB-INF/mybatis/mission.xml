@@ -138,7 +138,7 @@
       <result column="re_location_y" property="re_location_y" />
       <result column="re_success" property="re_success" />
       <result column="m_num" property="m_num" />
-      <association property="member" javaType="web.dto.member.MemberDto">
+      <association property="memberDto" javaType="web.dto.member.MemberDto">
          <result property="m_num" column="m_num"/>
          <result property="m_name" column="m_name"/>
          <result property="m_id" column="m_id"/>

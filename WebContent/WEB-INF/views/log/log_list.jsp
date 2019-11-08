@@ -59,7 +59,7 @@
 								<c:if test="${i.re_num==j.re_num}">
 									<tr onclick="location.href='log_detail?d_m_number=${i.d_m_number}'" style="cursor: pointer;">
 										<td>${i.d_m_number}</td>
-										<td>${j.member.m_name}/${j.member.po_position}</td>
+										<td>${j.memberDto.m_name}/${j.memberDto.po_position}</td>
 										<td><fmt:formatDate value="${j.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 										<td>${j.re_location_x}/${j.re_location_y}</td>
 									</tr>

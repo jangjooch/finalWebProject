@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import web.dao.log.LogDao;
 import web.dto.drone.DroneMissionDto;
 import web.dto.log.LogDto;
-import web.dto.mission.MissionDto;
+import web.dto.request.RequestDto;
 import web.service.drone.DroneMissionService;
 import web.service.log.LogService;
 
@@ -56,7 +56,7 @@ public class LogController {
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;			//
 		
 		List<DroneMissionDto> droneMissionList = logService.getSelectLogList(startRowNo, endRowNo);
-		List<MissionDto> missionList = logService.getRequestList();
+		List<RequestDto> missionList = logService.getRequestList();
 				
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
