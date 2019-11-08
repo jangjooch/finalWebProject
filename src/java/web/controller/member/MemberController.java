@@ -151,12 +151,10 @@ public class MemberController {
 		List<RequestDto> report = null;
 		
 		if (session.getAttribute("m_num") == null) {
-			System.out.println("m_num이 없대!");
 			m_num = (int)session.getAttribute("m_num");
 			report = service.getReport(m_num,startRowNo, endRowNo);
 		}
 		if (session.getAttribute("m_num") != null) {
-			System.out.println("m_num이 있대!");
 			report = service.getReport(m_num,startRowNo, endRowNo);
 		}
 		
@@ -250,7 +248,6 @@ public class MemberController {
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("searchList", searchList);
 		
-		logger.info("써치 컨트롤러 끝");
 		return "member/member_searched";
 	}
 	

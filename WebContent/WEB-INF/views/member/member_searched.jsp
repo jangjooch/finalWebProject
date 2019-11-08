@@ -3,6 +3,7 @@
 <jsp:include page="../main/top.jsp" flush="false"/>
 
 		<script type="text/javascript">
+		
 			function searchSelect(){
 				var result = true;
 				if ($("#searchThing").val() == "0") {

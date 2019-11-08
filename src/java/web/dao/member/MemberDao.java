@@ -97,8 +97,6 @@ public class MemberDao {
 
 	public int selectSearchTotalRowNo(String searchThing , String things) {
 		int totalRowNo = 0;
-		System.out.println(searchThing);
-		System.out.println(things);
 		if (searchThing.equals("m_num")) {
 			totalRowNo = sqlSessionTemplate.selectOne("member.selectSearchTotalRowNo1",things);
 		} else if (searchThing.equals("m_name")) {
@@ -108,7 +106,6 @@ public class MemberDao {
 		} else if (searchThing.equals("po_num")) {
 			totalRowNo = sqlSessionTemplate.selectOne("member.selectSearchTotalRowNo4",things);
 		}
-		System.out.println("디에이오 토탈로넘"+totalRowNo);
 		return totalRowNo;
 	}
 
