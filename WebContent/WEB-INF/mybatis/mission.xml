@@ -213,6 +213,7 @@
 	<select id="selectTotalRowNum" resultType="int">
 		SELECT COUNT(*) FROM
 		request
+		WHERE re_success != 2
 	</select>
 	
 	
@@ -238,7 +239,8 @@
                 FROM drone_mission dm, request re, member m
                 where dm.re_num = re.re_num
                      AND re.m_num = m.m_num
-                order by re.re_time desc
+                     AND re.re_success != 2
+                order by re.re_success, re.re_num desc
             ) 
 		where rownum &lt;= #{endRowNo}
 		)

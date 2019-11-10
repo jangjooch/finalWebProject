@@ -30,11 +30,6 @@ public class MissionController {
 	@Resource(name="dataSource")
 	private DataSource datasource;
 	
-	
-	
-	
-	
-	
 	@RequestMapping("/missionInList")
 	public String missionInList(HttpSession session) {		
 		
@@ -141,7 +136,7 @@ public class MissionController {
 	public String missionDetail(int re_num, Model model) {
 		MissionDto mission = service.getMission(re_num);
 		
-		model.addAttribute("mission",mission);
+		model.addAttribute("mission", mission);
 		return "mission/missionDetail2";
 	}
 	

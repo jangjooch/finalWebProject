@@ -46,7 +46,7 @@
 							<tbody>
 								<tr>
 									<th>요청 번호</th>
-									<td>${logDto.missionDto.re_num}</td>
+									<td>${logDto.requestDto.re_num}</td>
 								</tr>
 								<tr>
 									<th>요청자/직급</th>
@@ -54,16 +54,16 @@
 								</tr>
 								<tr>
 									<th>요청 시간</th>
-									<td><fmt:formatDate value="${logDto.missionDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
+									<td><fmt:formatDate value="${logDto.requestDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 								</tr>
 								<tr>
 									<th>요청 위치 x/y</th>
-									<td>${logDto.missionDto.re_location_x}/${logDto.missionDto.re_location_y}</td>
+									<td>${logDto.requestDto.re_location_x}/${logDto.requestDto.re_location_y}</td>
 								</tr>
 								<tr>
 									<th>요청 물품 및 수량</th>
 									<td>
-										<c:forEach var="i" items="${logDto.missionDto.missionItems}">
+										<c:forEach var="i" items="${logDto.requestDto.missionItems}">
 											${i.itemDto.i_name} / ${i.itemDto.i_weight}<br/>
 										</c:forEach>
 									</td>
