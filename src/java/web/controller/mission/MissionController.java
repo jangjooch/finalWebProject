@@ -128,7 +128,7 @@ public class MissionController {
 	}
 	
 	
-	@RequestMapping("missionDetail")
+	@RequestMapping("/missionDetail")
 	public String missionDetail(int re_num, Model model) {
 		MissionDto mission = service.getMission(re_num);
 		
@@ -137,14 +137,14 @@ public class MissionController {
 	}
 	
 	// 지도 api
-	@RequestMapping("missionProcess")
+	@RequestMapping("/missionProcess")
 	public String missionProcess() {
 		
 		return "mission/mission_pro_detail";
 	}
 	
 	// 미션 수락하기
-	@RequestMapping("missionAcceptList")
+	@RequestMapping("/missionAcceptList")
 	public String missionItemCheck(int re_num) {
 
 		int check = service.missionCheck(re_num);
@@ -152,10 +152,11 @@ public class MissionController {
 		if(check == 1) {
 			System.out.println("업데이트 실패");
 		}else{
+			int success = service.requestSuccessChange(re_num);
 			System.out.println("업데이트 성공");
 		}
 		
-		return "mission/mission_item_check";
+		return "redirect:/mission/requestList";
 	}
 	
 }

@@ -307,8 +307,15 @@
 	<!-- ITEM_LIST 에서 요청 물품 수량 빼기 -->
 	<update id="updateItemMount" parameterType="map">
 		UPDATE item_list 
-		SET i_mount = i_mount-#{requestItemMount}
+		SET i_mount = (i_mount - #{requestItemMount})
 		WHERE i_code = #{requestItemCode}
+	</update>
+	
+	<!-- 요청 수락 후 요청 테이블 상태 update -->
+	<update id="updateRequestSuccess" parameterType="int">
+		UPDATE request
+		SET re_success = 1
+		WHERE re_num = #{re_num}
 	</update>
 	
 </mapper>

@@ -79,31 +79,40 @@ public class MissionSerivce {
 		List<ItemDto> list = missionDao.selectItemList();
 		return list;
 	}
-
+	
+	// 요청 물품 update
 	public int missionCheck(int re_num) {
 		List<MissionItemsDto> checkMountList = missionDao.selectItemMount(re_num);    // 요청 물품 
+		System.out.println("요청 물품 : " + checkMountList.size());
 		List<ItemDto> checkAllList = missionDao.selectItemCheckList();                // 관리 물품
+		System.out.println("관리물품 : " + checkAllList.size());
 		
 		for(int i=0; i<checkAllList.size(); i++) {
 			for(int j=0; j<checkMountList.size(); j++) {
-				if(checkAllList.get(i).getI_mount() < checkMountList.get(j).getI_amount()) {
-					return 1;
+				if(checkAllList.get(i).getI_code() == checkMountList.get(j).getI_code()) {
+					if(checkAllList.get(i).getI_mount() < checkMountList.get(j).getI_amount()) {
+						return 1;
+					}
 				}
 			}
 		}
 		
-		int rows = 0;
+		int row = 0;
+		
 		for(int i=0; i<checkMountList.size(); i++) {
-			
-			int requestItemCode = checkMountList.get(i).getI_code();     //요청 물품 코드
 			int requestItemMount = checkMountList.get(i).getI_amount();  //요청 물품 수량
-				
-				rows = missionDao.updateRequestItemAmount(requestItemMount, requestItemCode) + rows;
-			}
+			int requestItemCode = checkMountList.get(i).getI_code();     //요청 물품 코드
+			row = missionDao.updateRequestItemAmount(requestItemMount, requestItemCode);
+		}
 		
-		
-		System.out.println(rows);
 		return 0;
+	}
+	
+	// 요청 물품 update 후 상태 바꾸기
+	public int requestSuccessChange(int re_num) {
 		
+		int rows = missionDao.updateRequestSuccessChange(re_num);
+		
+		return 0;
 	}
 }

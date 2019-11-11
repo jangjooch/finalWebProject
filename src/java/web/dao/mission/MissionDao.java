@@ -176,18 +176,28 @@ public class MissionDao {
 		return list;
 	}
 	
+	// 요청에 대한 List 가져오기
 	public List<MissionItemsDto> selectItemMount(int re_num) {
 		List<MissionItemsDto> list = sqlSessionTemplate.selectList("mission.selectRequestItemList", re_num);
 		return list;
 	}
-
-	public int updateRequestItemAmount(int checkItemCode, int requestItemMount) {
+	
+	// 물품 빼기 UPDATE
+	public int updateRequestItemAmount(int requestItemMount, int requestItemCode) {
 		Map<String, Integer> map = new HashMap<>();
-		map.put("checkItemCode", checkItemCode);
 		map.put("requestItemMount", requestItemMount);
+		map.put("requestItemCode", requestItemCode);
 		
 		int rows = sqlSessionTemplate.update("mission.updateItemMount", map);
 		
 		return rows;
+	}
+	
+	// 요청 SUCCESS CHANGE UPDATE 
+	public int updateRequestSuccessChange(int re_num) {
+		
+		int rows = sqlSessionTemplate.update("mission.updateRequestSuccess", re_num);
+				
+		return 0;
 	}
 }
