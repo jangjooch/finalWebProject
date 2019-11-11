@@ -35,6 +35,7 @@
 		}
 		return result;
 	}
+	
 </script>
 <style type="text/css">
 html, body {
@@ -195,7 +196,7 @@ html, body {
 									<div id="input_button_left">
 									</div>
 										<div class="form-group" >
-											<input type="submit" value="Login" class="btn btn-success"/>
+											<input type="submit" value="Login" class="btn btn-success" onclick="loginCheck()"/>
 										</div>	
 									<div id="input_button_right">
 									</div>				

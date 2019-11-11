@@ -15,6 +15,10 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3d69db29f8cf3ce70f95fece8fddde0"></script>
 
+<script type="text/javascript">
+	
+
+</script>
 </head>
 <body>
 	<div id="map" style="width: 100%; height: 500px;"></div>
@@ -24,11 +28,12 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 	<div id="clickLatlng"></div>
 	
 	<script>	 	
-		var destination_x = "${destination_lat}"; // 전에 model로 받은 destinaion_lat
-		var destination_y = "${destination_lng}"; // 전에 model로 받은 destinaion_lng
-		console.log(${destination_lat});
-		// 37.504000, 127.122000
-		var lat = 37.502000;
+		// 목적지
+		var destination_x = "37.504383"; // 전에 model로 받은 destinaion_lat 
+		var destination_y = "127.122404"; // 전에 model로 받은 destinaion_lng
+
+		// 드론 실제 위치
+		var lat = 37.502000;	// MQTT에서 받아옴 (최초 1회)
 		var lng = 127.120000;
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
@@ -73,8 +78,9 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 		}
 		
 		
+		// 실제 위치가 맞나?
 		setInterval(function(){
-			lat = lat + 0.0001;
+			lat = lat + 0.0001; // 1초마다 드론위치 수신
 			lng = lng + 0.0001;
 			DroneMarker.setMap(null);
 			DroneMarker.setPosition(new kakao.maps.LatLng(lat, lng));
@@ -82,7 +88,7 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 			cent_x= (lat + destination_x /2);
 			cent_x= (lng + destination_y /2);
 			map.setCenter(new kakao.maps.LatLng(cent_x,cent_y));
-		},2000);
+		},1000);	// 초마다 계속 실행한다.
 		
 	</script>
 </body>

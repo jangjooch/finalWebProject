@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import web.controller.HomeController;
@@ -33,14 +34,14 @@ public class NoticeController {
 	
 	
 	// 수정
-	@RequestMapping("noticeUpdate")
+	@PostMapping("noticeUpdate")
 	public String noticeUpdate() {
 		
 		return null;
 	}	
 	
 	// 삭제
-	@RequestMapping("noticeDelete")
+	@PostMapping("noticeDelete")
 	public String noticeDelete() {
 		
 		return null;
