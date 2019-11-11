@@ -26,6 +26,13 @@
 					}
 				}
 			}
+			
+			
+			// 요청 상세보기
+			function missionDetail(a) {
+				alert(a);
+				window.open("missionProcess");
+			}
 		</script>
 		<style>
 		</style>
@@ -104,7 +111,7 @@
 										<c:if test="${requestList.re_success == 1}">
 											<button type="button" class="btn btn-warning" disabled="disabled">수행중</button>
 											<button type="button" class="btn btn-success"
-											onclick="location.href='#'">상세보기</button>
+											onclick="missionDetail(${requestList.re_num})">상세보기</button>
 										</c:if>
 									</div>
 								</td>

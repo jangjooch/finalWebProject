@@ -61,7 +61,7 @@ public class MissionController {
 	}
 	
 	@RequestMapping("missionProcess")
-	public String missionProcess(int re_num, Model model) {
+	public String missionProcess(/* int re_num, Model model */) {
 		
 		return "mission/mission_pro_detail";
 	}
