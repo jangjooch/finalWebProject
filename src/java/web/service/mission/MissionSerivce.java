@@ -83,9 +83,7 @@ public class MissionSerivce {
 	// 요청 물품 update
 	public int missionCheck(int re_num) {
 		List<MissionItemsDto> checkMountList = missionDao.selectItemMount(re_num);    // 요청 물품 
-		System.out.println("요청 물품 : " + checkMountList.size());
 		List<ItemDto> checkAllList = missionDao.selectItemCheckList();                // 관리 물품
-		System.out.println("관리물품 : " + checkAllList.size());
 		
 		for(int i=0; i<checkAllList.size(); i++) {
 			for(int j=0; j<checkMountList.size(); j++) {
