@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.mission.MissionDao;
+import web.dto.item.ItemDto;
 import web.dto.mission.MissionDto;
 import web.dto.request.RequestDto;
 
@@ -72,4 +73,9 @@ public class MissionSerivce {
 		return mission;
 	}	
 	
+	// 아이템 리스트
+	public List<ItemDto> getItemList(){
+		List<ItemDto> list = missionDao.selectItemList();
+		return list;
+	}
 }

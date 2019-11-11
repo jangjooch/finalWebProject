@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import web.dto.item.ItemDto;
 import web.dto.mission.MissionDto;
 import web.dto.mission.MissionItemDto;
 import web.dto.request.RequestDto;
@@ -160,5 +161,11 @@ public class MissionDao {
 	public MissionDto selectOneMission(int re_num) {
 		MissionDto mission = sqlSessionTemplate.selectOne("mission.missionDetail", re_num);
 		return mission;
+	}
+	
+	// 아이템 가져오기
+	public List<ItemDto> selectItemList() {
+		List<ItemDto> list = sqlSessionTemplate.selectList("mission.itemList");
+		return list;
 	}
 }

@@ -247,6 +247,27 @@
 		where rn &gt;= #{startRowNo}
 	</select>
 	
+	<!-- 요청 아이템 목록 받아오기 -->
+	<resultMap type="web.dto.item.MissionItemsDto" id="missionItemListId">
+		 <result property="re_num" column="re_num"/>
+         <result property="i_code" column="i_code"/>
+         <result property="i_amount" column="i_amount"/>
+         <association property="itemDto" javaType="web.dto.item.ItemDto">
+         <!-- 1 대 1을 넣기 위해 association item.MissionItemDto에 있는
+             private ItemDto itemDto;를 사용하기 위해서 -->
+             <result property="i_code" column="i_code"/>
+             <result property="i_name" column="i_name"/>
+             <result property="i_mount" column="i_mount"/>
+             <result property="i_class" column="i_class"/>
+             <result property="i_weight" column="i_weight"/>
+         </association>
+	</resultMap>
+	<select id="itemList" resultMap="missionItemListId">
+		SELECT ri.re_num, ri.i_code, ri.i_amount,
+		       il.i_code, il.i_name, il.i_mount, il.i_class, il.i_weight       
+		FROM item_list il, request_item ri
+		WHERE il.i_code = ri.i_code
+	</select>
 	
 	<resultMap type="web.dto.request.RequestDto" id="missionAndRequestDetail">
 		<result property="re_num" column="re_num"/>

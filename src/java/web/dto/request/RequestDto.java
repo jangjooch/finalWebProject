@@ -22,19 +22,12 @@ public class RequestDto {
 	public List<MissionItemsDto> getMissionItems() {
 		return missionItems;
 	}
-	
-	
-	
-	
 	public MemberDto getMemberDto() {
 		return memberDto;
 	}
 	public void setMemberDto(MemberDto memberDto) {
 		this.memberDto = memberDto;
 	}
-
-
-
 
 	public void setMissionItems(List<MissionItemsDto> missionItems) {
 		this.missionItems = missionItems;

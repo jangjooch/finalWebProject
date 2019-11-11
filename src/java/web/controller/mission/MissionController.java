@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import web.dto.item.ItemDto;
 import web.dto.mission.MissionDto;
 import web.dto.request.RequestDto;
 import web.service.mission.MissionSerivce;
@@ -44,10 +45,6 @@ public class MissionController {
 	public String missionProList(HttpSession session) {		
 		
 		logger.info("Controller missionProList Activate");
-		int success = 1;
-		
-		List<RequestDto> missionList = service.missionList(session, success); 
-		
 		return "mission/mission_pro_list";
 	}
 	
@@ -65,10 +62,6 @@ public class MissionController {
 	
 	@RequestMapping("missionProcess")
 	public String missionProcess(int re_num, Model model) {
-		
-		List<String> destination = service.getDestination(re_num);
-		model.addAttribute("destination_lat",destination.get(0));
-		model.addAttribute("destination_lng",destination.get(1));
 		
 		return "mission/mission_pro_detail";
 	}
@@ -98,7 +91,7 @@ public class MissionController {
 	public String requestList(Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
 		logger.info("컨트롤러 진입");
 		session.setAttribute("pageNo", pageNo);
-		int rowsPerPage = 10;
+		int rowsPerPage = 10	;
 		int pagesPerGroup = 5;
 		int totalRowNum = service.getTotalRowNo();
 		int totalPageNum = totalRowNum / rowsPerPage;
@@ -117,6 +110,8 @@ public class MissionController {
 		logger.info("페이징끝");
 		//현재 페이지의 게시물 가져오기
 		List<MissionDto> requestList = service.getRequestList(startRowNo, endRowNo);
+		//아이템 리스트 가져오기
+		List<ItemDto> itemList = service.getItemList();
 		
 		//JSP로 페이지 정보 넘기기
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
@@ -127,6 +122,8 @@ public class MissionController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("requestList", requestList);
+		model.addAttribute("itemList", itemList);
+		
 		logger.info("컨트롤러 끝");
 		return "mission/mission_in_list2";
 	}

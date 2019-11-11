@@ -41,23 +41,24 @@
 						</div>
 						<div id="top_c">
 							<h1>Mission</h1>
+							<a href="missionProcess" class="btn btn-warning">테스트</a>
 						</div>
 						<div id="top_b">
 							<form class="form-inline" action="requestSearch" onsubmit="return searchSelect()">
-						<div class="form-group mb-2" id="t_b_right">
-							<select id="searchThing" name="searchThing"class="form-control">
-								<option value="0" selected>선택하기</option>
-								<option value="re_num">요청번호</option>
-								<option value="re_time">요청시간</option>
-								<option value="m_name">요청자 이름</option>
-								<option value="re_success">상태</option>
-							</select>
-						</div>
-						<div class="form-group mx-sm-3 mb-2">
-							<input id="things" name="things" type="text" class="form-control"	placeholder="검색어">
-						</div>
-						<button type="submit" class="btn btn-primary mb-2">검색</button>
-					</form>
+								<div class="form-group mb-2" id="t_b_right">
+									<select id="searchThing" name="searchThing"class="form-control">
+										<option value="0" selected>선택하기</option>
+										<option value="re_num">요청번호</option>
+										<option value="re_time">요청시간</option>
+										<option value="m_name">요청자 이름</option>
+										<option value="re_success">상태</option>
+									</select>
+								</div>
+								<div class="form-group mx-sm-3 mb-2">
+									<input id="things" name="things" type="text" class="form-control"	placeholder="검색어">
+								</div>
+								<button type="submit" class="btn btn-primary mb-2">검색</button>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -70,12 +71,13 @@
 					<table class="table table-hover">
 							<thead class="thead-dark">
 								<tr>
-									<th scope="col" width="15%;">요청 번호</th>
+									<th scope="col" width="10%;">요청 번호</th>
 									<th scope="col" width="15%;">요청 시간</th>
-									<th scope="col" width="15%;">요청 위치 Lat</th>
-									<th scope="col" width="15%;">요청 위치 Lng</th>							
+									<th scope="col" width="10%;">요청 위치 Lat</th>
+									<th scope="col" width="10%;">요청 위치 Lng</th>							
 									<th scope="col" width="15%;">요청자</th>							
-									<th scope="col" width="15%;">상태</th>							
+									<th scope="col" width="15%;">요청 물품</th>
+									<th scope="col" width="15%;">상태</th>
 								</tr>
 							</thead>
 						<tbody>
@@ -86,6 +88,13 @@
 								<td>${requestList.re_location_x}</td>
 								<td>${requestList.re_location_y}</td>
 								<td>${requestList.memberDto.m_name }</td>
+								<td>
+									<c:forEach var="i" items="${itemList}">
+										<c:if test="${i.re_num==requestList.re_num}">
+											${i.itemDto.i_name}/${i.i_amount}
+										</c:if>
+									</c:forEach>
+								</td>
 								<td>
 									<div>
 										<c:if test="${requestList.re_success == 0}">
@@ -127,7 +136,7 @@
 								
 						  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
 						  		<c:if test="${pageNo==i}">
-						  			<a href="requestList?pageNo=${i}" class="page-link" style="color:orange;">${i}</a>
+						  			<a href="requestList?pageNo=${i}" class="page-link active">${i}</a>
 						  		</c:if>
 				  				<c:if test="${pageNo!=i}">
 				  					<a href="requestList?pageNo=${i}" class="page-link">${i}</a>

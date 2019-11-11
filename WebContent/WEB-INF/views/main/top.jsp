@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 	<head>
 		<title>Main</title>
+		<link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/image/drone.png">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet"
@@ -25,9 +26,10 @@
 			href="<%=application.getContextPath()%>/resources/css/shc/resources.css">
 			
 		<script type="text/javascript">
+			// 이것도 가능
 // 			if(${member_logined==null}){
 // 				location.href="${pageContext.request.contextPath}";
-// 			}
+// 			} 
 			<c:if test="${member_logined==null}">
 				location.href="${pageContext.request.contextPath}";				
 			</c:if>
