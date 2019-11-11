@@ -98,7 +98,7 @@
 								<td>
 									<c:forEach var="i" items="${itemList}">
 										<c:if test="${i.re_num==requestList.re_num}">
-											${i.itemDto.i_name}/${i.i_amount}
+											${i.itemDto.i_name}/${i.i_amount}<br/>
 										</c:if>
 									</c:forEach>
 								</td>

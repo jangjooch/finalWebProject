@@ -60,11 +60,7 @@ public class MissionController {
 		return "redirect:/mission/missionInList";
 	}
 	
-	@RequestMapping("missionProcess")
-	public String missionProcess(/* int re_num, Model model */) {
-		
-		return "mission/mission_pro_detail";
-	}
+	
 	
 	
 	
@@ -137,8 +133,17 @@ public class MissionController {
 		return "mission/missionDetail2";
 	}
 	
+	// 지도 api
+	@RequestMapping("missionProcess")
+	public String missionProcess() {
+		
+		return "mission/mission_pro_detail";
+	}
 	
-	
-	
+	// 미션 아이템 개수 체크 하기
+	public String missionItemCheck() {
+		
+		return "mission_item_check";
+	}
 	
 }
