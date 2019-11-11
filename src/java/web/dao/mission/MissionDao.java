@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import web.dto.item.ItemDto;
+import web.dto.item.MissionItemsDto;
 import web.dto.mission.MissionDto;
 import web.dto.mission.MissionItemDto;
 import web.dto.request.RequestDto;
@@ -167,5 +168,26 @@ public class MissionDao {
 	public List<ItemDto> selectItemList() {
 		List<ItemDto> list = sqlSessionTemplate.selectList("mission.itemList");
 		return list;
+	}
+
+	// 전체 아이템 마운트 가져오기
+	public List<ItemDto> selectItemCheckList(){
+		List<ItemDto> list = sqlSessionTemplate.selectList("mission.selectItemList");
+		return list;
+	}
+	
+	public List<MissionItemsDto> selectItemMount(int re_num) {
+		List<MissionItemsDto> list = sqlSessionTemplate.selectList("mission.selectRequestItemList", re_num);
+		return list;
+	}
+
+	public int updateRequestItemAmount(int checkItemCode, int requestItemMount) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("checkItemCode", checkItemCode);
+		map.put("requestItemMount", requestItemMount);
+		
+		int rows = sqlSessionTemplate.update("mission.updateItemMount", map);
+		
+		return rows;
 	}
 }

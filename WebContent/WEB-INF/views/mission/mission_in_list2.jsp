@@ -36,7 +36,6 @@
 		</script>
 		<style>
 		</style>
-	<body>
 		<%-- 전체 div --%>
 			<div class="row">
 				<%-- top --%>
@@ -74,7 +73,6 @@
 				<%-- center --%>
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
-					
 					<table class="table table-hover">
 							<thead class="thead-dark">
 								<tr>
@@ -98,6 +96,8 @@
 								<td>
 									<c:forEach var="i" items="${itemList}">
 										<c:if test="${i.re_num==requestList.re_num}">
+											<input type="hidden" name="i_code" value="${i.itemDto.i_name}">
+											<input type="hidden" name="i_mount" value="${i.i_amount}">
 											${i.itemDto.i_name}/${i.i_amount}<br/>
 										</c:if>
 									</c:forEach>
@@ -105,8 +105,7 @@
 								<td>
 									<div>
 										<c:if test="${requestList.re_success == 0}">
-											<button type="button" class="btn btn-danger" 
-											onclick="location.href='#'">수락 대기</button>
+											<a href ="missionAcceptList?re_num=${requestList.re_num}" class="btn btn-danger">수락 대기</a>
 										</c:if>
 										<c:if test="${requestList.re_success == 1}">
 											<button type="button" class="btn btn-warning" disabled="disabled">수행중</button>
@@ -143,10 +142,14 @@
 								
 						  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
 						  		<c:if test="${pageNo==i}">
-						  			<a href="requestList?pageNo=${i}" class="page-link active">${i}</a>
+						  			<li class="page-item active">
+						  				<a href="requestList?pageNo=${i}" class="page-link">${i}</a>
+						  			</li>
 						  		</c:if>
 				  				<c:if test="${pageNo!=i}">
-				  					<a href="requestList?pageNo=${i}" class="page-link">${i}</a>
+				  					<li class="page-item">
+				  						<a href="requestList?pageNo=${i}" class="page-link">${i}</a>
+				  					</li>
 				  				</c:if>
 				  			</c:forEach>
 								<c:if test="${groupNo < totalGroupNum}">

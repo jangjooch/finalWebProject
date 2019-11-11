@@ -289,4 +289,26 @@
 				    AND m.m_num = re.m_num
 				    AND re.re_num = #{re_num}	
 	</select>
+	
+	<!-- 요청 물품 리스트 가져오기 -->
+	<select id="selectRequestItemList" parameterType="int" resultType="web.dto.item.MissionItemsDto">
+		SELECT re_num, i_code, i_amount FROM 
+		request_item
+		WHERE re_num = #{re_num}	
+	</select>
+	
+	<!-- 체크용 아이템 총 개수들 가져오기 -->
+	<select id="selectItemList" resultType="web.dto.item.ItemDto">
+		SELECT i_code, i_mount
+		FROM item_list
+		ORDER BY i_code ASC
+	</select>
+	
+	<!-- ITEM_LIST 에서 요청 물품 수량 빼기 -->
+	<update id="updateItemMount" parameterType="map">
+		UPDATE item_list 
+		SET i_mount = i_mount-#{requestItemMount}
+		WHERE i_code = #{requestItemCode}
+	</update>
+	
 </mapper>

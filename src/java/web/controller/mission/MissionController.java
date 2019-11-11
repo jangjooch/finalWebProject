@@ -1,6 +1,7 @@
 package web.controller.mission;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -11,10 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import web.dto.item.ItemDto;
+import web.dto.item.MissionItemsDto;
 import web.dto.mission.MissionDto;
 import web.dto.request.RequestDto;
 import web.service.mission.MissionSerivce;
@@ -140,10 +143,19 @@ public class MissionController {
 		return "mission/mission_pro_detail";
 	}
 	
-	// 미션 아이템 개수 체크 하기
-	public String missionItemCheck() {
+	// 미션 수락하기
+	@RequestMapping("missionAcceptList")
+	public String missionItemCheck(int re_num) {
+
+		int check = service.missionCheck(re_num);
 		
-		return "mission_item_check";
+		if(check == 1) {
+			System.out.println("업데이트 실패");
+		}else{
+			System.out.println("업데이트 성공");
+		}
+		
+		return "mission/mission_item_check";
 	}
 	
 }

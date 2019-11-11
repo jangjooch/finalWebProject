@@ -14,6 +14,8 @@ href="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/boots
 src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3d69db29f8cf3ce70f95fece8fddde0"></script>
+<script type="text/javascript"
+src="<%=application.getContextPath()%>/resources/js/paho-mqtt-min.js"></script>
 
 <script type="text/javascript">
 	
@@ -27,7 +29,39 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 	</p>
 	<div id="clickLatlng"></div>
 	
-	<script>	 	
+	<script>
+	$(function(){
+		  //106.253.56.124
+	      client = new Paho.MQTT.Client("106.253.56.124", 61614, "clientId");
+	      client.onMessageArrived = onMessageArrived;
+	      client.connect({
+	         onSuccess : onConnect
+	      });
+
+	      function onConnect() {
+	         // 연결이 완료되었을 때 자동으로 콜백되는 함수
+	         
+	         client.subscribe("/web/drone");
+ 
+	      }
+
+	      //메세지를 수신했을때 자동으로 실행(콜백)되는 함수
+	      function onMessageArrived(message) {
+	    	  console.log(message.payloadString + "<br/>");
+	         $("#divRecieve").append(message.payloadString + "<br/>");
+	         $("#divRecieve").append(location.hostname + "<br/>");
+	         
+	      }
+	   });
+	   function sendMessage(){
+	      var data = "웹 송신: "+ $("#inputData").val();
+	      var message = new Paho.MQTT.Message(data);
+	        message.destinationName ="aaa";
+	        client.send(message);
+	   }
+	   
+	   /* ****************************************************** */
+	
 		// 목적지
 		var destination_x = "37.504383"; // 전에 model로 받은 destinaion_lat 
 		var destination_y = "127.122404"; // 전에 model로 받은 destinaion_lng
@@ -88,8 +122,11 @@ src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstr
 			cent_x= (lat + destination_x /2);
 			cent_x= (lng + destination_y /2);
 			map.setCenter(new kakao.maps.LatLng(cent_x,cent_y));
-		},1000);	// 초마다 계속 실행한다.
+		},10000);	// 초마다 계속 실행한다.
 		
 	</script>
+	<div id="divRecieve">
+		아아
+	</div>
 </body>
 </html>

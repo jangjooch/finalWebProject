@@ -6,6 +6,17 @@ public class MissionItemDto {
 						// MissionDto랑 뽑아내기 위해서
 	private String i_name; // 요청 물품 명
 	private int i_amount; // 요청 수량
+	private int i_code;
+	
+	public int getI_code() {
+		return i_code;
+	}
+	public void setI_code(int i_code) {
+		this.i_code = i_code;
+	}
+	
+	
+	
 	public int getRe_num() {
 		return re_num;
 	}

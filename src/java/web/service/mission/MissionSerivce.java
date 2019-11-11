@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import web.dao.mission.MissionDao;
 import web.dto.item.ItemDto;
+import web.dto.item.MissionItemsDto;
 import web.dto.mission.MissionDto;
 import web.dto.request.RequestDto;
 
@@ -77,5 +78,32 @@ public class MissionSerivce {
 	public List<ItemDto> getItemList(){
 		List<ItemDto> list = missionDao.selectItemList();
 		return list;
+	}
+
+	public int missionCheck(int re_num) {
+		List<MissionItemsDto> checkMountList = missionDao.selectItemMount(re_num);    // 요청 물품 
+		List<ItemDto> checkAllList = missionDao.selectItemCheckList();                // 관리 물품
+		
+		for(int i=0; i<checkAllList.size(); i++) {
+			for(int j=0; j<checkMountList.size(); j++) {
+				if(checkAllList.get(i).getI_mount() < checkMountList.get(j).getI_amount()) {
+					return 1;
+				}
+			}
+		}
+		
+		int rows = 0;
+		for(int i=0; i<checkMountList.size(); i++) {
+			
+			int requestItemCode = checkMountList.get(i).getI_code();     //요청 물품 코드
+			int requestItemMount = checkMountList.get(i).getI_amount();  //요청 물품 수량
+				
+				rows = missionDao.updateRequestItemAmount(requestItemMount, requestItemCode) + rows;
+			}
+		
+		
+		System.out.println(rows);
+		return 0;
+		
 	}
 }
