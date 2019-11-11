@@ -15,9 +15,12 @@
 				}
 				
 				// 번호찾기인데 문자입력시 거부 해야함
-				
-				
-				
+				if ($("#searchThing").val() == "m_num") {
+					if (isNaN($("#things").val())) {
+						alert("숫자를 입력하세요.");
+						result = false;
+					}
+				}
 				return result;
 			}
 			

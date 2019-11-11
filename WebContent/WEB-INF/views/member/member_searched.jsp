@@ -3,14 +3,23 @@
 <jsp:include page="../main/top.jsp" flush="false"/>
 
 		<script type="text/javascript">
-		
 			function searchSelect(){
 				var result = true;
 				if ($("#searchThing").val() == "0") {
+					alert("검색할 분류를 선택해 주세요.");
 					result = false;
 				}
 				if($("#things").val() == ""){
+					alert("검색어를 입력해 주세요.");
 					result = false;
+				}
+				
+				// 번호찾기인데 문자입력시 거부 해야함
+				if ($("#searchThing").val() == "m_num") {
+					if (isNaN($("#things").val())) {
+						alert("숫자를 입력하세요.");
+						result = false;
+					}
 				}
 				return result;
 			}
