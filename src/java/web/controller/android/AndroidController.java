@@ -1,8 +1,13 @@
 package web.controller.android;
 
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.json.JSONArray;
@@ -10,12 +15,16 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import web.controller.log.LogController;
 import web.dto.android.ItemDto;
+import web.dto.android.RequestDto;
+import web.dto.android.RequestItemDto;
+import web.service.loginResult;
 import web.service.android.AndroidService;
 
 @Controller
@@ -41,8 +50,86 @@ public class AndroidController {
 			arrJson.put(i, json);
 		}
 		mainJson.put("List", arrJson);
-		model.addAttribute("list",mainJson.toString());
+		model.addAttribute("list", mainJson.toString());
 		return "android/itemList";
+	}
+
+	@RequestMapping("/login")
+	public String login(String id, String pw, Model model) throws Exception {
+		loginResult loginresult = service.login(id, pw);
+		String result = "";
+		if (loginresult == loginResult.Success) {
+			result = "success";
+		}
+		if (loginresult == loginResult.FailId) {
+			result = "failId";
+		}
+		if (loginresult == loginResult.FailPw) {
+			result = "failPw";
+		}
+		model.addAttribute("result", result);
+		return "android/loginResult";
+
+	}
+
+	@RequestMapping("getNewRequestNum")
+	public String getNewRequestNum(Model model) {
+		int result=0;
+		result = service.getNewRequestNum();
+		model.addAttribute("result", result);
+		System.out.println("최신 요청번호");
+		return "android/newRequestNumResult";
+	}
+
+	@RequestMapping("requestItem")
+	public String requestItem(String re_num, String re_location_x, String re_location_y, String m_num,
+			String re_itemList, Model model) {
+		System.out.println(re_num);
+		System.out.println(re_location_x+"  "+re_location_y);
+		System.out.println(m_num);
+		System.out.println(re_itemList);
+		String result = "fail";
+		RequestDto requestDto = new RequestDto();
+		requestDto.setRe_num(Integer.parseInt(re_num));
+		requestDto.setRe_location_x(re_location_x);
+		requestDto.setRe_location_y(re_location_y);
+		requestDto.setM_num(Integer.parseInt(m_num));
+
+		boolean resultRequest = service.request(requestDto);
+		
+		JSONObject json = new JSONObject(re_itemList);
+		JSONArray jArr = json.getJSONArray("List");
+		// 받아온 pRecvServerPage를 분석하는 부분
+		String[] jsonName = { "i_code", "i_amount" };
+		String[][] parseredData = new String[jArr.length()][jsonName.length];
+		for (int i = 0; i < jArr.length(); i++) {
+			json = jArr.getJSONObject(i);
+			if (json != null) {
+				for (int j = 0; j < jsonName.length; j++) {
+					parseredData[i][j] = json.getString(jsonName[j]);
+				}
+			}
+		}
+		List<RequestItemDto> requestItemList=new ArrayList<RequestItemDto>();
+		for(int i=0;i<parseredData.length;i++) {
+			RequestItemDto requestItemDto= new RequestItemDto();
+			requestItemDto.setRe_num(Integer.parseInt(re_num));
+			requestItemDto.setI_code(Integer.parseInt(parseredData[i][0]));
+			requestItemDto.setI_amount(Integer.parseInt(parseredData[i][1]));
+			requestItemList.add(requestItemDto);
+		}
+		
+		List<RequestItemDto> resultList = service.requestItem(requestItemList,re_num);
+		
+		
+		if(resultRequest) {
+			result = "success";
+		}
+		
+		//model.addAttribute("resultList", re_itemList);
+		
+		model.addAttribute("result", result);
+		return "android/requestItemResult";
 	}
 
 }

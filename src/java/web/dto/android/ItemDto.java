@@ -3,6 +3,8 @@ package web.dto.android;
 public class ItemDto {
 	private int i_code;
 	private String i_name;
+	private int i_mount;
+	
 	public int getI_code() {
 		return i_code;
 	}
@@ -14,5 +16,11 @@ public class ItemDto {
 	}
 	public void setI_name(String i_name) {
 		this.i_name = i_name;
+	}
+	public int getI_mount() {
+		return i_mount;
+	}
+	public void setI_mount(int i_mount) {
+		this.i_mount = i_mount;
 	}
 }

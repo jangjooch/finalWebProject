@@ -1,14 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <%
 	String list=request.getAttribute("list").toString();
-	out.println(list);
+	String res="requestItemList";
+	String sub="_distinguish_";
 %>
-</body>
-</html>
+<%=res%><%=sub%><%=list%>

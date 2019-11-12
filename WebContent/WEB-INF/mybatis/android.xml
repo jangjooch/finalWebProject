@@ -5,5 +5,37 @@
 	select i_code,i_name
 	from item_list
 	</select>
+	<select id="selectMemberByMid" parameterType="string"
+		resultType="web.dto.android.MemberDto">
+		select m_id,m_pw
+		from member
+		where m_id=#{m_id}
+	</select>
+	
+	<select id="selectMaxRequestNum" resultType="_int">
+		select max(re_num)
+		from request
+	</select>
+	
+	<insert id="insertRequest"
+		parameterType="web.dto.android.RequestDto">
+		INSERT INTO request
+		VALUES(#{re_num} ,sysdate ,#{re_location_x},#{re_location_y} ,#{m_num}, 0)
+	</insert>
+	
+	<insert id="insertRequestItem" parameterType="List">
+	<foreach collection="list" item="vo" index="index" open="INSERT ALL" separator=" " close="select * from dual">
+		into request_item
+		(re_num, i_code, i_amount)
+		values (#{vo.re_num}, #{vo.i_code}, #{vo.i_amount})
+		</foreach>
+	</insert>
+	
+	<select id="responseItem" parameterType="_int" resultType="web.dto.android.RequestItemDto">
+		select re_num,i_code,i_amount
+		from request_item
+		where re_num= #{re_num} and 
+		(select re_success from request where re_num=#{re_num} and re_success = 0) = 0
+	</select>
 
 </mapper>
