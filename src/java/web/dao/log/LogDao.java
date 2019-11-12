@@ -14,7 +14,6 @@ import web.dto.drone.DroneDto;
 import web.dto.drone.DroneMissionDto;
 import web.dto.log.LogDto;
 import web.dto.member.MemberDto;
-import web.dto.mission.MissionDto;
 import web.dto.request.RequestDto;
 
 @Component
@@ -60,6 +59,40 @@ public class LogDao {
 		List<RequestDto> missionList = sqlSessionTemplate.selectList("mission.GetMissionByReNum2List");
 		
 		return missionList;
+	}
+	
+	
+	
+	// 토탈로우넘
+	public int selectSearchTotalRowNo(String choose, String searchThing) {
+		int totalRowNo = 0;
+		if (choose.equals("requestNumber")) {
+			int intSearchThing = Integer.parseInt(searchThing);
+			totalRowNo = sqlSessionTemplate.selectOne("log.selectSearchTotalRowNoRN",intSearchThing);
+		} else if (choose.equals("requestMember")) {
+			totalRowNo = sqlSessionTemplate.selectOne("log.selectSearchTotalRowNoRM",searchThing);
+		}
+		return totalRowNo;
+	}
+	
+	
+	
+	
+	public List<RequestDto> selectSearchMember(String choose, String searchThing, int startRowNo, int endRowNo) {
+		Map<String, Object> map = new HashMap<>();
+//		map.put("things", searchThing);
+		map.put("startRowNo", startRowNo);
+		map.put("endRowNo", endRowNo);
+		List<RequestDto> searchList = null;
+		if (choose.equals("requestNumber")) {
+			int TsearchThing = Integer.parseInt(searchThing);
+			map.put("searchThing", TsearchThing);
+			searchList = sqlSessionTemplate.selectList("log.searchNumberList", map);
+		} else if (choose.equals("requestMember")) {
+			map.put("searchThing", searchThing);
+			searchList = sqlSessionTemplate.selectList("log.searchMemberList", map);
+		}
+		return searchList;
 	}
 	
 }
