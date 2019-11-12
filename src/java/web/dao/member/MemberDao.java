@@ -108,7 +108,12 @@ public class MemberDao {
 		}
 		return totalRowNo;
 	}
-
+	
+	public MemberDto gcsLogin(String m_id) {
+		MemberDto member = sqlSessionTemplate.selectOne("member.gcsLogin",m_id);
+		
+		return member;
+	}
 	
 	
 }

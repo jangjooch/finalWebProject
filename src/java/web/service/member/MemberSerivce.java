@@ -79,5 +79,12 @@ public class MemberSerivce {
 		int totalRowNum = memberDao.selectSearchTotalRowNo(searchThing, things);
 		return totalRowNum;
 	}
+	
+	// 형철이가 손댐 - gcs 에서 회원 정보 가져오기
+	public MemberDto getGcsLogin(String msgid) {
+		
+		MemberDto member = memberDao.gcsLogin(msgid);
+		return member;
+	}
 
 }

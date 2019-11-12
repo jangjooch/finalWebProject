@@ -165,4 +165,16 @@
                 where member.po_num = p.po_num
                     AND po_num like '%'||#{things}||'%'
 	</select>
+	
+	<!-- 형철이가 손댐-gcs -->
+	<select id="gcsLogin" parameterType="string"
+		resultType="web.dto.member.MemberDto">
+		SELECT 
+			m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num, p.po_position
+		FROM 
+			member m, position p
+		WHERE 
+        	m.po_num = p.po_num AND
+        	m_id=#{m_id}
+	</select>
 </mapper>

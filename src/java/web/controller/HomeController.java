@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import web.dto.member.MemberDto;
 import web.service.loginResult;
 import web.service.loginService;
+import web.service.member.MemberSerivce;
 
 //import com.company.web_ch09_01.service.Ch09CommonService;
 
@@ -25,6 +27,9 @@ public class HomeController {
    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
    // HomeController.class에서 사용할 log에 대한 작업
    
+   @Autowired
+   private MemberSerivce memberService;
+   
    @RequestMapping("home")
    public String home() {
       logger.info("HOMECONTROLLER ACTIVATE");
@@ -36,7 +41,9 @@ public class HomeController {
    public String login(@RequestParam(defaultValue = "0") String msgid, HttpSession session) {
 	   
 	   if(msgid.equals("gcs")) {
-		   session.setAttribute("member_logined", "d_manager1");
+		   MemberDto member = memberService.getGcsLogin("d_manager1");
+		   session.setAttribute("member_logined", member);
+		   System.out.println(session.getAttribute("member_logined"));
 		   return "redirect:/mission/missionProList";
 	   }
 	   
