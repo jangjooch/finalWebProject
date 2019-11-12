@@ -213,7 +213,7 @@
 	<select id="selectTotalRowNum" resultType="int">
 		SELECT COUNT(*) FROM
 		request
-		WHERE re_success != 2
+		WHERE re_success &lt; 2
 	</select>
 	
 	
@@ -239,7 +239,7 @@
                 FROM request re, member m
                 where
                      re.m_num = m.m_num AND 
-                     re.re_success != 2
+                     re.re_success &lt; 2
                 order by re.re_success, re.re_num desc
             ) 
 		where rownum &lt;= #{endRowNo}
@@ -311,11 +311,81 @@
 		WHERE i_code = #{requestItemCode}
 	</update>
 	
-	<!-- 요청 수락 후 요청 테이블 상태 update -->
+	<!-- 요청 수락 UPDATE -->
 	<update id="updateRequestSuccess" parameterType="int">
 		UPDATE request
 		SET re_success = 1
 		WHERE re_num = #{re_num}
 	</update>
 	
+	<!-- 요청 거절 UPDATE -->
+	<update id="updateRequestSuccess2" parameterType="int">
+		UPDATE request 
+		SET re_success = 3
+		WHERE re_num = #{re_num}
+	</update>
+	
+	<!-- ************************ 요청물품전달 완료 페이지 ************************ -->
+	<!-- 물품전달 완료 List -->
+	<resultMap type="web.dto.request.RequestDto" id="RequestSuccess1List">
+		<result property="re_num" column="re_num"/>
+		<result property="re_time" column="re_time"/>
+		<result property="re_location_x" column="re_location_x"/>
+		<result property="re_location_y" column="re_location_y"/>
+		<result property="re_success" column="re_success"/>
+		<association property="memberDto" javaType="web.dto.member.MemberDto">
+			<result property="m_name" column="m_name"/>
+		</association>
+	</resultMap>
+	<select id="selectRequestSuccess1List" parameterType="int" resultMap="RequestSuccess1List">
+		select rn, m_name ,m_num, re_num, re_time, re_location_x, re_location_y, re_success
+		from (
+            select rownum as rn, m_name , m_num, re_num, re_time, re_location_x, re_location_y, re_success
+            from (
+                select m.m_name ,m.m_num, re.re_num, re.re_time, re.re_location_x, re.re_location_y, re.re_success
+                FROM request re, member m
+                where
+                     re.m_num = m.m_num AND 
+                     re.re_success = 1
+                order by re.re_success, re.re_num desc
+            ) 
+		where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt;= #{startRowNo}
+	</select>
+	
+	<select id="selectSuccess1ListCount" resultType="int">
+		SELECT 
+		    COUNT(*) 
+		FROM REQUEST
+		WHERE re_success = 1
+	</select>
+	
+	<!-- ************************ 드론 수행 페이지 ************************ -->
+	<resultMap id="RequestSuccess2List" type="web.dto.request.RequestDto">
+		<result property="re_num" column="re_num"/>
+		<result property="re_time" column="re_time"/>
+		<result property="re_location_x" column="re_location_x"/>
+		<result property="re_location_y" column="re_location_y"/>
+		<result property="re_success" column="re_success"/>
+		<association property="memberDto" javaType="web.dto.member.MemberDto">
+			<result property="m_name" column="m_name"/>
+		</association>
+	</resultMap>
+	<select id="selectRequestSuccess2List" parameterType="int" resultMap="RequestSuccess2List">
+		select rn, m_name ,m_num, re_num, re_time, re_location_x, re_location_y, re_success
+		from (
+            select rownum as rn, m_name , m_num, re_num, re_time, re_location_x, re_location_y, re_success
+            from (
+                select m.m_name ,m.m_num, re.re_num, re.re_time, re.re_location_x, re.re_location_y, re.re_success
+                FROM request re, member m
+                where
+                     re.m_num = m.m_num AND 
+                     re.re_success = 1
+                order by re.re_success, re.re_num desc
+            ) 
+		where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt;= #{startRowNo}
+	</select>
 </mapper>

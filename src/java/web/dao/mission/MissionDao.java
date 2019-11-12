@@ -195,9 +195,33 @@ public class MissionDao {
 	
 	// 요청 SUCCESS CHANGE UPDATE 
 	public int updateRequestSuccessChange(int re_num) {
-		
 		int rows = sqlSessionTemplate.update("mission.updateRequestSuccess", re_num);
-				
-		return 0;
+		
+		return rows;
 	}
+	
+	public int updateRequestSuccessChangeRefusal(int re_num) {
+		int rows = sqlSessionTemplate.update("mission.updateRequestSuccess2", re_num);
+		
+		return rows;
+	}
+	
+	/* ****************** re_success 가 1 인 List *******************/
+	// 요청 페이지 List
+	public List<RequestDto> selectSuccess1List(int startRowNo, int endRowNo){
+		Map<String, Integer> map = new HashMap<>();
+		map.put("startRowNo", startRowNo);
+		map.put("endRowNo", endRowNo);
+		
+		List<RequestDto> list = sqlSessionTemplate.selectList("mission.selectRequestSuccess1List", map);
+		
+		return list;
+	}
+	
+	public int selectSuccess1ListCount() {
+		int count = sqlSessionTemplate.selectOne("mission.selectSuccess1ListCount");
+		return count;
+	}
+	
+	
 }

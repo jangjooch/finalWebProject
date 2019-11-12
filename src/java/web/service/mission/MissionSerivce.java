@@ -1,6 +1,8 @@
 package web.service.mission;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -85,6 +87,12 @@ public class MissionSerivce {
 		List<MissionItemsDto> checkMountList = missionDao.selectItemMount(re_num);    // 요청 물품 
 		List<ItemDto> checkAllList = missionDao.selectItemCheckList();                // 관리 물품
 		
+		System.out.println(checkMountList.size());
+		
+		if(checkMountList.size() == 0) {
+			return 1;
+		}
+		
 		for(int i=0; i<checkAllList.size(); i++) {
 			for(int j=0; j<checkMountList.size(); j++) {
 				if(checkAllList.get(i).getI_code() == checkMountList.get(j).getI_code()) {
@@ -108,9 +116,33 @@ public class MissionSerivce {
 	
 	// 요청 물품 update 후 상태 바꾸기
 	public int requestSuccessChange(int re_num) {
-		
 		int rows = missionDao.updateRequestSuccessChange(re_num);
 		
-		return 0;
+		return rows;
+	}
+	
+	// 요청 거절 UPDATE
+	public int updateRequestSuccessChangeRefusal(int re_num) {
+		int rows = missionDao.updateRequestSuccessChangeRefusal(re_num);
+		
+		return rows;
+	}
+	
+	/* ****************** re_success 가 1 인 List *******************/
+	// 요청 페이지 List
+	public List<RequestDto> selectSuccess1List(int startRowNo, int endRowNo){
+		Map<String, Integer> map = new HashMap<>();
+		map.put("startRowNo", startRowNo);
+		map.put("endRowNo", endRowNo);
+		
+		List<RequestDto> list = missionDao.selectSuccess1List(startRowNo, endRowNo);
+		
+		return list;
+	}
+	
+	// re_success count 개수
+	public int selectSuccess1ListCount() {
+		int count = missionDao.selectSuccess1ListCount();
+		return count;
 	}
 }

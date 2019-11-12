@@ -47,7 +47,6 @@
 						</div>
 						<div id="top_c">
 							<h1>Mission</h1>
-							<a href="missionProcess" class="btn btn-warning">테스트</a>
 						</div>
 						<div id="top_b">
 							<form class="form-inline" action="requestSearch" onsubmit="return searchSelect()">
@@ -87,7 +86,7 @@
 							</thead>
 						<tbody>
 						<c:forEach items="${requestList}" var="requestList">
-							<tr>
+							<tr align="center">
 								<td>${requestList.re_num}</td>
 								<td><fmt:formatDate value="${requestList.re_time}" pattern="yyyy-MM-dd hh:mm"/></td>
 								<td>${requestList.re_location_x}</td>
@@ -105,12 +104,10 @@
 								<td>
 									<div>
 										<c:if test="${requestList.re_success == 0}">
-											<a href ="missionAcceptList?re_num=${requestList.re_num}" class="btn btn-danger">수락 대기</a>
+											<a href ="missionAcceptList?re_num=${requestList.re_num}" class="btn btn-danger">요청 수락</a>
 										</c:if>
 										<c:if test="${requestList.re_success == 1}">
-											<button type="button" class="btn btn-warning" disabled="disabled">수행중</button>
-											<button type="button" class="btn btn-success"
-											onclick="missionDetail(${requestList.re_num})">상세보기</button>
+											<button type="button" class="btn btn-warning">물품전달완료</button>
 										</c:if>
 									</div>
 								</td>
