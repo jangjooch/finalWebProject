@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import web.service.loginResult;
 import web.service.loginService;
 
@@ -31,7 +33,13 @@ public class HomeController {
    }
    
    @RequestMapping("/")
-   public String login() {
+   public String login(@RequestParam(defaultValue = "0") String msgid, HttpSession session) {
+	   
+	   if(msgid.equals("gcs")) {
+		   session.setAttribute("member_logined", "d_manager1");
+		   return "redirect:/mission/missionProList";
+	   }
+	   
       logger.info("login activate");
       return "login";
    }
