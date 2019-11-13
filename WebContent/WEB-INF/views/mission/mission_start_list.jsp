@@ -81,7 +81,8 @@
 								</td>
 								<td>
 									<div>
-										<a href ="#" class="btn btn-success">드론 출발</a>
+										<button disabled="disabled" class="btn btn-primary" style="float: left;">실행중</button>
+										<a href="#" class="btn btn-info" style="float: left;">상세보기</a>
 									</div>
 								</td>
 							</tr>
@@ -101,11 +102,11 @@
 							<div id="bottom_c_c">
 								<nav aria-label="Page navigation example">
 							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="missionProList?=pageNo=1"> 
+								<li class="page-item"><a class="page-link" href="missionStart?=pageNo=1"> 
 									<span aria-hidden="true">&laquo;</span></a>
 								</li>
 								<c:if test="${groupNo > 1}">
-								<li class="page-item"><a class="page-link" href="missionProList?pageNo=${startPageNo-1}"> 
+								<li class="page-item"><a class="page-link" href="missionStart?pageNo=${startPageNo-1}"> 
 									<span aria-hidden="true"><</span></a>
 								</li>
 								</c:if>
@@ -113,23 +114,23 @@
 						  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
 						  		<c:if test="${pageNo==i}">
 						  			<li class="page-item active">
-						  				<a href="missionProList?pageNo=${i}" class="page-link">${i}</a>
+						  				<a href="missionStart?pageNo=${i}" class="page-link">${i}</a>
 						  			</li>
 						  		</c:if>
 				  				<c:if test="${pageNo!=i}">
 				  					<li class="page-item">
-				  						<a href="missionProList?pageNo=${i}" class="page-link">${i}</a>
+				  						<a href="missionStart?pageNo=${i}" class="page-link">${i}</a>
 				  					</li>
 				  				</c:if>
 				  			</c:forEach>
 								<c:if test="${groupNo < totalGroupNum}">
 									<li class="page-item">
-										<a class="page-link" href="missionProList?pageNo=${endPageNo+1 }"> 
+										<a class="page-link" href="missionStart?pageNo=${endPageNo+1 }"> 
 										<span aria-hidden="true">></span>
 										</a>
 									</li>
 								</c:if>
-								<li class="page-item"><a class="page-link" href="missionProList?pageNo=${totalPageNum }"> 
+								<li class="page-item"><a class="page-link" href="missionStart?pageNo=${totalPageNum }"> 
 									<span aria-hidden="true">&raquo;</span></a>
 								</li>
 							</ul>

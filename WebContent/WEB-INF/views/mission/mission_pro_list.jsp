@@ -81,7 +81,7 @@
 								</td>
 								<td>
 									<div>
-										<a href ="#" class="btn btn-success">드론 출발</a>
+										<a href ="${pageContext.request.contextPath}/drone/droneState_List" class="btn btn-success">드론 출발</a>
 									</div>
 								</td>
 							</tr>

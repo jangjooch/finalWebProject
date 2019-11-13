@@ -206,7 +206,7 @@ public class MissionDao {
 		return rows;
 	}
 	
-	/* ****************** re_success 가 1 인 List *******************/
+	/* ****************** re_success 가 1 인 List(드론출발대기) *******************/
 	// 요청 페이지 List
 	public List<RequestDto> selectSuccess1List(int startRowNo, int endRowNo){
 		Map<String, Integer> map = new HashMap<>();
@@ -223,5 +223,19 @@ public class MissionDao {
 		return count;
 	}
 	
+	/* ****************** re_success 가 2 인 List(실행중) *******************/
+	public List<RequestDto> selectSuccess2List(int startRowNo, int endRowNo){
+		Map<String, Integer> map = new HashMap<>();
+		map.put("startRowNo", startRowNo);
+		map.put("endRowNo", endRowNo);
+		
+		List<RequestDto> list = sqlSessionTemplate.selectList("mission.selectRequestSuccess2List", map);
+		
+		return list;
+	}
 	
+	public int selectSuccess2ListCount() {
+		int count = sqlSessionTemplate.selectOne("mission.selectSuccess2ListCount");
+		return count;
+	}
 }

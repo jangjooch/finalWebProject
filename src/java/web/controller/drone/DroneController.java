@@ -160,5 +160,39 @@ public class DroneController {
 		return "redirect:/drone/drone_list";
 	}
 	
-	
+	/* *********************** 드론 상태 리스트 *********************** */
+	@RequestMapping("/droneState_List")
+	public String droneStateList(Model model, @RequestParam(defaultValue ="1") int pageNo, HttpSession session) {
+		session.setAttribute("pageNo", pageNo);
+		
+		int rowsPerPage = 10;
+		int pagesPerGroup = 5;
+		int totalRowNum = service.getDroneStateTotalRowNo();
+		int totalPageNum = totalRowNum / rowsPerPage;
+		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
+		int totalGroupNum = totalPageNum / pagesPerGroup;
+		if(totalPageNum % pagesPerGroup != 0) totalGroupNum++;
+		
+		int groupNo = (pageNo-1)/pagesPerGroup + 1;
+		int startPageNo = (groupNo-1)*pagesPerGroup + 1;
+		int endPageNo = startPageNo + pagesPerGroup - 1;
+		if(groupNo == totalGroupNum) endPageNo = totalPageNum;
+		
+		int startRowNo = (pageNo-1)*rowsPerPage + 1;
+		int endRowNo = pageNo*rowsPerPage;
+		if(pageNo == totalPageNum) endRowNo = totalRowNum;
+		
+		List<DroneDto> drone_list = service.getDroneStateList(startRowNo, endRowNo);
+
+		model.addAttribute("pagesPerGroup", pagesPerGroup);
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("totalGroupNum", totalGroupNum);
+		model.addAttribute("groupNo", groupNo);
+		model.addAttribute("startPageNo", startPageNo);
+		model.addAttribute("endPageNo", endPageNo);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("drone_list", drone_list);
+			
+		return "drone/droneStateList";
+	}
 }

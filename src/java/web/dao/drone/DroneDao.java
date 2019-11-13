@@ -82,4 +82,22 @@ public class DroneDao {
 		
 	}
 	
+	
+	/* ***************** 운행가능 리스트 ***************** */
+	public List<DroneDto> selectStateList(int drone_startRowNo, int drone_endRowNo){
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("drone_startRowNo", drone_startRowNo);
+		map.put("drone_endRowNo", drone_endRowNo);
+		
+		List<DroneDto> drone_list = sqlSessionTemplate.selectList("drone.selectStateList", map);
+
+		return drone_list;
+	}
+	
+	public int selectStateTotalRowNo() {
+		int totalRowNum = sqlSessionTemplate.selectOne("drone.selectStateCount");
+		return totalRowNum;
+	}
+	
 }

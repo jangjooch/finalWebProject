@@ -68,4 +68,19 @@ public class DroneService {
 			return droneList;
 			
 		}
+		
+		/* ****************** 드론 운행가능 리스트 ****************** */
+		public List<DroneDto> getDroneStateList(int drone_startRowNo, int drone_endRowNo){
+			List<DroneDto> droneList = dronedao.selectStateList(drone_startRowNo, drone_endRowNo);
+			System.out.println(droneList.size());
+			return droneList;
+		}
+		
+		public int getDroneStateTotalRowNo() {
+			int totalRowNum = dronedao.selectStateTotalRowNo();
+			System.out.println(totalRowNum);
+			return totalRowNum;
+		}
+		
+		
 }
