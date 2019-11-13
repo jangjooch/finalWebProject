@@ -84,19 +84,22 @@ public class DroneDao {
 	
 	
 	/* ***************** 운행가능 리스트 ***************** */
-	public List<DroneDto> selectStateList(int drone_startRowNo, int drone_endRowNo){
-		
+	public List<DroneDto> selectStateList(int drone_startRowNo, int drone_endRowNo, String totalWeight){
+		int intTotalWeight = Integer.parseInt(totalWeight);
 		Map<String, Integer> map = new HashMap<>();
 		map.put("drone_startRowNo", drone_startRowNo);
 		map.put("drone_endRowNo", drone_endRowNo);
+		map.put("totalWeight", intTotalWeight);
 		
 		List<DroneDto> drone_list = sqlSessionTemplate.selectList("drone.selectStateList", map);
-
+		System.out.println("운행가능 드론 수: " + drone_list.size());
 		return drone_list;
 	}
 	
-	public int selectStateTotalRowNo() {
-		int totalRowNum = sqlSessionTemplate.selectOne("drone.selectStateCount");
+	public int selectStateTotalRowNo(String totalWeight) {
+		int intTotalWeight = Integer.parseInt(totalWeight);
+		int totalRowNum = sqlSessionTemplate.selectOne("drone.selectStateCount", intTotalWeight);
+		System.out.println("페이징 숫자: " + totalRowNum ) ;
 		return totalRowNum;
 	}
 	

@@ -34,52 +34,7 @@ public class MissionController {
 	@Resource(name="dataSource")
 	private DataSource datasource;
 	
-	@RequestMapping("/missionInList")
-	public String missionInList(HttpSession session) {		
-		
-		logger.info("Controller missionInList Activate");
-		int success = 0;
-		
-		List<RequestDto> missionList = service.missionList(session, success); 
-		
-		return "mission/mission_in_list";
-	}
-	
-	@RequestMapping("/missionAccept")
-	public String missionAccept(int re_num) {
-		
-		logger.info("Controller missionAccept Activate");
-		
-		service.successChange(re_num);
-		
-		service.reduceMount(re_num);
-		
-		return "redirect:/mission/missionInList";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// ---------------------------------
+	// 요청 리스트
 	@RequestMapping("/requestList")
 	public String requestList(Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
 		session.setAttribute("pageNo", pageNo);
@@ -115,7 +70,7 @@ public class MissionController {
 		model.addAttribute("requestList", requestList);
 		model.addAttribute("itemList", itemList);
 		
-		return "mission/mission_in_list2";
+		return "mission/mission_in_list";
 	}
 	
 	
@@ -124,7 +79,7 @@ public class MissionController {
 		MissionDto mission = service.getMission(re_num);
 		
 		model.addAttribute("mission", mission);
-		return "mission/missionDetail2";
+		return "mission/missionDetail";
 	}
 	
 	// 지도 api
@@ -137,7 +92,7 @@ public class MissionController {
 	// 미션 수락하기
 	@RequestMapping("/missionAcceptList")
 	public String missionItemCheck(int re_num) {
-
+		System.out.println("진입!");
 		int check = service.missionCheck(re_num);
 		
 		if(check == 1) {
@@ -148,7 +103,7 @@ public class MissionController {
 			int success = service.requestSuccessChange(re_num);
 		}
 		
-		return "redirect:/mission/missionProList";
+		return "redirect:/mission/requestList"; 
 	}
 	
 	/* ********************* 요청 수락 완료 상태-드론 출발 대기상태 ********************* */

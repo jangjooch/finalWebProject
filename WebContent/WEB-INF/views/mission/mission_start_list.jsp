@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="../main/top.jsp" flush="false"/>
-
+	<!-- 실행중 페이지 -->
 		<script type="text/javascript">
 			function searchSelect(){
 				var result = true;

@@ -54,7 +54,7 @@
 							      <td>${drone.d_weight}</td>
 							      <td>${drone.d_battery}</td>
 							      <td>
-							      	<a href="#" class="btn btn-secondary">드론 선택</a>
+							      	<a href="#" class="btn btn-secondary">드론 출발</a>
 							      </td>
 							     </tr>
 							</c:forEach>

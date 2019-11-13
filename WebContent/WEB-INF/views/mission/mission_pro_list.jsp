@@ -15,6 +15,7 @@
 				}
 				return result;
 			}
+			
 		</script>
 			<div class="row">
 				<div class="col-sm-2"></div>
@@ -58,7 +59,7 @@
 									<th scope="col" width="10%;">요청 위치 Lat</th>
 									<th scope="col" width="10%;">요청 위치 Lng</th>							
 									<th scope="col" width="15%;">요청자</th>							
-									<th scope="col" width="15%;">요청 물품</th>
+									<th scope="col" width="15%;">요청 물품/중량</th>
 									<th scope="col" width="15%;">상태</th>
 								</tr>
 							</thead>
@@ -71,17 +72,27 @@
 								<td>${requestList.re_location_y}</td>
 								<td>${requestList.memberDto.m_name }</td>
 								<td>
+									<c:set var="totalWeight" value="0"/>	<!-- 전역변수 -->
 									<c:forEach var="i" items="${itemList}">
 										<c:if test="${i.re_num==requestList.re_num}">
 											<input type="hidden" name="i_code" value="${i.itemDto.i_name}">
 											<input type="hidden" name="i_mount" value="${i.i_amount}">
 											${i.itemDto.i_name}/${i.i_amount}<br/>
+											<input type="hidden" name="i_weight" value="${i.itemDto.i_weight}">
+											<c:set var="weight" value="${i.i_amount * i.itemDto.i_weight}"/><!-- 항목당 무게 -->
+											<c:set var="sumWeight" value="${weight + sumWeight}"/>
+											<c:set var="totalWeight" value="${sumWeight}"/>
 										</c:if>
 									</c:forEach>
+											<h6>총중량: <c:out value="${totalWeight }"/> g</h6>
 								</td>
 								<td>
 									<div>
-										<a href ="${pageContext.request.contextPath}/drone/droneState_List" class="btn btn-success">드론 출발</a>
+										<a href="${pageContext.request.contextPath}
+										/drone/droneState_List?totalWeight=${totalWeight }" 
+											class="btn btn-success">드론 선택</a>
+											<c:set var="sumWeight" value="0"/>
+											<c:set var="totalWeight" value="0"/> <!-- 초기화 -->
 									</div>
 								</td>
 							</tr>

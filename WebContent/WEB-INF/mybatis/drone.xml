@@ -62,17 +62,20 @@
 					drone
 				where 
 					d_status = 1
+					AND drone.d_weight &gt;= #{totalWeight}
 				order 
-					by d_number asc
+					by drone.d_weight
             	) 
 		where rownum &lt;= #{drone_endRowNo}
 			)
 		where rn &gt;= #{drone_startRowNo}
 	</select>
-	<select id="selectStateCount" resultType="int">
+	<select id="selectStateCount" parameterType="int" resultType="int">
 		select count(*) 
 		from drone
-		where d_status = 1	
+		where d_status = 1
+			AND drone.d_weight &gt;= #{totalWeight}
+			
 	</select>
 	
 </mapper>

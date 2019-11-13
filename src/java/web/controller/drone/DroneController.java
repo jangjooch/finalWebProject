@@ -162,12 +162,32 @@ public class DroneController {
 	
 	/* *********************** 드론 상태 리스트 *********************** */
 	@RequestMapping("/droneState_List")
-	public String droneStateList(Model model, @RequestParam(defaultValue ="1") int pageNo, HttpSession session) {
+	public String droneStateList(String totalWeight, Model model, @RequestParam(defaultValue ="1") int pageNo, HttpSession session) {
+		System.out.println("드론상태리스트 컨트롤러 진입");
+		System.out.println("totalWeight가 파라이터로 왔니? : " + totalWeight);
+		
+//		session.setAttribute("totalWeight", totalWeight);
 		session.setAttribute("pageNo", pageNo);
+		
+		System.out.println("세션있니?" + session.getAttribute("totalWeight"));
+		
+		String totalWeight_get = null;
+		
+		if (totalWeight == null) {
+			totalWeight_get = (String) session.getAttribute("totalWeight");
+		} else {
+			session.setAttribute("totalWeight", totalWeight);
+		}
 		
 		int rowsPerPage = 10;
 		int pagesPerGroup = 5;
-		int totalRowNum = service.getDroneStateTotalRowNo();
+		int totalRowNum = 0;
+		if (totalWeight_get != null) {
+			totalRowNum = service.getDroneStateTotalRowNo(totalWeight_get);
+		} else {
+			totalRowNum = service.getDroneStateTotalRowNo(totalWeight);
+		}
+		
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
 		int totalGroupNum = totalPageNum / pagesPerGroup;
@@ -182,8 +202,17 @@ public class DroneController {
 		int endRowNo = pageNo*rowsPerPage;
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;
 		
-		List<DroneDto> drone_list = service.getDroneStateList(startRowNo, endRowNo);
+		
+		List<DroneDto> drone_list = null;
 
+		if (totalWeight != null) {
+			drone_list = service.getDroneStateList(startRowNo, endRowNo, totalWeight);
+		} else {
+			drone_list = service.getDroneStateList(startRowNo, endRowNo, totalWeight_get);
+		}
+		
+		
+		
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
 		model.addAttribute("totalGroupNum", totalGroupNum);

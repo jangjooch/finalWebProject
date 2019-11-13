@@ -70,15 +70,15 @@ public class DroneService {
 		}
 		
 		/* ****************** 드론 운행가능 리스트 ****************** */
-		public List<DroneDto> getDroneStateList(int drone_startRowNo, int drone_endRowNo){
-			List<DroneDto> droneList = dronedao.selectStateList(drone_startRowNo, drone_endRowNo);
-			System.out.println(droneList.size());
+		public List<DroneDto> getDroneStateList(int drone_startRowNo, int drone_endRowNo, String totalWeight){
+			System.out.println("aaaa1"+drone_startRowNo);
+			System.out.println("aaaa2"+drone_endRowNo);
+			List<DroneDto> droneList = dronedao.selectStateList(drone_startRowNo, drone_endRowNo, totalWeight);
 			return droneList;
 		}
 		
-		public int getDroneStateTotalRowNo() {
-			int totalRowNum = dronedao.selectStateTotalRowNo();
-			System.out.println(totalRowNum);
+		public int getDroneStateTotalRowNo(String totalWeight) {
+			int totalRowNum = dronedao.selectStateTotalRowNo(totalWeight);
 			return totalRowNum;
 		}
 		
