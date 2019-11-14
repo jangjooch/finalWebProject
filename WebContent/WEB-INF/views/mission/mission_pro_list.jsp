@@ -84,7 +84,7 @@
 											<c:set var="totalWeight" value="${sumWeight}"/>
 										</c:if>
 									</c:forEach>
-											<h6>총중량: <c:out value="${totalWeight }"/> g</h6>
+											<h6 style="color:red">총중량: <c:out value="${totalWeight }"/> g</h6>
 								</td>
 								<td>
 									<div>

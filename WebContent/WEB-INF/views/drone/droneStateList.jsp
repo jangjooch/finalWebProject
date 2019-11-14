@@ -41,8 +41,8 @@
 							<tr>
 								<th scope="col" width="15%;">드론 번호</th>
 								<th scope="col" width="20%;">드론 모델명</th>
-								<th scope="col" width="25%;">적재 가능 중량</th>
-								<th scope="col" width="25%;">비행 가능 시간</th>
+								<th scope="col" width="25%;">적재 가능 중량(단위: g)</th>
+								<th scope="col" width="25%;">비행 가능 시간(단위: 분)</th>
 								<th scope="col" width="15%;">드론 상태</th>
 							</tr>
 						</thead>
@@ -55,6 +55,8 @@
 							      <td>${drone.d_battery}</td>
 							      <td>
 							      	<a href="#" class="btn btn-secondary">드론 출발</a>
+							      	<a href="#" class="btn btn-primary">적재하기</a>
+							      	<a href="#" class="btn btn-warning">준비완료</a>
 							      </td>
 							     </tr>
 							</c:forEach>

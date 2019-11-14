@@ -74,8 +74,8 @@
 								<th scope="col" width="15%;">드론 번호</th>
 								<th scope="col" width="20%;">드론 모델명</th>
 								<th scope="col" width="15%;">드론 상태</th>
-								<th scope="col" width="25%;">적재 가능 중량</th>
-								<th scope="col" width="25%;">비행 가능 시간</th>
+								<th scope="col" width="25%;">적재 가능 중량(단위: g)</th>
+								<th scope="col" width="25%;">비행 가능 시간(단위: 분)</th>
 							</tr>
 						</thead>
 						<tbody>

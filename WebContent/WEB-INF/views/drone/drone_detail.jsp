@@ -57,14 +57,14 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="d_weight" class="col-sm-5 col-form-label">적재 가능 중량</label>
+							<label for="d_weight" class="col-sm-5 col-form-label">적재 가능 중량(단위: g)</label>
 							<div class="col-sm-7">
 								<input type="text" id="d_weight" value="${dronedto.d_weight}"
 									class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="d_battery" class="col-sm-5 col-form-label">비행 가능 시간</label>
+							<label for="d_battery" class="col-sm-5 col-form-label">비행 가능 시간(단위: kg)</label>
 							<div class="col-sm-7">
 								<input type="text" id="d_battery" value="${dronedto.d_battery}" 
 									class="form-control" readonly>

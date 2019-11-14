@@ -55,11 +55,11 @@
 					<table class="table table-hover" style="border: 1px solid 1px">
 						<thead class="thead-dark">
 							<tr>
-								<th scope="col" width="15%;">물품 번호</th>
-								<th scope="col" width="30%;">물품 이름</th>
+								<th scope="col" width="20%;">물품 번호</th>
+								<th scope="col" width="25%;">물품 이름</th>
 								<th scope="col" width="15%;">물품 수량</th>
-								<th scope="col" width="30%;">분류</th>
-								<th scope="col" width="10%;">무게</th>
+								<th scope="col" width="25%;">분류</th>
+								<th scope="col" width="15%;">무게 (단위: g)</th>
 							</tr>
 						</thead>
 						<tbody>
