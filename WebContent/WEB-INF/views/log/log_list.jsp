@@ -77,8 +77,8 @@
 					</thead>
 					<tbody>
 						<c:forEach var="log" items="${droneMissionList}">
-							<tr onclick="location.href='log_detail?d_m_number=${log.re_num}'" style="cursor: pointer;">
-								<td>${log.re_num}</td>
+							<tr onclick="location.href='log_detail?d_m_number=${log.d_m_number}'" style="cursor: pointer;">
+								<td>${log.re_num}/ ${log.d_m_number}</td>
 								<td>${log.requestDto.memberDto.m_name} / ${log.requestDto.memberDto.po_position}</td>
 								<td><fmt:formatDate value="${log.requestDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 								<td>${log.requestDto.re_location_x} / ${log.requestDto.re_location_y}</td>

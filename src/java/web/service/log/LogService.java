@@ -31,9 +31,6 @@ public class LogService {
 	}
 
 	public int getSearchTotalRowNo(String choose_get, String searchThing_get) {
-		// 여기까지 잘 들어옴
-		System.out.println("choose_get : "+choose_get);
-		System.out.println("searchThing_get : "+searchThing_get);
 		int totalRowNum = logDao.selectSearchTotalRowNo(choose_get, searchThing_get);
 		return totalRowNum;
 	}

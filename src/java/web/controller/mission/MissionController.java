@@ -20,6 +20,7 @@ import web.dto.item.ItemDto;
 import web.dto.item.MissionItemsDto;
 import web.dto.mission.MissionDto;
 import web.dto.request.RequestDto;
+import web.service.drone.DroneMissionService;
 import web.service.mission.MissionSerivce;
 
 @Controller
@@ -29,7 +30,9 @@ public class MissionController {
 	private static final Logger logger = LoggerFactory.getLogger(MissionController.class);
 	
 	@Autowired
-	MissionSerivce service;
+	private MissionSerivce service;
+	@Autowired
+	private DroneMissionService droneMissionService;
 	
 	@Resource(name="dataSource")
 	private DataSource datasource;
@@ -97,12 +100,14 @@ public class MissionController {
 		// 거절
 		if(rejection == 1) {
 			service.updateRequestSuccessChangeRefusal(re_num);
+			droneMissionService.requestRejection(re_num);
 			return "redirect:/mission/requestList";
 		}
 		
 		if(check == 1) {
 			//요청 거절 re_success = 6;
 			int fail = service.updateRequestSuccessChangeRefusal(re_num);
+			droneMissionService.requestRejection(re_num);
 		}else{
 			//요청 수락 re_success = 1;
 			int success = service.requestSuccessChange(re_num);

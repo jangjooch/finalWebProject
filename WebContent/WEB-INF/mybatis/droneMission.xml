@@ -4,6 +4,7 @@
 
 	<!-- 드론 미션 페이징 -->
 	<resultMap type="web.dto.drone.DroneMissionDto" id="droneMemberListExam">
+		<result property="d_m_number" column="d_m_number"/>
 		<result property="re_num" column="re_num"/>
 		<association property="requestDto" javaType="web.dto.request.RequestDto">
 			<result property="re_time" column="re_time"/>
@@ -17,11 +18,11 @@
 		</association>
 	</resultMap>
 	<select id="droneMemberListEx" resultMap="droneMemberListExam" parameterType="map">
-		select rn, re_num, m_name, po_position, re_time, re_location_x,re_location_y, re_success
+		select rn, d_m_number, re_num, m_name, po_position, re_time, re_location_x,re_location_y, re_success
         from (
-                select rownum as rn, re_num, m_name, po_position, re_time, re_location_x,re_location_y, re_success
+                select rownum as rn, d_m_number, re_num, m_name, po_position, re_time, re_location_x,re_location_y, re_success
                 from (
-                        select dm.re_num, m_name, po_position, re_time, re_location_x,re_location_y, re_success
+                        select dm.d_m_number, dm.re_num, m_name, po_position, re_time, re_location_x,re_location_y, re_success
                         from member m, position p , request re , drone_mission dm
                         where m.m_num = re.m_num
                          AND p.po_num = m.po_num
@@ -72,7 +73,12 @@
 	</select>
 	
 	
-	<!-- insert -->
+	<!-- 요청 거절된 로그 insert -->
+	<insert id="insertRequestRejection" parameterType="int">
+		INSERT INTO drone_mission VALUES 
+			(DRONE_MISSION_SEQ.NEXTVAL, 0, #{re_num}, 0, '요청이 거절 되었습니다.', SYSDATE)
+	</insert>
+	
 	<!-- update -->
 	<!-- insert -->
 	

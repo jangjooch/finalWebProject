@@ -34,5 +34,10 @@ public class DroneMissionService {
 		return droneMissionDto;
 	}
 	
+	// 요청이 거절 된 로그 
+	public void requestRejection(int re_num) {
+		int rows = droneMissionDao.requestRejection(re_num);		
+	}
+	
 	
 }

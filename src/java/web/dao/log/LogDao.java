@@ -50,7 +50,6 @@ public class LogDao {
 		map.put("endRowNo", endRowNo);
 		
 		List<DroneMissionDto> droneMissionlist = sqlSessionTemplate.selectList("droneMission.droneMemberListEx", map); 
-		System.out.println("droneMissionlist.size() : " + droneMissionlist.size());
 		
 		return droneMissionlist;
 	}
