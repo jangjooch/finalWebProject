@@ -214,7 +214,6 @@ public class MissionDao {
 		map.put("endRowNo", endRowNo);
 		
 		List<RequestDto> list = sqlSessionTemplate.selectList("mission.selectRequestSuccess1List", map);
-		
 		return list;
 	}
 	
@@ -237,5 +236,16 @@ public class MissionDao {
 	public int selectSuccess2ListCount() {
 		int count = sqlSessionTemplate.selectOne("mission.selectSuccess2ListCount");
 		return count;
+	}
+	
+	// 물품 적재 -> 적재 완료 업데이트
+	public int updateSuccessChainge1Eseo2(int re_num) {
+		int rows = sqlSessionTemplate.update("mission.updateSuccessChainge1Eseo2", re_num);
+		return rows;
+	}
+
+	public int updateSuccessChainge2Eseo3(int re_num) {
+		int rows = sqlSessionTemplate.update("mission.updateSuccessChainge2Eseo3", re_num);
+		return 0;
 	}
 }

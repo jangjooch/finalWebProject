@@ -163,4 +163,13 @@ public class MissionSerivce {
 		int count = missionDao.selectSuccess2ListCount();
 		return count;
 	}
+	
+	// 물품 적재 -> 적재 완료 업데이트
+	public void updateSuccessChainge1Eseo2(int re_num) {
+		int rows = missionDao.updateSuccessChainge1Eseo2(re_num);
+	}
+
+	public void updateSuccessChainge2Eseo3(int re_num) {
+		int rows = missionDao.updateSuccessChainge2Eseo3(re_num);
+	}
 }

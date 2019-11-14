@@ -106,7 +106,7 @@ public class MissionController {
 		return "redirect:/mission/requestList"; 
 	}
 	
-	/* ********************* 요청 수락 완료 상태-드론 출발 대기상태 ********************* */
+	/* ********************* 물품 적재-적재완료 jsp ********************* */
 	@RequestMapping("/missionProList")
 	public String missionProList(Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
 		
@@ -144,6 +144,24 @@ public class MissionController {
 		model.addAttribute("itemList", itemList);
 		
 		return "mission/mission_pro_list";
+	}
+	
+	// 적재 하기 버튼 클릭 시 1 -> 2
+	@RequestMapping("/updateSuccessChainge1Eseo2")
+	public String updateSuccessChainge1Eseo2(int re_num) {
+		
+		service.updateSuccessChainge1Eseo2(re_num);
+		
+		return "redirect:/mission/missionProList";
+	}
+	
+	// 적재 완료 버튼 클릭 시 2 -> 3
+	@RequestMapping("/updateSuccessChainge2Eseo3")
+	public String updateSuccessChainge2Eseo3(int re_num) {
+		
+		service.updateSuccessChainge2Eseo3(re_num);
+		
+		return "redirect:/mission/missionProList";
 	}
 	
 	/* ********************* 드론 출발 후 실행 중 ********************* */

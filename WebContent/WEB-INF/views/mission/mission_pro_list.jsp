@@ -25,7 +25,7 @@
 							<div style="height: 20px;"></div>
 						</div>
 						<div id="top_c">
-							<h1>Stand By Mission</h1>
+							<h1>Article Load Up</h1>
 						</div>
 						<div id="top_b">
 							<form class="form-inline" action="requestSearch" onsubmit="return searchSelect()">
@@ -70,7 +70,7 @@
 								<td><fmt:formatDate value="${requestList.re_time}" pattern="yyyy-MM-dd hh:mm"/></td>
 								<td>${requestList.re_location_x}</td>
 								<td>${requestList.re_location_y}</td>
-								<td>${requestList.memberDto.m_name }</td>
+								<td>${requestList.memberDto.m_name}</td>
 								<td>
 									<c:set var="totalWeight" value="0"/>	<!-- 전역변수 -->
 									<c:forEach var="i" items="${itemList}">
@@ -88,9 +88,12 @@
 								</td>
 								<td>
 									<div>
-										<a href="${pageContext.request.contextPath}
-										/drone/droneState_List?totalWeight=${totalWeight }" 
-											class="btn btn-success">드론 선택</a>
+										<c:if test="${requestList.re_success == 1}">
+											<a href="updateSuccessChainge1Eseo2?re_num=${requestList.re_num}" class="btn btn-warning">물품 적재 하기</a>
+										</c:if>
+										<c:if test="${requestList.re_success == 2}">
+											<a href="updateSuccessChainge2Eseo3?re_num=${requestList.re_num}" class="btn btn-primary">물품 적재 완료</a>
+										</c:if>
 											<c:set var="sumWeight" value="0"/>
 											<c:set var="totalWeight" value="0"/> <!-- 초기화 -->
 									</div>

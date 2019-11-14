@@ -353,13 +353,15 @@
 		where rn &gt;= #{startRowNo}
 	</select>
 	
-	<!-- ************************ 드론 출발 페이지 ************************ -->
+	<!-- ************************ 물품 담당자 페이지 데이터 ************************ -->
 	
 	<select id="selectSuccess1ListCount" resultType="int">
 		SELECT 
 		    COUNT(*) 
 		FROM REQUEST
-		WHERE re_success = 1
+		WHERE 
+			re_success &gt;= 1 AND
+            re_success &lt;= 2
 	</select>
 	
 	<resultMap id="RequestSuccess1List" type="web.dto.request.RequestDto">
@@ -381,13 +383,33 @@
                 FROM request re, member m
                 where
                      re.m_num = m.m_num AND 
-                     re.re_success = 1
-                order by re.re_success, re.re_num desc
+                     re.re_success &gt;= 1 AND
+                     re.re_success &lt;= 2
+                order by re.re_success desc, re.re_num desc
             ) 
 		where rownum &lt;= #{endRowNo}
 		)
 		where rn &gt;= #{startRowNo}
 	</select>
+	
+	<!-- 상태 업데이트  1 -> 2 -->
+	<update id="updateSuccessChainge1Eseo2" parameterType="int">
+		UPDATE 
+		    request 
+		SET 
+		    re_success = 2    
+		WHERE
+		    re_num = #{re_num}
+	</update>
+	
+	<update id="updateSuccessChainge2Eseo3" parameterType="int">
+		UPDATE 
+		    request 
+		SET 
+		    re_success = 3    
+		WHERE
+		    re_num = #{re_num}
+	</update>
 	
 	<!-- ************************ 드론 실행 페이지 ************************ -->
 	<resultMap id="RequestSuccess2List" type="web.dto.request.RequestDto">

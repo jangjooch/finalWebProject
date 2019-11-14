@@ -26,7 +26,6 @@
 				}
 			}
 			
-			
 			// 요청 상세보기
 			function missionDetail(a) {
 				alert(a);
@@ -103,7 +102,7 @@
 								<td>
 									<div>
 										<c:if test="${requestList.re_success == 0}">
-											<a onclick="mission_accept('${requestList.re_num}')" class="btn btn-danger">요청 수락</a>
+											<a onclick="mission_accept('${requestList.re_num}')" class="btn btn-danger" style="cursor: pointer;">요청 수락</a>
 										</c:if>
 										<c:if test="${requestList.re_success == 1}">
 											<button type="button" class="btn btn-warning">물품전달완료</button>
