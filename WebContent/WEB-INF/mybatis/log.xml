@@ -6,13 +6,15 @@
 	<select id="selectSearchTotalRowNoRN" parameterType="int" resultType="int">
 		select count(*)
 		from request
-		where re_num = #{searchThing} <!--  AND re_success = 10 or re_success = 11	 -->	
+		where ( re_success = 5 OR re_success=6)
+			AND re_num = #{searchThing} <!--  AND re_success = 10 or re_success = 11	 -->	
 	</select>
 	
 	<select id="selectSearchTotalRowNoRM" parameterType="string" resultType="int">
 		SELECT count(*)
 		from request re, member m
 		where re.m_num = m.m_num
+			 AND ( re.re_success = 5 OR re.re_success=6)
    			 AND m.m_name like '%'||#{searchThing}||'%'
    			<!-- AND re_success = 10 or re_success = 11	-->
 	</select>
@@ -30,6 +32,7 @@
                     from request re , member m , position p
                     WHERE m.po_num = p.po_num
                             AND re.m_num = m.m_num
+                            AND ( re.re_success = 5 OR re.re_success=6)
                             AND re.re_num = #{searchThing}
                             order by re.re_time desc
                     )
@@ -62,6 +65,7 @@
                     from request re , member m , position p
                     WHERE m.po_num = p.po_num
                             AND re.m_num = m.m_num
+                            AND ( re.re_success = 5 OR re.re_success=6)
                             AND m.m_name like '%'||#{searchThing}||'%'
                             order by re.re_time desc
                     )

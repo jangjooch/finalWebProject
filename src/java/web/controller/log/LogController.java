@@ -53,7 +53,7 @@ public class LogController {
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;			//
 		
 		List<DroneMissionDto> droneMissionList = logService.getSelectLogList(startRowNo, endRowNo);
-		List<RequestDto> missionList = logService.getRequestList();
+//		List<RequestDto> missionList = logService.getRequestList();
 				
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
@@ -63,7 +63,7 @@ public class LogController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("droneMissionList", droneMissionList); // 현재 페이지
-		model.addAttribute("missionList", missionList); // 현재 페이지
+//		model.addAttribute("missionList", missionList); // 현재 페이지
 		
 		// 검색리스트 jsp에서 구별하기 위한 코드
 		int whereFrom = 1;

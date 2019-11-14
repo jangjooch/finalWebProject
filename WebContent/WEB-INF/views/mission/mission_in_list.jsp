@@ -73,7 +73,7 @@
 				<div class="col-sm-8">
 					<table class="table table-hover">
 							<thead class="thead-dark">
-								<tr>
+								<tr align="center">
 									<th scope="col" width="10%;">요청 번호</th>
 									<th scope="col" width="15%;">요청 시간</th>
 									<th scope="col" width="10%;">요청 위치 Lat</th>
@@ -103,11 +103,12 @@
 								<td>
 									<div>
 										<c:if test="${requestList.re_success == 0}">
-											<a onclick="mission_accept('${requestList.re_num}')" class="btn btn-danger">요청 수락</a>
+											<a onclick="mission_accept('${requestList.re_num}')" style="color:white" class="btn btn-success">수락</a>
+											<a onclick="mission_accept('${requestList.re_num}')" style="color:white" class="btn btn-danger">거절</a>
 										</c:if>
-										<c:if test="${requestList.re_success == 1}">
+<%-- 										<c:if test="${requestList.re_success == 1}">
 											<button type="button" class="btn btn-warning">물품전달완료</button>
-										</c:if>
+										</c:if> --%>
 									</div>
 								</td>
 							</tr>
