@@ -140,11 +140,9 @@ public class LogController {
 		
 		if (choose !=null && searchThing != null) { // 처음 검색한 경우
 			searchList = logService.getSearchList(choose, searchThing, startRowNo, endRowNo);
-			System.out.println("searchList size1: " + searchList.size());
 		}
 		else {	// 검색중인 경우
 			searchList = logService.getSearchList(choose_get, SearchThing_get, startRowNo, endRowNo);
-			System.out.println("searchList size2: " + searchList);
 		}
 		
 		
@@ -162,7 +160,6 @@ public class LogController {
 		int whereFrom = 2;
 		model.addAttribute("whereFrom", whereFrom);
 		
-		System.out.println("컨트롤러 끝");
 		return "log/log_searched";
 	}
 	
