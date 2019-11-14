@@ -90,6 +90,15 @@
 									<th>드론 모델명</th>
 									<td>${logDto.droneDto.d_model}</td>
 								</tr>
+								<tr>
+									<th>비고</th>
+									<c:if test="${logDto.requestDto.re_success == 5}">
+										<td>미션 완료</td>
+									</c:if>
+									<c:if test="${logDto.requestDto.re_success == 6}">
+										<td>요청 거절</td>
+									</c:if>
+								</tr>
 								
 							</tbody>
 						</table>

@@ -67,20 +67,28 @@
 					
 					<table class="table table-hover" style="border: 1px solid 1px">
 					<thead class="thead-dark">
-						<tr>
+						<tr align="center">
 							<th scope="col">요청 번호</th>
 							<th scope="col">요청자/직급</th>
 							<th scope="col">요청 시간</th>
 							<th scope="col">요청 위치x/y</th>
+							<th scope="col">비고</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="log" items="${droneMissionList}">
 							<tr onclick="location.href='log_detail?d_m_number=${log.re_num}'" style="cursor: pointer;">
 								<td>${log.re_num}</td>
-								<td>${log.requestDto.memberDto.m_name}/${log.requestDto.memberDto.po_position}</td>
+								<td>${log.requestDto.memberDto.m_name} / ${log.requestDto.memberDto.po_position}</td>
 								<td><fmt:formatDate value="${log.requestDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
-								<td>${log.requestDto.re_location_x}/${log.requestDto.re_location_y}</td>
+								<td>${log.requestDto.re_location_x} / ${log.requestDto.re_location_y}</td>
+								<c:if test="${log.requestDto.re_success == 5}">
+								<td>미션 완료</td>
+								</c:if>									
+								<c:if test="${log.requestDto.re_success == 6}">
+								<td style="color:red">요청 거절</td>
+								</c:if>									
+
 							</tr>
 						</c:forEach>
 					</tbody>
