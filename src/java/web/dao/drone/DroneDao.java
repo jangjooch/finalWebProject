@@ -92,15 +92,20 @@ public class DroneDao {
 		map.put("totalWeight", intTotalWeight);
 		
 		List<DroneDto> drone_list = sqlSessionTemplate.selectList("drone.selectStateList", map);
-		System.out.println("운행가능 드론 수: " + drone_list.size());
 		return drone_list;
 	}
 	
 	public int selectStateTotalRowNo(String totalWeight) {
 		int intTotalWeight = Integer.parseInt(totalWeight);
 		int totalRowNum = sqlSessionTemplate.selectOne("drone.selectStateCount", intTotalWeight);
-		System.out.println("페이징 숫자: " + totalRowNum ) ;
+		
 		return totalRowNum;
 	}
 	
+	// 드론 상태 업데이트
+	public int updateDrontState(int d_number) {
+		int update = sqlSessionTemplate.update("drone.updateDroneState", d_number);
+		
+		return update;
+	}
 }

@@ -100,8 +100,6 @@ public class DroneController {
 		List<DroneDto> drone_list = service.getDroneList(drone_startRowNo, drone_endRowNo);
 		logger.info(""+drone_list.size());
 		
-		
-		
 		//Jsp로 페이지 정보 넘기기
 		model.addAttribute("drone_pagesPerGroup", drone_pagesPerGroup);
 		model.addAttribute("drone_totalPageNum", drone_totalPageNum);
@@ -163,13 +161,9 @@ public class DroneController {
 	/* *********************** 드론 상태 리스트 *********************** */
 	@RequestMapping("/droneState_List")
 	public String droneStateList(String totalWeight, Model model, @RequestParam(defaultValue ="1") int pageNo, HttpSession session) {
-		System.out.println("드론상태리스트 컨트롤러 진입");
-		System.out.println("totalWeight가 파라이터로 왔니? : " + totalWeight);
 		
 //		session.setAttribute("totalWeight", totalWeight);
 		session.setAttribute("pageNo", pageNo);
-		
-		System.out.println("세션있니?" + session.getAttribute("totalWeight"));
 		
 		String totalWeight_get = null;
 		
@@ -212,7 +206,6 @@ public class DroneController {
 		}
 		
 		
-		
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
 		model.addAttribute("totalGroupNum", totalGroupNum);
@@ -223,5 +216,11 @@ public class DroneController {
 		model.addAttribute("drone_list", drone_list);
 			
 		return "drone/droneStateList";
+	}
+	
+	@RequestMapping("")
+	public String droneStateUpdate() {
+		
+		return"";
 	}
 }

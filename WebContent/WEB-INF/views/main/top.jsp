@@ -114,6 +114,7 @@
             <c:if test="${member_logined.po_num <= 3}">
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionProList">드론 대기</a></li>
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionStart">실행중</a></li>
+               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/api">api</a></li>
             </c:if>
             <c:if test="${member_logined.po_num == 3 || member_logined.po_num == 1}">
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/item/item_list">Item</a></li>

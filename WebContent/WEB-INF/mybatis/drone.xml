@@ -62,9 +62,9 @@
 					drone
 				where 
 					d_status = 1
-					AND drone.d_weight &gt;= #{totalWeight}
+					AND d_weight &gt;= #{totalWeight}
 				order 
-					by drone.d_weight
+					by d_number
             	) 
 		where rownum &lt;= #{drone_endRowNo}
 			)
@@ -78,4 +78,13 @@
 			
 	</select>
 	
+	<!-- 드론 상태 업데이트 -->
+	<update id="updateDroneState" parameterType="int">
+		UPDATE 
+		    drone 
+		SET 
+		    d_status = 2
+		WHERE
+		    d_number = #{d_number}
+	</update>
 </mapper>

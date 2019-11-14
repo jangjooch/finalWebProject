@@ -196,4 +196,10 @@ public class MissionController {
 	
 		return "";
 	}
+	
+	@RequestMapping("/api")
+	public String MissionApi() {
+				
+		return"mission/mission_pro_detail";
+	}
 }
