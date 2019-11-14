@@ -33,6 +33,7 @@ public class DroneMissionDao {
 
 	public int droneMissionCountRows() {
 		int rows = sqlSessionTemplate.selectOne("droneMission.selectDroneMissionCount");
+		System.out.println("로그 페이징 총 갯수: " + rows);
 		return rows;
 	}
 

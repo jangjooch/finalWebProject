@@ -75,17 +75,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="i" items="${droneMissionList}">
-							<c:forEach var="j" items="${missionList}">
-								<c:if test="${i.re_num==j.re_num}">
-									<tr onclick="location.href='log_detail?d_m_number=${i.d_m_number}'" style="cursor: pointer;">
-										<td>${i.d_m_number}</td>
-										<td>${j.memberDto.m_name}/${j.memberDto.po_position}</td>
-										<td><fmt:formatDate value="${j.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
-										<td>${j.re_location_x}/${j.re_location_y}</td>
-									</tr>
-								</c:if>
-							</c:forEach>
+						<c:forEach var="log" items="${droneMissionList}">
+							<tr onclick="location.href='log_detail?d_m_number=${log.re_num}'" style="cursor: pointer;">
+								<td>${log.re_num}</td>
+								<td>${log.requestDto.memberDto.m_name}/${log.requestDto.memberDto.po_position}</td>
+								<td><fmt:formatDate value="${log.requestDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
+								<td>${log.requestDto.re_location_x}/${log.requestDto.re_location_y}</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>

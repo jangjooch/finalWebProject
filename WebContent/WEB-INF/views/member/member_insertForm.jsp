@@ -140,6 +140,7 @@
 											<option value="2">보급 담당자</option>
 											<option value="3">드론 담당자</option>
 											<option value="4">요청자</option>
+											<option value="5">요청 담당자</option>
 										</select>
 											<span id="po_numError" class="error" style="color:red"></span>	
 									</div>
