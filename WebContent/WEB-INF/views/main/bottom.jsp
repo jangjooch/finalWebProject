@@ -26,7 +26,6 @@
    <body>
       <div id="footer">
       <p >
-               형철아 배치 바꿀꺼니??
                
       </p>
       </div>
