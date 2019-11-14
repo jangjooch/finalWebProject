@@ -91,12 +91,17 @@ public class MissionController {
 	
 	// 미션 수락하기
 	@RequestMapping("/missionAcceptList")
-	public String missionItemCheck(int re_num) {
-		System.out.println("진입!");
+	public String missionItemCheck(int re_num, @RequestParam(defaultValue = "0") int rejection) {
 		int check = service.missionCheck(re_num);
 		
+		// 거절
+		if(rejection == 1) {
+			service.updateRequestSuccessChangeRefusal(re_num);
+			return "redirect:/mission/requestList";
+		}
+		
 		if(check == 1) {
-			//요청 거절 re_success = 3;
+			//요청 거절 re_success = 6;
 			int fail = service.updateRequestSuccessChangeRefusal(re_num);
 		}else{
 			//요청 수락 re_success = 1;

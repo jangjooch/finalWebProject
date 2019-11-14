@@ -320,7 +320,7 @@
 	<!-- 요청 거절 UPDATE -->
 	<update id="updateRequestSuccess2" parameterType="int">
 		UPDATE request 
-		SET re_success = 3
+		SET re_success = 6
 		WHERE re_num = #{re_num}
 	</update>
 	

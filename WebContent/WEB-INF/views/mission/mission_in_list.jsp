@@ -18,12 +18,20 @@
 			}
 		
 			// 요청수락 확인기능
-			function mission_accept(renum) {
+			function mission_accept(renum, check) {
 				var value = renum;
+				var rejection = check;
 				var result = false;
-				if (confirm("요청을 수락하시겠습니까?") == true) {
-					location.href = "missionAcceptList?re_num=" + value;
+				if(rejection == 0){
+					if (confirm("요청을 수락하시겠습니까?") == true) {
+						location.href = "missionAcceptList?re_num=" + value;
+					}	
+				}else{
+					if(confirm("요청을 거절하시겠습니까?") == true){
+						location.href = "missionAcceptList?re_num=" + value +"&rejection=" + rejection;
+					}
 				}
+				
 			}
 			
 			
@@ -103,8 +111,8 @@
 								<td>
 									<div>
 										<c:if test="${requestList.re_success == 0}">
-											<a onclick="mission_accept('${requestList.re_num}')" style="color:white" class="btn btn-success">수락</a>
-											<a onclick="mission_accept('${requestList.re_num}')" style="color:white" class="btn btn-danger">거절</a>
+											<a onclick="mission_accept('${requestList.re_num}',0)" style="color:white" class="btn btn-success">수락</a>
+											<a onclick="mission_accept('${requestList.re_num}',1)" style="color:white" class="btn btn-danger">거절</a>
 										</c:if>
 <%-- 										<c:if test="${requestList.re_success == 1}">
 											<button type="button" class="btn btn-warning">물품전달완료</button>
