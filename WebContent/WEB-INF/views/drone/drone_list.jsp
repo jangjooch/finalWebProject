@@ -83,7 +83,15 @@
 								<tr onclick="location.href='drone_detail?d_number=${drone.d_number}'" style="cursor: pointer;">
 							 	  <td>${drone.d_number}</td>
 							      <td>${drone.d_model}</td>
-							      <td>${drone.d_status}</td>
+							      <c:if test="${drone.d_status == 1}">
+								      <td>대기중(양호)</td>
+							      </c:if>
+							      <c:if test="${drone.d_status == 2}">
+								      <td style="color:red">미션 수행중</td>
+							      </c:if>
+							      <c:if test="${drone.d_status > 2}">
+								      <td style="color:red">상태이상</td>
+							      </c:if>
 							      <td>${drone.d_weight}</td>
 							      <td>${drone.d_battery}</td>
 							     </tr>

@@ -52,8 +52,18 @@
 						<div class="form-group row">
 							<label for="d_status" class="col-sm-5 col-form-label">드론 상태</label>
 							<div class="col-sm-7">
-								<input type="text" id="d_status" value="${dronedto.d_status}" 
+								<c:if test="${dronedto.d_status == 1}">
+								<input type="text" id="d_status" value="대기중(양호)" 
 									class="form-control" readonly>
+								</c:if>
+								<c:if test="${dronedto.d_status == 2}">
+								<input type="text" id="d_status" value="미션 수행중" 
+									class="form-control" readonly>
+								</c:if>
+								<c:if test="${dronedto.d_status > 2}">
+								<input type="text" id="d_status" value="상태이상" 
+									class="form-control" readonly>
+								</c:if>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -64,7 +74,7 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="d_battery" class="col-sm-5 col-form-label">비행 가능 시간(단위: kg)</label>
+							<label for="d_battery" class="col-sm-5 col-form-label">비행 가능 시간(단위: 분)</label>
 							<div class="col-sm-7">
 								<input type="text" id="d_battery" value="${dronedto.d_battery}" 
 									class="form-control" readonly>
