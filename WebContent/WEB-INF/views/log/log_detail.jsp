@@ -64,7 +64,7 @@
 									<th>요청 물품 및 수량</th>
 									<td>
 										<c:forEach var="i" items="${logDto.requestDto.missionItems}">
-											${i.itemDto.i_name} / ${i.itemDto.i_weight}<br/>
+											${i.itemDto.i_name} / ${i.i_amount}<br/>
 										</c:forEach>
 									</td>
 								</tr>

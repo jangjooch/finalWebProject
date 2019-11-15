@@ -150,7 +150,6 @@ public class MissionDao {
 
 	// 요청목록
 	public List<MissionDto> requestList(int startRowNo, int endRowNo) {
-		System.out.println("디에이오 진입");
 		Map<String, Integer> map = new HashMap<>();
 		map.put("startRowNo", startRowNo);
 		map.put("endRowNo", endRowNo);

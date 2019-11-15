@@ -66,7 +66,6 @@ public class MissionSerivce {
 
 	// 페이징 리스트
 	public List<MissionDto> getRequestList(int startRowNo, int endRowNo) {
-		logger.info("서비스 진입");
 		List<MissionDto> requestList = missionDao.requestList(startRowNo,endRowNo);
 		return requestList;
 	}

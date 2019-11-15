@@ -212,7 +212,7 @@
 	<select id="selectTotalRowNum" resultType="int">
 		SELECT COUNT(*) FROM
 		request
-		WHERE re_success &lt; 2
+		WHERE re_success = 0
 	</select>
 	
 	
@@ -238,7 +238,7 @@
                 FROM request re, member m
                 where
                      re.m_num = m.m_num AND 
-                     re.re_success &lt; 2
+                     re.re_success = 0
                 order by re.re_success, re.re_num desc
             ) 
 		where rownum &lt;= #{endRowNo}
@@ -345,7 +345,7 @@
                 FROM request re, member m
                 where
                      re.m_num = m.m_num AND 
-                     re.re_success = 1
+                     re.re_success = 0
                 order by re.re_success, re.re_num desc
             ) 
 		where rownum &lt;= #{endRowNo}

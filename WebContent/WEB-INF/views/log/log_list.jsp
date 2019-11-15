@@ -78,7 +78,7 @@
 					<tbody>
 						<c:forEach var="log" items="${droneMissionList}">
 							<tr onclick="location.href='log_detail?d_m_number=${log.d_m_number}'" style="cursor: pointer;">
-								<td>${log.re_num}/ ${log.d_m_number}</td>
+								<td>${log.re_num}</td>
 								<td>${log.requestDto.memberDto.m_name} / ${log.requestDto.memberDto.po_position}</td>
 								<td><fmt:formatDate value="${log.requestDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
 								<td>${log.requestDto.re_location_x} / ${log.requestDto.re_location_y}</td>
@@ -105,33 +105,33 @@
 							<div id="bottom_c_l"></div>
 							<div id="bottom_c_c">
 								<nav aria-label="Page navigation example">
-							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="?pageNo=1"> 
-									<span aria-hidden="true">&laquo;</span></a>
-								</li>
-								<c:if test="${groupNo>1}">
-									<li class="page-item"><a class="page-link" href="#"> 
-										<span aria-hidden="true"><</span></a>
-									</li>
-								</c:if>
-								<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
-									<c:if test="${pageNo == i}">
-										<li class="page-item active"><a class="page-link" href="?pageNo=${i}">${i}</a></li>		
-									</c:if>
-									<c:if test="${pageNo != i}">
-										<li class="page-item"><a class="page-link" href="?pageNo=${i}">${i}</a></li>
-									</c:if>
-								</c:forEach>
-								<c:if test="${group<totalGroupNum}">
-									<li class="page-item"><a class="page-link" href="?pageNo=${endPageNo+1}"> 
-										<span aria-hidden="true">></span></a>
-									</li>	
-								</c:if>								
-								<li class="page-item"><a class="page-link " href="?pageNo=${totalPageNum}"> 
-									<span aria-hidden="true">&raquo;</span></a>
-								</li>
-							</ul>
-						</nav>
+									<ul class="pagination">
+										<li class="page-item"><a class="page-link" href="?pageNo=1"> 
+											<span aria-hidden="true">&laquo;</span></a>
+										</li>
+										<c:if test="${groupNo>1}">
+											<li class="page-item"><a class="page-link" href="#"> 
+												<span aria-hidden="true"><</span></a>
+											</li>
+										</c:if>
+										<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
+											<c:if test="${pageNo == i}">
+												<li class="page-item active"><a class="page-link" href="?pageNo=${i}">${i}</a></li>		
+											</c:if>
+											<c:if test="${pageNo != i}">
+												<li class="page-item"><a class="page-link" href="?pageNo=${i}">${i}</a></li>
+											</c:if>
+										</c:forEach>
+										<c:if test="${group<totalGroupNum}">
+											<li class="page-item"><a class="page-link" href="?pageNo=${endPageNo+1}"> 
+												<span aria-hidden="true">></span></a>
+											</li>	
+										</c:if>								
+										<li class="page-item"><a class="page-link " href="?pageNo=${totalPageNum}"> 
+											<span aria-hidden="true">&raquo;</span></a>
+										</li>
+									</ul>
+								</nav>
 							</div>
 							<div id="bottom_c_r"></div>
 						</div>

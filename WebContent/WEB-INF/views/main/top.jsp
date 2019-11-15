@@ -96,8 +96,8 @@
          </div>
       </div>
 
-   <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Home</a>
+   <nav class="navbar navbar-expand-sm bg-success navbar-dark">
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/home">홈</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse"
          data-target="#collapsibleNavbar">
          <span class="navbar-toggler-icon"></span>
@@ -106,26 +106,25 @@
          <ul class="navbar-nav">
          	<%-- 관리자 --%>
             <c:if test="${member_logined.po_num == 1}">
-               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/member/memberList">Member</a></li>
-               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionStart">실행중</a></li>
+               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/member/memberList">회원</a></li>
             </c:if>
             <%-- 요청 담당자 --%>
             <c:if test="${member_logined.po_num == 5 || member_logined.po_num == 1}">
-           	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/requestList">요청 대기</a></li>
+           	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/requestList">요청 현황</a></li>
             </c:if>
             <%-- 드론 담당자 --%>
             <c:if test="${member_logined.po_num == 2 || member_logined.po_num == 1}">
-               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/drone/drone_list">Drone</a></li>
+               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/drone/drone_list">드론</a></li>
             </c:if>
             <%-- 보급 담당자 --%>
             <c:if test="${member_logined.po_num == 3 || member_logined.po_num == 1}">
-               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionProList">물품적재</a></li>
-               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/item/item_list">Item</a></li>
+               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionProList">보급 현황</a></li>
+               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/item/item_list">물품</a></li>
             </c:if>
-               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/log/log_list">Log</a></li>
+               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/log/log_list">사건기록</a></li>
             <c:if test="${member_logined!=null}">
                <li class="nav-item" style="float:right">
-                  <a class="nav-link" href="${pageContext.request.contextPath}/logOut">logOut</a>
+                  <a class="nav-link" href="${pageContext.request.contextPath}/logOut">로그아웃</a>
                </li>
             </c:if>
          </ul>
