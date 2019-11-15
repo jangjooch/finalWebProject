@@ -103,8 +103,10 @@
 						</tbody>						
 						</table>
 				</div>
+					<c:choose>
+						<c:when test="${!empty requestList}">
 				<div class="col-sm-2"></div>
-				
+							
 				<%-- bottom --%>
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
@@ -154,6 +156,8 @@
 						<div id="bottom_b" style="height: 20px;"></div>
 					</div>
 				</div>
+						</c:when>
+					</c:choose>
 				<div class="col-sm-2"></div>
 			</div>
 <jsp:include page="../main/bottom.jsp" flush="false"/>

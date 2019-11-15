@@ -12,7 +12,12 @@
 				data:{m_id:$("#m_id").val()},
 				success : function(data) {
 						if (data.result == false) {
-							$("#m_idError").text("사용중인 아이디입니다 :p");
+							$("#m_idError").text("사용중인 아이디입니다.");
+							$("#m_idError").css("color", "red");
+							availability = false;
+						}
+						if (data.result == false) {
+							$("#m_idError").text("사용중인 아이디입니다.");
 							$("#m_idError").css("color", "red");
 							availability = false;
 						}
