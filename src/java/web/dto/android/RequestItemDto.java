@@ -4,8 +4,15 @@ public class RequestItemDto {
 	private int re_num;
 	private int i_code;
 	private int i_amount;
+	private ItemDto itemDto;
 	
 	
+	public ItemDto getItemDto() {
+		return itemDto;
+	}
+	public void setItemDto(ItemDto itemDto) {
+		this.itemDto = itemDto;
+	}
 	public int getRe_num() {
 		return re_num;
 	}

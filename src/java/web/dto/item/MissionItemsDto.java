@@ -5,7 +5,7 @@ public class MissionItemsDto {
 	private int re_num;
 	private int i_code;
 	private int i_amount;
-	private ItemDto itemDto;	// 물품 상세 테이블
+	private ItemDto itemDto;
 	
 	public int getRe_num() {
 		return re_num;

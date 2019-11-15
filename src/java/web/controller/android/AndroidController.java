@@ -84,22 +84,22 @@ public class AndroidController {
 	@RequestMapping("requestItem")
 	public String requestItem(String re_num, String re_location_x, String re_location_y, String m_num,
 			String re_itemList, Model model) {
-		System.out.println(re_num);
-		System.out.println(re_location_x+"  "+re_location_y);
-		System.out.println(m_num);
-		System.out.println(re_itemList);
 		String result = "fail";
+		
+		
+		// 요청에 대한 데이터 가공
 		RequestDto requestDto = new RequestDto();
 		requestDto.setRe_num(Integer.parseInt(re_num));
 		requestDto.setRe_location_x(re_location_x);
 		requestDto.setRe_location_y(re_location_y);
 		requestDto.setM_num(Integer.parseInt(m_num));
 
+		//요청 저장
 		boolean resultRequest = service.request(requestDto);
 		
 		JSONObject json = new JSONObject(re_itemList);
 		JSONArray jArr = json.getJSONArray("List");
-		// 받아온 pRecvServerPage를 분석하는 부분
+		//요청 아이템 리스트 데이터 파싱
 		String[] jsonName = { "i_code", "i_amount" };
 		String[][] parseredData = new String[jArr.length()][jsonName.length];
 		for (int i = 0; i < jArr.length(); i++) {
@@ -119,17 +119,35 @@ public class AndroidController {
 			requestItemList.add(requestItemDto);
 		}
 		
-		List<RequestItemDto> resultList = service.requestItem(requestItemList,re_num);
+		//아이템 리스트 저장
+		boolean resultList = service.requestItem(requestItemList,re_num);
 		
 		
-		if(resultRequest) {
+		if(resultRequest && resultList) {
 			result = "success";
 		}
 		
-		//model.addAttribute("resultList", re_itemList);
-		
 		model.addAttribute("result", result);
 		return "android/requestItemResult";
+	}
+	
+	
+	@RequestMapping("/checkRequestItemList")
+	public String checkRequestItemList(String requtstNum,Model model) {
+		int reqNum=Integer.parseInt(requtstNum);
+		List<RequestItemDto>list = service.getItemListByRequestNum(reqNum);
+		JSONObject main=new JSONObject();
+		JSONArray jArray=new JSONArray();
+		for(RequestItemDto requestItemDto:list) {
+			JSONObject json=new JSONObject();
+			json.put("i_name", requestItemDto.getItemDto().getI_name());
+			json.put("i_amount", requestItemDto.getI_amount());
+			jArray.put(json);
+		}
+		main.put("list",jArray);
+		
+		model.addAttribute("list",jArray.toString());
+		return "checkRequestItemList";
 	}
 
 }

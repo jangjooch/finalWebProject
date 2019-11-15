@@ -57,15 +57,19 @@ public class AndroidService {
 	}
 
 
-	public List<RequestItemDto> requestItem(List<RequestItemDto> requestItemList, String re_num) {
+	public boolean requestItem(List<RequestItemDto> requestItemList, String re_num) {
 		int result=androidDao.requestItem(requestItemList);
 		if(result>0) {
-			List<RequestItemDto> list=androidDao.responseItem(Integer.parseInt(re_num));
-			return list;
+			return true;
 		}else {
-			return null;
+			return false;
 		}
 		
+	}
+
+	public List<RequestItemDto> getItemListByRequestNum(int requtstNum) {
+		List<RequestItemDto> list=androidDao.getRequestItemByRequestNum(requtstNum);
+		return list;
 	}
 
 }

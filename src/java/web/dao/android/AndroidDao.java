@@ -53,5 +53,8 @@ private static final Logger logger = LoggerFactory.getLogger(DroneDao.class);
 		return list;
 	}
 
-	
+	public List<RequestItemDto> getRequestItemByRequestNum(int requestNum) {
+		List<RequestItemDto> list=sqlSessionTemplate.selectList("android.getItemListByRequestNum",requestNum);
+		return null;
+	}
 }
