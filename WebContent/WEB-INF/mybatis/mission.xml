@@ -445,6 +445,13 @@
 		FROM REQUEST
 		WHERE re_success = 2
 	</select>
-	
-	<!-- 드론 상태 업데이트 -->
+
+	<select id ="mqttAllTable" resultType="web.dto.request.RequestDto">
+		SELECT 
+			re_num, re_location_x, re_location_y
+		FROM 
+			request
+		WHERE
+			re_success = 3
+	</select>	
 </mapper>

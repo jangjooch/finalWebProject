@@ -247,4 +247,10 @@ public class MissionDao {
 		int rows = sqlSessionTemplate.update("mission.updateSuccessChainge2Eseo3", re_num);
 		return 0;
 	}
+	
+	/*  */
+	public List<RequestDto> mqttAllTable(){
+		List<RequestDto> list = sqlSessionTemplate.selectList("mission.mqttAllTable");
+		return list;
+	}
 }
