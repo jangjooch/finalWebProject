@@ -26,7 +26,7 @@
 	<insert id="insertdrone" parameterType="web.dto.drone.DroneDto">
 		
 		insert into DRONE(D_NUMBER, D_MODEL, D_STATUS, D_WEIGHT, D_BATTERY)
-		values((select max(d_number) from drone)+1, #{d_model}, #{d_status}, #{d_weight}, #{d_battery})
+		values(drone_seq.nextval, #{d_model}, #{d_status}, #{d_weight}, #{d_battery})
 		
 	</insert>
 	
