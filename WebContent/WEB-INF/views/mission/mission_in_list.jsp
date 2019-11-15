@@ -5,6 +5,9 @@
 <jsp:include page="../main/top.jsp" flush="false"/>
 
 		<script type="text/javascript">
+		
+		window.setTimeout('window.location.reload()',5000); //5초마다 새로고침
+
 			// 검색기능
 			function searchSelect(){
 				var result = true;

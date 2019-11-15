@@ -21,7 +21,6 @@ public class MemberSerivce {
 	
 	
 	public void deleteMember(int m_num) {
-		System.out.println("서비스 주입"+m_num);
 		memberDao.deleteMember(m_num);
 	}
 
@@ -65,7 +64,6 @@ public class MemberSerivce {
 	}
 
 	public void updateMember(MemberDto member) {
-		System.out.println("서비스");
 		memberDao.updateMember(member);
 	}
 

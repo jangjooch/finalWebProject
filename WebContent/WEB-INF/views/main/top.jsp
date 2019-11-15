@@ -121,6 +121,10 @@
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionProList">보급 현황</a></li>
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/item/item_list">물품</a></li>
             </c:if>
+            <%-- 내 정보보기 --%>
+            <c:if test="${member_logined!=null}">
+               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/member/memberDetail?m_num=${member_logined.m_num}">마이 페이지</a></li>
+            </c:if>
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/log/log_list">사건기록</a></li>
             <c:if test="${member_logined!=null}">
                <li class="nav-item" style="float:right">

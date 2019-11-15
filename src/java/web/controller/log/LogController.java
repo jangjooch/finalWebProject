@@ -83,8 +83,16 @@ public class LogController {
 	}
 	
 	
-	
-	
+	/*
+	 *  d_m_number 값을 가지고온다
+	 *  어떻게~? 쿼리문에서 select dm.d_m_number from 
+	 */
+//	@RequestMapping("/getDMNum")
+//	public void getDMNum(int re_num, Model model) {
+//		int d_m_number = logService.getDMNum(re_num);
+//		log_detail(d_m_number, model);
+//	}
+//	
 	
 	
 	

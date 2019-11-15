@@ -35,9 +35,7 @@ public class MemberDao {
 	}
 
 	public int deleteMember(int m_num) {
-		System.out.println("DAO 주입" + m_num);
 		int rows = sqlSessionTemplate.delete("member.memberDelte",m_num);
-		System.out.println("DAO rows"+rows);
 		return rows;
 	}
 	
@@ -71,7 +69,6 @@ public class MemberDao {
 	}
 
 	public void updateMember(MemberDto member) {
-		System.out.println("디에이오");
 		sqlSessionTemplate.insert("memberUpdate",member);
 	}
 

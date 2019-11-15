@@ -154,7 +154,6 @@ public class MissionDao {
 		map.put("startRowNo", startRowNo);
 		map.put("endRowNo", endRowNo);
 		List<MissionDto> requestList = sqlSessionTemplate.selectList("mission.selectRequestList", map);
-		System.out.println("디에이오 끝");
 		return requestList;	
 	}
 

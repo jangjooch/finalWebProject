@@ -173,11 +173,13 @@
 								
 							</div>
 							<div id="bottom_c_r">
+								<c:if test="${member_logined.po_num == 1}">
 								<div>
 									<a href="updateMemberForm?m_num=${member.m_num}" class="btn btn-warning">회원수정</a>	
 									<a onclick="memdel()" class="btn btn-warning">회원삭제</a>
 									<a href="memberList?pageNo=${pageNo}" class="btn btn-warning">회원 목록으로</a>
 								</div>
+        					    </c:if>
 							</div>
 						</div>
 						<div id="bottom_b" style="height: 20px;"></div>

@@ -77,7 +77,6 @@ public class MemberController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("memberList", memberList);
-		logger.info("컨트롤러 끝");
 		return "member/member_list";
 	}
 	
@@ -115,7 +114,6 @@ public class MemberController {
 	// 멤버 수정하기
 	@RequestMapping("updateMember")
 	public String updateMember(MemberDto member , HttpSession session) {
-		System.out.println("컨트롤러");
 		service.updateMember(member);
 		int pageNo = (Integer)session.getAttribute("pageNo");
 		return "redirect:/member/memberList?pageNo=" + pageNo;
@@ -128,6 +126,7 @@ public class MemberController {
 	// 멤버 디테일
 	@RequestMapping("memberDetail")
 	public String memberDetail(int m_num , Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
+		System.out.println("m" + m_num);
 		MemberDto member = service.getMember(m_num);
 		session.setAttribute("m_num", m_num);
 		session.setAttribute("pageNo", pageNo);
