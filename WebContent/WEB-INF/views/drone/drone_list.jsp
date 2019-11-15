@@ -80,6 +80,7 @@
 						</thead>
 						<tbody>
 							<c:forEach var="drone" items="${drone_list}" >
+								<c:if test="${drone.d_number > 0}">
 								<tr onclick="location.href='drone_detail?d_number=${drone.d_number}'" style="cursor: pointer;">
 							 	  <td>${drone.d_number}</td>
 							      <td>${drone.d_model}</td>
@@ -95,6 +96,7 @@
 							      <td>${drone.d_weight}</td>
 							      <td>${drone.d_battery}</td>
 							     </tr>
+							     </c:if>
 							</c:forEach>
 						</tbody>
 					</table>
