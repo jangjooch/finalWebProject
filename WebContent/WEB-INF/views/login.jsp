@@ -11,6 +11,7 @@
 	src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js">
 	
 </script>
+<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/image/DroneLogo1.png"/>
 <link rel="stylesheet" tpye="text/css"
 	href="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
 <!-- bootstrap의 css를 가져옴 -->

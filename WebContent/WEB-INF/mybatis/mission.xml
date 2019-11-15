@@ -454,4 +454,11 @@
 		WHERE
 			re_success = 3
 	</select>	
+	
+	<!-- 정상완료 -->
+	<update id="updateRequestSuccess5" parameterType="int">
+		UPDATE request 
+		SET re_success = 5
+		WHERE re_num = #{re_num}
+	</update>
 </mapper>

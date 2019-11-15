@@ -78,7 +78,7 @@
 			
 	</select>
 	
-	<!-- 드론 상태 업데이트 -->
+	<!-- 드론 상태 업데이트 - 실행중 -->
 	<update id="updateDroneState" parameterType="int">
 		UPDATE 
 		    drone 

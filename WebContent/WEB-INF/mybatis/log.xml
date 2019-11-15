@@ -94,10 +94,30 @@
 		where re_num = #{re_num}
 	</select>
 	
-
+	<insert id="insertDroneMission" parameterType="map">
+		INSERT INTO 
+			drone_mission
+		VALUES 
+			(DRONE_MISSION_SEQ.NEXTVAL, #{d_number}, #{re_num}, 2, #{d_m_preparation}, null)	
+			
+	</insert>
 	
+	<update id="updateDroneMission" parameterType="map">
+		UPDATE 
+			drone_mission 
+		SET
+			d_number = #{d_number},
+			re_num = #{re_num},
+			d_m_preparation = #{d_m_preparation}
+		WHERE 
+			re_num = #{re_num}
+	</update>
 	
-
+	<select id="getDMNumCount" parameterType="int" resultType="int">
+		select COUNT(*) from
+		drone_mission
+		where re_num = #{re_num}
+	</select>
 	
 
 	

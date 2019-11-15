@@ -96,6 +96,33 @@ public class LogDao {
 	}
 	public int getDMNum(int re_num) {
 		int d_m_number = sqlSessionTemplate.selectOne("log.getDMNum", re_num);
+		System.out.println(d_m_number);
+		return d_m_number;
+	}
+	
+	// 드론 미션 인서트
+	public void insertDroneMission(int d_number, int re_num, String d_m_preparation) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("d_number", d_number);
+		map.put("re_num", re_num);
+		map.put("d_m_preparation", d_m_preparation);
+		
+		int rows = sqlSessionTemplate.insert("log.insertDroneMission", map);
+	}
+	
+	// 드론 미션 업데이트 -> 업로드를 여러번 눌렀을 경우를 대비
+	public void updateDroneMission(int d_number, int re_num, String d_m_preparation) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("d_number", d_number);
+		map.put("re_num", re_num);
+		map.put("d_m_preparation", d_m_preparation);
+		
+		int rows = sqlSessionTemplate.update("log.insertDroneMission", map);
+		
+	}
+	
+	public int getDMNumCount(int re_num) {
+		int d_m_number = sqlSessionTemplate.selectOne("log.getDMNumCount", re_num);
 		return d_m_number;
 	}
 	

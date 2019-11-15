@@ -20,6 +20,7 @@ import web.dto.item.ItemDto;
 import web.dto.item.MissionItemsDto;
 import web.dto.mission.MissionDto;
 import web.dto.request.RequestDto;
+import web.service.MqttService;
 import web.service.drone.DroneMissionService;
 import web.service.mission.MissionSerivce;
 
@@ -36,6 +37,9 @@ public class MissionController {
 	
 	@Resource(name="dataSource")
 	private DataSource datasource;
+	
+	@Autowired
+	private MqttService mqttService;
 	
 	// 요청 리스트
 	@RequestMapping("/requestList")
@@ -170,6 +174,7 @@ public class MissionController {
 	public String updateSuccessChainge2Eseo3(int re_num) {
 		
 		service.updateSuccessChainge2Eseo3(re_num);
+		mqttService.sendMessage("/gcs/missionIn");
 		
 		return "redirect:/mission/missionProList";
 	}

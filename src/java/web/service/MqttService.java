@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import web.dao.drone.DroneDao;
+import web.dao.log.LogDao;
 import web.dao.mission.MissionDao;
 import web.dto.request.RequestDto;
 
@@ -27,6 +29,10 @@ public class MqttService {
 	
 	@Autowired
 	private MissionDao missionDao;
+	@Autowired
+	private DroneDao droneDao;
+	@Autowired
+	private LogDao logDao;
 	
 	// 기본 생성자 -> 서비스 객체 생성 시 MqttConnect 설정
 	public MqttService() {
@@ -80,11 +86,67 @@ public class MqttService {
 						@Override
 						public void run() {
 							sendMessage("/gcs/missionIn");
-							logger.info("앙 나 가버렸띠~");
 						}
 					}.start();
 					
+				// 업로드 시 - insert drone_mission	
+				}else if(jsonObject.get("msgid").equals("missionSpots")) {
+					JSONArray jsonArray = new JSONArray(jsonObject.get("missionSpots").toString());
+					
+					// 미션 내용
+					String d_m_preparation = new String();
+					
+					for(int i=0; i<jsonArray.length(); i++) {
+						JSONObject obj = new JSONObject();
+						 obj = (JSONObject) jsonArray.get(i);
+						 
+						 if(i == 0) {
+							 d_m_preparation = i + " 번째 경로 : " + 
+								 		" / x: " + String.valueOf(obj.get("x")) + 
+								 		" / y: " + String.valueOf(obj.get("y")) + "    | |    ";
+							
+						 }
+						 
+						 if(i == jsonArray.length()-1) {
+							 d_m_preparation = d_m_preparation + i + " 번째 경로 : " + String.valueOf(obj.get("seq")) + 
+									 	" / x: " + String.valueOf(obj.get("x")) + 
+								 		" / y: " + String.valueOf(obj.get("y"));
+							 break;
+						 }
+						 
+						 if(i != 0) {
+							 d_m_preparation = d_m_preparation + i + " 번째 경로 : " + String.valueOf(obj.get("seq")) + 
+								 		" / x: " + String.valueOf(obj.get("x")) + 
+								 		" / y: " + String.valueOf(obj.get("y")) + "    | |    ";
+						 }
+						 
+						
+					}
+					
+					int d_number = (int) jsonObject.get("droneNumber"); // 드론 번호 가져오기
+					int re_num = (int) jsonObject.get("missionNumber");   // 요청 번호 가져오기
+					// 드론 상태 업데이트
+					int rows = droneDao.updateDrontState(d_number);
+					
+					int d_m_number = logDao.getDMNumCount(re_num);
+
+					/* 업로드를 여러번 할 경우 */
+					// 로그가 인서트가 안됬을 경우
+					if(d_m_number == 0) {
+						logDao.insertDroneMission(d_number, re_num, d_m_preparation);
+						// 요청을 상태 값을 바꿔야함
+						missionDao.updateSuccessChainge2Eseo5(re_num);
+					// 로그가 인서트 됬을 경우
+					}else {
+						logDao.updateDroneMission(d_number, re_num, d_m_preparation);
+					}
+				
+				}else if(jsonObject.get("msgid").equals("missionSpots")) {
+					System.out.println("끝");
 				}
+					
+					
+			
 			}
 			
 			@Override
@@ -102,19 +164,8 @@ public class MqttService {
 			e.printStackTrace();
 		}
 	}
-
 	
-	// 보내기
-	public void sendMessage(String topic, String message) {
-		try {
-			mqttclient.publish(topic, message.getBytes(), 0, false);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	// 요청 테이블 gcs에 보내기
+	// 요청 테이블 gcs에 보내기 - gcs에서 요청
 	public void sendMessage(String topic) {
 		JSONArray jsonArray = new JSONArray();
 		List<RequestDto> list = missionDao.mqttAllTable();

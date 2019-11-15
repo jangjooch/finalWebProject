@@ -105,7 +105,6 @@ public class DroneDao {
 	// 드론 상태 업데이트
 	public int updateDrontState(int d_number) {
 		int update = sqlSessionTemplate.update("drone.updateDroneState", d_number);
-		
 		return update;
 	}
 }
