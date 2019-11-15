@@ -24,9 +24,14 @@
 				}
 				return result;
 			}
+			
+			
+			function goDetail(value) {
+				var re_num = value;
+				location.href="log_detail?d_m_number=" + re_num;			
+			}
 		
 		</script>
-		
 		<style>
 		</style>
 	<body>
@@ -52,7 +57,7 @@
 							</select>
 						</div>
 						<div class="form-group mx-sm-3 mb-2">
-							<input name="searchThing" id="SearchThing"type="text" class="form-control"	placeholder="검색어">
+							<input id="searchThing" name="searchThing" type="text" class="form-control"	placeholder="검색어">
 						</div>
 						<button type="submit" class="btn btn-primary mb-2">검색</button>
 					</form>
@@ -60,36 +65,33 @@
 					</div>
 				</div>
 				<div class="col-sm-2"></div>
-				
 				<%-- center --%>
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					
 					<table class="table table-hover" style="border: 1px solid 1px">
 					<thead class="thead-dark">
-						<tr align="center">
+						<tr>
 							<th scope="col">요청 번호</th>
 							<th scope="col">요청자/직급</th>
 							<th scope="col">요청 시간</th>
 							<th scope="col">요청 위치x/y</th>
-							<th scope="col">비고</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="log" items="${droneMissionList}">
-							<tr onclick="location.href='log_detail?d_m_number=${log.d_m_number}'" style="cursor: pointer;">
-								<td>${log.re_num}/ ${log.d_m_number}</td>
-								<td>${log.requestDto.memberDto.m_name} / ${log.requestDto.memberDto.po_position}</td>
-								<td><fmt:formatDate value="${log.requestDto.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
-								<td>${log.requestDto.re_location_x} / ${log.requestDto.re_location_y}</td>
-								<c:if test="${log.requestDto.re_success == 5}">
-								<td>미션 완료</td>
-								</c:if>									
-								<c:if test="${log.requestDto.re_success == 6}">
-								<td style="color:red">요청 거절</td>
-								</c:if>									
-
+						<c:forEach var="searchList" items="${searchList}">
+						<c:choose>
+							<c:when test="${whereFrom == 1 }"> <!-- 미션num -->
+							</c:when>
+							<c:when test="${whereFrom == 2 }"> <!-- 요청num -->
+							<tr onclick="goDetail('${searchList.re_num}')" style="cursor: pointer;">
+								<td>${searchList.re_num}</td>
+								<td>${searchList.memberDto.m_name}/${searchList.memberDto.po_position}</td>
+								<td><fmt:formatDate value="${searchList.re_time}" pattern="yyyy-MM-dd / hh:mm:ss"/></td>
+								<td>${searchList.re_location_x}/${searchList.re_location_y}</td>
 							</tr>
+							</c:when>
+						</c:choose>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -105,39 +107,46 @@
 							<div id="bottom_c_l"></div>
 							<div id="bottom_c_c">
 								<nav aria-label="Page navigation example">
-							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="?pageNo=1"> 
-									<span aria-hidden="true">&laquo;</span></a>
-								</li>
-								<c:if test="${groupNo>1}">
-									<li class="page-item"><a class="page-link" href="#"> 
-										<span aria-hidden="true"><</span></a>
-									</li>
-								</c:if>
-								<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
-									<c:if test="${pageNo == i}">
-										<li class="page-item active"><a class="page-link" href="?pageNo=${i}">${i}</a></li>		
-									</c:if>
-									<c:if test="${pageNo != i}">
-										<li class="page-item"><a class="page-link" href="?pageNo=${i}">${i}</a></li>
-									</c:if>
-								</c:forEach>
-								<c:if test="${group<totalGroupNum}">
-									<li class="page-item"><a class="page-link" href="?pageNo=${endPageNo+1}"> 
-										<span aria-hidden="true">></span></a>
-									</li>	
-								</c:if>								
-								<li class="page-item"><a class="page-link " href="?pageNo=${totalPageNum}"> 
-									<span aria-hidden="true">&raquo;</span></a>
-								</li>
-							</ul>
-						</nav>
+									<ul class="pagination">
+										<li class="page-item"><a class="page-link" href="logSearchedList?=searchPageNo=1"> 
+											<span aria-hidden="true">&laquo;</span></a>
+										</li>
+										<c:if test="${groupNo > 1}">
+										<li class="page-item"><a class="page-link" href="logSearchedList?searchPageNo=${searchstartPageNo-1}"> 
+											<span aria-hidden="true"><</span></a>
+										</li>
+										</c:if>
+										
+								  	<c:forEach begin="${searchstartPageNo}" end="${searchendPageNo}" var="i">
+								  		<c:if test="${searchPageNo==i}">
+								  			<li class="page-item active">
+								  				<a href="logSearchedList?searchPageNo=${i}" class="page-link">${i}</a>
+								  			</li>
+								  		</c:if>
+						  				<c:if test="${searchPageNo!=i}">
+						  					<li class="page-item">
+						  						<a href="logSearchedList?searchPageNo=${i}" class="page-link">${i}</a>
+						  					</li>
+						  				</c:if>
+						  			</c:forEach>
+										<c:if test="${groupNo < totalGroupNum}">
+											<li class="page-item">
+												<a class="page-link" href="logSearchedList?searchPageNo=${searchendPageNo+1 }"> 
+												<span aria-hidden="true">></span>
+												</a>
+											</li>
+										</c:if>
+										<li class="page-item"><a class="page-link" href="logSearchedList?searchPageNo=${searchtotalPageNum }"> 
+											<span aria-hidden="true">&raquo;</span></a>
+										</li>
+									</ul>
+								</nav>
 							</div>
 							<div id="bottom_c_r"></div>
 						</div>
 						<div id="bottom_b" style="height: 20px;"></div>
 					</div>
-				</div>
+				</div>	
 				<div class="col-sm-2"></div>
 			</div>
 <jsp:include page="../main/bottom.jsp" flush="false"/>

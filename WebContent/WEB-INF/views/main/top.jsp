@@ -84,7 +84,7 @@
             <div id="header_center_hr">
          </div>
             <div id="header_center_hr">
-            <p><img src="${pageContext.request.contextPath}/resources/image/moniter.png" height="60px" width="60px">119는 언제나 여러분 곁에 있습니다.</p>
+            <p><img src="${pageContext.request.contextPath}/resources/image/moniter.png" height="60px" width="60px"> 차세대 재난 구조 시스템</p>
             </div>
             <div id="header_center_hr">
          </div>
@@ -104,17 +104,22 @@
       </button>
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
          <ul class="navbar-nav">
+         	<%-- 관리자 --%>
             <c:if test="${member_logined.po_num == 1}">
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/member/memberList">Member</a></li>
+               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionStart">실행중</a></li>
             </c:if>
-            <c:if test="${member_logined.po_num <= 2}">
+            <%-- 요청 담당자 --%>
+            <c:if test="${member_logined.po_num == 5 || member_logined.po_num == 1}">
+           	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/requestList">요청 대기</a></li>
+            </c:if>
+            <%-- 드론 담당자 --%>
+            <c:if test="${member_logined.po_num == 2 || member_logined.po_num == 1}">
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/drone/drone_list">Drone</a></li>
-               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/requestList">MissionInlist</a></li>
             </c:if>
-            <c:if test="${member_logined.po_num <= 3}">
-               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionProList">MissionProList</a></li>
-            </c:if>
+            <%-- 보급 담당자 --%>
             <c:if test="${member_logined.po_num == 3 || member_logined.po_num == 1}">
+               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionProList">물품적재</a></li>
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/item/item_list">Item</a></li>
             </c:if>
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/log/log_list">Log</a></li>

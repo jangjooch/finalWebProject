@@ -100,8 +100,6 @@ public class DroneController {
 		List<DroneDto> drone_list = service.getDroneList(drone_startRowNo, drone_endRowNo);
 		logger.info(""+drone_list.size());
 		
-		
-		
 		//Jsp로 페이지 정보 넘기기
 		model.addAttribute("drone_pagesPerGroup", drone_pagesPerGroup);
 		model.addAttribute("drone_totalPageNum", drone_totalPageNum);
@@ -160,5 +158,69 @@ public class DroneController {
 		return "redirect:/drone/drone_list";
 	}
 	
+	/* *********************** 드론 상태 리스트 *********************** */
+	@RequestMapping("/droneState_List")
+	public String droneStateList(String totalWeight, Model model, @RequestParam(defaultValue ="1") int pageNo, HttpSession session) {
+		
+//		session.setAttribute("totalWeight", totalWeight);
+		session.setAttribute("pageNo", pageNo);
+		
+		String totalWeight_get = null;
+		
+		if (totalWeight == null) {
+			totalWeight_get = (String) session.getAttribute("totalWeight");
+		} else {
+			session.setAttribute("totalWeight", totalWeight);
+		}
+		
+		int rowsPerPage = 10;
+		int pagesPerGroup = 5;
+		int totalRowNum = 0;
+		if (totalWeight_get != null) {
+			totalRowNum = service.getDroneStateTotalRowNo(totalWeight_get);
+		} else {
+			totalRowNum = service.getDroneStateTotalRowNo(totalWeight);
+		}
+		
+		int totalPageNum = totalRowNum / rowsPerPage;
+		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
+		int totalGroupNum = totalPageNum / pagesPerGroup;
+		if(totalPageNum % pagesPerGroup != 0) totalGroupNum++;
+		
+		int groupNo = (pageNo-1)/pagesPerGroup + 1;
+		int startPageNo = (groupNo-1)*pagesPerGroup + 1;
+		int endPageNo = startPageNo + pagesPerGroup - 1;
+		if(groupNo == totalGroupNum) endPageNo = totalPageNum;
+		
+		int startRowNo = (pageNo-1)*rowsPerPage + 1;
+		int endRowNo = pageNo*rowsPerPage;
+		if(pageNo == totalPageNum) endRowNo = totalRowNum;
+		
+		
+		List<DroneDto> drone_list = null;
+
+		if (totalWeight != null) {
+			drone_list = service.getDroneStateList(startRowNo, endRowNo, totalWeight);
+		} else {
+			drone_list = service.getDroneStateList(startRowNo, endRowNo, totalWeight_get);
+		}
+		
+		
+		model.addAttribute("pagesPerGroup", pagesPerGroup);
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("totalGroupNum", totalGroupNum);
+		model.addAttribute("groupNo", groupNo);
+		model.addAttribute("startPageNo", startPageNo);
+		model.addAttribute("endPageNo", endPageNo);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("drone_list", drone_list);
+			
+		return "drone/droneStateList";
+	}
 	
+	@RequestMapping("")
+	public String droneStateUpdate() {
+		
+		return"";
+	}
 }

@@ -74,8 +74,8 @@
 								<th scope="col" width="15%;">드론 번호</th>
 								<th scope="col" width="20%;">드론 모델명</th>
 								<th scope="col" width="15%;">드론 상태</th>
-								<th scope="col" width="25%;">적재 가능 중량</th>
-								<th scope="col" width="25%;">비행 가능 시간</th>
+								<th scope="col" width="25%;">적재 가능 중량(단위: g)</th>
+								<th scope="col" width="25%;">비행 가능 시간(단위: 분)</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -83,7 +83,15 @@
 								<tr onclick="location.href='drone_detail?d_number=${drone.d_number}'" style="cursor: pointer;">
 							 	  <td>${drone.d_number}</td>
 							      <td>${drone.d_model}</td>
-							      <td>${drone.d_status}</td>
+							      <c:if test="${drone.d_status == 1}">
+								      <td>대기중(양호)</td>
+							      </c:if>
+							      <c:if test="${drone.d_status == 2}">
+								      <td style="color:red">미션 수행중</td>
+							      </c:if>
+							      <c:if test="${drone.d_status > 2}">
+								      <td style="color:red">상태이상</td>
+							      </c:if>
 							      <td>${drone.d_weight}</td>
 							      <td>${drone.d_battery}</td>
 							     </tr>

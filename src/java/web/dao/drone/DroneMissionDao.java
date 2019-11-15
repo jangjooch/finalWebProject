@@ -40,5 +40,11 @@ public class DroneMissionDao {
 		DroneMissionDto droneMissionDto = sqlSessionTemplate.selectOne("droneMission.selectDroneMissionDetail", d_m_number);
 		return droneMissionDto;
 	}
+
+	//요청 거절 된 로그
+	public int requestRejection(int re_num) {
+		int rows = sqlSessionTemplate.insert("droneMission.insertRequestRejection", re_num); 
+		return rows;
+	}
 	
 }

@@ -3,6 +3,7 @@ package web.dto.drone;
 import java.util.Date;
 
 import web.dto.member.MemberDto;
+import web.dto.request.RequestDto;
 
 public class DroneMissionDto {
 	private int rn;
@@ -18,7 +19,21 @@ public class DroneMissionDto {
 	private MemberDto memberDto;
 	private String d_m_start;
 	private Date d_m_preparation;
+	private RequestDto requestDto;
 	
+	
+	
+	
+	
+	
+	
+	
+	public RequestDto getRequestDto() {
+		return requestDto;
+	}
+	public void setRequestDto(RequestDto requestDto) {
+		this.requestDto = requestDto;
+	}
 	public int getRn() {
 		return rn;
 	}

@@ -82,4 +82,30 @@ public class DroneDao {
 		
 	}
 	
+	
+	/* ***************** 운행가능 리스트 ***************** */
+	public List<DroneDto> selectStateList(int drone_startRowNo, int drone_endRowNo, String totalWeight){
+		int intTotalWeight = Integer.parseInt(totalWeight);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("drone_startRowNo", drone_startRowNo);
+		map.put("drone_endRowNo", drone_endRowNo);
+		map.put("totalWeight", intTotalWeight);
+		
+		List<DroneDto> drone_list = sqlSessionTemplate.selectList("drone.selectStateList", map);
+		return drone_list;
+	}
+	
+	public int selectStateTotalRowNo(String totalWeight) {
+		int intTotalWeight = Integer.parseInt(totalWeight);
+		int totalRowNum = sqlSessionTemplate.selectOne("drone.selectStateCount", intTotalWeight);
+		
+		return totalRowNum;
+	}
+	
+	// 드론 상태 업데이트
+	public int updateDrontState(int d_number) {
+		int update = sqlSessionTemplate.update("drone.updateDroneState", d_number);
+		
+		return update;
+	}
 }

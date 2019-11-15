@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import web.dao.log.LogDao;
 import web.dto.drone.DroneMissionDto;
 import web.dto.log.LogDto;
 import web.dto.request.RequestDto;
@@ -29,8 +28,6 @@ public class LogController {
 	private DroneMissionService droneMissionService;
 	@Autowired
 	private LogService logService;
-	@Autowired
-	private LogDao logDao;
 	
 	// 페이징
 	@RequestMapping("/log_list")
@@ -56,7 +53,7 @@ public class LogController {
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;			//
 		
 		List<DroneMissionDto> droneMissionList = logService.getSelectLogList(startRowNo, endRowNo);
-		List<RequestDto> missionList = logService.getRequestList();
+//		List<RequestDto> missionList = logService.getRequestList();
 				
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
@@ -66,7 +63,12 @@ public class LogController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("droneMissionList", droneMissionList); // 현재 페이지
-		model.addAttribute("missionList", missionList); // 현재 페이지
+//		model.addAttribute("missionList", missionList); // 현재 페이지
+		
+		// 검색리스트 jsp에서 구별하기 위한 코드
+		int whereFrom = 1;
+		model.addAttribute("whereFrom", whereFrom);
+		
 		
 		return "log/log_list";
 	}
@@ -80,6 +82,97 @@ public class LogController {
 		return "log/log_detail";
 	}
 	
-	// 검색한 리스트만 가져오기
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// -------------- 검색
+	@RequestMapping("logSearchedList")
+	public String logSearchedList(String choose, String searchThing,Model model, @RequestParam(defaultValue="1") int searchPageNo, HttpSession session) {
+		session.setAttribute("searchPageNo", searchPageNo);
+		String choose_get = null;
+		if(choose == null) {  // 처음검색이 아닌경우
+			choose_get = (String)session.getAttribute("logChoose");
+		}
+		else {		//  새로운 검색인 경우
+			session.setAttribute("logChoose", choose);
+		}
+		
+		String SearchThing_get = null;
+		if(searchThing == null) { // 처음 검색이 아닌경우
+			SearchThing_get = (String)session.getAttribute("logSearchThing");
+		}
+		else {//  새로운 검색인 경우
+			session.setAttribute("logSearchThing", searchThing);
+		}
+		int rowsPerPage = 10;
+		int pagesPerGroup = 5;
+		int totalRowNum = 0;
+		if(SearchThing_get != null) { // 처음 검색이 아닌경우
+			totalRowNum = logService.getSearchTotalRowNo(choose_get ,SearchThing_get);
+		}
+		else {
+			totalRowNum = logService.getSearchTotalRowNo(choose ,searchThing);
+		}
+		int totalPageNum = totalRowNum / rowsPerPage;
+		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
+		int totalGroupNum = totalPageNum / pagesPerGroup;
+		if(totalPageNum % pagesPerGroup != 0) totalGroupNum++;
+		int groupNo = (searchPageNo-1)/pagesPerGroup + 1;
+		int startPageNo = (groupNo-1)*pagesPerGroup + 1;
+		int endPageNo = startPageNo + pagesPerGroup - 1;
+		if(groupNo == totalGroupNum) endPageNo = totalPageNum;
+		int startRowNo = (searchPageNo-1)*rowsPerPage + 1;
+		int endRowNo = searchPageNo*rowsPerPage;
+		if(searchPageNo == totalPageNum) endRowNo = totalRowNum;
+		
+		//현재 페이지의 게시물 가져오기
+		List<RequestDto> searchList = null;
+		
+		if (choose !=null && searchThing != null) { // 처음 검색한 경우
+			searchList = logService.getSearchList(choose, searchThing, startRowNo, endRowNo);
+		}
+		else {	// 검색중인 경우
+			searchList = logService.getSearchList(choose_get, SearchThing_get, startRowNo, endRowNo);
+		}
+		
+		
+		//JSP로 페이지 정보 넘기기
+		model.addAttribute("searchpagesPerGroup", pagesPerGroup);
+		model.addAttribute("searchtotalPageNum", totalPageNum);
+		model.addAttribute("searchtotalGroupNum", totalGroupNum);
+		model.addAttribute("searchgroupNo", groupNo);
+		model.addAttribute("searchstartPageNo", startPageNo);
+		model.addAttribute("searchendPageNo", endPageNo);
+		model.addAttribute("searchPageNo", searchPageNo);
+		model.addAttribute("searchList", searchList);
+		
+		// 검색리스트 jsp에서 구별하기 위한 코드
+		int whereFrom = 2;
+		model.addAttribute("whereFrom", whereFrom);
+		
+		return "log/log_searched";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -1,8 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="log">
-	<!-- 요청회원으로 검색한 리스트 -->
-	<select id="requestMember">
-		
+
+	<!-- 검색 페이징 전체 갯수 -->
+	<select id="selectSearchTotalRowNoRN" parameterType="int" resultType="int">
+		select count(*)
+		from request
+		where ( re_success = 5 OR re_success=6)
+			AND re_num = #{searchThing} <!--  AND re_success = 10 or re_success = 11	 -->	
 	</select>
+	
+	<select id="selectSearchTotalRowNoRM" parameterType="string" resultType="int">
+		SELECT count(*)
+		from request re, member m
+		where re.m_num = m.m_num
+			 AND ( re.re_success = 5 OR re.re_success=6)
+   			 AND m.m_name like '%'||#{searchThing}||'%'
+   			<!-- AND re_success = 10 or re_success = 11	-->
+	</select>
+	
+	
+	
+	<!-- 검색  -->
+				<!-- 번호로 검색 -->
+	<select id="searchNumberList" parameterType="map" resultMap="memberNoList">
+		select rn ,  m_name, po_position ,re_num, re_time, re_location_x,re_location_y , re_success
+        from (
+            select rownum as rn ,m_name, po_position ,re_num, re_time, re_location_x,re_location_y , re_success
+            from (
+                    select m_name, po_position ,re.re_num, re.re_time, re.re_location_x,re.re_location_y , re.re_success
+                    from request re , member m , position p
+                    WHERE m.po_num = p.po_num
+                            AND re.m_num = m.m_num
+                            AND ( re.re_success = 5 OR re.re_success=6)
+                            AND re.re_num = #{searchThing}
+                            order by re.re_time desc
+                    )
+                    where rownum &lt;= #{endRowNo}
+            )
+            where rn &gt;= #{startRowNo}
+	</select>
+	<resultMap type="web.dto.request.RequestDto" id="memberNoList">
+			<result column="re_num" property="re_num" />
+			<result column="re_time" property="re_time" />
+			<result column="re_location_x" property="re_location_x" />
+			<result column="re_location_y" property="re_location_y" />
+			<result column="re_success" property="re_success" />
+		<association property="memberDto" javaType="web.dto.member.MemberDto">
+			<result column="m_name" property="m_name" />
+			<result column="po_position" property="po_position" />
+		</association> <!-- 조인 Dto -->
+	</resultMap>
+	
+
+	
+	
+				<!-- 요청자 이름으로 검색 --> <!-- 조건에 임무완료만 나오게아는 조건절! -->
+	<select id="searchMemberList" parameterType="map" resultMap="memberNameList">
+		select rn ,  m_name, po_position ,re_num, re_time, re_location_x,re_location_y , re_success
+        from (
+            select rownum as rn ,m_name, po_position ,re_num, re_time, re_location_x,re_location_y , re_success
+            from (
+                    select m_name, po_position ,re.re_num, re.re_time, re.re_location_x,re.re_location_y , re.re_success
+                    from request re , member m , position p
+                    WHERE m.po_num = p.po_num
+                            AND re.m_num = m.m_num
+                            AND ( re.re_success = 5 OR re.re_success=6)
+                            AND m.m_name like '%'||#{searchThing}||'%'
+                            order by re.re_time desc
+                    )
+                    where rownum &lt;= #{endRowNo}
+            )
+            where rn &gt;= #{startRowNo}
+	</select>
+	<resultMap type="web.dto.request.RequestDto" id="memberNameList">
+			<result column="re_num" property="re_num" />
+			<result column="re_time" property="re_time" />
+			<result column="re_location_x" property="re_location_x" />
+			<result column="re_location_y" property="re_location_y" />
+			<result column="re_success" property="re_success" />
+		<association property="memberDto" javaType="web.dto.member.MemberDto">
+			<result column="m_name" property="m_name" />
+			<result column="po_position" property="po_position" />
+		</association> <!-- 조인 Dto -->
+	</resultMap>
+		
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+
+	
+	
+	
 </mapper>

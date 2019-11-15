@@ -92,7 +92,7 @@
 							<%-- 입력값 검사 효과 추가해야함 --%>
 						</div>
 						<div class="form-group row">
-							<label for="d_weight" class="col-sm-5 col-form-label">적재 가능 중량</label>
+							<label for="d_weight" class="col-sm-5 col-form-label">적재 가능 중량(단위: g)</label>
 							<div class="col-sm-7">
 								<input type="text" id="d_weight" name="d_weight"
 									class="form-control" placeholder="적재 가능 중량을 입력하세요.">
@@ -101,7 +101,7 @@
 							<%-- 입력값 검사 효과 추가해야함 --%>
 						</div>
 						<div class="form-group row">
-							<label for="d_battery" class="col-sm-5 col-form-label">최대 비행 가능 시간</label>
+							<label for="d_battery" class="col-sm-5 col-form-label">최대 비행 가능 시간(단위: 분)</label>
 							<div class="col-sm-7">
 								<input type="text" id="d_battery" name="d_battery"
 									class="form-control" placeholder="비행 가능 시간을 등록하세요.">

@@ -49,4 +49,42 @@
     		order by d_number asc
 	</select>
 	
+	<!-- 형철쓰가 손댐 -->
+	<!-- 드론 사용 가능 한 상태 리스트 -->
+	<select id="selectStateList" parameterType="map" resultType="web.dto.drone.DroneDto">
+		select rn, d_number, d_model, d_status, d_weight, d_battery
+		from (
+            select rownum as rn, d_number, d_model, d_status, d_weight, d_battery
+            from (
+                select 
+					d_number, d_model, d_status, d_weight, d_battery 
+				from 
+					drone
+				where 
+					d_status = 1
+					AND d_weight &gt;= #{totalWeight}
+				order 
+					by d_number
+            	) 
+		where rownum &lt;= #{drone_endRowNo}
+			)
+		where rn &gt;= #{drone_startRowNo}
+	</select>
+	<select id="selectStateCount" parameterType="int" resultType="int">
+		select count(*) 
+		from drone
+		where d_status = 1
+			AND drone.d_weight &gt;= #{totalWeight}
+			
+	</select>
+	
+	<!-- 드론 상태 업데이트 -->
+	<update id="updateDroneState" parameterType="int">
+		UPDATE 
+		    drone 
+		SET 
+		    d_status = 2
+		WHERE
+		    d_number = #{d_number}
+	</update>
 </mapper>

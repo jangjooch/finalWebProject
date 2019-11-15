@@ -191,8 +191,8 @@ public class MemberController {
 	@RequestMapping("/memberSearch")
 	public String memberSearch(String searchThing, String things,Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
 		session.setAttribute("pageNo", pageNo);
-		String searching_get = null;
-		if(searchThing == null) {
+		String searching_get = null; // 페이징을 클릭하여 들어 왔을 경우
+		if(searchThing == null) {  //searchThing : 종류      things : 검색어
 			searching_get = (String)session.getAttribute("memberSearchThing");
 		}
 		else {

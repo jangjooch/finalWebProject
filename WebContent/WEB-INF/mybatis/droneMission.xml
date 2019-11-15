@@ -5,46 +5,41 @@
 	<!-- 드론 미션 페이징 -->
 	<resultMap type="web.dto.drone.DroneMissionDto" id="droneMemberListExam">
 		<result property="d_m_number" column="d_m_number"/>
-		<result property="d_number" column="d_number"/>
 		<result property="re_num" column="re_num"/>
-		<result property="m_num" column="m_num"/>
-		<result property="d_m_start" column="d_m_start"/>
-		<result property="d_m_preparation" column="d_m_preparation"/>
-		<association property="memberDto" javaType="web.dto.member.MemberDto">
-			<result property="m_num" column="m_num"/>
-			<result property="m_name" column="m_name"/>
-			<result property="m_id" column="m_id"/>
-			<result property="m_pw" column="m_pw"/>
-			<result property="m_phone" column="m_phone"/>
-			<result property="po_num" column="po_num"/>
-			<result property="po_position" column="po_position"/>
+		<association property="requestDto" javaType="web.dto.request.RequestDto">
+			<result property="re_time" column="re_time"/>
+			<result property="re_location_x" column="re_location_x"/>
+			<result property="re_location_y" column="re_location_y"/>
+			<result property="re_success" column="re_success"/>
+			<association property="memberDto" javaType="web.dto.member.MemberDto">
+				<result property="m_name" column="m_name"/>
+				<result property="po_position" column="po_position"/>
+			</association>
 		</association>
 	</resultMap>
 	<select id="droneMemberListEx" resultMap="droneMemberListExam" parameterType="map">
-	SELECT rn, d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation,
-               m_m_num, m_name, m_id, m_pw, m_phone, po_num,       
-               po_position
-		FROM
-		    (SELECT ROWNUM AS rn, d_m_number, d_number, re_num, m_num, d_m_start, d_m_preparation,
-                              m_m_num, m_name, m_id, m_pw, m_phone, po_num,       
-                              po_position
-		     FROM
-              (SELECT dm.d_m_number, dm.d_number, dm.re_num, dm.m_num , dm.d_m_start, dm.d_m_preparation,
-                             m.m_num m_m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num,       
-                             p.po_position
-                      FROM 
-                          drone_mission dm, member m, position p
-                      WHERE 
-                          m.m_num = dm.m_num AND
-                          m.po_num = p.po_num
-                      ORDER BY dm.d_m_number DESC)
+		select rn, d_m_number, re_num, m_name, po_position, re_time, re_location_x,re_location_y, re_success
+        from (
+                select rownum as rn, d_m_number, re_num, m_name, po_position, re_time, re_location_x,re_location_y, re_success
+                from (
+                        select dm.d_m_number, dm.re_num, m_name, po_position, re_time, re_location_x,re_location_y, re_success
+                        from member m, position p , request re , drone_mission dm
+                        where m.m_num = re.m_num
+                         AND p.po_num = m.po_num
+                         AND dm.re_num = re.re_num
+                         AND (re.re_success = 5 or re.re_success =6)
+                        order by re_time desc
+                    )
 		    WHERE ROWNUM  &lt;= #{endRowNo})
 		WHERE rn  &gt;= #{startRowNo}
 	</select>
 	
 	<!-- 드론 테이블수 Count 가져오기 -->
 	<select id="selectDroneMissionCount" resultType="int">
-		SELECT COUNT(*) FROM drone_mission
+		SELECT COUNT(*) FROM drone_mission dm , request re
+		where re.re_num = dm.re_num
+   				 AND (re.re_success = 5
+    			Or re.re_success = 6)
 	</select>
 	
 	<!-- 게시글 상세 페이지 한 행 가져오기 -->
@@ -78,7 +73,12 @@
 	</select>
 	
 	
-	<!-- insert -->
+	<!-- 요청 거절된 로그 insert -->
+	<insert id="insertRequestRejection" parameterType="int">
+		INSERT INTO drone_mission VALUES 
+			(DRONE_MISSION_SEQ.NEXTVAL, 0, #{re_num}, 0, '요청이 거절 되었습니다.', SYSDATE)
+	</insert>
+	
 	<!-- update -->
 	<!-- insert -->
 	

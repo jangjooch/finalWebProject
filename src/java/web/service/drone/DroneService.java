@@ -68,4 +68,23 @@ public class DroneService {
 			return droneList;
 			
 		}
+		
+		/* ****************** 드론 운행가능 리스트 ****************** */
+		public List<DroneDto> getDroneStateList(int drone_startRowNo, int drone_endRowNo, String totalWeight){
+			List<DroneDto> droneList = dronedao.selectStateList(drone_startRowNo, drone_endRowNo, totalWeight);
+			return droneList;
+		}
+		
+		public int getDroneStateTotalRowNo(String totalWeight) {
+			int totalRowNum = dronedao.selectStateTotalRowNo(totalWeight);
+			return totalRowNum;
+		}
+		
+		// 드론 상태 업데이트
+		public void updateDroneState(int d_number) {
+			int updateRows = dronedao.updateDrontState(d_number); 
+			logger.debug("드론 상태 업데이트 완료/업데이트 행의 수" + updateRows);
+		}
+		
+		
 }
