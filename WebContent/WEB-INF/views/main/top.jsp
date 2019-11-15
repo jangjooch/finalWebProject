@@ -113,11 +113,11 @@
            	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/requestList">요청 현황</a></li>
             </c:if>
             <%-- 드론 담당자 --%>
-            <c:if test="${member_logined.po_num == 2 || member_logined.po_num == 1}">
+            <c:if test="${member_logined.po_num == 3 || member_logined.po_num == 1}">
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/drone/drone_list">드론</a></li>
             </c:if>
             <%-- 보급 담당자 --%>
-            <c:if test="${member_logined.po_num == 3 || member_logined.po_num == 1}">
+            <c:if test="${member_logined.po_num == 2 || member_logined.po_num == 1}">
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mission/missionProList">보급 현황</a></li>
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/item/item_list">물품</a></li>
             </c:if>

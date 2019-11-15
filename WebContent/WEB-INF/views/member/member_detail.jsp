@@ -115,7 +115,7 @@
 							<div id="bottom_c_c">
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
-										<li class="page-item"><a class="page-link" href="memberDetail?=pageNo=1"> 
+										<li class="page-item"><a class="page-link" href="memberDetail?pageNo=1&m_num=${member.m_num}"> 
 											<span aria-hidden="true">&laquo;</span></a>
 										</li>
 										<c:if test="${groupNo > 1}">
