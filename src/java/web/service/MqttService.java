@@ -42,7 +42,6 @@ public class MqttService {
 			logger.info("MQTT 연결 성공");
 			receiveMessage();
 			logger.info("subScribe 성공");
-			thread.start();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -68,34 +67,44 @@ public class MqttService {
 	// 메세지 받기
 	private void receiveMessage(){
 		mqttclient.setCallback(new MqttCallback() {
-			
 			@Override
 			public void messageArrived(String topic, MqttMessage message) throws Exception {
 				byte[] bytes = message.getPayload();
 				String json = new String(bytes);
 				logger.info("json : " + json);
+				JSONObject jsonObject = new JSONObject(json);
+				
+				// 메세지 받거나, 새로고침 일 경우에만 요청 리스트 보내기
+				if(jsonObject.get("msgid").equals("dataRequest") ) {
+					new Thread() {
+						@Override
+						public void run() {
+							sendMessage("/gcs/missionIn");
+							logger.info("앙 나 가버렸띠~");
+						}
+					}.start();
+					
+				}
 			}
 			
 			@Override
 			public void connectionLost(Throwable cause) {
-				
 			}
 
 			@Override
 			public void deliveryComplete(IMqttDeliveryToken token) {
-				
 			}
 			
 		});
 		try {
 			mqttclient.subscribe("/web/missionStatus");
 		} catch (MqttException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// /web/drone/sub
 	}
 
+	
+	// 보내기
 	public void sendMessage(String topic, String message) {
 		try {
 			mqttclient.publish(topic, message.getBytes(), 0, false);
@@ -104,22 +113,9 @@ public class MqttService {
 		}
 	}
 	
-	// 서비스 객체 생성시 바로 mqtt 데이터 보내기
-	Thread thread = new Thread() {
-		@Override
-		public void run() {
-			while(true) {
-				test("/gcs/missionIn");
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-	};
 	
-	public void test(String topic) {
+	// 요청 테이블 gcs에 보내기
+	public void sendMessage(String topic) {
 		JSONArray jsonArray = new JSONArray();
 		List<RequestDto> list = missionDao.mqttAllTable();
 		
