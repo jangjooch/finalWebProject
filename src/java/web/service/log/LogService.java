@@ -39,6 +39,11 @@ public class LogService {
 		List<RequestDto> searchList = logDao.selectSearchMember(choose,searchThing,startRowNo, endRowNo);
 		return searchList;
 	}
+
+	public int getDMNum(int re_num) {
+		int d_m_number = logDao.getDMNum(re_num);
+		return d_m_number;
+	}
 	
 	
 }

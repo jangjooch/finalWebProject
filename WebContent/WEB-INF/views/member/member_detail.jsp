@@ -95,7 +95,7 @@
 								<tbody>
 									<c:forEach var="report" items="${report}">
 										<tr>
-											<td><a href="#">${report.re_num}</a></td>
+											<td><a href="${pageContext.request.contextPath}/log/getDMNum?re_num=${report.re_num}">${report.re_num}</a></td>
 											<td>${report.re_location_x} / ${report.re_location_y}</td>
 											<!-- <td>${report.re_time}</td> -->
 											<td><fmt:formatDate value="${report.re_time}" 

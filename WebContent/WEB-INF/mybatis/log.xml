@@ -88,7 +88,11 @@
 	
 	
 	
-	
+	<select id="getDMNum" parameterType="int" resultType="int">
+		select d_m_number from
+		drone_mission
+		where re_num = #{re_num}
+	</select>
 	
 
 	

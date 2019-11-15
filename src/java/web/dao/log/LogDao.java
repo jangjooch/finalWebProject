@@ -94,5 +94,9 @@ public class LogDao {
 		}
 		return searchList;
 	}
+	public int getDMNum(int re_num) {
+		int d_m_number = sqlSessionTemplate.selectOne("log.getDMNum", re_num);
+		return d_m_number;
+	}
 	
 }

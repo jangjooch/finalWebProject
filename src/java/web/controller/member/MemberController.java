@@ -126,7 +126,6 @@ public class MemberController {
 	// 멤버 디테일
 	@RequestMapping("memberDetail")
 	public String memberDetail(int m_num , Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
-		System.out.println("m" + m_num);
 		MemberDto member = service.getMember(m_num);
 		session.setAttribute("m_num", m_num);
 		session.setAttribute("pageNo", pageNo);
