@@ -57,9 +57,12 @@ public class AndroidController {
 	@RequestMapping("/login")
 	public String login(String id, String pw, Model model) throws Exception {
 		loginResult loginresult = service.login(id, pw);
+		int m_num;
 		String result = "";
 		if (loginresult == loginResult.Success) {
 			result = "success";
+			m_num=service.getMid(id,pw);
+			if(m_num!=0) model.addAttribute("m_num",m_num);
 		}
 		if (loginresult == loginResult.FailId) {
 			result = "failId";
@@ -67,6 +70,8 @@ public class AndroidController {
 		if (loginresult == loginResult.FailPw) {
 			result = "failPw";
 		}
+		
+		
 		model.addAttribute("result", result);
 		return "android/loginResult";
 
@@ -133,9 +138,9 @@ public class AndroidController {
 	
 	
 	@RequestMapping("/checkRequestItemList")
-	public String checkRequestItemList(String requtstNum,Model model) {
-		int reqNum=Integer.parseInt(requtstNum);
-		List<RequestItemDto>list = service.getItemListByRequestNum(reqNum);
+	public String checkRequestItemList(String requestNum,Model model) {
+		int reqNum=Integer.parseInt(requestNum);
+		List<RequestItemDto>list = service.getItemListByRequestNum(reqNum);//리턴값 없음 마이바티스 수정 필요
 		JSONObject main=new JSONObject();
 		JSONArray jArray=new JSONArray();
 		for(RequestItemDto requestItemDto:list) {
@@ -144,10 +149,11 @@ public class AndroidController {
 			json.put("i_amount", requestItemDto.getI_amount());
 			jArray.put(json);
 		}
-		main.put("list",jArray);
+		main.put("List",jArray);
+		String result=main.toString();
 		
-		model.addAttribute("list",jArray.toString());
-		return "checkRequestItemList";
+		model.addAttribute("list",result);
+		return "android/checkRequestItemList";
 	}
 
 }

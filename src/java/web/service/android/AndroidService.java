@@ -67,9 +67,14 @@ public class AndroidService {
 		
 	}
 
-	public List<RequestItemDto> getItemListByRequestNum(int requtstNum) {
-		List<RequestItemDto> list=androidDao.getRequestItemByRequestNum(requtstNum);
+	public List<RequestItemDto> getItemListByRequestNum(int requestNum) {
+		List<RequestItemDto> list=androidDao.getRequestItemByRequestNum(requestNum);
 		return list;
+	}
+
+	public int getMid(String id, String pw) {
+		int result = androidDao.getMid(id,pw);
+		return result;
 	}
 
 }

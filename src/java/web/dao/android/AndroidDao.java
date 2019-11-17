@@ -1,7 +1,8 @@
 package web.dao.android;
 
+import java.util.HashMap;
 import java.util.List;
-import org.springframework.ui.Model;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -55,6 +56,14 @@ private static final Logger logger = LoggerFactory.getLogger(DroneDao.class);
 
 	public List<RequestItemDto> getRequestItemByRequestNum(int requestNum) {
 		List<RequestItemDto> list=sqlSessionTemplate.selectList("android.getItemListByRequestNum",requestNum);
-		return null;
+		return list;
+	}
+
+	public int getMid(String id, String pw) {
+		Map<String, String> map=new HashMap<>();
+		map.put("id", id);
+		map.put("pw", pw);
+		int result=sqlSessionTemplate.selectOne("android.getMid",map);
+		return result;
 	}
 }

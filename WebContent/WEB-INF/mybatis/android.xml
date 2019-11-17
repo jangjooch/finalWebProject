@@ -5,6 +5,7 @@
 	select i_code,i_name
 	from item_list
 	</select>
+	
 	<select id="selectMemberByMid" parameterType="string"
 		resultType="web.dto.android.MemberDto">
 		select m_id,m_pw
@@ -52,8 +53,14 @@
 	<select id="getItemListByRequestNum" parameterType="int" resultMap="resultItemList">
 		select re_num, r.i_code, i_amount, i.i_code, i_name, i_mount
 		from request_item r, item_list i
-		where r.i_code= i.i_code
-		and r.re_num = #{requestNum}
+		where r.i_code = i.i_code
+		and re_num = #{requestNum}
+	</select>
+	
+	<select id="getMid" parameterType="String" resultType="_int">
+		select m_num
+		from member
+		where m_id=#{id} and m_pw=#{pw}
 	</select>
 
 </mapper>
