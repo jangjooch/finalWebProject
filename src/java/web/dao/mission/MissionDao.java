@@ -252,10 +252,14 @@ public class MissionDao {
 		List<RequestDto> list = sqlSessionTemplate.selectList("mission.mqttAllTable");
 		return list;
 	}
-
-	// 정상완료
-	public void updateSuccessChainge2Eseo5(int re_num) {
+	
+	// 수행중
+	public void updateSuccessChainge3Eseo4(int re_num) {
+		int rows = sqlSessionTemplate.update("mission.updateRequestSuccess4", re_num);
+	}
+	
+	// 수행완료
+	public void updateSuccessChainge4Eseo5(int re_num) {
 		int rows = sqlSessionTemplate.update("mission.updateRequestSuccess5", re_num);
-		
 	}
 }

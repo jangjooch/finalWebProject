@@ -87,4 +87,13 @@
 		WHERE
 		    d_number = #{d_number}
 	</update>
+	
+	<update id="updateDroneState1" parameterType="int">
+		UPDATE 
+		    drone 
+		SET 
+		    d_status = 1
+		WHERE
+		    d_number = #{d_number}
+	</update>
 </mapper>

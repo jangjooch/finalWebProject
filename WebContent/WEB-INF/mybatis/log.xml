@@ -119,6 +119,15 @@
 		where re_num = #{re_num}
 	</select>
 	
+	<!-- 드론 미션 완료 업데이트  -->
+	<update id="updateDroneMissionComplate" parameterType="int">
+		UPDATE 
+			drone_mission
+		SET 
+			d_m_preparation = SYSDATE
+		WHERE
+			re_num=#{re_num}
+	</update>
 
 	
 	

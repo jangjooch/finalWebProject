@@ -119,8 +119,6 @@ public class MqttService {
 								 		" / x: " + String.valueOf(obj.get("x")) + 
 								 		" / y: " + String.valueOf(obj.get("y")) + "    | |    ";
 						 }
-						 
-						
 					}
 					
 					int d_number = (int) jsonObject.get("droneNumber"); // 드론 번호 가져오기
@@ -135,14 +133,20 @@ public class MqttService {
 					if(d_m_number == 0) {
 						logDao.insertDroneMission(d_number, re_num, d_m_preparation);
 						// 요청을 상태 값을 바꿔야함
-						missionDao.updateSuccessChainge2Eseo5(re_num);
+						missionDao.updateSuccessChainge3Eseo4(re_num); // -> 요청 상태  : 수행중
 					// 로그가 인서트 됬을 경우
 					}else {
 						logDao.updateDroneMission(d_number, re_num, d_m_preparation);
 					}
 				
 				}else if(jsonObject.get("msgid").equals("missionSpots")) {
-					System.out.println("끝");
+					
+					int re_num = (int) jsonObject.get("missionNumber");   // 요청 번호 가져오기
+					int d_number = (int) jsonObject.get("droneNumber"); // 드론 번호 가져오기
+					
+					missionDao.updateSuccessChainge4Eseo5(re_num);    // 요청 상태 업데이트 : 완료
+					droneDao.updateDroneState1(d_number);             // 드론 상태 업데이트
+					logDao.getDroneMissionUpdate(re_num);             // 완료 시간 업데이트 
 				}
 					
 					
@@ -183,6 +187,20 @@ public class MqttService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 미션 수락 -> 안드로이드에 전송
+	public void missionAcceptance(int re_num) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("re_num", re_num);
+		jsonObject.put("success", "수락");
+		
+		try {
+			mqttclient.publish("/android/page1", jsonObject.toString().getBytes(), 0, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

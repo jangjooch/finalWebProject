@@ -455,6 +455,13 @@
 			re_success = 3
 	</select>	
 	
+	<!-- 수행중 -->
+	<update id="updateRequestSuccess4" parameterType="int">
+		UPDATE request 
+		SET re_success = 4
+		WHERE re_num = #{re_num}
+	</update>
+	
 	<!-- 정상완료 -->
 	<update id="updateRequestSuccess5" parameterType="int">
 		UPDATE request 

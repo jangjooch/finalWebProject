@@ -115,6 +115,7 @@ public class MissionController {
 		}else{
 			//요청 수락 re_success = 1;
 			int success = service.requestSuccessChange(re_num);
+			mqttService.missionAcceptance(re_num);
 		}
 		
 		return "redirect:/mission/requestList"; 
@@ -233,6 +234,6 @@ public class MissionController {
 	@RequestMapping("/api")
 	public String MissionApi() {
 				
-		return"mission/mission_pro_detail";
+		return "mission/mission_pro_detail";
 	}
 }

@@ -102,9 +102,15 @@ public class DroneDao {
 		return totalRowNum;
 	}
 	
-	// 드론 상태 업데이트
+	// 드론 상태 업데이트 -> 수행중
 	public int updateDrontState(int d_number) {
 		int update = sqlSessionTemplate.update("drone.updateDroneState", d_number);
 		return update;
+	}
+	
+	// 드론 상태 업데이트 -> 대기중
+	public void updateDroneState1(int d_number) {
+		int update = sqlSessionTemplate.update("drone.updateDroneState1", d_number);
+		
 	}
 }

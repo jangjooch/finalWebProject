@@ -121,9 +121,17 @@ public class LogDao {
 		
 	}
 	
+	// 드론 미션 확인 테스트
 	public int getDMNumCount(int re_num) {
 		int d_m_number = sqlSessionTemplate.selectOne("log.getDMNumCount", re_num);
 		return d_m_number;
 	}
+	
+	// 미션 완료 업데이트
+	public void getDroneMissionUpdate(int re_num) {
+		int d_update = sqlSessionTemplate.update("log.updateDroneMissionComplate", re_num);
+		
+	}
+	
 	
 }
