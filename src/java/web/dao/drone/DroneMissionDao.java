@@ -44,6 +44,7 @@ public class DroneMissionDao {
 	//요청 거절 된 로그
 	public int requestRejection(int re_num) {
 		int rows = sqlSessionTemplate.insert("droneMission.insertRequestRejection", re_num); 
+		
 		return rows;
 	}
 	

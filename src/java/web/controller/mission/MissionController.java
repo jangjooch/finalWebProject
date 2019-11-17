@@ -105,6 +105,7 @@ public class MissionController {
 		if(rejection == 1) {
 			service.updateRequestSuccessChangeRefusal(re_num);
 			droneMissionService.requestRejection(re_num);
+			mqttService.missionAcceptance(re_num, check);
 			return "redirect:/mission/requestList";
 		}
 		

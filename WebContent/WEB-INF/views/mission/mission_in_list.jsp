@@ -21,8 +21,8 @@
 			}
 		
 			// 요청수락 확인기능
-			function mission_accept(renum, check) {
-				var value = renum;
+			function mission_accept(re_num, check) {
+				var value = re_num;
 				var rejection = check;
 				var result = false;
 				if(rejection == 0){
