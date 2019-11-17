@@ -112,10 +112,11 @@ public class MissionController {
 			//요청 거절 re_success = 6;
 			int fail = service.updateRequestSuccessChangeRefusal(re_num);
 			droneMissionService.requestRejection(re_num);
+			mqttService.missionAcceptance(re_num, check);
 		}else{
 			//요청 수락 re_success = 1;
 			int success = service.requestSuccessChange(re_num);
-			mqttService.missionAcceptance(re_num);
+			mqttService.missionAcceptance(re_num, check);
 		}
 		
 		return "redirect:/mission/requestList"; 

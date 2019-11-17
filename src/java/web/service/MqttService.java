@@ -148,9 +148,6 @@ public class MqttService {
 					droneDao.updateDroneState1(d_number);             // 드론 상태 업데이트
 					logDao.getDroneMissionUpdate(re_num);             // 완료 시간 업데이트 
 				}
-					
-					
-			
 			}
 			
 			@Override
@@ -190,10 +187,18 @@ public class MqttService {
 	}
 	
 	// 미션 수락 -> 안드로이드에 전송
-	public void missionAcceptance(int re_num) {
+	public void missionAcceptance(int re_num, int check) {
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("re_num", re_num);
-		jsonObject.put("success", "수락");
+		
+		if(check == 1) {
+			jsonObject.put("msgid", "missionStatus");
+			jsonObject.put("status", "requestDeny");
+			jsonObject.put("missionNumber", re_num);
+		}else {
+			jsonObject.put("msgid", "missionStatus");
+			jsonObject.put("status", "requestAccept");
+			jsonObject.put("missionNumber", re_num);
+		}
 		
 		try {
 			mqttclient.publish("/android/page1", jsonObject.toString().getBytes(), 0, false);
