@@ -120,6 +120,52 @@
 									</tr>
 								</tbody>
 							</table>
+										<!--                                                             -->
+<div class="jumbotron">
+  <div class="container text-center">
+    <h3>My Portfolio</h3>      
+    <p>첫번째 사진</p>
+  </div>
+</div>
+  
+<div class="container-fluid bg-3 text-center">    
+  <h6 align="left">드론사진</h6><br>
+  <div class="row">
+    <div class="col-sm-3">
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-3"> 
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-3"> 
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-3">
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+    </div>
+  </div>
+</div><br>
+
+<div class="container-fluid bg-3 text-center">    
+  <h6 align="left">현장사진</h6><br>
+  <div class="row">
+    <div class="col-sm-3">
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-3"> 
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-3"> 
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-3">
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+    </div>
+  </div>
+</div><br><br>			
+			
+			
+			<!--                                                             -->
 						</div>
 					</div>
 					<div class="col-sm-12">
@@ -151,6 +197,7 @@
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
+			
 			<script>
 				// 목적지
 				var destination_x = ${logDto.requestDto.re_location_x}; // 전에 model로 받은 destinaion_lat 
