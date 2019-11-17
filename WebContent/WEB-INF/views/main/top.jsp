@@ -25,6 +25,8 @@
          src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
       <link rel="stylesheet" type="text/css"
          href="<%=application.getContextPath()%>/resources/css/shc/resources.css">
+         <script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3d69db29f8cf3ce70f95fece8fddde0"></script>
          
       <script type="text/javascript">
 //          if(${member_logined==null}){
