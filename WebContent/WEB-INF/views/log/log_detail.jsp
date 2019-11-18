@@ -17,8 +17,9 @@
 			
 			
 			
-			function fileUpload() {
-			    window.open("logFileUpload", "네이버새창", "width=600, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );
+			function fileUpload(m_number) {
+				var d_m_number = m_number;
+				    window.open("logFileUpload?d_m_number="+d_m_number, "파일 업로드", "width=600, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );
 			}
 		</script>
 		
@@ -148,7 +149,8 @@
   <h6 align="left">드론사진</h6><br>
   <div class="row">
     <div class="col-sm-3">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      <img src="<%=application.getContextPath()%>/resources/upload/" 
+      	class="img-responsive" style="width:100%" alt="Image">
     </div>
     <div class="col-sm-3"> 
       <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
@@ -196,7 +198,7 @@
 						<div id="bottom_t" style="height: 20px;"></div>
 						<div id="bottom_c">
 							<div id="bottom_c_l">
-								<div align="right"><a onclick="fileUpload()" class="btn btn-primary">사진업로드</a></div>							
+								<div align="right"><a onclick="fileUpload(${logDto.droneMissionDto.d_m_number})" class="btn btn-primary">사진업로드</a></div>							
 							</div>
 							<div id="bottom_c_c">
 								

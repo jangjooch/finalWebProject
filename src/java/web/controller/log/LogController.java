@@ -185,8 +185,9 @@ public class LogController {
 	
 	// 파일 업로드창 띄우기
 	@RequestMapping("logFileUpload")
-	public String logFileUpload() {
-		
+	public String logFileUpload(int d_m_number, Model model) {
+		System.out.println("창 띄우기!"+d_m_number);
+		model.addAttribute("d_m_number",d_m_number);
 		return "log/log_fileUpload";
 	}
 	
@@ -195,50 +196,40 @@ public class LogController {
 	
 	// 파일 업로드하기
 	@PostMapping("/fileUpLoad")
-	public String fileUpload(
-//			String title, String description, 
-			MultipartFile attach1, MultipartFile attach2,
+	public void fileUpload(int d_m_number,MultipartFile attach1, MultipartFile attach2, MultipartFile attach3, MultipartFile attach4,
 			HttpServletRequest request, Model model) throws Exception {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!");
+		System.out.println("d_m_number: " + d_m_number);
 		ServletContext application = request.getServletContext();
 		String savePath = application.getRealPath("/resources/upload/");
-		
+		System.out.println("저장위치: " + savePath);
 		if(!attach1.isEmpty()) {
-			logger.debug("-------------");
-			logger.debug("attach1: " + attach1.getOriginalFilename());
-			logger.debug("attach1: " + attach1.getContentType());
-			logger.debug("attach1: " + attach1.getSize());
-			String saveFileName = new Date().getTime() + "-" + attach1.getOriginalFilename();
-			logger.debug("attach1: " + saveFileName);
+			logger.info("-------------");
+			logger.info("attach1: " + attach1.getOriginalFilename());
+			String saveFileName = new Date().getTime() + "-" + d_m_number + "_1" + attach1.getOriginalFilename();
+			logger.info("attach1: " + saveFileName);
+			model.addAttribute("attach1", saveFileName);
 			attach1.transferTo(new File(savePath + saveFileName));
 		}
-		
 		if(!attach2.isEmpty()) {
-			logger.debug("-------------");
-			logger.debug("attach2: " + attach2.getOriginalFilename());
-			logger.debug("attach2: " + attach2.getContentType());
-			logger.debug("attach2: " + attach2.getSize());
-			String saveFileName = new Date().getTime() + "-" + attach2.getOriginalFilename();
-			logger.debug("attach2: " + saveFileName);
+			String saveFileName = new Date().getTime() + "-" + d_m_number + "_2"  + attach2.getOriginalFilename();
+			model.addAttribute("attach2", saveFileName);
 			attach2.transferTo(new File(savePath + saveFileName));
 		}
-		
-//		model.addAttribute("title", title);
-//		model.addAttribute("description", description);
-		
-		if(!attach1.isEmpty()) {
-			model.addAttribute("attach1", attach1.getOriginalFilename());
+		if(!attach3.isEmpty()) {
+			String saveFileName = new Date().getTime() + "-" + d_m_number + "_3"  + attach3.getOriginalFilename();
+			model.addAttribute("attach3", saveFileName);
+			attach3.transferTo(new File(savePath + saveFileName));
 		}
-		if(!attach2.isEmpty()) {
-			model.addAttribute("attach1", attach2.getOriginalFilename());
+		if(!attach4.isEmpty()) {
+			String saveFileName = new Date().getTime() + "-" + d_m_number + "_4"  + attach4.getOriginalFilename();
+			model.addAttribute("attach4", saveFileName);
+			attach4.transferTo(new File(savePath + saveFileName));
+		}
+
+		if (model != null) {
+			System.out.println("모델은 null이 아니다!");
 		}
 		
-		
-		return "log/log_detail";
 	}	
-	
-	
-	
-	
-	
-	
-}
+}// class
