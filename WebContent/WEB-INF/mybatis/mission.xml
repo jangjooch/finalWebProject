@@ -453,6 +453,7 @@
 			request
 		WHERE
 			re_success = 3
+		ORDER BY re_num ASC;
 	</select>	
 	
 	<!-- 수행중 -->

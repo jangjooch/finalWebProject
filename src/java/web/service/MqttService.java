@@ -167,11 +167,11 @@ public class MqttService {
 		
 		if(check == 1) {
 			jsonObject.put("msgid", "missionStatus");
-			jsonObject.put("status", "요청거절");
+			jsonObject.put("status", "Mission Deny");
 			jsonObject.put("missionNumber", re_num);
 		}else {
 			jsonObject.put("msgid", "missionStatus");
-			jsonObject.put("status", "요청수락");
+			jsonObject.put("status", "Mission Accept");
 			jsonObject.put("missionNumber", re_num);
 		}
 		
@@ -189,11 +189,11 @@ public class MqttService {
 		
 		if(load == 2) {
 			jsonObject.put("msgid", "missionStatus");
-			jsonObject.put("status", "물품 적재중...");
+			jsonObject.put("status", "Package Loading...");
 			jsonObject.put("missionNumber", re_num);
 		}else {
 			jsonObject.put("msgid", "missionStatus");
-			jsonObject.put("status", "물품 적재완료");
+			jsonObject.put("status", "Package Complete");
 			jsonObject.put("missionNumber", re_num);
 		}
 		
