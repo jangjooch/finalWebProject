@@ -187,6 +187,7 @@ public class MqttService {
 		
 		JSONObject jsonObject = new JSONObject();
 		
+		// load = 2 -> 물품 적재중
 		if(load == 2) {
 			jsonObject.put("msgid", "missionStatus");
 			jsonObject.put("status", "Package Loading...");
