@@ -205,6 +205,28 @@ public class MqttService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 적재 상태 보내기
+	public void missionLoad(int re_num, int load) {
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		if(load == 2) {
+			jsonObject.put("msgid", "missionStatus");
+			jsonObject.put("status", "물품 적재중...");
+			jsonObject.put("missionNumber", re_num);
+		}else {
+			jsonObject.put("msgid", "missionStatus");
+			jsonObject.put("status", "물품 적재완료");
+			jsonObject.put("missionNumber", re_num);
+		}
+		
+		try {
+			mqttclient.publish("/android/page1", jsonObject.toString().getBytes(), 0, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

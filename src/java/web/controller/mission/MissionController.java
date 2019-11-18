@@ -166,8 +166,9 @@ public class MissionController {
 	// 적재 하기 버튼 클릭 시 1 -> 2
 	@RequestMapping("/updateSuccessChainge1Eseo2")
 	public String updateSuccessChainge1Eseo2(int re_num) {
-		
+		int load = 2;
 		service.updateSuccessChainge1Eseo2(re_num);
+		mqttService.missionLoad(re_num, load);		
 		
 		return "redirect:/mission/missionProList";
 	}
@@ -176,8 +177,10 @@ public class MissionController {
 	@RequestMapping("/updateSuccessChainge2Eseo3")
 	public String updateSuccessChainge2Eseo3(int re_num) {
 		
+		int load = 3;
 		service.updateSuccessChainge2Eseo3(re_num);
 		mqttService.sendMessage("/gcs/missionIn");
+		mqttService.missionLoad(re_num, load);
 		
 		return "redirect:/mission/missionProList";
 	}
