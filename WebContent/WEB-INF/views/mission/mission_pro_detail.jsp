@@ -32,11 +32,8 @@ src="<%=application.getContextPath()%>/resources/js/paho-mqtt-min.js"></script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new kakao.maps.LatLng(destination_x, destination_y), // 지도의 중심좌표
-			//33.450701, 126.570667 -> 제주도
-			// 13.22415, 32.21584 -> 아랍사막
-			// 37.504383, 127.122404 -> 협회
-			level : 4
-		// 지도의 확대 레벨
+			level : 4,
+			marker: marker
 		};
 
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -45,22 +42,13 @@ src="<%=application.getContextPath()%>/resources/js/paho-mqtt-min.js"></script>
 		var marker = new kakao.maps.Marker({
 			// 지도 중심좌표에 마커를 생성합니다 
 			map: map,
-		    position: new kakao.maps.LatLng(destination_x, destination_y)
+		    position: new kakao.maps.LatLng(destination_x, destination_y),
+		    text: '요청 위치'
+				
 		});
 		//marker.setPosition(new kakao.maps.LatLng(destination_x, destination_y))
 		// 지도에 마커를 표시합니다		
 		marker.setMap(map);
-		
-		// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
-		function showMarkers() {
-		    setMarkers(map); 
-		}
-
-		// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
-		function hideMarkers() {
-		    setMarkers(null);    
-		}
-		
 	</script>
 </body>
 </html>

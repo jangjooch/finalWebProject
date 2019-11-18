@@ -103,8 +103,7 @@
 						</tbody>						
 						</table>
 				</div>
-					<c:choose>
-						<c:when test="${!empty requestList}">
+				
 				<div class="col-sm-2"></div>
 							
 				<%-- bottom --%>
@@ -115,49 +114,55 @@
 						<div id="bottom_c">
 							<div id="bottom_c_l"></div>
 							<div id="bottom_c_c">
+								<c:choose>
+								<c:when test="${!empty requestList}">
 								<nav aria-label="Page navigation example">
-							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="missionProList?=pageNo=1"> 
-									<span aria-hidden="true">&laquo;</span></a>
-								</li>
-								<c:if test="${groupNo > 1}">
-								<li class="page-item"><a class="page-link" href="missionProList?pageNo=${startPageNo-1}"> 
-									<span aria-hidden="true"><</span></a>
-								</li>
-								</c:if>
-								
-						  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
-						  		<c:if test="${pageNo==i}">
-						  			<li class="page-item active">
-						  				<a href="missionProList?pageNo=${i}" class="page-link">${i}</a>
-						  			</li>
-						  		</c:if>
-				  				<c:if test="${pageNo!=i}">
-				  					<li class="page-item">
-				  						<a href="missionProList?pageNo=${i}" class="page-link">${i}</a>
-				  					</li>
-				  				</c:if>
-				  			</c:forEach>
-								<c:if test="${groupNo < totalGroupNum}">
-									<li class="page-item">
-										<a class="page-link" href="missionProList?pageNo=${endPageNo+1 }"> 
-										<span aria-hidden="true">></span>
-										</a>
-									</li>
-								</c:if>
-								<li class="page-item"><a class="page-link" href="missionProList?pageNo=${totalPageNum }"> 
-									<span aria-hidden="true">&raquo;</span></a>
-								</li>
-							</ul>
-						</nav>
+									<ul class="pagination">
+										<li class="page-item"><a class="page-link" href="missionProList?=pageNo=1"> 
+											<span aria-hidden="true">&laquo;</span></a>
+										</li>
+										<c:if test="${groupNo > 1}">
+										<li class="page-item"><a class="page-link" href="missionProList?pageNo=${startPageNo-1}"> 
+											<span aria-hidden="true"><</span></a>
+										</li>
+										</c:if>
+										
+								  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
+								  		<c:if test="${pageNo==i}">
+								  			<li class="page-item active">
+								  				<a href="missionProList?pageNo=${i}" class="page-link">${i}</a>
+								  			</li>
+								  		</c:if>
+						  				<c:if test="${pageNo!=i}">
+						  					<li class="page-item">
+						  						<a href="missionProList?pageNo=${i}" class="page-link">${i}</a>
+						  					</li>
+						  				</c:if>
+						  			</c:forEach>
+										<c:if test="${groupNo < totalGroupNum}">
+											<li class="page-item">
+												<a class="page-link" href="missionProList?pageNo=${endPageNo+1 }"> 
+												<span aria-hidden="true">></span>
+												</a>
+											</li>
+										</c:if>
+										<li class="page-item"><a class="page-link" href="missionProList?pageNo=${totalPageNum }"> 
+											<span aria-hidden="true">&raquo;</span></a>
+										</li>
+									</ul>
+								</nav>
+								</c:when>
+								<c:otherwise>
+									<h4 Style="text-align: center;">요청 내역이 없습니다.</h4>
+								</c:otherwise>
+								</c:choose>
 							</div>
 							<div id="bottom_c_r"></div>
 						</div>
 						<div id="bottom_b" style="height: 20px;"></div>
 					</div>
 				</div>
-						</c:when>
-					</c:choose>
+				
 				<div class="col-sm-2"></div>
 			</div>
 <jsp:include page="../main/bottom.jsp" flush="false"/>

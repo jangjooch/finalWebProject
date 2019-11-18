@@ -98,7 +98,7 @@
 		INSERT INTO 
 			drone_mission
 		VALUES 
-			(DRONE_MISSION_SEQ.NEXTVAL, #{d_number}, #{re_num}, 2, #{d_m_preparation}, null)	
+			(DRONE_MISSION_SEQ.NEXTVAL, #{d_number}, #{re_num}, 2, null, #{d_m_start}, null)	
 			
 	</insert>
 	
@@ -108,7 +108,7 @@
 		SET
 			d_number = #{d_number},
 			re_num = #{re_num},
-			d_m_preparation = #{d_m_preparation}
+			d_m_start = #{d_m_start}
 		WHERE 
 			re_num = #{re_num}
 	</update>

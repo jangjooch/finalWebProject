@@ -93,28 +93,38 @@ public class MqttService {
 				}else if(jsonObject.get("msgid").equals("missionSpots")) {
 					JSONArray jsonArray = new JSONArray(jsonObject.get("missionSpots").toString());
 					
-					// 미션 내용
-					String d_m_preparation = jsonArray.toString();
-					
 					int d_number = (int) jsonObject.get("droneNumber"); // 드론 번호 가져오기
 					int re_num = (int) jsonObject.get("missionNumber");   // 요청 번호 가져오기
 					// 드론 상태 업데이트
 					int rows = droneDao.updateDrontState(d_number);
 					
 					int d_m_number = logDao.getDMNumCount(re_num);
-
+					
+					JSONArray history = new JSONArray();
+					for(int i=0; i<jsonArray.length(); i++) {
+						JSONObject get = (JSONObject) jsonArray.get(i);
+						JSONObject array = new JSONObject();
+						array.put("seq", get.get("seq"));
+						array.put("x", get.get("x"));
+						array.put("y", get.get("y"));
+						history.put(array);
+					}
+					
+					// 미션 내용
+					String d_m_start = history.toString();
+					
 					/* 업로드를 여러번 할 경우 */
 					// 로그가 인서트가 안됬을 경우
 					if(d_m_number == 0) {
-						logDao.insertDroneMission(d_number, re_num, d_m_preparation);
+						logDao.insertDroneMission(d_number, re_num, d_m_start);
 						// 요청을 상태 값을 바꿔야함
 						missionDao.updateSuccessChainge3Eseo4(re_num); // -> 요청 상태  : 수행중
 					// 로그가 인서트 됬을 경우
 					}else {
-						logDao.updateDroneMission(d_number, re_num, d_m_preparation);
+						logDao.updateDroneMission(d_number, re_num, d_m_start);
 					}
 				
-				}else if(jsonObject.get("msgid").equals("missionSpots")) {
+				}else if(jsonObject.get("msgid").equals("missionStatus")) {
 					
 					int re_num = (int) jsonObject.get("missionNumber");   // 요청 번호 가져오기
 					int d_number = (int) jsonObject.get("droneNumber"); // 드론 번호 가져오기
@@ -167,11 +177,11 @@ public class MqttService {
 		
 		if(check == 1) {
 			jsonObject.put("msgid", "missionStatus");
-			jsonObject.put("status", "요청거절");
+			jsonObject.put("status", "Mission Deny");
 			jsonObject.put("missionNumber", re_num);
 		}else {
 			jsonObject.put("msgid", "missionStatus");
-			jsonObject.put("status", "요청수락");
+			jsonObject.put("status", "Mission Accept");
 			jsonObject.put("missionNumber", re_num);
 		}
 		
@@ -187,13 +197,14 @@ public class MqttService {
 		
 		JSONObject jsonObject = new JSONObject();
 		
+		// load = 2 -> 물품 적재중
 		if(load == 2) {
 			jsonObject.put("msgid", "missionStatus");
-			jsonObject.put("status", "물품 적재중...");
+			jsonObject.put("status", "Package Loading...");
 			jsonObject.put("missionNumber", re_num);
 		}else {
 			jsonObject.put("msgid", "missionStatus");
-			jsonObject.put("status", "물품 적재완료");
+			jsonObject.put("status", "Package Complete");
 			jsonObject.put("missionNumber", re_num);
 		}
 		
