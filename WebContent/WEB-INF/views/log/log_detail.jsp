@@ -14,6 +14,12 @@
 				}
 				return result;
 			}
+			
+			
+			
+			function fileUpload() {
+			    window.open("logFileUpload", "네이버새창", "width=600, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );
+			}
 		</script>
 		
 		<style>
@@ -120,7 +126,17 @@
 									</tr>
 								</tbody>
 							</table>
-										<!--                                                             -->
+
+						</div>
+					</div>
+					<div class="col-sm-12">
+						
+						<h5>요청 위치</h5>
+						<div id="map" style="width: 100%; height: 500px;">
+						</div>
+						<p/>
+						<p/>
+<!--                                                             -->
 <div class="jumbotron">
   <div class="container text-center">
     <h3>My Portfolio</h3>      
@@ -166,15 +182,10 @@
 			
 			
 			<!--                                                             -->
-						</div>
-					</div>
-					<div class="col-sm-12">
 						
-						<div id="map" style="width: 100%; height: 500px;">
-						
-						</div>
 						
 					</div>
+					
 					</div>
 					</div>
 				
@@ -184,12 +195,14 @@
 					<div id="bottom">
 						<div id="bottom_t" style="height: 20px;"></div>
 						<div id="bottom_c">
-							<div id="bottom_c_l"></div>
+							<div id="bottom_c_l">
+								<div align="right"><a onclick="fileUpload()" class="btn btn-primary">사진업로드</a></div>							
+							</div>
 							<div id="bottom_c_c">
 								
 							</div>
 							<div id="bottom_c_r">
-								<div><a href="log_list?pageNo=${pageNo}" class="btn btn-warning">목록으로</a></div>
+								<div align="right"><a href="log_list?pageNo=${pageNo}" class="btn btn-warning">목록으로</a></div>
 							</div>
 						</div>
 						<div id="bottom_b" style="height: 20px;"></div>
