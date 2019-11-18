@@ -32,8 +32,6 @@
 			}
 		
 		</script>
-		<style>
-		</style>
 		<%-- 전체 div --%>
 			<div class="row">
 				<%-- top --%>
@@ -147,5 +145,10 @@
 					</div>
 				</div>	
 				<div class="col-sm-2"></div>
+				
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8" style="height: 100px;"></div>
+				<div class="col-sm-2"></div>
+				
 			</div>
 <jsp:include page="../main/bottom.jsp" flush="false"/>

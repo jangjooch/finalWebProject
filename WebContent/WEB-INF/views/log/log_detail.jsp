@@ -128,7 +128,7 @@
 					</div>
 					<div class="col-sm-12">
 						
-						<h5>요청 위치</h5>
+						<h4 style="text-align: center;">요청 위치</h4>
 						<div id="map" style="width: 100%; height: 500px;">
 						</div>
 						<p/>
@@ -203,6 +203,10 @@
 					</div>
 				</div>
 				<div class="col-sm-2"></div>
+				
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8" style="height: 100px;"></div>
+				<div class="col-sm-2"></div>
 			</div>
 			
 			<script>
@@ -232,5 +236,12 @@
 				//marker.setPosition(new kakao.maps.LatLng(destination_x, destination_y))
 				// 지도에 마커를 표시합니다		
 				marker.setMap(map);
+				
+				
+				// 새로고침
+				function refresh(){
+					
+				}
+				
 			</script>
 <jsp:include page="../main/bottom.jsp" flush="false"/>

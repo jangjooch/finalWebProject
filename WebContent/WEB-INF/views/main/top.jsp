@@ -2,8 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
+	<html>
    <head>
-      <title>Main</title>
+      <title>A Control Center</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/image/DroneLogo1.png"/>
@@ -26,8 +27,7 @@
       <link rel="stylesheet" type="text/css"
          href="<%=application.getContextPath()%>/resources/css/shc/resources.css">
          <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3d69db29f8cf3ce70f95fece8fddde0"></script>
-         
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3d69db29f8cf3ce70f95fece8fddde0"></script>
       <script type="text/javascript">
 //          if(${member_logined==null}){
 //             location.href="${pageContext.request.contextPath}";
@@ -37,6 +37,19 @@
          </c:if>
       </script>
       <style type="text/css">
+      
+      html {
+			height: 100%;
+			}
+	body {
+	margin: 0;
+	height: 100%;
+	}
+	#wrapper {
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 19px; /* footer height */
+	}
       
       #header{
          height: 150px;
@@ -130,7 +143,7 @@
             </c:if>
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/log/log_list">사건기록</a></li>
             <c:if test="${member_logined!=null}">
-               <li class="nav-item" style="float:right">
+               <li class="nav-item" style="float:right; text-align: right;">
                   <a class="nav-link" href="${pageContext.request.contextPath}/logOut">로그아웃</a>
                </li>
             </c:if>

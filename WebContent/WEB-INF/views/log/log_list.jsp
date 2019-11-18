@@ -26,15 +26,11 @@
 			}
 		
 		</script>
-		
-		<style>
-		</style>
 		<%-- 전체 div --%>
 			<div class="row">
 				<%-- top --%>
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8" id="top">
-					<div id="top">
 						<div id="top_t">
 							<div style="height: 20px;"></div>
 						</div>
@@ -56,7 +52,6 @@
 						<button type="submit" class="btn btn-primary mb-2">검색</button>
 					</form>
 						</div>
-					</div>
 				</div>
 				<div class="col-sm-2"></div>
 				
@@ -138,5 +133,10 @@
 					</div>
 				</div>
 				<div class="col-sm-2"></div>
+				
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8" style="height: 100px;"></div>
+				<div class="col-sm-2"></div>
+				
 			</div>
 <jsp:include page="../main/bottom.jsp" flush="false"/>

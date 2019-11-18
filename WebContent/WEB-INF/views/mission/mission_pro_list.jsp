@@ -5,6 +5,9 @@
 <jsp:include page="../main/top.jsp" flush="false"/>
 
 		<script type="text/javascript">
+			
+		window.setTimeout('window.location.reload()',5000); //5초마다 새로고침
+		
 			function searchSelect(){
 				var result = true;
 				if ($("#searchThing").val() == "0") {
@@ -161,6 +164,11 @@
 						</div>
 						<div id="bottom_b" style="height: 20px;"></div>
 					</div>
+					
+					<div class="col-sm-2"></div>
+					<div class="col-sm-8" style="height: 100px;"></div>
+					<div class="col-sm-2"></div>
+					
 				</div>
 				
 				<div class="col-sm-2"></div>

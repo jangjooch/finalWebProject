@@ -12,8 +12,11 @@
             border-top: 1px solid ;
             background-image: url("${pageContext.request.contextPath}/resources/image/footer.png");
             background-size: 100% 100%;
-            
+            position:absolute;
+		    bottom:0;
+		    width:100%;
       }
+      
       
       </style>
       </body>

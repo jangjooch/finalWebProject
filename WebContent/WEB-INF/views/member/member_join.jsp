@@ -138,5 +138,10 @@
 					<div id="b_r_bottom"></div>
 				</div>
 			</div>
+			
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8" style="height: 100px;"></div>
+			<div class="col-sm-2"></div>
+			
 		</div>	
 </html>
