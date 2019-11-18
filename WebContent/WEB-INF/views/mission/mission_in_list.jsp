@@ -146,11 +146,11 @@
 								<c:when test="${!empty requestList}">
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
-										<li class="page-item"><a class="page-link" href="requestProList?=pageNo=1"> 
+										<li class="page-item"><a class="page-link" href="requestList?=pageNo=1"> 
 											<span aria-hidden="true">&laquo;</span></a>
 										</li>
 										<c:if test="${groupNo > 1}">
-										<li class="page-item"><a class="page-link" href="requestProList?pageNo=${startPageNo-1}"> 
+										<li class="page-item"><a class="page-link" href="requestList?pageNo=${startPageNo-1}"> 
 											<span aria-hidden="true"><</span></a>
 										</li>
 										</c:if>
@@ -158,23 +158,23 @@
 								  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
 								  		<c:if test="${pageNo==i}">
 								  			<li class="page-item active">
-								  				<a href="requestProList?pageNo=${i}" class="page-link">${i}</a>
+								  				<a href="requestList?pageNo=${i}" class="page-link">${i}</a>
 								  			</li>
 								  		</c:if>
 						  				<c:if test="${pageNo!=i}">
 						  					<li class="page-item">
-						  						<a href="requestProList?pageNo=${i}" class="page-link">${i}</a>
+						  						<a href="requestList?pageNo=${i}" class="page-link">${i}</a>
 						  					</li>
 						  				</c:if>
 						  			</c:forEach>
 										<c:if test="${groupNo < totalGroupNum}">
 											<li class="page-item">
-												<a class="page-link" href="requestProList?pageNo=${endPageNo+1 }"> 
+												<a class="page-link" href="requestList?pageNo=${endPageNo+1 }"> 
 												<span aria-hidden="true">></span>
 												</a>
 											</li>
 										</c:if>
-										<li class="page-item"><a class="page-link" href="requestProList?pageNo=${totalPageNum }"> 
+										<li class="page-item"><a class="page-link" href="requestList?pageNo=${totalPageNum }"> 
 											<span aria-hidden="true">&raquo;</span></a>
 										</li>
 									</ul>

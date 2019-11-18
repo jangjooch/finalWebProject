@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.drone.DroneDao;
+import web.dao.drone.DroneMissionDao;
 import web.dao.log.LogDao;
 import web.dao.mission.MissionDao;
+import web.dto.drone.DroneDto;
 import web.dto.request.RequestDto;
 
 @Service
@@ -27,6 +29,8 @@ public class MqttService {
 	
 	private MqttClient mqttclient;
 	
+	@Autowired
+	private DroneMissionDao droneMissionDao;
 	@Autowired
 	private MissionDao missionDao;
 	@Autowired
@@ -74,11 +78,24 @@ public class MqttService {
 	private void receiveMessage(){
 		mqttclient.setCallback(new MqttCallback() {
 			@Override
-			public void messageArrived(String topic, MqttMessage message) throws Exception {
+			public void messageArrived(String topic, MqttMessage message){
 				byte[] bytes = message.getPayload();
 				String json = new String(bytes);
 				logger.info("json : " + json);
 				JSONObject jsonObject = new JSONObject(json);
+				
+				// 드론 리스트 요청
+				if(jsonObject.get("msgid").equals("DroneRequest")) {
+					new Thread() {
+						@Override
+						public void run() {
+							sendDroneMessage("/drone/select/sub");
+						}
+					}.start();
+				}else if(jsonObject.get("msgid").equals("DroneSelect")) {
+					// 드론 상태 업데이트
+					int rows = droneDao.updateDrontState(Integer.parseInt(String.valueOf(jsonObject.get("DroneNum"))));
+				}
 				
 				// 메세지 받거나, 새로고침 일 경우에만 요청 리스트 보내기
 				if(jsonObject.get("msgid").equals("dataRequest") ) {
@@ -88,16 +105,12 @@ public class MqttService {
 							sendMessage("/gcs/missionIn");
 						}
 					}.start();
-					
 				// 업로드 시 - insert drone_mission	
 				}else if(jsonObject.get("msgid").equals("missionSpots")) {
 					JSONArray jsonArray = new JSONArray(jsonObject.get("missionSpots").toString());
 					
-					int d_number = (int) jsonObject.get("droneNumber"); // 드론 번호 가져오기
+					int d_number = (int) jsonObject.get("droneNumber");   // 드론 번호 가져오기
 					int re_num = (int) jsonObject.get("missionNumber");   // 요청 번호 가져오기
-					// 드론 상태 업데이트
-					int rows = droneDao.updateDrontState(d_number);
-					
 					int d_m_number = logDao.getDMNumCount(re_num);
 					
 					JSONArray history = new JSONArray();
@@ -116,6 +129,7 @@ public class MqttService {
 					/* 업로드를 여러번 할 경우 */
 					// 로그가 인서트가 안됬을 경우
 					if(d_m_number == 0) {
+						System.out.println("실행");
 						logDao.insertDroneMission(d_number, re_num, d_m_start);
 						// 요청을 상태 값을 바꿔야함
 						missionDao.updateSuccessChainge3Eseo4(re_num); // -> 요청 상태  : 수행중
@@ -130,9 +144,21 @@ public class MqttService {
 					int d_number = (int) jsonObject.get("droneNumber"); // 드론 번호 가져오기
 					
 					missionDao.updateSuccessChainge4Eseo5(re_num);    // 요청 상태 업데이트 : 완료
-					droneDao.updateDroneState1(d_number);             // 드론 상태 업데이트
 					logDao.getDroneMissionUpdate(re_num);             // 완료 시간 업데이트 
 				}
+				
+				// 이상종료
+				if(jsonObject.get("msgid").equals("droneReset")) {
+					// 드론 상태 원상복귀
+					droneDao.updateDroneState1(Integer.parseInt(String.valueOf(jsonObject.get("droneNumber"))));
+					
+					int re_num = Integer.parseInt(String.valueOf(jsonObject.get("missionNumber")));
+					int d_number = Integer.parseInt(String.valueOf(jsonObject.get("droneNumber")));
+
+					missionDao.updateRequestSuccessChangeRefusal(re_num);
+					droneMissionDao.updateMissionDroneFail(re_num);
+				}
+				
 			}
 			
 			@Override
@@ -149,6 +175,28 @@ public class MqttService {
 		} catch (MqttException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 드론 list 보내기 -> gcs
+	public void sendDroneMessage(String topic) {
+		logger.info("실행");
+		JSONArray jsonArray = new JSONArray();
+		List<DroneDto> list = droneDao.gcsDroneList();
+		
+		for(DroneDto request: list) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("DroneNum", request.getD_number());
+			jsonObject.put("DroneModel", request.getD_model());
+			jsonObject.put("DroneState", request.getD_status());
+			jsonArray.put(jsonObject);
+		}
+		
+		try {
+			mqttclient.publish(topic, jsonArray.toString().getBytes(), 0, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	// 요청 테이블 gcs에 보내기 - gcs에서 요청

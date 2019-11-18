@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import web.dto.drone.DroneMissionDto;
-import web.dto.log.LogDto;
 
 @Component
 public class DroneMissionDao {
@@ -46,6 +45,11 @@ public class DroneMissionDao {
 		int rows = sqlSessionTemplate.insert("droneMission.insertRequestRejection", re_num); 
 		
 		return rows;
+	}
+	
+	public void updateMissionDroneFail(int re_num) {
+		int row = sqlSessionTemplate.update("droneMission.updateMissionDroneFail", re_num);
+		
 	}
 	
 }

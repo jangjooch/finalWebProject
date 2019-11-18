@@ -19,7 +19,9 @@
       
       
       </style>
-      </body>
       <div id="footer">
       </div>
+      </div>
+      
+      </body>
 </html>

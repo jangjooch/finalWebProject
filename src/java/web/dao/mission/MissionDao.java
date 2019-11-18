@@ -198,6 +198,7 @@ public class MissionDao {
 		return rows;
 	}
 	
+	// 요청 거절 처리
 	public int updateRequestSuccessChangeRefusal(int re_num) {
 		int rows = sqlSessionTemplate.update("mission.updateRequestSuccess2", re_num);
 		

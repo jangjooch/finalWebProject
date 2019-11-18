@@ -111,6 +111,11 @@ public class DroneDao {
 	// 드론 상태 업데이트 -> 대기중
 	public void updateDroneState1(int d_number) {
 		int update = sqlSessionTemplate.update("drone.updateDroneState1", d_number);
-		
+	}
+	
+	// 드론 리스트 gcs에게 보내기
+	public List<DroneDto> gcsDroneList(){
+		List<DroneDto> list = sqlSessionTemplate.selectList("gcsDroneList");
+		return list;
 	}
 }

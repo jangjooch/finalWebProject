@@ -76,8 +76,19 @@
 	<!-- 요청 거절된 로그 insert -->
 	<insert id="insertRequestRejection" parameterType="int">
 		INSERT INTO drone_mission VALUES 
-			(DRONE_MISSION_SEQ.NEXTVAL, 0, #{re_num}, 0, '요청이 거절 되었습니다.', SYSDATE, null)
+			(DRONE_MISSION_SEQ.NEXTVAL, 0, #{re_num}, 0, null, '요청이 거절 되었습니다.', SYSDATE)
 	</insert>
+
+	<update id="updateMissionDroneFail" parameterType="int">
+		UPDATE 
+			drone_mission
+		SET
+			d_m_start = '요청이 거절 되었습니다.',
+			d_m_preparation = SYSDATE
+		WHERE
+			re_num = #{re_num}
+	
+	</update>
 	
 	<!-- update -->
 	<!-- insert -->
