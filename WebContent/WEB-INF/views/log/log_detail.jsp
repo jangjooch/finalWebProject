@@ -22,10 +22,6 @@
 				    window.open("logFileUpload?d_m_number="+d_m_number, "파일 업로드", "width=600, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );
 			}
 		</script>
-		
-		<style>
-		</style>
-	<body>
 		<%-- 전체 div --%>
 			<div class="row">
 				<%-- top --%>
@@ -36,7 +32,7 @@
 							<div style="height: 20px;"></div>
 						</div>
 						<div id="top_c">
-							<h2> LogDetail # ${logDto.droneMissionDto.d_m_number} </h2>
+							<h1> LogDetail # ${logDto.droneMissionDto.d_m_number} </h1>
 						</div>
 						<div id="top_b">
 							
@@ -182,10 +178,6 @@
   </div>
 </div><br><br>			
 			
-			
-			<!--                                                             -->
-						
-						
 					</div>
 					
 					</div>
@@ -240,26 +232,5 @@
 				//marker.setPosition(new kakao.maps.LatLng(destination_x, destination_y))
 				// 지도에 마커를 표시합니다		
 				marker.setMap(map);
-				
-				
-				var DroneMarker = new kakao.maps.Marker({ 
-					map: map,
-				    position: new kakao.maps.LatLng(lat, lng)
-				}); 
-				//37.504000, 127.122000
-				//DroneMarker.setPosition(new kakao.maps.LatLng(destination_x, destination_y));
-				DroneMarker.setMap(map);
-				
-				
-				// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
-				function showMarkers() {
-				    setMarkers(map); 
-				}
-	
-				// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
-				function hideMarkers() {
-				    setMarkers(null);    
-				}
-				
 			</script>
 <jsp:include page="../main/bottom.jsp" flush="false"/>

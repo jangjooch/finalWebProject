@@ -31,7 +31,6 @@
 		
 		
 	</head>
-	<body>
 		<form action="fileUpLoad" id="postUpdate" method="post"  enctype="multipart/form-data" > <!-- 본문에 input태그 하나당 파트를 가진다.
 																					문자파트/파일파트 를 보내야 할 경우 -->
 			<!-- MultipartResolver(인터페이스임) 에게 해석 요청을 함 -->
@@ -88,8 +87,4 @@
 			
 			<input type="submit" class="btn btn-secondary" id="files_send" value="파일업로드" />
 		</form>
-		
-		
-		
-	</body>
 </html>

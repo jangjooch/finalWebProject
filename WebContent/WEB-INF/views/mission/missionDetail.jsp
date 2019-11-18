@@ -28,7 +28,6 @@
 		
 			
 	</style>
-	<body>
 		<div id="body">
 			
 			<%-- top --%>
@@ -142,5 +141,4 @@
 				</div>
 			</div>
 		</div>	
-	</body>
 </html>

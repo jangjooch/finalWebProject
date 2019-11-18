@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import web.dao.log.LogDao;
 import web.dao.mission.MissionDao;
 import web.dto.item.ItemDto;
 import web.dto.item.MissionItemsDto;
@@ -21,7 +22,9 @@ import web.dto.request.RequestDto;
 public class MissionSerivce {
 	
 	@Autowired
-	MissionDao missionDao;
+	private MissionDao missionDao;
+	@Autowired
+	private LogDao logDao;
 
 	private static final Logger logger = LoggerFactory.getLogger(MissionSerivce.class);
 	
@@ -171,4 +174,5 @@ public class MissionSerivce {
 	public void updateSuccessChainge2Eseo3(int re_num) {
 		int rows = missionDao.updateSuccessChainge2Eseo3(re_num);
 	}
+	
 }

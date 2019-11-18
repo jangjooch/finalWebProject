@@ -128,8 +128,5 @@
 		WHERE
 			re_num=#{re_num}
 	</update>
-
-	
-	
 	
 </mapper>

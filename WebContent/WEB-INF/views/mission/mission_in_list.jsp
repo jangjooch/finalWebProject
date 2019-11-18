@@ -53,8 +53,6 @@
 				window.open(url, "자식창", setting);
 			}
 		</script>
-		<style>
-		</style>
 		<%-- 전체 div --%>
 			<div class="row">
 				<%-- top --%>

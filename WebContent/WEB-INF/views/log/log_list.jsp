@@ -29,7 +29,6 @@
 		
 		<style>
 		</style>
-	<body>
 		<%-- 전체 div --%>
 			<div class="row">
 				<%-- top --%>
@@ -40,7 +39,7 @@
 							<div style="height: 20px;"></div>
 						</div>
 						<div id="top_c">
-							<h2>LogList</h2>
+							<h1>LogList</h1>
 						</div>
 						<div id="top_b">
 							<form class="form-inline" action="logSearchedList" onsubmit="return searchSelect()">

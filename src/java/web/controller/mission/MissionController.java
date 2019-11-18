@@ -21,6 +21,7 @@ import web.dto.mission.MissionDto;
 import web.dto.request.RequestDto;
 import web.service.MqttService;
 import web.service.drone.DroneMissionService;
+import web.service.log.LogService;
 import web.service.mission.MissionSerivce;
 
 @Controller
@@ -39,6 +40,7 @@ public class MissionController {
 	
 	@Autowired
 	private MqttService mqttService;
+	
 	
 	// 요청 리스트
 	@RequestMapping("/requestList")
@@ -111,6 +113,7 @@ public class MissionController {
 		
 		if(check == 1) {
 			//요청 거절 re_success = 6;
+			//요청이 수락 되더라고 물품 부족시 자동 거절
 			int fail = service.updateRequestSuccessChangeRefusal(re_num);
 			droneMissionService.requestRejection(re_num);
 			mqttService.missionAcceptance(re_num, check);

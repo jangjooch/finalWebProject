@@ -11,8 +11,6 @@
 				}
 			}
 		</script>
-		
-	<body>
 		<%-- 전체 div --%>
 			<div class="row">
 				<%-- top --%>
@@ -23,7 +21,7 @@
 							<div style="height: 20px;"></div>
 						</div>
 						<div id="top_c">
-							<h2> MemberDetail </h2>
+							<h1> MemberDetail </h1>
 						</div>
 						<div id="top_b">
 							
@@ -105,9 +103,9 @@
 									</c:forEach>
 								</tbody>
 							</table>
-		<c:choose>
-			<c:when test="${!empty report}">
-							<div class="col-sm-8">
+					<c:choose>
+					<c:when test="${!empty report}">
+					<div class="col-sm-8">
 					<div id="bottom">
 						<div id="bottom_t" style="height: 20px;"></div>
 						<div id="bottom_c">
@@ -152,12 +150,12 @@
 						</div>
 						<div id="bottom_b" style="height: 20px;"></div>
 					</div>
-				</div>
+					</div>
 					</c:when>
-			<c:when test="${empty report}">
-				<h5 align="center">관련된 요청이 없습니다.</h5>
-			</c:when>
-		</c:choose>
+					<c:when test="${empty report}">
+						<h5 align="center">관련된 요청이 없습니다.</h5>
+					</c:when>
+				</c:choose>
 						</div>
 					</div>
 				</div>

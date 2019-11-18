@@ -37,7 +37,6 @@
 		</script>
 		<style>
 		</style>
-	<body>
 		<%-- 전체 div --%>
 			<div class="row">
 				<%-- top --%>
@@ -48,7 +47,7 @@
 							<div style="height: 20px;"></div>
 						</div>
 						<div id="top_c">
-							<h2> DroneUpdate </h2>
+							<h1> DroneUpdate </h1>
 						</div>
 						<div id="top_b">
 							<div style="height: 20px;"></div>

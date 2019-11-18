@@ -26,7 +26,6 @@
 		</script>
 		<style>
 		</style>
-	<body>
 		<%-- 전체 div --%>
 			<div class="row">
 				<%-- top --%>
@@ -37,7 +36,7 @@
 							<div style="height: 20px;"></div>
 						</div>
 						<div id="top_c">
-							<h2> MemberList </h2>
+							<h1> MemberList </h1>
 						</div>
 						<div id="top_b">
 							<form class="form-inline" method="get" action="memberSearch" onsubmit="return searchSelect()">
