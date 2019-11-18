@@ -226,10 +226,6 @@ public class LogController {
 			model.addAttribute("attach4", saveFileName);
 			attach4.transferTo(new File(savePath + saveFileName));
 		}
-
-		if (model != null) {
-			System.out.println("모델은 null이 아니다!");
-		}
 		
 	}	
 }// class

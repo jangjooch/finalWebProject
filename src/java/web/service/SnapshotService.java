@@ -44,7 +44,8 @@ public class SnapshotService {
 		while(true) {
 			try {
 				client = new MqttClient("tcp://106.253.56.124:1881", MqttClient.generateClientId(), null);
-				System.out.println("Camclient created");
+				client.connect();
+				System.out.println("Camclient created");				
 				break;
 			} catch (MqttException e) {
 				// TODO Auto-generated catch block
@@ -53,7 +54,12 @@ public class SnapshotService {
 		}
 		takeSnap = false;
 		System.out.println("CamClient Subscribe setCallback");
-		client.setCallback(new MqttCallback() {
+		make_sub();
+	}
+	
+	
+	public void make_sub() {
+			client.setCallback(new MqttCallback() {
 			
 			@Override
 			public void messageArrived(String topic, MqttMessage message) throws Exception {
@@ -61,7 +67,7 @@ public class SnapshotService {
 				if(topic.equals("/drone/cam0/gcs")) {
 					takeSnap = true;
 					pictureNumber = 0;
-//					
+					
 					byte[] data = message.getPayload();
 					String strData = new String(data);
 					JSONObject jsonObject = new JSONObject(strData);
