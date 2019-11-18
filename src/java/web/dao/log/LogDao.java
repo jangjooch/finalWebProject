@@ -101,21 +101,22 @@ public class LogDao {
 	}
 	
 	// 드론 미션 인서트
-	public void insertDroneMission(int d_number, int re_num, String d_m_preparation) {
+	public void insertDroneMission(int d_number, int re_num, String d_m_start) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("d_number", d_number);
 		map.put("re_num", re_num);
-		map.put("d_m_preparation", d_m_preparation);
+		map.put("d_m_start", d_m_start);
+		System.out.println(map.get("d_m_start"));
 		
 		int rows = sqlSessionTemplate.insert("log.insertDroneMission", map);
 	}
 	
 	// 드론 미션 업데이트 -> 업로드를 여러번 눌렀을 경우를 대비
-	public void updateDroneMission(int d_number, int re_num, String d_m_preparation) {
+	public void updateDroneMission(int d_number, int re_num, String d_m_start) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("d_number", d_number);
 		map.put("re_num", re_num);
-		map.put("d_m_preparation", d_m_preparation);
+		map.put("d_m_start", d_m_start);
 		
 		int rows = sqlSessionTemplate.update("log.insertDroneMission", map);
 		
