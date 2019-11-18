@@ -94,32 +94,7 @@ public class MqttService {
 					JSONArray jsonArray = new JSONArray(jsonObject.get("missionSpots").toString());
 					
 					// 미션 내용
-					String d_m_preparation = new String();
-					
-					for(int i=0; i<jsonArray.length(); i++) {
-						JSONObject obj = new JSONObject();
-						 obj = (JSONObject) jsonArray.get(i);
-						 
-						 if(i == 0) {
-							 d_m_preparation = i + " 번째 경로 : " + 
-								 		" / x: " + String.valueOf(obj.get("x")) + 
-								 		" / y: " + String.valueOf(obj.get("y")) + "    | |    ";
-							
-						 }
-						 
-						 if(i == jsonArray.length()-1) {
-							 d_m_preparation = d_m_preparation + i + " 번째 경로 : " + String.valueOf(obj.get("seq")) + 
-									 	" / x: " + String.valueOf(obj.get("x")) + 
-								 		" / y: " + String.valueOf(obj.get("y"));
-							 break;
-						 }
-						 
-						 if(i != 0) {
-							 d_m_preparation = d_m_preparation + i + " 번째 경로 : " + String.valueOf(obj.get("seq")) + 
-								 		" / x: " + String.valueOf(obj.get("x")) + 
-								 		" / y: " + String.valueOf(obj.get("y")) + "    | |    ";
-						 }
-					}
+					String d_m_preparation = jsonArray.toString();
 					
 					int d_number = (int) jsonObject.get("droneNumber"); // 드론 번호 가져오기
 					int re_num = (int) jsonObject.get("missionNumber");   // 요청 번호 가져오기
