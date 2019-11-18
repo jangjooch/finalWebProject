@@ -6,7 +6,7 @@
 
 		<script type="text/javascript">
 		
-		window.setTimeout('window.location.reload()',5000); //5초마다 새로고침
+		//window.setTimeout('window.location.reload()',5000); //5초마다 새로고침
 
 			// 검색기능
 			function searchSelect(){
@@ -42,6 +42,16 @@
 			function missionDetail(a) {
 				alert(a);
 				window.open("missionProcess");
+			}
+			
+			//요청위치 자식창
+			function onChildWindow(re_location_x, re_location_y){
+				var popupX = (window.screen.width / 2) - (500 / 2);
+				var popupY = (window.screen.height / 2) - (500 / 2);
+				
+				var setting= "toolbar=0,directories=0,status=no,menubar=0,scrollbars=auto,resizable=no,height=500,width=500,left=" + popupX + ",top=" + popupY;
+				var url ="${pageContext.request.contextPath}/mission/api?re_location_x=" + re_location_x + "&re_location_y=" + re_location_y
+				window.open(url, "자식창", setting);
 			}
 		</script>
 		<style>
@@ -89,9 +99,9 @@
 									<th scope="col" width="15%;">요청 시간</th>
 									<th scope="col" width="10%;">요청 위치 Lat</th>
 									<th scope="col" width="10%;">요청 위치 Lng</th>							
-									<th scope="col" width="15%;">요청자</th>							
+									<th scope="col" width="10%;">요청자</th>							
 									<th scope="col" width="15%;">요청 물품</th>
-									<th scope="col" width="15%;">상태</th>
+									<th scope="col" width="20%;">상태</th>
 								</tr>
 							</thead>
 						<tbody>
@@ -114,12 +124,10 @@
 								<td>
 									<div>
 										<c:if test="${requestList.re_success == 0}">
-											<a onclick="mission_accept('${requestList.re_num}',0)" style="color:white" class="btn btn-success">수락</a>
-											<a onclick="mission_accept('${requestList.re_num}',1)" style="color:white" class="btn btn-danger">거절</a>
+											<a onclick="mission_accept('${requestList.re_num}',0)" style="color:white; cursor: pointer;" class="btn btn-primary">수락</a>
+											<a onclick="mission_accept('${requestList.re_num}',1)" style="color:white; cursor: pointer;" class="btn btn-danger">거절</a>
+											<a onclick="onChildWindow('${requestList.re_location_x}', ${requestList.re_location_y})" style="color:white; cursor: pointer;" class="btn btn-success">위치확인</a>
 										</c:if>
-<%-- 										<c:if test="${requestList.re_success == 1}">
-											<button type="button" class="btn btn-warning">물품전달완료</button>
-										</c:if> --%>
 									</div>
 								</td>
 							</tr>

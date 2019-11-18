@@ -1,5 +1,6 @@
 package web.controller.mission;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import web.dto.item.ItemDto;
-import web.dto.item.MissionItemsDto;
 import web.dto.mission.MissionDto;
 import web.dto.request.RequestDto;
 import web.service.MqttService;
@@ -105,6 +104,7 @@ public class MissionController {
 		if(rejection == 1) {
 			service.updateRequestSuccessChangeRefusal(re_num);
 			droneMissionService.requestRejection(re_num);
+			check = 1;
 			mqttService.missionAcceptance(re_num, check);
 			return "redirect:/mission/requestList";
 		}
@@ -234,7 +234,11 @@ public class MissionController {
 	}
 	
 	@RequestMapping("/api")
-	public String MissionApi() {
+	public String MissionApi(double re_location_x, double re_location_y, Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("re_location_x", re_location_x);
+		map.put("re_location_y", re_location_y);
+		model.addAttribute("map", map);
 				
 		return "mission/mission_pro_detail";
 	}
