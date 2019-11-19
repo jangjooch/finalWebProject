@@ -15,8 +15,6 @@
 				return result;
 			}
 			
-			
-			
 		function fileUpload(m_number) { // 현상사진 업로드
 			var d_m_number = m_number;
 				jQuery(document).ready(function() {
@@ -24,9 +22,6 @@
 				    		"width=600, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
 				});
 			}
-		</script>
-		<!-- 이한 -->
-		<script type="text/javascript">
 		function mainShot1() {
 			jQuery(document).ready(function() {
 				var src = jQuery('#img1').attr("src");
@@ -51,11 +46,6 @@
 				jQuery("#mainSnapshot").attr("src", src);
 			});
 		}
-		
-		
-		
-		
-		
 		</script>
 		<%-- 전체 div --%>
 			<div class="row">
@@ -152,8 +142,7 @@
 									</tr>
 									<tr>
 										<th>미션 내용</th>
-										<td>
-											${logDto.droneMissionDto.d_m_start}
+										<td id="d_m_start">
 										</td>
 									</tr>
 								</tbody>
@@ -168,9 +157,8 @@
 						</div>
 						<p/>
 						<p/>
-<!--                                                             -->
-
-	
+					
+					<c:if test="${logDto.requestDto.re_success == 5}">
 					  <h4 style="text-align: center;">현장 사진</h4>
 					<div class="jumbotron">
 					  <div class="container text-center">
@@ -201,26 +189,7 @@
 					
 					  </div>
 					</div><br>
-					
-					<!-- 
-					<div class="container-fluid bg-3 text-center">    
-					  <h6 align="left">현장</h6><br>
-					  <div class="row">
-					    <div class="col-sm-3">
-					      <img id="lacationImg1" name="lacationImg1" src="<%=application.getContextPath()%>/resources/upload/picture" class="img-responsive" style="width:100%" alt="Image">
-					    </div>
-					    <div class="col-sm-3"> 
-					      <img id="lacationImg2" name="lacationImg2"  src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-					    </div>
-					    <div class="col-sm-3"> 
-					      <img id="lacationImg3" name="lacationImg3"  src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-					    </div>
-					    <div class="col-sm-3">
-					      <img id="lacationImg4" name="lacationImg4"  src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-					    </div>
-					  </div>
-					</div><br><br> -->	
-								
+					</c:if>
 					</div>
 					
 					</div>
@@ -232,11 +201,6 @@
 					<div id="bottom">
 						<div id="bottom_t" style="height: 20px;"></div>
 						<div id="bottom_c">
-							<!-- 
-							<div id="bottom_c_l">
-								<div align="right"><a style="color:white" onclick="fileUpload(${logDto.droneMissionDto.d_m_number})" class="btn btn-primary">사진업로드</a></div>							
-							</div>
-							 -->
 							
 							<div id="bottom_c_c">
 								
@@ -264,30 +228,110 @@
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				mapOption = {
 					center : new kakao.maps.LatLng(destination_x, destination_y), // 지도의 중심좌표
-					//33.450701, 126.570667 -> 제주도
-					// 13.22415, 32.21584 -> 아랍사막
-					// 37.504383, 127.122404 -> 협회
-					level : 4
-				// 지도의 확대 레벨
+					level : 2 // 지도의 확대 레벨
+				
 				};
 	
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	
-				// 지도를 클릭한 위치에 표출할 마커입니다
-				var marker = new kakao.maps.Marker({
-					// 지도 중심좌표에 마커를 생성합니다 
-					map: map,
-				    position: new kakao.maps.LatLng(destination_x, destination_y)
-				});
-				//marker.setPosition(new kakao.maps.LatLng(destination_x, destination_y))
-				// 지도에 마커를 표시합니다		
-				marker.setMap(map);
 				
+				// 선 배열
+				var linePath = [];
 				
-				// 새로고침
-				function refresh(){
+				// array
+				$("#d_m_start").empty();
+				var array = null;				
+				
+				if('${logDto.droneMissionDto.d_m_start}' == '["요청이 거절 되었습니다."]'){
+					array = '${logDto.droneMissionDto.d_m_start}';
+					$("#d_m_start").append(
+						'요청이 거절 되었습니다.'		
+					);
+					
+					var marker = new kakao.maps.Marker({
+						// 지도 중심좌표에 마커를 생성합니다 
+						map: map,
+					    position: new kakao.maps.LatLng(destination_x, destination_y),
+					});
+					
+					marker.setMap(map);
+					
+				}else{
+					array = ${logDto.droneMissionDto.d_m_start};
+					
+					for(var i=0; i<array.length; i++){
+						// 미션 로그에 생성
+						if(i == 0){
+							$("#d_m_start").append('위도 :' + 
+									   array[i].x + ' / 경도 : ' + 
+									   array[i].y + ' / 출발 위치 <br/>'
+									   );	
+						}else if(i == array.length-1){
+							$("#d_m_start").append('위도 :' + 
+									   array[i].x + ' / 경도 : ' + 
+									   array[i].y + ' / 요청 위치'
+									   );
+						}else{
+							$("#d_m_start").append('위도 :' + 
+									   array[i].x + ' / 경도 : ' + 
+									   array[i].y + '<br/>'
+									   );
+						}
+						linePath[i] = new kakao.maps.LatLng(array[i].x, array[i].y);
+					}
+					
+					// 지도에 표시할 선을 생성합니다
+					var polyline = new kakao.maps.Polyline({
+					    path: linePath, // 선을 구성하는 좌표배열 입니다
+					    strokeWeight: 5, // 선의 두께 입니다
+					    strokeColor: 'red', // 선의 색깔입니다
+					    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+					    strokeStyle: 'solid' // 선의 스타일입니다
+					});
+					
+					// 지도를 클릭한 위치에 표출할 마커입니다
+					var marker = new kakao.maps.Marker({
+						// 지도 중심좌표에 마커를 생성합니다 
+						map: map,
+					    position: new kakao.maps.LatLng(destination_x, destination_y),
+					});
+					
+					var destinationMarker = new kakao.maps.Marker({
+						// 지도 중심좌표에 마커를 생성합니다 
+						map: map,
+					    position: new kakao.maps.LatLng(array[0].x, array[0].y)
+					}); 
+					//marker.setPosition(new kakao.maps.LatLng(destination_x, destination_y))
+					// 지도에 마커를 표시합니다		
+					marker.setMap(map);
+					destinationMarker.setMap(map);
+					
+					// 지도에 선을 표시합니다 
+					polyline.setMap(map);
+					
+					// 텍스트 창
+					var iwContent = '<div style="padding:5px;">드론 출발 위치</div>';
+					var destinationiwContent = '<div style="padding:5px;">구조 요청 위치</div>';
+				    iwPosition = new kakao.maps.LatLng(destination_x, destination_y); //인포윈도우 표시 위치입니다
+				    destinationiwPosition = new kakao.maps.LatLng(array[0].x, array[0].y); //인포윈도우 표시 위치입니다
+
+					// 인포윈도우를 생성합니다
+					var infowindow = new kakao.maps.InfoWindow({
+					    position : iwPosition, 
+					    content : iwContent 
+					});
+				    
+					var destinationinfowindow = new kakao.maps.InfoWindow({
+					    position : destinationiwPosition, 
+					    content : destinationiwContent 
+					});
+					  
+					// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+					infowindow.open(map, marker);
+					destinationinfowindow.open(map, destinationMarker);
 					
 				}
+				
+				
 				
 			</script>
 <jsp:include page="../main/bottom.jsp" flush="false"/>

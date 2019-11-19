@@ -138,13 +138,15 @@ public class MqttService {
 						logDao.updateDroneMission(d_number, re_num, d_m_start);
 					}
 				
+				// 요청완료
 				}else if(jsonObject.get("msgid").equals("missionStatus")) {
 					
 					int re_num = (int) jsonObject.get("missionNumber");   // 요청 번호 가져오기
 					int d_number = (int) jsonObject.get("droneNumber"); // 드론 번호 가져오기
 					
 					missionDao.updateSuccessChainge4Eseo5(re_num);    // 요청 상태 업데이트 : 완료
-					logDao.getDroneMissionUpdate(re_num);             // 완료 시간 업데이트 
+					logDao.getDroneMissionUpdate(re_num);             // 완료 시간 업데이트
+					droneDao.updateDroneState1(Integer.parseInt(String.valueOf(jsonObject.get("droneNumber"))));
 				}
 				
 				// 이상종료
@@ -154,9 +156,11 @@ public class MqttService {
 					
 					int re_num = Integer.parseInt(String.valueOf(jsonObject.get("missionNumber")));
 					int d_number = Integer.parseInt(String.valueOf(jsonObject.get("droneNumber")));
-
-					missionDao.updateRequestSuccessChangeRefusal(re_num);
-					droneMissionDao.updateMissionDroneFail(re_num);
+					
+					if(re_num != -1) {
+						missionDao.updateRequestSuccessChangeRefusal(re_num);
+						droneMissionDao.updateMissionDroneFail(re_num);
+					}
 				}
 				
 			}
