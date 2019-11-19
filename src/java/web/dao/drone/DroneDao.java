@@ -118,4 +118,7 @@ public class DroneDao {
 		List<DroneDto> list = sqlSessionTemplate.selectList("gcsDroneList");
 		return list;
 	}
+	
+	// 드론 무게 가능 한 개수 가져오기
+	
 }

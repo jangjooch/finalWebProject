@@ -84,15 +84,20 @@ public class MqttService {
 				logger.info("json : " + json);
 				JSONObject jsonObject = new JSONObject(json);
 				
+				//int re_num=0;
+				
 				// 드론 리스트 요청
 				if(jsonObject.get("msgid").equals("DroneRequest")) {
+					System.out.println(jsonObject.get("re_num").toString());
 					new Thread() {
 						@Override
 						public void run() {
 							sendDroneMessage("/drone/select/sub");
 						}
 					}.start();
+				// 드론 선택
 				}else if(jsonObject.get("msgid").equals("DroneSelect")) {
+					
 					// 드론 상태 업데이트
 					int rows = droneDao.updateDrontState(Integer.parseInt(String.valueOf(jsonObject.get("DroneNum"))));
 				}
@@ -183,7 +188,7 @@ public class MqttService {
 	
 	// 드론 list 보내기 -> gcs
 	public void sendDroneMessage(String topic) {
-		logger.info("실행");
+		logger.info("droneList 실행");
 		JSONArray jsonArray = new JSONArray();
 		List<DroneDto> list = droneDao.gcsDroneList();
 		

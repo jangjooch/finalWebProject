@@ -263,4 +263,19 @@ public class MissionDao {
 	public void updateSuccessChainge4Eseo5(int re_num) {
 		int rows = sqlSessionTemplate.update("mission.updateRequestSuccess5", re_num);
 	}
+	
+	// 요청번호에 따른 총 무게 가져오기
+	public int requestAddWeight(int re_num) {
+		int totalWeight = 0;
+		List<MissionItemsDto> list = sqlSessionTemplate.selectList("mission.requestAddWeight", re_num);
+		for(int i=0; i<list.size(); i++) {
+			int count = list.get(i).getI_amount();
+			int weight = list.get(i).getItemDto().getI_weight();
+			
+			totalWeight = totalWeight + (count*weight);
+		}
+		
+		return totalWeight;
+		
+	}
 }

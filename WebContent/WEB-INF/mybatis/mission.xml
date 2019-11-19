@@ -470,4 +470,28 @@
 		SET re_success = 5
 		WHERE re_num = #{re_num}
 	</update>
+	
+	
+	<resultMap type="web.dto.item.MissionItemsDto" id="requestAddItemWeight">
+		<result column="re_num" property="re_num"/>
+		<result column="i_code" property="i_code"/>
+		<result column="i_amount" property="i_amount"/>
+		<association property="itemDto" javaType="web.dto.item.ItemDto">
+			<result column="i_code" property="i_code"/>
+			<result column="i_name" property="i_name"/>
+			<result column="i_mount" property="i_mount"/>
+			<result column="i_class" property="i_class"/>
+			<result column="i_weight" property="i_weight"/>
+		</association>
+	</resultMap>
+	<select id="requestAddWeight" parameterType="int" resultMap="requestAddItemWeight">
+		SELECT 
+		   ri.re_num , ri.i_code , ri.i_amount ,
+		   il.i_code , il.i_name , il.i_mount , il.i_class , il.i_weight
+		FROM 
+		   request_item ri, item_list il
+		WHERE 
+		   il.i_code = ri.i_code AND
+		   ri.re_num = #{re_num}
+	</select>
 </mapper>
