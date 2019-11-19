@@ -96,4 +96,14 @@
 		WHERE
 		    d_number = #{d_number}
 	</update>
+	
+	<!-- gcs에게 보내는 list -->
+	<select id="gcsDroneList" resultType="web.dto.drone.DroneDto">
+		SELECT 
+			d_number, d_model, d_status, d_weight, d_battery
+		FROM
+			drone
+		WHERE
+			d_status = 1		
+	</select>
 </mapper>

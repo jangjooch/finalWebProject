@@ -41,11 +41,11 @@
       html {
 			height: 100%;
 			}
-	body {
-	margin: 0;
-	height: 100%;
-	}
-	#wrapper {
+	  body {
+	  margin: 0;
+	  height: 100%;
+	       }
+	  #wrapper {
 	min-height: 100%;
 	position: relative;
 	padding-bottom: 19px; /* footer height */
@@ -142,11 +142,10 @@
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/member/memberDetail?m_num=${member_logined.m_num}">마이 페이지</a></li>
             </c:if>
                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/log/log_list">사건기록</a></li>
-            <c:if test="${member_logined!=null}">
-               <li class="nav-item" style="float:right; text-align: right;">
-                  <a class="nav-link" href="${pageContext.request.contextPath}/logOut">로그아웃</a>
-               </li>
-            </c:if>
+            
          </ul>
       </div>
+      <c:if test="${member_logined!=null}">
+         <a class="navbar-brand" style="size: 10px;" href="${pageContext.request.contextPath}/logOut">로그아웃</a>
+      </c:if>
    </nav>
