@@ -83,7 +83,7 @@
 		UPDATE 
 			drone_mission
 		SET
-			d_m_start = '[요청이 거절 되었습니다.]',
+			d_m_start = '["요청이 거절 되었습니다."]',
 			d_m_preparation = SYSDATE
 		WHERE
 			re_num = #{re_num}
