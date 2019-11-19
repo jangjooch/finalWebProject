@@ -134,10 +134,43 @@
 						<p/>
 						<p/>
 <!--                                                             -->
+<!-- 이한 -->
+<script type="text/javascript">
+function mainShot1() {
+	jQuery(document).ready(function() {
+		var src = jQuery('#img1').attr("src");
+		jQuery("#mainSnapshot").attr("src", src);
+	});
+}
+function mainShot2() {
+	jQuery(document).ready(function() {
+		var src = jQuery('#img2').attr("src");
+		jQuery("#mainSnapshot").attr("src", src);
+	});
+}
+function mainShot3() {
+	jQuery(document).ready(function() {
+		var src = jQuery('#img3').attr("src");
+		jQuery("#mainSnapshot").attr("src", src);
+	});
+}
+function mainShot4() {
+	jQuery(document).ready(function() {
+		var src = jQuery('#img4').attr("src");
+		jQuery("#mainSnapshot").attr("src", src);
+	});
+}
+//		var imgpath = src;
+	//	document.getElementById("mainSnapshot").src="imgpath";
+	
+//	jQuery(document).ready(function() {
+//	});
+</script>
+
 <div class="jumbotron">
   <div class="container text-center">
-    <h3>My Portfolio</h3>      
-    <p>첫번째 사진</p>
+      <img id="mainSnapshot" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}3.jpg"
+      	class="img-responsive" style="width:100%" alt="Image">
   </div>
 </div>
   
@@ -145,21 +178,26 @@
   <h6 align="left">드론사진</h6><br>
   <div class="row">
     <div class="col-sm-3">
-      <img src="<%=application.getContextPath()%>/resources/upload/" 
-      	class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      <img id="img1" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}0.jpg"
+      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot1()">
     </div>
     <div class="col-sm-3">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      <img id="img2" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}1.jpg"
+      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot2()">
     </div>
+    <div class="col-sm-3">
+      <img id="img3" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}2.jpg"
+      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot3()">
+    </div>
+    <div class="col-sm-3">
+      <img id="img4" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}3.jpg"
+      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot4()">
+    </div>
+
   </div>
 </div><br>
 
+<!-- 
 <div class="container-fluid bg-3 text-center">    
   <h6 align="left">현장사진</h6><br>
   <div class="row">
@@ -176,7 +214,8 @@
       <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
     </div>
   </div>
-</div><br><br>			
+</div><br><br>	
+ -->		
 			
 					</div>
 					
@@ -189,9 +228,11 @@
 					<div id="bottom">
 						<div id="bottom_t" style="height: 20px;"></div>
 						<div id="bottom_c">
+						<!--  이한
 							<div id="bottom_c_l">
 								<div align="right"><a onclick="fileUpload(${logDto.droneMissionDto.d_m_number})" class="btn btn-primary">사진업로드</a></div>							
 							</div>
+						 -->	
 							<div id="bottom_c_c">
 								
 							</div>

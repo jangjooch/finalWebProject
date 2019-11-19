@@ -25,7 +25,7 @@ public class SnapshotService {
 	
 	private int pictureNumber;
 	private int forPictureThread;
-	private int missionNumber;
+	private int requestNumber;
 	private boolean takeSnap;
 	
 	
@@ -63,18 +63,25 @@ public class SnapshotService {
 			
 			@Override
 			public void messageArrived(String topic, MqttMessage message) throws Exception {
+				System.out.println("Message Arrived");
 				// TODO Auto-generated method stub
 				if(topic.equals("/drone/cam0/gcs")) {
+					
+					System.out.println("Message Recived from GCS");
+					System.out.println("Recived : " + new String(message.getPayload()));					
 					takeSnap = true;
 					pictureNumber = 0;
 					
-					byte[] data = message.getPayload();
-					String strData = new String(data);
+					String strData = new String(message.getPayload());
 					JSONObject jsonObject = new JSONObject(strData);
-					missionNumber = (int) jsonObject.get("missionNumber");
+					System.out.println("Recived Json : " + jsonObject.toString());
+					requestNumber = (int)jsonObject.get("missionNumber");
+					System.out.println("get missionNumber Done");
 				}
 				else if(topic.equals("/drone/cam0/pub")) {
+					System.out.println("message Arrived From Cam");
 					if(takeSnap) {
+						System.out.println("Snapshot Activate");
 						if(pictureNumber < 4) {
 							if(forPictureThread == 0) {
 								new Thread() {
@@ -83,8 +90,8 @@ public class SnapshotService {
 										forPictureThread = 1;
 										byte[] data = message.getPayload();
 										// 이미지 파일을 byte배열로 마꿔서 저장한다.
-										String fileName = "picture" + missionNumber + pictureNumber + ".jpg"; // 파일 이름											
-										String realPath = application.getRealPath("/upload/")+fileName; // 경로
+										String fileName = "picture" + requestNumber + pictureNumber + ".jpg"; // 파일 이름											
+										String realPath = application.getRealPath("/resources/upload/")+fileName; // 경로
 										FileOutputStream fos;
 										try {
 											System.out.println("Try JPG File Save");
@@ -127,7 +134,7 @@ public class SnapshotService {
 			@Override
 			public void connectionLost(Throwable cause) {
 				// TODO Auto-generated method stub
-				
+				System.out.println("Connection Lost");
 			}
 		});
 		
