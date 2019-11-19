@@ -63,7 +63,7 @@
 					<table class="table table-hover" style="border: 1px solid 1px">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col" width="15%;">번호</th>
+							<th scope="col" width="15%;">회원번호</th>
 							<th scope="col" width="15%;">이름</th>
 							<th scope="col" width="25%;">아이디</th>
 							<th scope="col" width="25%;">전화번호</th>
