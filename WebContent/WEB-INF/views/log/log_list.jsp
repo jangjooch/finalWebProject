@@ -104,7 +104,7 @@
 											<span aria-hidden="true">&laquo;</span></a>
 										</li>
 										<c:if test="${groupNo>1}">
-											<li class="page-item"><a class="page-link" href="#"> 
+											<li class="page-item"><a class="page-link" href="?pageNo=${startPageNo-1}"> 
 												<span aria-hidden="true"><</span></a>
 											</li>
 										</c:if>
@@ -116,7 +116,7 @@
 												<li class="page-item"><a class="page-link" href="?pageNo=${i}">${i}</a></li>
 											</c:if>
 										</c:forEach>
-										<c:if test="${group<totalGroupNum}">
+										<c:if test="${groupNo<totalGroupNum}">
 											<li class="page-item"><a class="page-link" href="?pageNo=${endPageNo+1}"> 
 												<span aria-hidden="true">></span></a>
 											</li>	
