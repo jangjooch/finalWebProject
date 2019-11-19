@@ -95,13 +95,15 @@
 						<div id="bottom_c">
 							<div id="bottom_c_l"></div>
 							<div id="bottom_c_c">
+								<c:choose>
+								<c:when test="${!empty searchList}">
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
-										<li class="page-item"><a class="page-link" href="memberList?=pageNo=1"> 
+										<li class="page-item"><a class="page-link" href="memberSearch?=pageNo=1"> 
 											<span aria-hidden="true">&laquo;</span></a>
 										</li>
 										<c:if test="${groupNo > 1}">
-										<li class="page-item"><a class="page-link" href="memberDetail?pageNo=${startPageNo-1}&m_num=${member.m_num}"> 
+										<li class="page-item"><a class="page-link" href="memberSearch?pageNo=${startPageNo-1}&m_num=${member.m_num}"> 
 											<span aria-hidden="true"><</span></a>
 										</li>
 										</c:if>
@@ -109,27 +111,32 @@
 								  	<c:forEach begin="${startPageNo}" end="${endPageNo}" var="i">
 								  		<c:if test="${pageNo==i}">
 								  			<li class="page-item active">
-								  				<a href="memberList?pageNo=${i}" class="page-link">${i}</a>
+								  				<a href="memberSearch?pageNo=${i}" class="page-link">${i}</a>
 								  			</li>
 								  		</c:if>
 						  				<c:if test="${pageNo!=i}">
 						  					<li class="page-item">
-						  						<a href="memberList?pageNo=${i}" class="page-link">${i}</a>
+						  						<a href="memberSearch?pageNo=${i}" class="page-link">${i}</a>
 						  					</li>
 						  				</c:if>
 						  			</c:forEach>
 										<c:if test="${groupNo < totalGroupNum}">
 											<li class="page-item">
-												<a class="page-link" href="memberList?pageNo=${endPageNo+1 }"> 
+												<a class="page-link" href="memberSearch?pageNo=${endPageNo+1 }"> 
 												<span aria-hidden="true">></span>
 												</a>
 											</li>
 										</c:if>
-										<li class="page-item"><a class="page-link" href="memberList?pageNo=${totalPageNum}"> 
+										<li class="page-item"><a class="page-link" href="memberSearch?pageNo=${totalPageNum}"> 
 											<span aria-hidden="true">&raquo;</span></a>
 										</li>
 									</ul>
 								</nav>
+								</c:when>
+								<c:otherwise>
+									<h4 Style="text-align: center;">검색 내역이 없습니다.</h4>
+								</c:otherwise>
+								</c:choose>
 							</div>
 							<div id="bottom_c_r">
 								<div><a href="memberInsertForm" class="btn btn-warning">회원 등록</a>
@@ -146,4 +153,5 @@
 				<div class="col-sm-2"></div>
 				
 			</div>
+			
 <jsp:include page="../main/bottom.jsp" flush="false"/>

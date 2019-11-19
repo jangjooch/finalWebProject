@@ -12,6 +12,8 @@
 		select m_num, m_name, m_id, m_phone, p.po_num ,po_position 
 		from member ,position p
 			WHERE member.po_num = p.po_num
+			and
+            m_num != 0
 		order by m_num desc
 		)
 		where rownum &lt;= #{endRowNo}
@@ -105,6 +107,8 @@
                 select m_num, m_name, m_id, m_phone, p.po_num, po_position 
                 from member , position p
                 where member.po_num = p.po_num
+                and
+            	m_num != 0
                     AND m_num = #{things}
                 order by m_num desc
             ) 
@@ -121,7 +125,8 @@
             from (
                 select m_num, m_name, m_id, m_phone, p.po_num, po_position 
                 from member , position p
-                where member.po_num = p.po_num
+                where member.po_num = p.po_num 
+                	AND m_num != 0
                     AND m_name like '%'||#{things}||'%'
                 order by m_num desc
             ) 
@@ -153,6 +158,8 @@
                 select m_num, m_name, m_id, m_phone, p.po_num, po_position 
                 from member , position p
                 where member.po_num = p.po_num
+                and
+            	member.po_num != 0
                     AND p.po_position like '%'||#{things}||'%'
                 order by p.po_position desc
             ) 
@@ -165,25 +172,29 @@
 	<select id="selectSearchTotalRowNo1" parameterType="string" resultType="int">
                 select count(*)
                 from member , position p
-                where member.po_num = p.po_num
+                where member.po_num = p.po_num and
+                member.m_num !=0
                     AND m_num = #{things}
 	</select>
 	<select id="selectSearchTotalRowNo2" parameterType="string" resultType="int">
                 select count(*)
                 from member , position p
-                where member.po_num = p.po_num
+                where member.po_num = p.po_num and
+                member.m_num !=0
                     AND m_name like '%'||#{things}||'%'
 	</select>
 	<select id="selectSearchTotalRowNo3" parameterType="string" resultType="int">
                 select count(*)
                 from member , position p
-                where member.po_num = p.po_num
+                where member.po_num = p.po_num and
+                member.m_num !=0
                     AND m_phone like '%'||#{things}||'%'
 	</select>
 	<select id="selectSearchTotalRowNo4" parameterType="string" resultType="int">
                 select count(*)
                 from member , position p
-                where member.po_num = p.po_num
+                where member.po_num = p.po_num and
+                member.m_num !=0
                     AND p.po_position like '%'||#{things}||'%'
 	</select>
 	
@@ -195,7 +206,8 @@
 		FROM 
 			member m, position p
 		WHERE 
-        	m.po_num = p.po_num AND
+        	m.po_num = p.po_num AND 
+        	m.m_num != 0 AND
         	m_id=#{m_id}
 	</select>
 </mapper>

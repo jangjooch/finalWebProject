@@ -48,7 +48,6 @@
 	  #wrapper {
 	min-height: 100%;
 	position: relative;
-	padding-bottom: 19px; /* footer height */
 	}
       
       #header{

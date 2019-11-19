@@ -103,6 +103,8 @@
 						<div id="bottom_c">
 							<div id="bottom_c_l"></div>
 							<div id="bottom_c_c">
+								<c:choose>
+								<c:when test="${!empty searchList}">
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
 										<li class="page-item"><a class="page-link" href="logSearchedList?=searchPageNo=1"> 
@@ -138,6 +140,11 @@
 										</li>
 									</ul>
 								</nav>
+								</c:when>
+								<c:otherwise>
+									<h4 Style="text-align: center;">검색 내역이 없습니다.</h4>
+								</c:otherwise>
+								</c:choose>
 							</div>
 							<div id="bottom_c_r"></div>
 						</div>
