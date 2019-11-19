@@ -85,4 +85,9 @@ public class MemberSerivce {
 		return member;
 	}
 
+	public int getDetailTotalRowNo(int m_num) {
+		int totalRowNum = memberDao.getDetailTotalRowNo(m_num);
+		return totalRowNum;
+	}
+
 }

@@ -34,7 +34,7 @@ public class MemberController {
 	private  MemberSerivce service;
 	
 	
-	// 멤버 목록
+	// 멤버들 목록
 	@RequestMapping("/memberList")
 	public String memberList(Model model, @RequestParam(defaultValue="1") int pageNo, HttpSession session) {
 		session.setAttribute("pageNo", pageNo);
@@ -132,7 +132,7 @@ public class MemberController {
 		// 페이징
 		int rowsPerPage = 5;
 		int pagesPerGroup = 5;
-		int totalRowNum = 0;
+		int totalRowNum = service.getDetailTotalRowNo(m_num);   // 
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
 		int totalGroupNum = totalPageNum / pagesPerGroup;
@@ -228,10 +228,12 @@ public class MemberController {
 		//현재 페이지의 게시물 가져오기
 		List<MemberDto> searchList = null;
 		
-		if (searchThing !=null && things != null) {
+		if (searchThing !=null && things != null) { 
+			// 처음 검색할 경우 검색 리스트
 			searchList = service.getSearchList(searchThing, things, startRowNo, endRowNo);
 		}
 		else {
+			// 처음 검색이 아닌경우
 			searchList = service.getSearchList(searching_get, thing_get, startRowNo, endRowNo);
 		}
 		

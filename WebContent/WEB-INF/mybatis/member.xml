@@ -90,11 +90,14 @@
 	</resultMap>
 	 -->
 	
+	<!-- 멤버디테일 페이징 토탈로우넘 -->
+	<select id="getDetailTotalRowNo" parameterType="int" resultType="int">
+		select COUNT(*) FROM request where m_num = #{m_num}
+	</select>
 
 
 
-
-	<select id="searchMemberList1" parameterType="map" resultType="web.dto.member.MemberDto">
+	<select id="searchMemberListMemberNum" parameterType="map" resultType="web.dto.member.MemberDto">
         select rn, m_num, m_name, m_id, m_phone, po_num,  po_position 
 		from (
             select rownum as rn, m_num, m_name, m_id, m_phone, po_num , po_position 
@@ -111,7 +114,7 @@
 	</select>
 
 	<!-- 회원번호를 제외한 검색 -->
-	<select id="searchMemberList2" parameterType="map" resultType="web.dto.member.MemberDto">
+	<select id="searchMemberListName" parameterType="map" resultType="web.dto.member.MemberDto">
         select rn, m_num, m_name, m_id, m_phone, po_num,  po_position 
 		from (
             select rownum as rn, m_num, m_name, m_id, m_phone, po_num , po_position 
@@ -126,19 +129,37 @@
 		)
 		where rn &gt;= #{startRowNo}
 	</select>
-	<select id="searchMemberList3" parameterType="map" resultType="web.dto.member.MemberDto">
-		SELECT 	m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num, p.po_position 
-		FROM 	member m , position p
-		WHERE 
-				m.po_num = p.po_num 
-				AND m_phone like '%'||#{things}||'%'
+	<select id="searchMemberListPhone" parameterType="map" resultType="web.dto.member.MemberDto">
+        select rn, m_num, m_name, m_id, m_phone, po_num,  po_position 
+		from (
+            select rownum as rn, m_num, m_name, m_id, m_phone, po_num , po_position 
+            from (
+                select m_num, m_name, m_id, m_phone, p.po_num, po_position 
+                from member , position p
+                where member.po_num = p.po_num
+                    AND m_phone like '%'||#{things}||'%'
+                order by m_num desc
+            ) 
+		where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt;= #{startRowNo}
+				
 	</select>
-	<select id="searchMemberList4" parameterType="map" resultType="web.dto.member.MemberDto">
-		SELECT 	m.m_num, m.m_name, m.m_id, m.m_pw, m.m_phone, m.po_num, p.po_position 
-		FROM 	member m , position p
-		WHERE 
-				m.po_num = p.po_num 
-				AND p.po_position like '%'||#{things}||'%'
+	<select id="searchMemberListPosition" parameterType="map" resultType="web.dto.member.MemberDto">
+        select rn, m_num, m_name, m_id, m_phone, po_num,  po_position 
+		from (
+            select rownum as rn, m_num, m_name, m_id, m_phone, po_num , po_position 
+            from (
+                select m_num, m_name, m_id, m_phone, p.po_num, po_position 
+                from member , position p
+                where member.po_num = p.po_num
+                    AND p.po_position like '%'||#{things}||'%'
+                order by p.po_position desc
+            ) 
+		where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt;= #{startRowNo}	
+				 
 	</select> <!-- c:if 로 가능 -->
 	
 	<select id="selectSearchTotalRowNo1" parameterType="string" resultType="int">
@@ -163,7 +184,7 @@
                 select count(*)
                 from member , position p
                 where member.po_num = p.po_num
-                    AND po_num like '%'||#{things}||'%'
+                    AND p.po_position like '%'||#{things}||'%'
 	</select>
 	
 	<!-- 형철이가 손댐-gcs -->

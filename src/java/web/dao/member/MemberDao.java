@@ -81,13 +81,14 @@ public class MemberDao {
 		map.put("endRowNo", endRowNo);
 		List<MemberDto> searchList = null;
 		if (searchThing.equals("m_name")) {
-			searchList = sqlSessionTemplate.selectList("member.searchMemberList2", map);
+			searchList = sqlSessionTemplate.selectList("member.searchMemberListName", map);
 		} else if (searchThing.equals("m_phone")) {
-			searchList = sqlSessionTemplate.selectList("member.searchMemberList3", map);
+			searchList = sqlSessionTemplate.selectList("member.searchMemberListPhone", map);
 		} else if (searchThing.equals("po_num")) {
-			searchList = sqlSessionTemplate.selectList("member.searchMemberList4", map);
+			System.out.println("searchThing: " + searchThing);
+			searchList = sqlSessionTemplate.selectList("member.searchMemberListPosition", map);
 		} else if (searchThing.equals("m_num")) {
-			searchList = sqlSessionTemplate.selectList("member.searchMemberList1", map);
+			searchList = sqlSessionTemplate.selectList("member.searchMemberListMemberNum", map);
 		}
 		return searchList;
 	}
@@ -110,6 +111,11 @@ public class MemberDao {
 		MemberDto member = sqlSessionTemplate.selectOne("member.gcsLogin",m_id);
 		
 		return member;
+	}
+
+	public int getDetailTotalRowNo(int m_num) {
+		int totalRowNo = sqlSessionTemplate.selectOne("member.getDetailTotalRowNo", m_num);
+		return totalRowNo;
 	}
 	
 	
