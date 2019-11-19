@@ -86,7 +86,11 @@
 	</resultMap>
 		
 	
-	
+	<select id="getDMNumber" parameterType="int" resultType="int">
+		select d_m_number from
+		drone_mission
+		where re_num = #{reNum}
+	</select>
 	
 	<select id="getDMNum" parameterType="int" resultType="int">
 		select d_m_number from

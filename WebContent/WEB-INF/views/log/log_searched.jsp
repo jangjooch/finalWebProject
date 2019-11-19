@@ -28,7 +28,7 @@
 			
 			function goDetail(value) {
 				var re_num = value;
-				location.href="log_detail?d_m_number=" + re_num;			
+				location.href="log_detail?re_num=" + re_num;			
 			}
 		
 		</script>

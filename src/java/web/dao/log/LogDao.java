@@ -133,6 +133,10 @@ public class LogDao {
 		int d_update = sqlSessionTemplate.update("log.updateDroneMissionComplate", re_num);
 		
 	}
+	public int getDMNumber(int reNum) {
+		int d_m_number = sqlSessionTemplate.selectOne("log.getDMNumber", reNum);
+		return d_m_number;
+	}
 	
 	
 }
