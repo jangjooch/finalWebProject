@@ -17,10 +17,45 @@
 			
 			
 			
-			function fileUpload(m_number) {
-				var d_m_number = m_number;
-				    window.open("logFileUpload?d_m_number="+d_m_number, "파일 업로드", "width=600, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );
+		function fileUpload(m_number) { // 현상사진 업로드
+			var d_m_number = m_number;
+				jQuery(document).ready(function() {
+				    window.open("logFileUpload?d_m_number="+d_m_number, "파일 업로드",
+				    		"width=600, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
+				});
 			}
+		</script>
+		<!-- 이한 -->
+		<script type="text/javascript">
+		function mainShot1() {
+			jQuery(document).ready(function() {
+				var src = jQuery('#img1').attr("src");
+				jQuery("#mainSnapshot").attr("src", src);
+			});
+		}
+		function mainShot2() {
+			jQuery(document).ready(function() {
+				var src = jQuery('#img2').attr("src");
+				jQuery("#mainSnapshot").attr("src", src);
+			});
+		}
+		function mainShot3() {
+			jQuery(document).ready(function() {
+				var src = jQuery('#img3').attr("src");
+				jQuery("#mainSnapshot").attr("src", src);
+			});
+		}
+		function mainShot4() {
+			jQuery(document).ready(function() {
+				var src = jQuery('#img4').attr("src");
+				jQuery("#mainSnapshot").attr("src", src);
+			});
+		}
+		
+		
+		
+		
+		
 		</script>
 		<%-- 전체 div --%>
 			<div class="row">
@@ -134,89 +169,58 @@
 						<p/>
 						<p/>
 <!--                                                             -->
-<!-- 이한 -->
-<script type="text/javascript">
-function mainShot1() {
-	jQuery(document).ready(function() {
-		var src = jQuery('#img1').attr("src");
-		jQuery("#mainSnapshot").attr("src", src);
-	});
-}
-function mainShot2() {
-	jQuery(document).ready(function() {
-		var src = jQuery('#img2').attr("src");
-		jQuery("#mainSnapshot").attr("src", src);
-	});
-}
-function mainShot3() {
-	jQuery(document).ready(function() {
-		var src = jQuery('#img3').attr("src");
-		jQuery("#mainSnapshot").attr("src", src);
-	});
-}
-function mainShot4() {
-	jQuery(document).ready(function() {
-		var src = jQuery('#img4').attr("src");
-		jQuery("#mainSnapshot").attr("src", src);
-	});
-}
-//		var imgpath = src;
-	//	document.getElementById("mainSnapshot").src="imgpath";
+
 	
-//	jQuery(document).ready(function() {
-//	});
-</script>
-
-<div class="jumbotron">
-  <div class="container text-center">
-      <img id="mainSnapshot" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}3.jpg"
-      	class="img-responsive" style="width:100%" alt="Image">
-  </div>
-</div>
-  
-<div class="container-fluid bg-3 text-center">    
-  <h6 align="left">드론사진</h6><br>
-  <div class="row">
-    <div class="col-sm-3">
-      <img id="img1" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}0.jpg"
-      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot1()">
-    </div>
-    <div class="col-sm-3">
-      <img id="img2" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}1.jpg"
-      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot2()">
-    </div>
-    <div class="col-sm-3">
-      <img id="img3" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}2.jpg"
-      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot3()">
-    </div>
-    <div class="col-sm-3">
-      <img id="img4" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}3.jpg"
-      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot4()">
-    </div>
-
-  </div>
-</div><br>
-
-<!-- 
-<div class="container-fluid bg-3 text-center">    
-  <h6 align="left">현장사진</h6><br>
-  <div class="row">
-    <div class="col-sm-3">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
-</div><br><br>	
- -->		
-			
+					  <h4 style="text-align: center;">현장 사진</h4>
+					<div class="jumbotron">
+					  <div class="container text-center">
+					      <img id="mainSnapshot" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}0.jpg"
+					      	class="img-responsive" style="width:100%" alt="Image">
+					  </div>
+					</div>
+					  
+					<div class="container-fluid bg-3 text-center">    
+					  <h6 align="left">드론</h6><br>
+					  <div class="row">
+					    <div class="col-sm-3">
+					      <img id="img1" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}0.jpg"
+					      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot1()">
+					    </div>
+					    <div class="col-sm-3">
+					      <img id="img2" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}1.jpg"
+					      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot2()">
+					    </div>
+					    <div class="col-sm-3">
+					      <img id="img3" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}2.jpg"
+					      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot3()">
+					    </div>
+					    <div class="col-sm-3">
+					      <img id="img4" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}3.jpg"
+					      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot4()">
+					    </div>
+					
+					  </div>
+					</div><br>
+					
+					<!-- 
+					<div class="container-fluid bg-3 text-center">    
+					  <h6 align="left">현장</h6><br>
+					  <div class="row">
+					    <div class="col-sm-3">
+					      <img id="lacationImg1" name="lacationImg1" src="<%=application.getContextPath()%>/resources/upload/picture" class="img-responsive" style="width:100%" alt="Image">
+					    </div>
+					    <div class="col-sm-3"> 
+					      <img id="lacationImg2" name="lacationImg2"  src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+					    </div>
+					    <div class="col-sm-3"> 
+					      <img id="lacationImg3" name="lacationImg3"  src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+					    </div>
+					    <div class="col-sm-3">
+					      <img id="lacationImg4" name="lacationImg4"  src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+					    </div>
+					  </div>
+					</div><br><br> -->	
+								
 					</div>
 					
 					</div>
@@ -228,11 +232,12 @@ function mainShot4() {
 					<div id="bottom">
 						<div id="bottom_t" style="height: 20px;"></div>
 						<div id="bottom_c">
-						<!--  이한
+							<!-- 
 							<div id="bottom_c_l">
-								<div align="right"><a onclick="fileUpload(${logDto.droneMissionDto.d_m_number})" class="btn btn-primary">사진업로드</a></div>							
+								<div align="right"><a style="color:white" onclick="fileUpload(${logDto.droneMissionDto.d_m_number})" class="btn btn-primary">사진업로드</a></div>							
 							</div>
-						 -->	
+							 -->
+							
 							<div id="bottom_c_c">
 								
 							</div>
