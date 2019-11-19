@@ -93,12 +93,38 @@
 								<tbody>
 									<c:forEach var="report" items="${report}">
 										<tr>
-											<td><a href="${pageContext.request.contextPath}/log/getDMNum?re_num=${report.re_num}">${report.re_num}</a></td>
+											<c:if test="${report.re_success > 4}">
+												<td><a href="${pageContext.request.contextPath}/log/getDMNum?re_num=${report.re_num}">${report.re_num}</a></td>
+											</c:if>
+											<c:if test="${report.re_success < 5}">
+												<td>${report.re_num}</td>
+											</c:if>
 											<td>${report.re_location_x} / ${report.re_location_y}</td>
 											<!-- <td>${report.re_time}</td> -->
 											<td><fmt:formatDate value="${report.re_time}" 
 												pattern="yyyy-MM-dd hh:mm"/></td>
-											<td>${report.re_success}</td>
+												<c:if test="${report.re_success == 0}">
+													<td>수락대기</td>
+												</c:if>
+												<c:if test="${report.re_success == 1}">
+													<td>수락완료</td>
+												</c:if>
+												<c:if test="${report.re_success == 2}">
+													<td>적재중</td>
+												</c:if>
+												<c:if test="${report.re_success == 3}">
+													<td>적재완료</td>
+												</c:if>
+												<c:if test="${report.re_success == 4}">
+													<td>수행중</td>
+												</c:if>
+												<c:if test="${report.re_success == 5}">
+													<td>미션 완료</td>
+												</c:if>
+												<c:if test="${report.re_success == 6}">
+													<td style="color:red">요청 거절</td>
+												</c:if>
+												
 										</tr>
 									</c:forEach>
 								</tbody>
