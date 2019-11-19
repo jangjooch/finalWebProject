@@ -16,8 +16,8 @@
 				}
 				
 				// 번호찾기인데 문자입력시 거부 해야함
-				if ($("#choose").val() == "m_num") {
-					if (isNaN($("#requestNumber").val())) {
+				if ($("#choose").val() == "requestNumber") {
+					if (isNaN($("#searchThing").val())) {
 						alert("숫자를 입력하세요.");
 						result = false;
 					}
@@ -47,7 +47,7 @@
 							</select>
 						</div>
 						<div class="form-group mx-sm-3 mb-2">
-							<input name="searchThing" id="SearchThing"type="text" class="form-control"	placeholder="검색어">
+							<input name="searchThing" id="searchThing"type="text" class="form-control"	placeholder="검색어">
 						</div>
 						<button type="submit" class="btn btn-primary mb-2">검색</button>
 					</form>
