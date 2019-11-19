@@ -83,13 +83,11 @@ public class LogController {
 	@RequestMapping("/log_detail")
 	public String log_detail(String d_m_number, String re_num, Model model) {
 		if (d_m_number != null) {
-			System.out.println("빠밤1");
 			int dm_number = Integer.parseInt(d_m_number);
 			LogDto logDto = logService.getSelectLog(dm_number);
 			model.addAttribute("logDto", logDto);
 		}
 		if (re_num != null) {
-			System.out.println("뿌붐1");
 			int reNum = Integer.parseInt(re_num);
 			int dm_number = logService.getDMNumber(reNum); // d_m_number를 구해와라
 			LogDto logDto = logService.getSelectLog(dm_number);

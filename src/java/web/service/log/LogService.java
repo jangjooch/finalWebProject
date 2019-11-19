@@ -16,7 +16,6 @@ public class LogService {
 	private LogDao logDao;
 	
 	public LogDto getSelectLog(int d_m_number) {
-		System.out.println("빠밤2");
 		LogDto logDto = logDao.getSelectLog(d_m_number);
 		return logDto;
 	}
