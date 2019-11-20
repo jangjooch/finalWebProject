@@ -69,10 +69,10 @@
 								<td>
 									<div>
 										<c:if test="${requestList.re_success == 1}">
-											<a href="updateSuccessChainge1Eseo2?re_num=${requestList.re_num}" class="btn btn-warning">물품 적재 하기</a>
+											<a href="updateSuccessChainge1Eseo2?re_num=${requestList.re_num}" class="btn btn-warning">패키징중</a>
 										</c:if>
 										<c:if test="${requestList.re_success == 2}">
-											<a href="updateSuccessChainge2Eseo3?re_num=${requestList.re_num}" class="btn btn-primary">물품 적재 완료</a>
+											<a href="updateSuccessChainge2Eseo3?re_num=${requestList.re_num}" class="btn btn-primary">패키징 완료</a>
 										</c:if>
 											<c:set var="sumWeight" value="0"/>
 											<c:set var="totalWeight" value="0"/> <!-- 초기화 -->
