@@ -2,32 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../main/top.jsp" flush="false"/>
 
-		<script type="text/javascript">
-					function checkForm(){	//하는중
-						var result = true;
-						//입력값 검사
-						if($("#drone_type").val()=="needselect")
-							{	
-								return false;
-							}
-						if($("#drone_type").val()=="drone_number")
-							{
-								result = true;
-							}
-						if($("#drone_type").val()=="drone_model")
-							{
-								result = true;
-							}
-						if($("#drone_type").val()=="drone_status")
-							{
-								
-								return result = true;
-							}
-						
-						// return result;
-					}	
-					
-			</script>
+
 		<style>
 		</style>
 		<%-- 전체 div --%>
@@ -43,21 +18,7 @@
 							<h1>DroneList</h1>
 						</div>
 						<div id="top_b">
-							<form class="form-inline" action="drone_list" method="post" onsubmit="return checkForm()">
-								<div class="form-group mb-2" id="t_b_right">
-									<select class="form-control" id="drone_type" name="drone_type">
-										<option value="needselect" selected="selected">선택하기</option>
-										<option value="drone_number">드론 번호</option>
-										<option value="drone_model">모델명</option>
-										<option value="drone_status">드론 상태</option>
-									</select>
-								</div>
-								
-								<div class="form-group mx-sm-3 mb-2"> 
-									<input id="result" name="drone_value" type="text" class="form-control"	placeholder="검색어">
-								</div>
-								<button type="submit" class="btn btn-primary mb-2">검색</button>
-							</form>
+
 						</div>
 					</div>
 				</div>

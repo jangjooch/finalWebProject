@@ -8,16 +8,7 @@
 			
 		window.setTimeout('window.location.reload()',5000); //5초마다 새로고침
 		
-			function searchSelect(){
-				var result = true;
-				if ($("#searchThing").val() == "0") {
-					result = false;
-				}
-				if($("#things").val() == ""){
-					result = false;
-				}
-				return result;
-			}
+
 			
 		</script>
 			<div class="row">
@@ -31,21 +22,7 @@
 							<h1>Article Load Up</h1>
 						</div>
 						<div id="top_b">
-							<form class="form-inline" action="requestSearch" onsubmit="return searchSelect()">
-								<div class="form-group mb-2" id="t_b_right">
-									<select id="searchThing" name="searchThing"class="form-control">
-										<option value="0" selected>선택하기</option>
-										<option value="re_num">요청번호</option>
-										<option value="re_time">요청시간</option>
-										<option value="m_name">요청자 이름</option>
-										<option value="re_success">상태</option>
-									</select>
-								</div>
-								<div class="form-group mx-sm-3 mb-2">
-									<input id="things" name="things" type="text" class="form-control"	placeholder="검색어">
-								</div>
-								<button type="submit" class="btn btn-primary mb-2">검색</button>
-							</form>
+
 						</div>
 					</div>
 				</div>
