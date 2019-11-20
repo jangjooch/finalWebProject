@@ -24,8 +24,8 @@ public class SnapshotService {
 	private MqttClient client;
 	
 	private int pictureNumber;
-	private int forPictureThread;
-	private int requestNumber;
+	private int forPictureThread = 0;
+	private int requestNumber = 0;
 	private boolean takeSnap;
 	
 	
@@ -63,9 +63,9 @@ public class SnapshotService {
 			
 			@Override
 			public void messageArrived(String topic, MqttMessage message) throws Exception {
-				System.out.println("Message Arrived");
+				//System.out.println("Message Arrived");
 				// TODO Auto-generated method stub
-				if(topic.equals("/drone/cam0/gcs")) {
+				if(topic.equals("/drone/cam1/gcs")) {
 					
 					System.out.println("Message Recived from GCS");
 					System.out.println("Recived : " + new String(message.getPayload()));					
@@ -78,9 +78,9 @@ public class SnapshotService {
 					requestNumber = (int)jsonObject.get("missionNumber");
 					System.out.println("get missionNumber Done");
 				}
-				else if(topic.equals("/drone/cam0/pub")) {
-					System.out.println("message Arrived From Cam");
+				else if(topic.equals("/drone/cam1/pub")) {				
 					if(takeSnap) {
+						System.out.println("message Arrived From Cam");
 						System.out.println("Snapshot Activate");
 						if(pictureNumber < 4) {
 							if(forPictureThread == 0) {
@@ -89,14 +89,14 @@ public class SnapshotService {
 									public void run() {
 										forPictureThread = 1;
 										byte[] data = message.getPayload();
-										// 이미지 파일을 byte배열로 마꿔서 저장한다.
-										String fileName = "picture" + requestNumber + pictureNumber + ".jpg"; // 파일 이름											
-										String realPath = application.getRealPath("/resources/upload/")+fileName; // 경로
+										// �씠誘몄� �뙆�씪�쓣 byte諛곗뿴濡� 留덇퓭�꽌 ���옣�븳�떎.
+										String fileName = "picture" + requestNumber + pictureNumber + ".jpg"; // �뙆�씪 �씠由�											
+										String realPath = application.getRealPath("/resources/upload/")+fileName; // 寃쎈줈
 										FileOutputStream fos;
 										try {
 											System.out.println("Try JPG File Save");
 											fos = new FileOutputStream(realPath);
-											BufferedOutputStream bos = new BufferedOutputStream(fos); // 이미지 만들기
+											BufferedOutputStream bos = new BufferedOutputStream(fos); // �씠誘몄� 留뚮뱾湲�
 											bos.write(data);
 											bos.flush();
 											bos.close();
@@ -104,7 +104,7 @@ public class SnapshotService {
 										} catch (Exception e1) {
 											// TODO Auto-generated catch block
 											e1.printStackTrace();
-										}  // 경로에 이미지 파일을 만듬
+										}  // 寃쎈줈�뿉 �씠誘몄� �뙆�씪�쓣 留뚮벉
 										
 										
 										try {
@@ -139,7 +139,7 @@ public class SnapshotService {
 		});
 		
 		try {
-			client.subscribe("/drone/cam0/+");
+			client.subscribe("/drone/cam1/+");
 			System.out.println("CamClient Subscribe Done");
 		} catch (MqttException e) {
 			// TODO Auto-generated catch block
