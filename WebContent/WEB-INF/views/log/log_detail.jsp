@@ -160,36 +160,60 @@
 					
 					<c:if test="${logDto.requestDto.re_success == 5}">
 					  <h4 style="text-align: center;">현장 사진</h4>
-					<div class="jumbotron">
-					  <div class="container text-center">
-					      <img id="mainSnapshot" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}0.jpg"
-					      	class="img-responsive" style="width:100%" alt="Image">
-					  </div>
-					</div>
+					
 					  
-					<div class="container-fluid bg-3 text-center">    
-					  <h6 align="left">드론</h6><br>
+					  
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-4">
+							<div>
+								<img id="img1"
+									src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}0.jpg"
+									class="img-responsive" style="width: 100%" alt="Image"
+									onmouseover="mainShot1()">
+							</div>
+							<div>
+								<img id="img2"
+									src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}1.jpg"
+									class="img-responsive" style="width: 100%" alt="Image"
+									onmouseover="mainShot2()">
+							</div>
+							<div>
+								<img id="img3"
+									src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}2.jpg"
+									class="img-responsive" style="width: 100%" alt="Image"
+									onmouseover="mainShot3()">
+							</div>
+							<div>
+								<img id="img4"
+									src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}3.jpg"
+									class="img-responsive" style="width: 100%" alt="Image"
+									onmouseover="mainShot4()">
+							</div>
+						</div>
+						<div class="col-sm-8">
+							<div class="jumbotron">
+								<div class="container text-center">
+									<img id="mainSnapshot"
+										src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}0.jpg"
+										class="img-responsive" style="width: 100%" alt="Image">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+					
+					<div class="container-fluid bg-3 text-center">    <!-- 왼 -->
 					  <div class="row">
-					    <div class="col-sm-3">
-					      <img id="img1" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}0.jpg"
-					      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot1()">
-					    </div>
-					    <div class="col-sm-3">
-					      <img id="img2" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}1.jpg"
-					      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot2()">
-					    </div>
-					    <div class="col-sm-3">
-					      <img id="img3" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}2.jpg"
-					      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot3()">
-					    </div>
-					    <div class="col-sm-3">
-					      <img id="img4" src="<%=application.getContextPath()%>/resources/upload/picture${logDto.requestDto.re_num}3.jpg"
-					      	class="img-responsive" style="width:100%" alt="Image" onmouseover="mainShot4()">
-					    </div>
+					    
 					
 					  </div>
-					</div><br>
+					</div><br>	<!-- 왼 -->
 					</c:if>
+					
+					
+					
+					
 					</div>
 					
 					</div>
